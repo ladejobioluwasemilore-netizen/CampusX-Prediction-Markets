@@ -1,0 +1,21 @@
+CAMPUSX UPDATE — 17 NOVEMBER 2026
+
+Added in this build:
+- Expanded campus event market library with 18 new YES/NO questions across academics, campus life, sports, entertainment, fashion and competitions.
+- Every new event includes a close time, explicit YES resolution criteria and an identified result source.
+- Candidate-specific FUNAABSU President markets for Ladejobi Oluwasemilore and Abiola Ayomide.
+- Mr FUNAAB 2026/2027 and Miss FUNAAB 2026/2027 announcement markets, without inventing contestant names.
+- Registration and login no longer ask users to choose Student or Admin. Login detects the role attached to the account. An approved admin ID is only requested during account creation when an administrator account is being provisioned.
+- Existing student profile dashboard, admin dashboard, admin user controls, market selection flow, expandable market slip, stake input, combined return calculations and payment-method checkout page are retained.
+- Existing saved placeholder election markets are filtered out when the app loads the updated market catalogue.
+
+Important:
+This is a source-code update, not a live deployment. The frontend currently stores local account and market data in browser storage. Admin authorization, shared accounts/markets, and payment processing must be enforced by the server and an approved payment provider before production use. The checkout interface does not itself charge cards, process transfers or credit a real wallet.
+
+MOBILE / PROFILE POLISH (2026-11-17)
+- Mobile hero showcase animation is disabled/reflowed to prevent collisions with text.
+- Compact icon-only mobile market category controls and collapsible top navigation.
+- Welcome overlay duration is 2.7 seconds.
+- Compact market chart sizing and toast notifications for market updates.
+- Profile market suggestion form with authenticated API storage and contact email. Apply server/schema.sql or migration 003_market_suggestions.sql.
+- Creator tools require an additional Admin ID confirmation after the authenticated admin session check.

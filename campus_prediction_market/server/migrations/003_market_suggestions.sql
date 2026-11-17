@@ -1,0 +1,2 @@
+CREATE TABLE IF NOT EXISTS market_suggestions (id BIGSERIAL PRIMARY KEY,user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,title VARCHAR(160) NOT NULL,category VARCHAR(60) NOT NULL,details VARCHAR(1200) NOT NULL,contact_email VARCHAR(200) NOT NULL,status VARCHAR(20) NOT NULL DEFAULT 'NEW',created_at TIMESTAMPTZ NOT NULL DEFAULT now());
+CREATE INDEX IF NOT EXISTS market_suggestions_created_idx ON market_suggestions(created_at DESC);

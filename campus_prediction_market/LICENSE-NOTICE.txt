@@ -1,0 +1,3 @@
+CampusX project notice
+
+The project includes frontend and backend components that require deployment configuration. Payment processing, production authentication, market persistence and operator authorization must be connected and verified before public transactions are enabled. See README.md for the required production configuration.

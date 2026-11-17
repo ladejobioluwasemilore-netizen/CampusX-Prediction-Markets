@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: campusx
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: ./public

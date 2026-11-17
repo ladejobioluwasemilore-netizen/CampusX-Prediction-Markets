@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Payment status · CampusX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:22px;background:#f4f7f3;color:#203b2b;font-family:'DM Sans',sans-serif}.card{width:min(100%,460px);padding:34px 28px;border:1px solid #e1e9e1;border-radius:24px;background:#fff;box-shadow:0 18px 55px #1b3b2510;text-align:center}.mark{width:58px;height:58px;margin:0 auto 20px;border-radius:18px;background:#e8f3e9;display:grid;place-items:center;color:#287447}.mark svg{width:28px;height:28px}h1{font:800 25px Manrope,sans-serif;margin:0 0 10px}p{font-size:14px;line-height:1.65;color:#68786c;margin:0 0 22px}.ref{padding:12px;border-radius:12px;background:#f4f7f4;font-size:12px;overflow-wrap:anywhere;margin-bottom:22px}.btn{display:block;padding:14px;border-radius:12px;background:#245d3b;color:#fff;text-decoration:none;font-weight:700}
+</style></head>
+<body><main class="card"><div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h1>Payment status is being checked</h1><p>SquadCo has returned you to CampusX. Do not treat this redirect alone as proof of payment. Your transaction must be verified securely before any account or market activity is updated.</p><div class="ref" id="paymentRef">Transaction reference: checking…</div><a class="btn" href="/dashboard.html">Return to CampusX</a></main>
+<script>const ref=new URLSearchParams(location.search).get('transaction_ref')||new URLSearchParams(location.search).get('reference');document.getElementById('paymentRef').textContent=ref?'Transaction reference: '+ref:'No transaction reference was supplied.';</script>
+</body></html>

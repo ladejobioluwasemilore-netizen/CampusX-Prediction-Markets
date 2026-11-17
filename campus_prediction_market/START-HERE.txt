@@ -1,0 +1,12 @@
+CAMPUSX — FRONTEND-ONLY PREVIEW
+
+1. Extract this ZIP.
+2. Open public/index.html in a browser, or deploy the contents of the public folder to any static web host.
+3. Create an account using email and password.
+4. Sign in to open the dashboard.
+
+No database, backend, API URL, environment variables, or server installation is required in this version.
+
+Approved admin emails are assigned their Admin IDs automatically during local signup. All accounts and app data are stored in the current browser/device only. Google sign-in and real payment processing are intentionally disabled until the backend phase.
+
+IMPORTANT: This is a frontend prototype only. Local accounts/admin roles are not secure server authentication. Do not use it for real-money transactions.
