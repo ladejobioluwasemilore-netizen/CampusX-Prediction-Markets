@@ -5,7 +5,8 @@
 <meta name="theme-color" content="#071b14"><title>CampusX — Prediction Markets</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,500,0,0" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,500,0,0" rel="stylesheet">
 
 <style>html{scroll-behavior:smooth}
 .icon-navigation{display:flex;align-items:center;gap:12px;flex:1}.icon-navigation a{width:48px;height:46px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#728378;transition:all .25s ease;border:1px solid transparent}.icon-navigation svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.icon-navigation a span{font-size:8px;font-weight:800;letter-spacing:.2px}.icon-navigation a:hover::after{content:attr(title);position:absolute;top:54px;background:#123d29;color:#fff;padding:6px 9px;border-radius:7px;font-size:9px;white-space:nowrap;box-shadow:0 7px 18px #0b241833;z-index:30}.icon-navigation a:hover,.icon-navigation a.active{background:#eaf4e8;color:#175334;border-color:#d7e9d5;transform:translateY(-2px);box-shadow:0 8px 18px #174d3212}.market-card,.operator-market-row,.literary-option{animation:cardEnter .48s cubic-bezier(.2,.8,.2,1) both}.market-card:hover{transform:translateY(-5px);box-shadow:0 18px 35px #173d2416}.operator-market-row{transition:background .2s,transform .2s}.operator-market-row:hover{background:#f3f8f1;transform:translateX(3px)}.operator-help{font-size:11px;color:#829087}.operator-market-row input{width:76px;border:1px solid #dce8dc;border-radius:8px;padding:8px;color:#174d32;font-weight:800}.operator-market-row button{border:0;border-radius:8px;padding:8px 10px;background:#eaf4e8;color:#175334;font-weight:800;cursor:pointer;margin:2px}.operator-market-row button.danger{background:#faeee9;color:#9b543b}.operator-market-row .operator-odds{display:flex;align-items:center;gap:6px;margin-top:7px;font-size:10px;color:#68796d}.operator-market-row .operator-odds b{color:#1b6b3b}.operator-market-row .operator-row-actions{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}.operator-market-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #e9eee8}.operator-market-row>div:first-child{min-width:0;flex:1}.operator-market-row b{display:block;font-size:11px}.operator-market-row small{display:block;color:#829087;font-size:9px;margin-top:4px}.operator-fields{grid-template-columns:repeat(3,minmax(0,1fr))}@keyframes cardEnter{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
@@ -30,11 +31,14 @@ body.landing-only #marketRuntime{display:none!important}.material-symbols-outlin
  <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu"><svg viewBox="0 0 24 24" aria-hidden="true">
   <path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
  <nav id="nav" class="icon-navigation" aria-label="Main navigation">
-  <a href="#home" class="active" aria-label="Home" title="Home"><svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1Z"/></svg></a>
+  <a href="#home" class="active" aria-label="Home" title="Home">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1Z"/></svg>
+  </a>
   <a href="dashboard.html" id="marketsNav" aria-label="Markets" title="Markets">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h17"/>
-      <path d="m7 15 4-4 3 2 6-7"/><circle cx="20" cy="6" r="1"/></svg><span>Markets</span></a>
+      <path d="m7 15 4-4 3 2 6-7"/><circle cx="20" cy="6" r="1"/></svg>
+      <span>Markets</span></a>
   <a href="#features" aria-label="Features" title="Features">
     <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/>
@@ -164,7 +168,12 @@ body.landing-only #marketRuntime{display:none!important}.material-symbols-outlin
 <div class="modal-backdrop" id="walletModal"><section class="modal"><button class="modal-close" data-close>×</button><div class="eyebrow dark">CAMPUSX WALLET</div><h2 id="walletModalTitle">Add funds</h2><p>Payment requests are verified before wallet balances are updated.</p><form id="walletForm"><label>Amount (₦)<input id="walletAmount" type="number" min="100" step="100" value="10000" required></label><div class="wallet-actions"><button class="btn btn-primary" type="submit" value="deposit">Add funds</button><button class="btn btn-outline" type="button" id="withdrawBtn">Request withdrawal</button></div></form><small class="form-note">Deposits and withdrawals are subject to payment-provider verification.</small></section></div>
 
 <div class="modal-backdrop" id="detailModal"><section class="modal"><button class="modal-close" data-close>×</button><div class="eyebrow dark">MARKET DETAILS</div><h2 id="detailQuestion"></h2><div class="detail-meta" id="detailMeta"></div><h3>Resolution criteria</h3><p id="detailCriteria"></p><h3>Result source</h3><p id="detailSource"></p><h3>Market status</h3><p id="detailStatus"></p><button class="btn btn-primary full" id="detailTrade">Take a position</button></section></div>
-<div class="modal-backdrop" id="resolveModal"><section class="modal"><button class="modal-close" data-close>×</button><div class="eyebrow dark">RESOLVE MARKET</div><h2 id="resolveQuestion"></h2><p>Confirm the verified outcome. Winning positions receive the defined payout; voided positions are refunded according to the market settlement rules.</p><div class="wallet-actions"><button class="btn btn-primary" id="resolveYes">Resolve YES</button><button class="btn btn-outline" id="resolveNo">Resolve NO</button><button class="btn btn-outline" id="voidMarket">Void & refund</button></div></section></div><div class="toast" id="toast"></div>
+<div class="modal-backdrop" id="resolveModal">
+  <section class="modal"><button class="modal-close" data-close>×</button>
+    <div class="eyebrow dark">RESOLVE MARKET</div><h2 id="resolveQuestion"></h2>
+    <p>Confirm the verified outcome. Winning positions receive the defined payout; 
+      voided positions are refunded according to the market settlement rules.</p>
+      <div class="wallet-actions"><button class="btn btn-primary" id="resolveYes">Resolve YES</button><button class="btn btn-outline" id="resolveNo">Resolve NO</button><button class="btn btn-outline" id="voidMarket">Void & refund</button></div></section></div><div class="toast" id="toast"></div>
 <script src="app.js"></script>
 <script>
 (() => {
