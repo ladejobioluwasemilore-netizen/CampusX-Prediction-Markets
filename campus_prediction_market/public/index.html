@@ -25,26 +25,56 @@ body.landing-only #marketRuntime{display:none!important}.material-symbols-outlin
 <body class="landing-only">
 <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
 <header class="topbar">
- <a class="brand" href="#home"><span class="brand-mark">CX</span><span><b>campus<span>X</span></b><small>PREDICTION MARKETS</small></span></a>
- <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+ <a class="brand" href="#home"><span class="brand-mark">CX</span><span><b>campus<span>X</span></b>
+  <small>PREDICTION MARKETS</small></span></a>
+ <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu"><svg viewBox="0 0 24 24" aria-hidden="true">
+  <path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
  <nav id="nav" class="icon-navigation" aria-label="Main navigation">
-  <a href="#home" class="active" aria-label="Home" title="Home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1Z"/></svg></a>
-  <a href="dashboard.html" id="marketsNav" aria-label="Markets" title="Markets"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h17"/><path d="m7 15 4-4 3 2 6-7"/><circle cx="20" cy="6" r="1"/></svg><span>Markets</span></a>
-  <a href="#features" aria-label="Features" title="Features"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/><path d="m19 16 .9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9Z"/></svg></a>
-  <a href="#how" aria-label="How it works" title="How it works"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9a2.5 2.5 0 1 1 4.5 1.5c-.9 1.1-2.1 1.3-2.1 3"/><path d="M12 17.5h.01"/></svg></a>
-  <a href="#about" aria-label="About CampusX" title="About CampusX"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></a>
+  <a href="#home" class="active" aria-label="Home" title="Home"><svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1Z"/></svg></a>
+  <a href="dashboard.html" id="marketsNav" aria-label="Markets" title="Markets">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h17"/>
+      <path d="m7 15 4-4 3 2 6-7"/><circle cx="20" cy="6" r="1"/></svg><span>Markets</span></a>
+  <a href="#features" aria-label="Features" title="Features">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/>
+    <path d="m19 16 .9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9Z"/></svg>
+  </a>
+  <a href="info.html" aria-label="How it works" title="How it works">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="9"/>
+    <path d="M9.6 9a2.5 2.5 0 1 1 4.5 1.5c-.9 1.1-2.1 1.3-2.1 3"/>
+    <path d="M12 17.5h.01"/></svg></a>
+  <a href="about.html" aria-label="About CampusX" title="About CampusX">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+  </a>
  </nav>
- <div class="top-actions"><span id="topBalance" hidden>₦0.00</span><button class="icon-btn" id="bell" aria-label="Notifications"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></button><button class="btn btn-primary" id="authBtn">Sign in</button><div class="account-chip hidden" id="accountChip" role="button" tabindex="0" aria-label="Open your profile dashboard"><span id="accountInitial">U</span><b id="accountName">User</b><button id="logoutBtn" aria-label="Log out"><span class="material-symbols-outlined" aria-hidden="true">logout</span></button></div></div>
-</header><aside class="notification-drawer" id="notificationDrawer" aria-label="CampusX notifications" aria-hidden="true"><div class="notification-head"><div><small>CAMPUSX UPDATES</small><h3>Notifications</h3></div><button type="button" id="closeNotifications" aria-label="Close notifications">×</button></div><div class="notification-tabs"><button class="active" data-notification-filter="all">All</button><button data-notification-filter="new">New</button><button data-notification-filter="old">Earlier</button></div><div class="notification-list" id="notificationList"></div><button class="notification-clear" id="markNotificationsRead" type="button">Mark all as read</button></aside><div class="notification-scrim" id="notificationScrim"></div>
+ <div class="top-actions"><span id="topBalance" hidden>₦0.00</span>
+  
+    <button class="btn btn-primary" id="authBtn">Join the space</button>
+    <div class="account-chip hidden" id="accountChip" role="button" tabindex="0" aria-label="Open your profile dashboard">
+      <span id="accountInitial">U</span><b id="accountName">User</b><button id="logoutBtn" aria-label="Log out">
+        <span class="material-symbols-outlined" aria-hidden="true">logout</span></button></div></div>
+</header>
 <main id="home">
 <section class="hero">
  <div class="hero-image"></div><div class="hero-overlay"></div>
  <div class="hero-inner">
   <div class="eyebrow"><i></i> THE CAMPUS PREDICTION MARKET</div>
-  <h1 class="landing-title">Your campus.<br>Your perspective. <em class="animated-word" id="heroRotatingWord">Your moment.</em></h1>
-  <p>CampusX brings campus events, student elections and the conversations shaping university life into one engaging digital experience. Explore what matters, share your view and follow every moment.</p>
-  <div class="hero-actions"><button class="btn btn-lime" id="heroEnter">Enter CampusX <span class="material-symbols-outlined" aria-hidden="true">north_east</span></button><button class="btn btn-ghost" id="heroHow">Discover how it works <span class="material-symbols-outlined" aria-hidden="true">south</span></button></div>
-  <div class="hero-proof"><span><span class="material-symbols-outlined" aria-hidden="true">event</span> Campus events</span><span><span class="material-symbols-outlined" aria-hidden="true">how_to_vote</span> Student elections</span><span><span class="material-symbols-outlined" aria-hidden="true">insights</span> Community insights</span></div>
+  <h1 class="landing-title">Your campus.<br>Your perspective. <em class="animated-word" id="heroRotatingWord">Your moment.
+
+  </em></h1>
+  <p>CampusX brings campus events, student elections and the conversations shaping university life into one engaging digital 
+    experience. Explore what matters, share your view and follow every moment.</p>
+  <div class="hero-actions"><button class="btn btn-lime" id="heroEnter">Enter CampusX 
+    <span class="material-symbols-outlined" aria-hidden="true">north_east</span></button>
+    <button class="btn btn-ghost" id="heroHow">Discover how it works 
+      <span class="material-symbols-outlined" aria-hidden="true">south</span></button></div>
+  <div class="hero-proof"><span><span class="material-symbols-outlined" aria-hidden="true">event</span> 
+    Campus events</span><span><span class="material-symbols-outlined" aria-hidden="true">how_to_vote</span> 
+    Student elections</span><span><span class="material-symbols-outlined" aria-hidden="true">insights</span> 
+    Community insights</span></div>
  </div>
  <div class="hero-showcase" aria-label="CampusX interface">
   <div class="showcase-glow"></div>
@@ -105,16 +135,27 @@ body.landing-only #marketRuntime{display:none!important}.material-symbols-outlin
     <form id="dashWithdrawForm"><label>Withdrawal amount (₦)<input id="withdrawAmount" type="number" min="100" step="100" placeholder="Enter amount" required></label><label>Bank name<select id="payoutBank" required><option value="">Select bank</option><option>Access Bank</option><option>Ecobank</option><option>Fidelity Bank</option><option>First Bank</option><option>GTBank</option><option>Keystone Bank</option><option>Moniepoint MFB</option><option>OPay</option><option>Palmpay</option><option>Stanbic IBTC</option><option>Sterling Bank</option><option>UBA</option><option>Union Bank</option><option>Wema Bank</option><option>Zenith Bank</option><option>Other</option></select></label><label>Account name<input id="payoutName" type="text" placeholder="Name on bank account" required></label><label>Account number<input id="payoutAccount" type="text" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" placeholder="10-digit account number" required></label><label class="wallet-save-choice"><input id="savePayoutDetails" type="checkbox"> Save payout details on this device</label><button class="btn btn-dark full" type="submit">Request withdrawal →</button></form>
    </section>
   </div>
-  <section class="panel wallet-history-panel"><div class="panel-head"><div><h3>Wallet transactions</h3><small>Deposits, withdrawals and payment requests</small></div></div><div id="dashWalletTransactions" class="wallet-history-list"></div></section>
+  <section class="panel wallet-history-panel"><div class="panel-head"><div>
+    <h3>Wallet transactions</h3><small>Deposits, withdrawals and payment requests</small></div>
+  </div><div id="dashWalletTransactions" class="wallet-history-list"></div></section>
   <p class="wallet-security-note">Payment requests are verified before wallet balances are updated. Never enter card PINs, CVVs, OTPs or banking passwords.</p>
  </div>
- <div class="dash-pane hidden" id="dashProfile"><div class="panel profile-form-panel"><div class="eyebrow dark">ACCOUNT PROFILE</div><h2>Your details</h2><form id="profileForm"><label>Full name<input id="profileName" name="name" required></label><label>Email address<input id="profileEmail" name="email" type="email" disabled></label><label>Campus / institution<input id="profileCampus" name="campus" placeholder="e.g. FUNAAB"></label><label>Department<input id="profileDepartment" name="department" placeholder="Your department"></label><label>Level<select id="profileLevel" name="level"><option value="">Select level</option><option>100 Level</option><option>200 Level</option><option>300 Level</option><option>400 Level</option><option>500 Level</option><option>600 Level</option><option>Postgraduate</option></select></label><button class="btn btn-primary" type="submit">Save profile</button></form></div></div>
+ <div class="dash-pane hidden" id="dashProfile"><div class="panel profile-form-panel"><div class="eyebrow dark">ACCOUNT PROFILE</div><h2>Your details</h2><form id="profileForm"><label>Full name<input id="profileName" name="name" required></label>
+  <label>Email address<input id="profileEmail" name="email" type="email" disabled></label><label>Campus / institution<input id="profileCampus" name="campus" placeholder="e.g. FUNAAB"></label><label>Department<input id="profileDepartment" name="department" placeholder="Your department"></label><label>Level<select id="profileLevel" name="level"><option value="">Select level</option><option>100 Level</option><option>200 Level</option><option>300 Level</option><option>400 Level</option><option>500 Level</option><option>600 Level</option><option>Postgraduate</option></select></label><button class="btn btn-primary" type="submit">Save profile</button></form></div></div>
  <div class="dash-pane hidden" id="dashSettings"><div class="panel settings-panel"><div class="eyebrow dark">PREFERENCES</div><h2>Account settings</h2><label class="setting-row"><span><b>Market notifications</b><small>Notification preference</small></span><input type="checkbox" id="settingNotifications" checked></label><label class="setting-row"><span><b>Show balance on dashboard</b><small>Hide or show your wallet figure</small></span><input type="checkbox" id="settingBalance" checked></label><button class="btn btn-outline" id="saveSettings">Save settings</button></div></div>
  </section>
 <footer><a class="brand" href="#home"><span class="brand-mark">CX</span><span><b>campus<span>X</span></b><small>PREDICTION MARKETS</small></span></a><p>Independent campus-event prediction market concept. Not affiliated with or endorsed by any university.</p><span>© 2026 CampusX</span></footer>
 </main>
 
-<div class="modal-backdrop" id="authModal"><section class="modal auth-modal-card"><button class="modal-close" data-close>×</button><div class="eyebrow dark">WELCOME TO CAMPUSX</div><h2 id="authTitle">Create your account</h2><p id="authText">Join the market community.</p><div class="tabs auth-tabs"><button class="selected" data-auth="signup">Create account</button><button data-auth="login">Sign in</button></div><form id="authForm"><div id="signupFields"><label>Full name<input name="name" required placeholder="Your name" autocomplete="name"></label></div><label>Email address<input name="email" type="email" required placeholder="you@example.com" autocomplete="email"></label><label>Password<input name="password" type="password" required minlength="12" placeholder="At least 12 characters" autocomplete="current-password"></label><label class="remember-line"><input type="checkbox" name="rememberMe" id="rememberMe" checked> Remember me on this device</label><button class="btn btn-primary full" id="authSubmit">Create account</button></form><div class="auth-divider"><span>OR CONTINUE WITH</span></div><div id="googleSignInButton" class="google-signin-host" aria-label="Continue with Google"></div></section></div>
+<div class="modal-backdrop" id="authModal"><section class="modal auth-modal-card">
+  <button class="modal-close" data-close>×</button><div class="eyebrow dark">WELCOME TO CAMPUSX</div>
+  <h2 id="authTitle">Create your account</h2><p id="authText">Join the market community.</p><div class="tabs auth-tabs">
+    <button class="selected" data-auth="signup">Create account</button>
+  <button data-auth="login">Sign in</button></div><form id="authForm"><div id="signupFields">
+    <label>Full name<input name="name" required placeholder="Your name" autocomplete="name"></label>
+  </div>
+    <label>Email address<input name="email" type="email" required placeholder="you@example.com" autocomplete="email">
+    </label><label>Password<input name="password" type="password" required minlength="12" placeholder="At least 12 characters" autocomplete="current-password"></label><label class="remember-line"><input type="checkbox" name="rememberMe" id="rememberMe" checked> Remember me on this device</label><button class="btn btn-primary full" id="authSubmit">Create account</button></form><div class="auth-divider"><span>OR CONTINUE WITH</span></div><div id="googleSignInButton" class="google-signin-host" aria-label="Continue with Google"></div></section></div>
 
 <div class="modal-backdrop" id="tradeModal"><section class="modal trade-modal"><button class="modal-close" data-close>×</button><div class="eyebrow dark">MARKET POSITION</div><h2 id="tradeQuestion">Market question</h2><p id="tradeMeta"></p><div class="outcome-choice"><button class="outcome yes selected" data-outcome="YES"><span>YES</span><b id="yesPrice">₦0.65</b><small id="yesProb">65% implied probability</small></button><button class="outcome no" data-outcome="NO"><span>NO</span><b id="noPrice">₦0.35</b><small id="noProb">35% implied probability</small></button></div><section class="market-chart-panel" aria-label="Market price chart"><div class="market-chart-head"><div><span class="chart-kicker">MARKET PRICE MOVEMENT</span><h3 id="chartTitle">YES price movement</h3><p>Indicative animated movement around the current listing value</p></div><strong id="chartCurrentPrice">₦0.65</strong></div><div class="market-chart-wrap"><canvas id="marketFluctuationChart" role="img" aria-label="Animated market price fluctuation chart"></canvas></div><div class="chart-axis-labels"><span>Earlier</span><span>Recent</span><span>Selected outcome: <b id="chartSelectedSide">YES</b></span></div></section><label class="amount-label">How much do you want to spend?<div class="amount-input"><span>₦</span><input id="tradeAmount" type="number" min="100" step="50" value="1000"></div></label><div class="trade-estimates"><div><span>Estimated shares</span><b id="sharesEstimate">1,538.46</b></div><div><span>Potential gross payout*</span><b id="payoutEstimate">₦1,538.46</b></div><div><span>Potential profit*</span><b id="profitEstimate">₦538.46</b></div></div><small class="fine-print">*Potential returns are estimates based on the displayed listing price. Final pricing, fees, share issuance and liquidity are subject to platform rules. Payment processing requires an active verified provider.</small><button class="btn btn-primary full" id="confirmTrade">Add selection to market slip</button></section></div>
 

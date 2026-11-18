@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#315f20">
+<title>Info | CampusX — Your Campus. Your Call.</title>
+
+<style>
+:root {
+  --green: #336508;
+  --dark: #206506;
+  --deep: #16360f;
+  --light: #eff8e9;
+  --lime: #c7ed91;
+  --ink: #172117;
+  --muted: #687268;
+  --border: #e3ecd9;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f7faF4;
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+button { font: inherit; }
+
+.container {
+  width: min(1160px, 90%);
+  margin: auto;
+}
+
+/* NAVIGATION */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 23px;
+  font-weight: 850;
+  letter-spacing: -1px;
+}
+
+.logo-mark {
+  width: 39px;
+  height: 39px;
+  border-radius: 12px;
+  background: rgb(1, 71, 1);
+  color: white;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+}
+
+.logo span { color: var(--dark); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 14px;
+  font-weight: 650;
+  color: #566451;
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: var(--green); }
+
+.nav-cta {
+  background: var(--dark);
+  color: white;
+  padding: 12px 21px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 750;
+  transition: .25s;
+}
+
+.nav-cta:hover {
+  background: var(--green);
+  transform: translateY(-2px);
+}
+
+.menu-btn {
+  display: none;
+  border: 0;
+  background: var(--light);
+  color: var(--dark);
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0 95px;
+  color: white;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(199,237,145,.25), transparent 30%),
+    radial-gradient(circle at 10% 90%, rgba(120,184,63,.35), transparent 35%),
+    linear-gradient(125deg, #1d3d16, #315f20 58%, #497e2e);
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero::before {
+  width: 480px;
+  height: 480px;
+  right: -130px;
+  top: -200px;
+}
+
+.hero::after {
+  width: 340px;
+  height: 340px;
+  right: -60px;
+  top: -130px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  animation: rise .8s ease both;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 15px;
+  border: 1px solid rgba(255,255,255,.23);
+  background: rgba(255,255,255,.10);
+  border-radius: 30px;
+  color: var(--lime);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+
+.eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--lime);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--lime);
+}
+
+.hero h1 {
+  font-size: clamp(43px, 7vw, 76px);
+  line-height: 1.04;
+  letter-spacing: -3px;
+  margin-bottom: 22px;
+}
+
+.hero h1 span { color: var(--lime); }
+
+.hero p {
+  color: rgba(255,255,255,.78);
+  max-width: 580px;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 13px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-outline {
+  padding: 14px 22px;
+  border-radius: 11px;
+  font-weight: 750;
+  font-size: 14px;
+  transition: .25s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.btn-primary {
+  background: var(--lime);
+  color: var(--deep);
+}
+
+.btn-primary:hover {
+  background: white;
+  transform: translateY(-3px);
+}
+
+.btn-outline {
+  border: 1px solid rgba(255,255,255,.35);
+  color: white;
+}
+
+.btn-outline:hover { background: rgba(255,255,255,.12); }
+
+.hero-decoration {
+  position: absolute;
+  right: 8%;
+  bottom: 45px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(199,237,145,.25), rgba(120,184,63,.03));
+  border: 1px solid rgba(255,255,255,.2);
+  animation: float 5s ease-in-out infinite;
+}
+
+.hero-decoration::before {
+  content: "CX";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: rgba(255,255,255,.2);
+  font-size: 90px;
+  font-weight: 900;
+  letter-spacing: -8px;
+}
+
+/* GENERAL SECTIONS */
+section { padding: 85px 0; }
+
+.section-heading {
+  max-width: 650px;
+  margin-bottom: 42px;
+}
+
+.section-heading.center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-label {
+  color: var(--green);
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 1.5px;
+  margin-bottom: 13px;
+}
+
+.section-heading h2 {
+  font-size: clamp(30px, 4vw, 43px);
+  letter-spacing: -1.7px;
+  line-height: 1.15;
+  margin-bottom: 15px;
+}
+
+.section-heading p {
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+/* HOW IT WORKS */
+.steps-section {
+  background:
+    radial-gradient(circle at 0% 100%, #e4f3d5, transparent 38%),
+    #f7faf4;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.step-card {
+  background: white;
+  padding: 30px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: .3s;
+}
+
+.step-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 18px 45px rgba(49,95,32,.10);
+}
+
+.step-card::after {
+  content: "";
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  right: -45px;
+  bottom: -45px;
+  background: var(--light);
+  border-radius: 50%;
+}
+
+.step-number {
+  font-size: 12px;
+  font-weight: 850;
+  color: var(--green);
+  margin-bottom: 23px;
+}
+
+.icon-box {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: var(--light);
+  color: var(--dark);
+  margin-bottom: 22px;
+}
+
+.icon-box svg {
+  width: 25px;
+  height: 25px;
+  stroke: currentColor;
+}
+
+.step-card h3 {
+  font-size: 19px;
+  margin-bottom: 11px;
+}
+
+.step-card p {
+  color: var(--muted);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+/* MARKET CATEGORIES */
+.categories-section {
+  background: linear-gradient(135deg, #eaf5df, #f4f9ee 55%, #e0efcf);
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.category-card {
+  padding: 25px;
+  background: rgba(255,255,255,.82);
+  border: 1px solid rgba(120,184,63,.18);
+  border-radius: 18px;
+  transition: .3s;
+}
+
+.category-card:hover {
+  background: white;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(49,95,32,.09);
+}
+
+.category-card .icon-box { margin-bottom: 18px; }
+
+.category-card h3 {
+  font-size: 17px;
+  margin-bottom: 9px;
+}
+
+.category-card p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* DASHBOARD FEATURE */
+.dashboard-section {
+  background: var(--deep);
+  color: white;
+  overflow: hidden;
+  position: relative;
+}
+
+.dashboard-section::before {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: rgba(120,184,63,.13);
+  right: -130px;
+  top: -170px;
+}
+
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 65px;
+  position: relative;
+}
+
+.dashboard-section .section-heading { margin-bottom: 25px; }
+.dashboard-section .section-heading h2 { color: white; }
+.dashboard-section .section-heading p { color: rgba(255,255,255,.67); }
+.dashboard-section .section-label { color: var(--lime); }
+
+.feature-list {
+  display: grid;
+  gap: 19px;
+}
+
+.feature-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.feature-check {
+  flex-shrink: 0;
+  width: 29px;
+  height: 29px;
+  background: rgba(199,237,145,.15);
+  color: var(--lime);
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+}
+
+.feature-item h4 {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.feature-item p {
+  color: rgba(255,255,255,.61);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* DASHBOARD PREVIEW */
+.preview {
+  background: #f7fbf2;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 23px;
+  padding: 24px;
+  color: var(--ink);
+  box-shadow: 0 25px 70px rgba(0,0,0,.22);
+  transform: rotate(1deg);
+}
+
+.preview-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.preview-top strong { font-size: 14px; }
+
+.preview-pill {
+  background: #e5f5d5;
+  color: var(--dark);
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.preview-stat {
+  background: linear-gradient(120deg, #315f20, #609b36);
+  color: white;
+  padding: 23px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+.preview-stat small {
+  color: rgba(255,255,255,.7);
+  font-size: 11px;
+}
+
+.preview-stat h3 {
+  font-size: 32px;
+  margin: 8px 0;
+}
+
+.preview-stat span {
+  font-size: 11px;
+  color: var(--lime);
+}
+
+.preview-chart {
+  height: 115px;
+  display: flex;
+  align-items: end;
+  gap: 8px;
+  padding: 10px 5px;
+  background: white;
+  border-radius: 13px;
+  overflow: hidden;
+}
+
+.preview-chart span {
+  flex: 1;
+  min-width: 5px;
+  height: var(--height);
+  border-radius: 5px 5px 0 0;
+  background: linear-gradient(to top, #78b83f, #c7ed91);
+  animation: barPulse 2.5s ease-in-out infinite alternate;
+}
+
+.preview-chart span:nth-child(even) { animation-delay: .4s; }
+
+.preview-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 14px;
+}
+
+/* FAQ */
+.faq-section {
+  background: #f7faf4;
+}
+
+.faq-wrap {
+  max-width: 800px;
+  margin: auto;
+}
+
+.faq-item {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: .2s;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 21px;
+  border: 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  cursor: pointer;
+  font-weight: 750;
+  color: var(--ink);
+  gap: 15px;
+}
+
+.faq-question:hover { color: var(--dark); }
+
+.faq-question svg {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  transition: transform .25s;
+  stroke: var(--green);
+}
+
+.faq-item.open .faq-question svg { transform: rotate(180deg); }
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s ease;
+}
+
+.faq-answer p {
+  padding: 0 21px 21px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* CTA */
+.cta-section {
+  padding: 75px 0;
+  background: linear-gradient(120deg, #78b83f, #9acb62);
+}
+
+.cta-box {
+  text-align: center;
+  max-width: 680px;
+  margin: auto;
+}
+
+.cta-box h2 {
+  font-size: clamp(30px, 5vw, 45px);
+  color: var(--deep);
+  letter-spacing: -1.5px;
+  margin-bottom: 15px;
+}
+
+.cta-box p {
+  color: rgba(29,61,22,.8);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 27px;
+}
+
+.cta-box a {
+  display: inline-block;
+  background: var(--deep);
+  color: white;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 750;
+  transition: .25s;
+}
+
+.cta-box a:hover {
+  background: white;
+  color: var(--deep);
+  transform: translateY(-3px);
+}
+
+/* FOOTER */
+footer {
+  background: #192f14;
+  color: white;
+  padding: 55px 0 25px;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+  padding-bottom: 40px;
+}
+
+.footer-brand p {
+  color: rgba(255,255,255,.55);
+  font-size: 13px;
+  margin-top: 13px;
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  color: rgba(255,255,255,.7);
+  font-size: 13px;
+}
+
+.footer-links a:hover { color: var(--lime); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.12);
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255,255,255,.45);
+  font-size: 12px;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* MOBILE */
+@media(max-width: 850px) {
+  .hero-decoration { right: -90px; opacity: .6; }
+  .dashboard-layout { grid-template-columns: 1fr; gap: 40px; }
+  .steps-grid, .categories-grid { grid-template-columns: repeat(2,1fr); }
+}
+
+@media(max-width: 650px) {
+  .nav { height: 67px; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 67px;
+    left: 0;
+    width: 100%;
+    background: white;
+    padding: 20px 5%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 15px 25px rgba(0,0,0,.06);
+  }
+
+  .nav-links.show { display: flex; }
+  .nav-links a { padding: 13px 0; }
+  .nav-cta { display: none; }
+  .menu-btn { display: grid; place-items: center; }
+
+  .hero { padding: 75px 0 80px; }
+  .hero h1 { letter-spacing: -2px; }
+  .hero p { font-size: 14px; }
+  .hero-decoration { width: 150px; height: 150px; bottom: -35px; right: -50px; }
+  .hero-decoration::before { font-size: 60px; }
+
+  section { padding: 65px 0; }
+  .steps-grid, .categories-grid { grid-template-columns: 1fr; }
+  .step-card { padding: 25px; }
+  .footer-top { flex-direction: column; }
+  .footer-bottom { flex-direction: column; }
+  .preview { padding: 17px; }
+  .hero-actions a { flex: 1; }
+}
+
+/* ANIMATIONS */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+
+@keyframes barPulse {
+  from { transform: scaleY(.78); transform-origin: bottom; }
+  to { transform: scaleY(1); transform-origin: bottom; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">CX</div>
+      <span>campusX</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="about.html">About</a>
+      <a href="info.html" class="active">Info</a>
+    </nav>
+
+    <a href="dashboard.html" class="nav-cta">Explore CampusX</a>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="eyebrow"><span class="eyebrow-dot"></span> CampusX Information Centre</div>
+      <h1>Everything you need to know about <span>CampusX.</span></h1>
+      <p>
+        Discover how CampusX works, explore different markets, follow campus
+        conversations and stay connected to the things happening around you.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#how-it-works" class="btn-primary">
+          Get started
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#faq" class="btn-outline">Frequently asked questions</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-decoration"></div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="steps-section" id="how-it-works">
+  <div class="container">
+    <div class="section-heading center reveal">
+      <div class="section-label">Getting started</div>
+      <h2>How CampusX works</h2>
+      <p>
+        CampusX makes it easier to discover interesting topics, explore market
+        activity and keep track of your participation.
+      </p>
+    </div>
+
+    <div class="steps-grid">
+      <article class="step-card reveal">
+        <div class="step-number">STEP 01</div>
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="m20 20-4-4"/>
+            <path d="M8 11h6M11 8v6"/>
+          </svg>
+        </div>
+        <h3>Discover markets</h3>
+        <p>Browse available markets across campus events, elections, sports and other interesting topics.</p>
+      </article>
+
+      <article class="step-card reveal">
+        <div class="step-number">STEP 02</div>
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+            <path d="M4 19V5M4 19h17"/>
+            <path d="m7 15 4-4 3 2 6-7"/>
+            <path d="M16 6h4v4"/>
+          </svg>
+        </div>
+        <h3>Explore market details</h3>
+        <p>Review the available options, market information and activity before making your decision.</p>
+      </article>
+
+      <article class="step-card reveal">
+        <div class="step-number">STEP 03</div>
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+            <path d="M20 7 10 17l-5-5"/>
+            <path d="M21 12v7H3V5h12"/>
+          </svg>
+        </div>
+        <h3>Track your activity</h3>
+        <p>Use your dashboard to follow your activity, review your positions and stay updated.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories-section">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div class="section-label">Explore possibilities</div>
+      <h2>Different topics. One platform.</h2>
+      <p>
+        CampusX brings different areas of interest together, giving users
+        more ways to engage with events and conversations.
+      </p>
+    </div>
+
+    <div class="categories-grid">
+      <article class="category-card reveal">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+            <path d="M12 3 3 8l9 5 9-5-9-5Z"/>
+            <path d="m3 12 9 5 9-5M3 16l9 5 9-5"/>
+          </svg>
+        </div>
+        <h3>Campus events</h3>
+        <p>Follow activities, programmes and conversations happening around your campus.</p>
+      </article>
+
+      <article class="category-card reveal">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+            <path d="M12 3v18M5 7h14M7 7l-4 8h8L7 7Zm10 0-4 8h8l-4-8Z"/>
+          </svg>
+        </div>
+        <h3>Campus elections</h3>
+        <p>Explore election-related markets and follow the conversations around candidates and outcomes.</p>
+      </article>
+
+      <article class="category-card reveal">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M8 12h8M12 8v8"/>
+          </svg>
+        </div>
+        <h3>Sports</h3>
+        <p>Explore sports markets and follow the outcomes of matches and competitions.</p>
+      </article>
+
+      <article class="category-card reveal">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+            <path d="M4 21V5l8-3 8 3v16"/>
+            <path d="M8 21v-6h8v6M8 8h.01M16 8h.01M12 8h.01M12 11h.01"/>
+          </svg>
+        </div>
+        <h3>College affairs</h3>
+        <p>Stay connected to developments, announcements and issues affecting college communities.</p>
+      </article>
+
+      <article class="category-card reveal">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+            <circle cx="9" cy="8" r="3"/>
+            <circle cx="17" cy="9" r="2"/>
+            <path d="M3 20v-2a6 6 0 0 1 12 0v2M15 15a4 4 0 0 1 6 3v2"/>
+          </svg>
+        </div>
+        <h3>Student union affairs</h3>
+        <p>Follow conversations and developments involving student union activities and representation.</p>
+      </article>
+
+      <article class="category-card reveal">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 7v5l3 2"/>
+            <path d="M8 3h8"/>
+          </svg>
+        </div>
+        <h3>More to explore</h3>
+        <p>Discover other interesting topics and markets as the CampusX community grows.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section class="dashboard-section">
+  <div class="container dashboard-layout">
+    <div class="reveal">
+      <div class="section-heading">
+        <div class="section-label">Your personal space</div>
+        <h2>Stay on top of everything with your dashboard.</h2>
+        <p>
+          Your dashboard brings your CampusX activity together in one place.
+          Keep an eye on your positions and follow market developments.
+        </p>
+      </div>
+
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="m5 12 5 5L20 7"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Activity overview</h4>
+            <p>See an organised overview of your platform activity.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="m5 12 5 5L20 7"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Position tracking</h4>
+            <p>Review the markets and positions you are following.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="m5 12 5 5L20 7"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Personal profile</h4>
+            <p>Manage your account details and personal preferences.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview reveal">
+      <div class="preview-top">
+        <strong>Activity overview</strong>
+        <span class="preview-pill">Dashboard</span>
+      </div>
+
+      <div class="preview-stat">
+        <small>Your CampusX activity</small>
+        <h3>Overview</h3>
+        <span>Keep track of your activity</span>
+      </div>
+
+      <div class="preview-chart" aria-label="Decorative animated chart">
+        <span style="--height:35%"></span>
+        <span style="--height:55%"></span>
+        <span style="--height:43%"></span>
+        <span style="--height:75%"></span>
+        <span style="--height:60%"></span>
+        <span style="--height:88%"></span>
+        <span style="--height:68%"></span>
+        <span style="--height:96%"></span>
+        <span style="--height:79%"></span>
+        <span style="--height:100%"></span>
+      </div>
+
+      <div class="preview-bottom">
+        <span>Activity</span>
+        <span>Market overview</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-heading center reveal">
+      <div class="section-label">Need some clarity?</div>
+      <h2>Frequently asked questions</h2>
+      <p>Quick answers to common questions about using CampusX.</p>
+    </div>
+
+    <div class="faq-wrap">
+      <div class="faq-item reveal">
+        <button class="faq-question" aria-expanded="false">
+          What is CampusX?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>CampusX is a platform where users can explore prediction markets around campus events, elections, sports and other topics.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question" aria-expanded="false">
+          How do I find a market?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Visit the Market page to browse available markets. You can explore different categories and open a market to see its details.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question" aria-expanded="false">
+          What can I find on my dashboard?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Your dashboard provides an overview of your activity, positions and other account-related information.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question" aria-expanded="false">
+          Can I update my profile?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Yes. Visit the Profile section of your dashboard to view and manage the account information available to you.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question" aria-expanded="false">
+          What topics are available on CampusX?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Markets can cover campus events, campus elections, sports, college affairs, student union affairs and other topics.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2>Your campus. Your call.</h2>
+      <p>
+        Explore what's happening, discover new markets and become part of
+        the CampusX experience.
+      </p>
+      <a href="dashboard.html">Explore markets →</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-mark">CX</div>
+          <span style="color:white">campusX</span>
+        </a>
+        <p>Your Campus. Your Call. A new way to explore the topics and events that matter.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="info.html">Information</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> CampusX. All rights reserved.</span>
+      <span>Your Campus. Your Call.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* MOBILE MENU */
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("show");
+  menuBtn.setAttribute("aria-expanded", isOpen);
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("show");
+    menuBtn.setAttribute("aria-expanded", "false");
+  });
+});
+
+/* FAQ ACCORDION */
+document.querySelectorAll(".faq-question").forEach(button => {
+  button.addEventListener("click", () => {
+    const item = button.closest(".faq-item");
+    const answer = item.querySelector(".faq-answer");
+    const isOpen = item.classList.contains("open");
+
+    document.querySelectorAll(".faq-item").forEach(other => {
+      other.classList.remove("open");
+      other.querySelector(".faq-answer").style.maxHeight = null;
+      other.querySelector(".faq-question").setAttribute("aria-expanded", "false");
+    });
+
+    if (!isOpen) {
+      item.classList.add("open");
+      answer.style.maxHeight = answer.scrollHeight + "px";
+      button.setAttribute("aria-expanded", "true");
+    }
+  });
+});
+
+/* SCROLL REVEAL */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(element => {
+  observer.observe(element);
+});
+
+/* FOOTER YEAR */
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

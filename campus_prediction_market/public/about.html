@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123B2A">
+<title>About CampusX | Your Campus. Your Call.</title>
+
+<style>
+:root {
+  --green: #123B2A;
+  --green-mid: #185037;
+  --green-light: #EAF1EB;
+  --lime: #C5F36B;
+  --ink: #172D22;
+  --muted: #78867D;
+  --border: #DDE7DE;
+  --page: #F6F8F3;
+  --white: #FFFFFF;
+  --shadow: 0 18px 50px rgba(18,59,42,.09);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
+  font-family: Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:var(--page);
+  overflow-x:hidden;
+}
+
+a { color:inherit; text-decoration:none; }
+button { font:inherit; cursor:pointer; }
+svg { display:block; }
+
+.container {
+  width:min(1160px,90%);
+  margin:auto;
+}
+
+section { padding:95px 0; }
+
+/* ICONS */
+
+.icon {
+  width:22px;
+  height:22px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.icon-sm { width:17px; height:17px; }
+.icon-lg { width:27px; height:27px; }
+
+/* NAVIGATION */
+
+.navbar {
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav-inner {
+  height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:23px;
+  font-weight:850;
+  letter-spacing:-1px;
+}
+
+.logo-mark {
+  width:43px;
+  height:43px;
+  background:var(--green);
+  color:var(--lime);
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  font-size:19px;
+}
+
+.logo b { color:var(--green-mid); }
+
+.nav-links {
+  display:flex;
+  gap:28px;
+  font-size:14px;
+  font-weight:650;
+  color:#596B60;
+}
+
+.nav-links a { transition:.25s; }
+.nav-links a:hover { color:var(--green-mid); }
+
+.nav-cta {
+  background:var(--green);
+  color:white;
+  padding:13px 19px;
+  border-radius:11px;
+  font-size:13px;
+  font-weight:750;
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  transition:.3s;
+}
+
+.nav-cta:hover {
+  background:var(--green-mid);
+  transform:translateY(-3px);
+}
+
+.menu-btn {
+  display:none;
+  border:1px solid var(--border);
+  background:var(--page);
+  color:var(--green);
+  width:43px;
+  height:43px;
+  border-radius:11px;
+  align-items:center;
+  justify-content:center;
+}
+
+/* GENERAL */
+
+.eyebrow {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:var(--green-mid);
+  background:var(--green-light);
+  border-radius:30px;
+  padding:9px 15px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.eyebrow .icon {
+  width:15px;
+  height:15px;
+}
+
+.section-heading {
+  max-width:650px;
+  margin-bottom:42px;
+}
+
+.section-heading h2,
+.story-text h2 {
+  font-size:clamp(32px,5vw,48px);
+  line-height:1.12;
+  letter-spacing:-2px;
+  margin:18px 0;
+}
+
+.section-heading p,
+.story-text p {
+  color:var(--muted);
+  line-height:1.85;
+}
+
+/* HERO */
+
+.hero {
+  padding:95px 0 110px;
+  background:
+    radial-gradient(circle at 85% 20%,#EAF1EB,transparent 31%),
+    linear-gradient(180deg,#FFFFFF,var(--page));
+  overflow:hidden;
+}
+
+.hero-grid {
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  align-items:center;
+  gap:55px;
+}
+
+.hero h1 {
+  font-size:clamp(48px,7vw,76px);
+  letter-spacing:-5px;
+  line-height:1.02;
+  margin:25px 0;
+}
+
+.hero h1 span { color:var(--green-mid); }
+
+.hero-content > p {
+  max-width:510px;
+  color:var(--muted);
+  line-height:1.85;
+  font-size:16px;
+}
+
+.hero-actions {
+  display:flex;
+  gap:13px;
+  margin-top:30px;
+  flex-wrap:wrap;
+}
+
+.btn {
+  padding:15px 22px;
+  border-radius:11px;
+  font-size:14px;
+  font-weight:750;
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  transition:.3s;
+}
+
+.btn-primary {
+  color:white;
+  background:var(--green);
+}
+
+.btn-primary:hover {
+  background:var(--green-mid);
+  transform:translateY(-4px);
+  box-shadow:0 12px 25px rgba(18,59,42,.2);
+}
+
+.btn-secondary {
+  border:1px solid var(--border);
+  background:white;
+  color:var(--green);
+}
+
+.btn-secondary:hover {
+  border-color:var(--green-mid);
+  transform:translateY(-3px);
+}
+
+.hero-visual {
+  min-height:440px;
+  position:relative;
+  display:grid;
+  place-items:center;
+}
+
+.orbit {
+  width:370px;
+  height:370px;
+  border:1px dashed #AFC7B3;
+  border-radius:50%;
+  position:absolute;
+  animation:spin 35s linear infinite;
+}
+
+.orbit::before,
+.orbit::after {
+  content:"";
+  position:absolute;
+  width:14px;
+  height:14px;
+  background:var(--green-mid);
+  border-radius:50%;
+}
+
+.orbit::before { top:40px; left:45px; }
+.orbit::after { bottom:45px; right:35px; }
+
+.market-card {
+  position:relative;
+  z-index:2;
+  width:min(100%,355px);
+  background:white;
+  border:1px solid var(--border);
+  border-radius:23px;
+  padding:27px;
+  box-shadow:var(--shadow);
+  animation:float 5s ease-in-out infinite;
+}
+
+.market-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:12px;
+  color:var(--muted);
+}
+
+.live-label {
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.live-dot {
+  width:8px;
+  height:8px;
+  background:#3B9B62;
+  display:inline-block;
+  border-radius:50%;
+  animation:pulse 1.5s infinite;
+}
+
+.market-card h3 {
+  font-size:20px;
+  margin:22px 0 7px;
+}
+
+.market-card p {
+  font-size:12px;
+  color:var(--muted);
+}
+
+.chart {
+  width:100%;
+  height:125px;
+  margin:22px 0;
+}
+
+.chart-line {
+  fill:none;
+  stroke:var(--green-mid);
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-dasharray:500;
+  stroke-dashoffset:500;
+  animation:draw 3s ease forwards;
+}
+
+.chart-area { fill:url(#chartFill); }
+
+.market-options {
+  display:flex;
+  gap:10px;
+}
+
+.market-options div {
+  flex:1;
+  background:var(--green-light);
+  padding:13px;
+  border-radius:11px;
+  font-size:12px;
+  font-weight:750;
+}
+
+.market-options strong {
+  display:block;
+  color:var(--green);
+  font-size:17px;
+  margin-top:5px;
+}
+
+.float-icon {
+  position:absolute;
+  z-index:3;
+  width:53px;
+  height:53px;
+  border-radius:16px;
+  display:grid;
+  place-items:center;
+  color:var(--green);
+  background:white;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  animation:float 4s ease-in-out infinite;
+}
+
+.icon-one { top:50px; left:5%; }
+.icon-two { right:0; top:100px; animation-delay:1s; }
+.icon-three { bottom:45px; left:7%; animation-delay:2s; }
+
+/* STORY */
+
+.story-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:65px;
+  align-items:center;
+}
+
+.story-text p { margin:18px 0; }
+
+.story-visual {
+  background:#F0F5EF;
+  border:1px solid var(--border);
+  border-radius:25px;
+  padding:30px;
+}
+
+.story-visual h3 { font-size:19px; }
+
+.story-visual > p {
+  color:var(--muted);
+  font-size:13px;
+  margin-top:8px;
+}
+
+.story-visual svg {
+  width:100%;
+  margin-top:25px;
+}
+
+.story-chart {
+  fill:none;
+  stroke:var(--green-mid);
+  stroke-width:4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-dasharray:600;
+  stroke-dashoffset:600;
+  animation:draw 3s ease forwards;
+}
+
+.stats {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+
+.stat {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:17px 10px;
+  text-align:center;
+}
+
+.stat strong {
+  display:block;
+  font-size:23px;
+  color:var(--green);
+}
+
+.stat span {
+  font-size:11px;
+  color:var(--muted);
+}
+
+/* MISSION */
+
+.mission,
+.values { background:#F0F4EF; }
+
+.mission-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:22px;
+}
+
+.mission-card {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:35px;
+  transition:.35s;
+}
+
+.mission-card:hover,
+.market-category:hover,
+.value-card:hover {
+  transform:translateY(-7px);
+  box-shadow:var(--shadow);
+}
+
+.card-icon {
+  width:55px;
+  height:55px;
+  border-radius:16px;
+  background:var(--green-light);
+  color:var(--green-mid);
+  display:grid;
+  place-items:center;
+  margin-bottom:25px;
+}
+
+.mission-card h3 {
+  font-size:23px;
+  margin-bottom:13px;
+}
+
+.mission-card p {
+  color:var(--muted);
+  line-height:1.8;
+  font-size:14px;
+}
+
+/* MARKETS */
+
+.market-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.market-category {
+  padding:27px;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:white;
+  transition:.3s;
+  position:relative;
+  overflow:hidden;
+}
+
+.market-category::after {
+  content:"";
+  position:absolute;
+  width:100px;
+  height:100px;
+  background:var(--green-light);
+  border-radius:50%;
+  right:-45px;
+  bottom:-55px;
+  transition:.4s;
+}
+
+.market-category:hover::after { transform:scale(1.5); }
+
+.market-category .card-icon { margin-bottom:20px; }
+
+.market-category h3 {
+  font-size:17px;
+  margin-bottom:9px;
+}
+
+.market-category p {
+  font-size:13px;
+  line-height:1.7;
+  color:var(--muted);
+  position:relative;
+  z-index:1;
+}
+
+/* VALUES */
+
+.values-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:17px;
+}
+
+.value-card {
+  background:white;
+  padding:26px 21px;
+  border-radius:17px;
+  border:1px solid var(--border);
+  transition:.3s;
+}
+
+.value-card .card-icon {
+  width:48px;
+  height:48px;
+  margin-bottom:20px;
+}
+
+.value-card h3 {
+  font-size:16px;
+  margin-bottom:9px;
+}
+
+.value-card p {
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+}
+
+/* FAQ */
+
+.faq-list { max-width:800px; }
+
+.faq-item { border-bottom:1px solid var(--border); }
+
+.faq-question {
+  width:100%;
+  padding:22px 0;
+  background:none;
+  border:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  text-align:left;
+  font-weight:750;
+  color:var(--ink);
+  font-size:16px;
+}
+
+.faq-question span {
+  color:var(--green-mid);
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  transition:transform .3s;
+}
+
+.faq-answer {
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+}
+
+.faq-answer p {
+  color:var(--muted);
+  line-height:1.8;
+  padding:0 30px 20px 0;
+  font-size:14px;
+}
+
+.faq-item.open .faq-answer { max-height:180px; }
+.faq-item.open .faq-question span { transform:rotate(45deg); }
+
+/* CTA */
+
+.cta { padding:85px 0; }
+
+.cta-box {
+  text-align:center;
+  padding:70px 25px;
+  border-radius:27px;
+  background:linear-gradient(125deg,#0D3022,#174B34);
+  color:white;
+  position:relative;
+  overflow:hidden;
+}
+
+.cta-box::before,
+.cta-box::after {
+  content:"";
+  position:absolute;
+  width:240px;
+  height:240px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:50%;
+}
+
+.cta-box::before { left:-90px; top:-130px; }
+.cta-box::after { right:-70px; bottom:-160px; }
+
+.cta-box h2 {
+  font-size:clamp(30px,5vw,48px);
+  letter-spacing:-2px;
+  margin-bottom:15px;
+  position:relative;
+  z-index:1;
+}
+
+.cta-box p {
+  color:#D9E8DD;
+  max-width:530px;
+  margin:0 auto 25px;
+  line-height:1.8;
+  font-size:14px;
+  position:relative;
+  z-index:1;
+}
+
+.cta-box .btn {
+  background:var(--lime);
+  color:var(--green);
+  position:relative;
+  z-index:1;
+}
+
+.cta-box .btn:hover {
+  transform:translateY(-3px);
+  background:white;
+}
+
+/* FOOTER */
+
+footer {
+  border-top:1px solid var(--border);
+  padding:35px 0;
+  background:white;
+}
+
+.footer-inner {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.footer-copy {
+  font-size:12px;
+  color:var(--muted);
+}
+
+.footer-links {
+  display:flex;
+  gap:22px;
+  font-size:12px;
+  color:var(--muted);
+}
+
+.footer-links a:hover { color:var(--green-mid); }
+
+/* REVEAL ANIMATIONS */
+
+.reveal {
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+
+.reveal.visible {
+  opacity:1;
+  transform:translateY(0);
+}
+
+@keyframes float {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-13px); }
+}
+
+@keyframes spin {
+  to { transform:rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%,100% { box-shadow:0 0 0 0 rgba(59,155,98,.4); }
+  50% { box-shadow:0 0 0 8px rgba(59,155,98,0); }
+}
+
+@keyframes draw {
+  to { stroke-dashoffset:0; }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px) {
+  .hero-grid,
+  .story-grid { grid-template-columns:1fr; }
+
+  .hero-visual { margin-top:25px; }
+  .market-grid { grid-template-columns:repeat(2,1fr); }
+  .values-grid { grid-template-columns:repeat(2,1fr); }
+}
+
+@media(max-width:700px) {
+  section { padding:75px 0; }
+
+  .nav-inner { height:68px; }
+  .menu-btn { display:flex; }
+  .nav-cta { display:none; }
+
+  .nav-links {
+    display:none;
+    position:absolute;
+    top:68px;
+    left:0;
+    width:100%;
+    padding:22px 5%;
+    background:white;
+    border-bottom:1px solid var(--border);
+    flex-direction:column;
+    gap:22px;
+    box-shadow:0 15px 25px rgba(0,0,0,.04);
+  }
+
+  .nav-links.show { display:flex; }
+
+  .hero { padding:70px 0 80px; }
+
+  .hero h1 {
+    font-size:52px;
+    letter-spacing:-3px;
+  }
+
+  .hero-grid { gap:20px; }
+  .hero-visual { min-height:360px; }
+  .orbit { width:290px; height:290px; }
+  .market-card { max-width:320px; }
+
+  .icon-one { left:0; }
+  .icon-two { right:0; }
+
+  .mission-grid,
+  .market-grid { grid-template-columns:1fr; }
+
+  .values-grid { grid-template-columns:repeat(2,1fr); }
+  .stats { gap:7px; }
+  .stat strong { font-size:19px; }
+
+  .footer-inner {
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+
+@media(max-width:390px) {
+  .hero h1 { font-size:44px; }
+  .values-grid { grid-template-columns:1fr; }
+  .orbit { width:260px; height:260px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+  }
+
+  .reveal {
+    opacity:1;
+    transform:none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INLINE SVG ICON DEFINITIONS -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-menu" viewBox="0 0 24 24">
+    <path d="M4 7h16M4 12h16M4 17h16"/>
+  </symbol>
+  <symbol id="i-close" viewBox="0 0 24 24">
+    <path d="m18 6-12 12M6 6l12 12"/>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24">
+    <path d="M5 12h14M13 5l7 7-7 7"/>
+  </symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24">
+    <path d="M3 3v18h18M7 14l4-4 4 3 6-7"/>
+    <path d="M16 6h5v5"/>
+  </symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24">
+    <path d="m2 10 10-6 10 6-10 6-10-6Z"/>
+    <path d="M6 12.5V17c3.5 3 8.5 3 12 0v-4.5M22 10v6"/>
+  </symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24">
+    <path d="m13 2-3 9h7l-6 11 1-9H5l8-11Z"/>
+  </symbol>
+  <symbol id="i-target" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"/>
+    <circle cx="12" cy="12" r="5"/>
+    <circle cx="12" cy="12" r="1"/>
+  </symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10"/>
+    <path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/>
+  </symbol>
+  <symbol id="i-ball" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10"/>
+    <path d="m12 2 3 5-3 4-5-1-2-5M22 12l-6 1-3 5 3 4M2 12l5 1 2 5-3 4M15 7l5-1M7 13l-2 6"/>
+  </symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="16" rx="2"/>
+    <path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"/>
+  </symbol>
+  <symbol id="i-landmark" viewBox="0 0 24 24">
+    <path d="m3 9 9-6 9 6M4 10h16M5 10v9M9 10v9M15 10v9M19 10v9M3 21h18M2 19h20"/>
+  </symbol>
+  <symbol id="i-vote" viewBox="0 0 24 24">
+    <path d="M4 4h16v16H4zM8 9l2 2 5-5M8 16h8"/>
+  </symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24">
+    <path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3ZM19 14l1.1 2.9L23 18l-2.9 1.1L19 22l-1.1-2.9L15 18l2.9-1.1L19 14Z"/>
+  </symbol>
+  <symbol id="i-users" viewBox="0 0 24 24">
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6"/>
+  </symbol>
+  <symbol id="i-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5"/>
+    <path d="m16 16 5 5"/>
+  </symbol>
+  <symbol id="i-lightbulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 22h4M8 14a7 7 0 1 1 8 0c-.8.6-1 1.2-1 2H9c0-.8-.2-1.4-1-2Z"/>
+  </symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24">
+    <path d="M20 4c-8 0-14 3-14 10a6 6 0 0 0 6 6c7 0 10-8 8-16Z"/>
+    <path d="M4 21c3-5 7-8 13-11"/>
+  </symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24">
+    <path d="M12 5v14M5 12h14"/>
+  </symbol>
+</svg>
+
+<!-- NAVIGATION -->
+<header class="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark">CX</span>
+      <span>campus<b>X</b></span>
+    </a>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <svg class="icon"><use href="#i-menu"/></svg>
+    </button>
+
+    <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+      <a href="#story">Our Story</a>
+      <a href="#mission">Mission</a>
+      <a href="#markets">Markets</a>
+      <a href="#values">Our Values</a>
+      <a href="#faq">FAQs</a>
+    </nav>
+
+    <a href="#join" class="nav-cta">
+      Explore CampusX
+      <svg class="icon icon-sm"><use href="#i-arrow"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content reveal">
+      <span class="eyebrow">
+        <svg class="icon"><use href="#i-sparkles"/></svg>
+        ABOUT CAMPUSX
+      </span>
+
+      <h1>Your Campus.<br><span>Your Call.</span></h1>
+
+      <p>
+        CampusX brings campus conversations, events and possibilities
+        into one interactive marketplace. Discover what matters,
+        explore different outcomes and make your perspective count.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#markets" class="btn btn-primary">
+          Explore our markets
+          <svg class="icon icon-sm"><use href="#i-arrow"/></svg>
+        </a>
+        <a href="#story" class="btn btn-secondary">Discover our story</a>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="orbit"></div>
+
+      <div class="float-icon icon-one">
+        <svg class="icon icon-lg"><use href="#i-chart"/></svg>
+      </div>
+      <div class="float-icon icon-two">
+        <svg class="icon icon-lg"><use href="#i-cap"/></svg>
+      </div>
+      <div class="float-icon icon-three">
+        <svg class="icon icon-lg"><use href="#i-bolt"/></svg>
+      </div>
+
+      <div class="market-card">
+        <div class="market-top">
+          <span class="live-label"><i class="live-dot"></i> CAMPUSX MARKET</span>
+          <span>Overview</span>
+        </div>
+
+        <h3>Campus Pulse</h3>
+        <p>Explore conversations shaping your campus.</p>
+
+        <svg class="chart" viewBox="0 0 320 120">
+          <defs>
+            <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#185037" stop-opacity=".28"/>
+              <stop offset="100%" stop-color="#185037" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path class="chart-area" d="M0 100 L35 85 L65 91 L100 57 L130 67 L165 38 L195 48 L230 25 L265 38 L320 8 L320 120 L0 120 Z"/>
+          <path class="chart-line" d="M0 100 L35 85 L65 91 L100 57 L130 67 L165 38 L195 48 L230 25 L265 38 L320 8"/>
+        </svg>
+
+        <div class="market-options">
+          <div>Trending topics<strong>Explore</strong></div>
+          <div>Community pulse<strong>Discover</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR STORY -->
+<section id="story">
+  <div class="container story-grid">
+    <div class="story-text reveal">
+      <span class="eyebrow">
+        <svg class="icon"><use href="#i-sparkles"/></svg>
+        OUR STORY
+      </span>
+
+      <h2>More than a platform. A new way to experience campus.</h2>
+
+      <p>
+        Every campus has its own energy. From major events and
+        student affairs to sports, elections and everyday conversations,
+        there is always something worth paying attention to.
+      </p>
+
+      <p>
+        CampusX was created to bring these conversations together
+        in one engaging space where users can discover markets,
+        explore different perspectives and follow developments
+        across their campus communities.
+      </p>
+
+      <p>
+        We believe campus life should be more interactive,
+        connected and exciting.
+      </p>
+    </div>
+
+    <div class="story-visual reveal">
+      <h3>Ideas. Opinions. Possibilities.</h3>
+      <p>A connected view of campus activity.</p>
+
+      <svg viewBox="0 0 400 170">
+        <path class="story-chart" d="M0 140 L45 110 L90 125 L135 65 L180 85 L225 42 L270 65 L315 20 L400 35"/>
+      </svg>
+
+      <div class="stats">
+        <div class="stat"><strong>01</strong><span>Connected space</span></div>
+        <div class="stat"><strong>∞</strong><span>Possibilities</span></div>
+        <div class="stat"><strong>100%</strong><span>Campus focus</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION AND VISION -->
+<section class="mission" id="mission">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">
+        <svg class="icon"><use href="#i-target"/></svg>
+        WHY WE EXIST
+      </span>
+      <h2>Built around the campus experience.</h2>
+      <p>
+        Our focus is to make campus-related information and
+        conversations easier to discover and more engaging to explore.
+      </p>
+    </div>
+
+    <div class="mission-grid">
+      <article class="mission-card reveal">
+        <div class="card-icon">
+          <svg class="icon icon-lg"><use href="#i-target"/></svg>
+        </div>
+        <h3>Our Mission</h3>
+        <p>
+          To create an interactive platform that connects users
+          with the events, decisions and conversations shaping
+          campus communities.
+        </p>
+      </article>
+
+      <article class="mission-card reveal">
+        <div class="card-icon">
+          <svg class="icon icon-lg"><use href="#i-globe"/></svg>
+        </div>
+        <h3>Our Vision</h3>
+        <p>
+          To become a leading destination for campus discovery,
+          community participation and interactive prediction markets
+          across institutions.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETS -->
+<section id="markets">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">
+        <svg class="icon"><use href="#i-chart"/></svg>
+        WHAT YOU CAN EXPLORE
+      </span>
+      <h2>One campus. Countless possibilities.</h2>
+      <p>
+        CampusX goes beyond a single category. Explore different
+        markets covering the things people across campus care about.
+      </p>
+    </div>
+
+    <div class="market-grid">
+      <article class="market-category reveal">
+        <div class="card-icon"><svg class="icon icon-lg"><use href="#i-ball"/></svg></div>
+        <h3>Sports</h3>
+        <p>Follow sporting events, team performances and conversations around competitions.</p>
+      </article>
+
+      <article class="market-category reveal">
+        <div class="card-icon"><svg class="icon icon-lg"><use href="#i-calendar"/></svg></div>
+        <h3>Campus Events</h3>
+        <p>Explore concerts, festivals, programmes and upcoming campus activities.</p>
+      </article>
+
+      <article class="market-category reveal">
+        <div class="card-icon"><svg class="icon icon-lg"><use href="#i-landmark"/></svg></div>
+        <h3>Student Union</h3>
+        <p>Follow student leadership, decisions and developments within student communities.</p>
+      </article>
+
+      <article class="market-category reveal">
+        <div class="card-icon"><svg class="icon icon-lg"><use href="#i-vote"/></svg></div>
+        <h3>Campus Elections</h3>
+        <p>Explore election conversations, candidates, campaigns and important developments.</p>
+      </article>
+
+      <article class="market-category reveal">
+        <div class="card-icon"><svg class="icon icon-lg"><use href="#i-cap"/></svg></div>
+        <h3>College Affairs</h3>
+        <p>Discover topics surrounding faculties, departments, academic communities and institutional activities.</p>
+      </article>
+
+      <article class="market-category reveal">
+        <div class="card-icon"><svg class="icon icon-lg"><use href="#i-sparkles"/></svg></div>
+        <h3>And Much More</h3>
+        <p>Discover new topics and possibilities as campus conversations continue to evolve.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values" id="values">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">
+        <svg class="icon"><use href="#i-lightbulb"/></svg>
+        WHAT GUIDES US
+      </span>
+      <h2>The values behind CampusX.</h2>
+      <p>
+        The experience matters just as much as the platform.
+        These principles guide what we build.
+      </p>
+    </div>
+
+    <div class="values-grid">
+      <article class="value-card reveal">
+        <div class="card-icon"><svg class="icon"><use href="#i-users"/></svg></div>
+        <h3>Community</h3>
+        <p>Bringing campus conversations and communities closer together.</p>
+      </article>
+
+      <article class="value-card reveal">
+        <div class="card-icon"><svg class="icon"><use href="#i-search"/></svg></div>
+        <h3>Transparency</h3>
+        <p>Making information and market outcomes clear and accessible.</p>
+      </article>
+
+      <article class="value-card reveal">
+        <div class="card-icon"><svg class="icon"><use href="#i-lightbulb"/></svg></div>
+        <h3>Innovation</h3>
+        <p>Finding better ways to make campus experiences interactive.</p>
+      </article>
+
+      <article class="value-card reveal">
+        <div class="card-icon"><svg class="icon"><use href="#i-leaf"/></svg></div>
+        <h3>Accessibility</h3>
+        <p>Creating an experience that is simple and welcoming to users.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">
+        <svg class="icon"><use href="#i-search"/></svg>
+        GOT QUESTIONS?
+      </span>
+      <h2>Frequently asked questions.</h2>
+      <p>A few things you might want to know about CampusX.</p>
+    </div>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is CampusX?
+          <span><svg class="icon"><use href="#i-plus"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <p>CampusX is a campus-focused interactive prediction market platform where users can explore markets around campus events, sports, elections and more.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Who can use CampusX?
+          <span><svg class="icon"><use href="#i-plus"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <p>CampusX is designed for users interested in campus communities, events, activities and conversations.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What types of markets are available?
+          <span><svg class="icon"><use href="#i-plus"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <p>Markets can cover sports, campus events, student union affairs, campus elections, college affairs and other relevant topics.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is CampusX limited to elections?
+          <span><svg class="icon"><use href="#i-plus"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <p>No. CampusX covers a wide range of campus-related categories. Elections are only one part of the experience.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How do I get started?
+          <span><svg class="icon"><use href="#i-plus"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <p>Explore the available markets and discover the topics that interest you. Use the main CampusX platform to access its available features.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section class="cta" id="join">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2>Your campus. Your perspective.</h2>
+      <p>
+        The conversations are happening. The possibilities are endless.
+        Be part of the CampusX experience.
+      </p>
+      <a href="index.html" class="btn">
+        Discover CampusX
+        <svg class="icon icon-sm"><use href="#i-arrow"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark">CX</span>
+      <span>campus<b>X</b></span>
+    </a>
+
+    <p class="footer-copy">
+      © <span id="year"></span>
+       CampusX. Your Campus. Your Call.
+    </p>
+
+    <div class="footer-links">
+      <a href="#story">About</a>
+      <a href="#markets">Markets</a>
+      <a href="#faq">FAQs</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// MOBILE NAVIGATION
+
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("show");
+
+  menuBtn.setAttribute("aria-expanded", isOpen);
+  menuBtn.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+
+  menuBtn.innerHTML = isOpen
+    ? '<svg class="icon"><use href="#i-close"/></svg>'
+    : '<svg class="icon"><use href="#i-menu"/></svg>';
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("show");
+    menuBtn.setAttribute("aria-expanded", "false");
+    menuBtn.setAttribute("aria-label", "Open menu");
+    menuBtn.innerHTML = '<svg class="icon"><use href="#i-menu"/></svg>';
+  });
+});
+
+// SCROLL REVEAL ANIMATIONS
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold:0.12 });
+
+document.querySelectorAll(".reveal").forEach(element => {
+  observer.observe(element);
+});
+
+// FAQ ACCORDION
+
+document.querySelectorAll(".faq-question").forEach(button => {
+  button.addEventListener("click", () => {
+    const current = button.parentElement;
+    const wasOpen = current.classList.contains("open");
+
+    document.querySelectorAll(".faq-item").forEach(item => {
+      item.classList.remove("open");
+      item.querySelector(".faq-question").setAttribute("aria-expanded","false");
+    });
+
+    if (!wasOpen) {
+      current.classList.add("open");
+      button.setAttribute("aria-expanded","true");
+    }
+  });
+});
+
+// AUTOMATIC FOOTER YEAR
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
