@@ -206,3 +206,25 @@ html.cx-reveal-enabled .reveal-on-scroll:not(.is-visible){opacity:0;transform:tr
 .google-signin-host>div{margin-inline:auto!important}.google-signin-host iframe{display:block;margin-inline:auto!important}
 
 .remember-line{display:flex!important;align-items:center;gap:9px;font-size:11px!important;color:#617367!important;margin:3px 0 12px!important}.remember-line input{width:16px;height:16px;accent-color:#205b38;flex:none}
+
+#communityNav svg {
+    width: 24px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.0;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+#communityNav {
+    display: flex;
+    align-items: center;
+    padding-top: 4px;
+    gap: 10px;
+    text-decoration: none;
+    padding-bottom: 12px;
+}
+#communityNav.active {
+    color: #20b52f;
+}
