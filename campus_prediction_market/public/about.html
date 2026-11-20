@@ -7,18 +7,17 @@
 <title>About CampusX | Your Campus. Your Call.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <script>
-  function renderLucideIcons() {
-    if (window.lucide?.createIcons) window.lucide.createIcons();
+document.addEventListener("DOMContentLoaded", () => {
+  if (!window.lucide) {
+    console.error("Lucide failed to load.");
+    return;
   }
 
-  document.addEventListener("DOMContentLoaded", renderLucideIcons);
+  lucide.createIcons();
+});
 </script>
-<script
-  src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"
-  onload="renderLucideIcons()"
-  onerror="this.onerror=null;this.src='https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js';"
-></script>
 <style>
 :root{
 --green:#20b52f;
