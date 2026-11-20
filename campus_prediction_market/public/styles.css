@@ -228,3 +228,16 @@ html.cx-reveal-enabled .reveal-on-scroll:not(.is-visible){opacity:0;transform:tr
 #communityNav.active {
     color: #20b52f;
 }
+.icon-box svg,
+.faq-question svg {
+  display: block;
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  visibility: visible;
+  opacity: 1;
+}
