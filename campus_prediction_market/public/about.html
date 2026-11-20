@@ -3,970 +3,945 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f7fbf3">
+<meta name="theme-color" content="#00351F">
+<meta name="description" content="Discover CampusX — the platform where campus conversations, student perspectives and prediction markets meet.">
 <title>About CampusX | Your Campus. Your Call.</title>
-<meta name="description" content="Discover CampusX — the platform where campus conversations, opinions and predictions come together.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
-
-:root {
-  --green: #78b83f;
-  --dark: #24551e;
-  --deep: #153c19;
-  --lime: #c5f36b;
-  --light: #eff8e9;
-  --ink: #172117;
-  --muted: #697568;
-  --border: #e5eddf;
-  --white: #fff;
+:root{
+  --forest:#00351F;
+  --forest2:#064B2B;
+  --green:#39C51B;
+  --lime:#A6F542;
+  --ink:#08191C;
+  --slate:#647477;
+  --muted:#879494;
+  --bg:#F5F8F5;
+  --white:#FFFFFF;
+  --line:#E5ECE7;
+  --soft:#EAF6E7;
+  --shadow:0 20px 55px rgba(0,45,25,.09);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  overflow-x:hidden;
 }
 
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: #f8fbf5;
-  color: var(--ink);
-  overflow-x: hidden;
+a{text-decoration:none;color:inherit}
+button{font:inherit;cursor:pointer}
+svg{
+  width:22px;height:22px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  display:block;
 }
 
-button, a { font: inherit; }
-a { text-decoration: none; color: inherit; }
-
-.container {
-  width: min(1160px, 90%);
-  margin: auto;
-}
-
-svg {
-  width: 24px;
-  height: 24px;
-  display: block;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.container{
+  width:min(1200px,91%);
+  margin:auto;
 }
 
 /* NAVIGATION */
 
-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(248,251,245,.9);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(220,233,211,.8);
+.header{
+  height:78px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
 }
 
-.nav {
-  height: 76px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.nav{
+  height:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: Manrope, sans-serif;
-  font-size: 25px;
-  font-weight: 800;
-  letter-spacing: -1.5px;
+.logo{
+  display:flex;
+  align-items:center;
+  width:205px;
 }
 
-.logo-mark {
-  width: 39px;
-  height: 39px;
-  border-radius: 13px;
-  display: grid;
-  place-items: center;
-  color: white;
-  background: linear-gradient(145deg,#91d34c,#438d29);
-  box-shadow: 0 6px 16px #78b83f40;
+.logo img{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:contain;
 }
 
-.logo-mark svg {
-  width: 25px;
-  height: 25px;
-  stroke-width: 2.4;
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:29px;
 }
 
-.logo span { color: var(--green); }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #596555;
+.nav-links a{
+  color:#66736C;
+  font-size:12px;
+  font-weight:700;
+  transition:.25s;
 }
 
-.nav-links a { transition: .25s; }
 .nav-links a:hover,
-.nav-links a.active { color: var(--green); }
-
-.nav-action {
-  background: var(--dark);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 700;
-  transition: .3s;
+.nav-links a.active{
+  color:var(--green);
 }
 
-.nav-action:hover {
-  background: var(--green);
-  transform: translateY(-2px);
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.menu-btn {
-  display: none;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 11px;
-  padding: 9px;
-  color: var(--dark);
+.nav-login{
+  padding:11px 17px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  font-size:11px;
+  font-weight:800;
+  transition:.2s;
+}
+
+.nav-login:hover{
+  border-color:var(--green);
+  color:var(--forest);
+}
+
+.nav-signup{
+  padding:12px 18px;
+  border-radius:9px;
+  background:var(--forest);
+  color:white;
+  font-size:11px;
+  font-weight:800;
+  transition:.25s;
+}
+
+.nav-signup:hover{
+  background:var(--green);
+  color:var(--forest);
+  transform:translateY(-2px);
+}
+
+.menu-btn{
+  display:none;
+  border:1px solid var(--line);
+  background:white;
+  padding:9px;
+  border-radius:10px;
+  color:var(--forest);
 }
 
 /* HERO */
 
-.hero {
-  position: relative;
-  padding: 100px 0 90px;
-  overflow: hidden;
+.hero{
+  position:relative;
+  overflow:hidden;
   background:
-    radial-gradient(circle at 85% 15%, #d9f4a8 0, transparent 25%),
-    radial-gradient(circle at 5% 90%, #e0f2d5 0, transparent 28%),
-    #f8fbf5;
+    radial-gradient(circle at 80% 20%,rgba(57,197,27,.22),transparent 28%),
+    radial-gradient(circle at 5% 100%,rgba(166,245,66,.12),transparent 30%),
+    linear-gradient(120deg,#002A19 0%,#06472A 55%,#00351F 100%);
+  color:white;
+  padding:100px 0 110px;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  border: 1px solid #d9ebcd;
-  border-radius: 50%;
-  right: -150px;
-  top: -170px;
-  box-shadow: 0 0 0 35px #eaf5e340, 0 0 0 75px #eaf5e325;
+.hero:before{
+  content:"";
+  position:absolute;
+  width:520px;
+  height:520px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:50%;
+  right:-130px;
+  top:-280px;
+  box-shadow:
+    0 0 0 55px rgba(255,255,255,.035),
+    0 0 0 115px rgba(255,255,255,.025);
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.08fr .92fr;
-  align-items: center;
-  gap: 60px;
-  position: relative;
-  z-index: 2;
+.hero:after{
+  content:"";
+  position:absolute;
+  width:270px;
+  height:270px;
+  border-radius:50%;
+  background:var(--green);
+  filter:blur(140px);
+  opacity:.18;
+  left:35%;
+  bottom:-160px;
 }
 
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 14px;
-  border: 1px solid #d9e9cc;
-  border-radius: 50px;
-  background: #f0f9e9;
-  color: var(--dark);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .6px;
-  text-transform: uppercase;
-  margin-bottom: 24px;
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:850px;
 }
 
-.eyebrow svg {
-  width: 16px;
-  height: 16px;
-  color: var(--green);
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:9px 14px;
+  border-radius:30px;
+  border:1px solid rgba(166,245,66,.35);
+  background:rgba(166,245,66,.09);
+  color:var(--lime);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  margin-bottom:25px;
 }
 
-.hero h1 {
-  font-family: Manrope, sans-serif;
-  font-size: clamp(43px,6vw,72px);
-  line-height: 1.06;
-  letter-spacing: -3.8px;
-  font-weight: 800;
-  max-width: 650px;
+.eyebrow-dot{
+  width:7px;height:7px;
+  border-radius:50%;
+  background:var(--lime);
+  box-shadow:0 0 12px var(--lime);
 }
 
-.hero h1 span {
-  color: var(--green);
-  position: relative;
+.hero h1{
+  font-family:Manrope,sans-serif;
+  font-size:clamp(43px,7vw,76px);
+  line-height:1.08;
+  letter-spacing:-4px;
+  font-weight:800;
+  max-width:850px;
 }
 
-.hero-copy {
-  color: var(--muted);
-  line-height: 1.9;
-  font-size: 16px;
-  max-width: 510px;
-  margin: 24px 0 30px;
+.hero h1 span{
+  color:var(--lime);
 }
 
-.hero-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 13px;
+.hero-description{
+  color:#C5D8CC;
+  font-size:15px;
+  line-height:1.9;
+  max-width:620px;
+  margin-top:24px;
 }
 
-.btn-primary, .btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 15px 21px;
-  border-radius: 13px;
-  font-size: 14px;
-  font-weight: 700;
-  transition: .3s;
+.hero-buttons{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  flex-wrap:wrap;
+  margin-top:34px;
 }
 
-.btn-primary {
-  background: var(--dark);
-  color: white;
-  box-shadow: 0 9px 22px #24551e25;
+.btn-primary{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:var(--lime);
+  color:var(--forest);
+  border-radius:10px;
+  padding:15px 21px;
+  font-size:12px;
+  font-weight:800;
+  transition:.25s;
 }
 
-.btn-primary:hover {
-  background: var(--green);
-  transform: translateY(-4px);
+.btn-primary:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 30px #a6f54230;
 }
 
-.btn-secondary {
-  background: white;
-  color: var(--dark);
-  border: 1px solid var(--border);
+.btn-primary svg{width:17px;height:17px}
+
+.btn-outline{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  border:1px solid #ffffff45;
+  color:white;
+  padding:14px 19px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:700;
+  transition:.2s;
 }
 
-.btn-secondary:hover { transform: translateY(-4px); }
-
-.btn-primary svg, .btn-secondary svg {
-  width: 17px;
-  height: 17px;
+.btn-outline:hover{
+  background:#ffffff12;
+  border-color:var(--lime);
 }
 
-/* HERO VISUAL */
+/* FLOATING BRAND ELEMENT */
 
-.hero-visual {
-  position: relative;
-  min-height: 420px;
-  display: grid;
-  place-items: center;
+.hero-brand{
+  position:absolute;
+  right:7%;
+  bottom:50px;
+  width:180px;
+  opacity:.09;
+  transform:rotate(-9deg);
+  pointer-events:none;
 }
 
-.visual-glow {
-  position: absolute;
-  width: 310px;
-  height: 310px;
-  border-radius: 50%;
-  background: linear-gradient(145deg,#d4f2a8,#a8db77);
-  filter: blur(1px);
+.hero-brand img{
+  width:100%;
+  filter:grayscale(1) brightness(0) invert(1);
 }
-
-.visual-card {
-  position: relative;
-  z-index: 2;
-  width: min(100%,390px);
-  padding: 25px;
-  border: 1px solid #ffffff;
-  border-radius: 27px;
-  background: rgba(255,255,255,.91);
-  box-shadow: 0 25px 70px #315f2020;
-  transform: rotate(-2deg);
-  animation: float 5s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%,100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-12px) rotate(0deg); }
-}
-
-.visual-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 23px;
-}
-
-.visual-label {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.live-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: #edfae8;
-  color: #438b2e;
-  padding: 7px 10px;
-  border-radius: 30px;
-  font-size: 10px;
-  font-weight: 800;
-}
-
-.live-dot {
-  width: 7px;
-  height: 7px;
-  background: #70bd42;
-  border-radius: 50%;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  50% { box-shadow: 0 0 0 6px #78b83f25; }
-}
-
-.visual-question {
-  font-family: Manrope;
-  font-size: 21px;
-  font-weight: 800;
-  line-height: 1.35;
-  margin-bottom: 18px;
-}
-
-.visual-option {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px;
-  border: 1px solid var(--border);
-  border-radius: 13px;
-  margin-top: 10px;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.visual-option.active {
-  background: #f0f9e9;
-  border-color: #b9dc9d;
-  color: var(--dark);
-}
-
-.visual-option span:last-child { color: var(--green); }
-
-.floating-chip {
-  position: absolute;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 12px 16px;
-  background: white;
-  border-radius: 14px;
-  box-shadow: 0 12px 35px #24451e1c;
-  font-size: 12px;
-  font-weight: 800;
-  animation: float 4s ease-in-out infinite;
-}
-
-.floating-chip svg {
-  color: var(--green);
-  width: 20px;
-}
-
-.chip-one { top: 30px; right: -5px; }
-.chip-two { bottom: 27px; left: -5px; animation-delay: 1s; }
 
 /* INTRO STRIP */
 
-.trust-strip {
-  background: var(--deep);
-  color: white;
-  padding: 22px 0;
+.intro-strip{
+  background:white;
+  border-bottom:1px solid var(--line);
 }
 
-.strip-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
+.intro-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
 }
 
-.strip-content p {
-  font-size: 13px;
-  color: #d3e6c9;
-  font-weight: 600;
+.intro-item{
+  padding:27px 25px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  border-right:1px solid var(--line);
 }
 
-.strip-items {
-  display: flex;
-  gap: 25px;
-  flex-wrap: wrap;
+.intro-item:last-child{border:0}
+
+.intro-icon{
+  width:43px;height:43px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  background:#EAF7E4;
+  color:var(--forest2);
 }
 
-.strip-items span {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #e7f5df;
+.intro-icon svg{width:21px;height:21px}
+
+.intro-item strong{
+  display:block;
+  font-family:Manrope;
+  font-size:13px;
 }
 
-.strip-items svg {
-  color: var(--lime);
-  width: 17px;
+.intro-item small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:4px;
 }
 
-/* SECTION GENERAL */
+/* GENERAL SECTIONS */
 
-section.content-section { padding: 100px 0; }
-
-.section-heading {
-  max-width: 650px;
-  margin-bottom: 45px;
+.section{
+  padding:100px 0;
 }
 
-.section-tag {
-  color: #5e9d35;
-  text-transform: uppercase;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1.7px;
-  margin-bottom: 15px;
+.section-label{
+  color:#399B2A;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+  margin-bottom:15px;
 }
 
-.section-heading h2 {
-  font-family: Manrope;
-  font-size: clamp(30px,4vw,46px);
-  line-height: 1.16;
-  letter-spacing: -1.8px;
-  font-weight: 800;
+.section-title{
+  font-family:Manrope,sans-serif;
+  font-size:clamp(30px,4vw,45px);
+  line-height:1.2;
+  letter-spacing:-1.8px;
+  font-weight:800;
 }
 
-.section-heading h2 span { color: var(--green); }
+.section-title span{color:var(--green)}
 
-.section-heading p {
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.85;
-  margin-top: 17px;
+.section-description{
+  color:var(--slate);
+  font-size:13px;
+  line-height:1.9;
+  max-width:570px;
+  margin-top:17px;
 }
 
-/* MISSION */
+/* STORY */
 
-.mission-section { background: white; }
-
-.mission-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
+.story-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:75px;
 }
 
-.mission-art {
-  min-height: 370px;
-  border-radius: 27px;
+.story-visual{
+  min-height:420px;
+  border-radius:25px;
+  position:relative;
+  overflow:hidden;
   background:
-    radial-gradient(circle at 80% 15%,#d8f4aa,transparent 35%),
-    linear-gradient(145deg,#eaf6df,#d9edc9);
-  display: grid;
-  place-items: center;
-  position: relative;
-  overflow: hidden;
+    radial-gradient(circle at 75% 25%,#A6F54245,transparent 35%),
+    linear-gradient(145deg,#00351F,#07552D);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.mission-art::before,
-.mission-art::after {
-  content: "";
-  position: absolute;
-  border: 1px solid #9bc87a70;
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
+.story-visual:before{
+  content:"";
+  position:absolute;
+  width:300px;height:300px;
+  border:1px solid #ffffff25;
+  border-radius:50%;
+  box-shadow:0 0 0 35px #ffffff08,0 0 0 75px #ffffff05;
 }
 
-.mission-art::after {
-  width: 330px;
-  height: 330px;
+.story-logo{
+  width:75%;
+  position:relative;
+  z-index:2;
+  filter:drop-shadow(0 15px 30px #001c10);
 }
 
-.mission-icon {
-  position: relative;
-  z-index: 2;
-  width: 130px;
-  height: 130px;
-  display: grid;
-  place-items: center;
-  border-radius: 38px;
-  background: linear-gradient(145deg,#8acb4a,#438c2c);
-  color: white;
-  box-shadow: 0 20px 45px #376b263b;
-  transform: rotate(-8deg);
+.story-logo img{
+  width:100%;
+  display:block;
+  border-radius:10px;
 }
 
-.mission-icon svg { width: 65px; height: 65px; stroke-width: 1.6; }
-
-.mission-float {
-  position: absolute;
-  z-index: 3;
-  padding: 13px 16px;
-  background: white;
-  border-radius: 14px;
-  box-shadow: 0 10px 25px #315f2020;
-  font-size: 12px;
-  font-weight: 800;
+.story-sticker{
+  position:absolute;
+  bottom:25px;
+  right:25px;
+  z-index:3;
+  background:var(--lime);
+  color:var(--forest);
+  padding:12px 17px;
+  border-radius:11px;
+  font-size:10px;
+  font-weight:800;
+  box-shadow:0 10px 30px #001c1040;
 }
 
-.mission-float.one { top: 45px; left: 25px; }
-.mission-float.two { right: 25px; bottom: 45px; }
-
-.mission-text h3 {
-  font-family: Manrope;
-  font-size: 29px;
-  letter-spacing: -1px;
-  line-height: 1.25;
-  margin-bottom: 18px;
+.story-copy p{
+  color:var(--slate);
+  font-size:13px;
+  line-height:2;
+  margin-top:17px;
 }
 
-.mission-text p {
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.95;
-  margin-bottom: 17px;
+.story-highlight{
+  border-left:3px solid var(--green);
+  padding:13px 18px;
+  margin-top:25px;
+  background:#ECF6E9;
+  color:#36563B;
+  font-size:12px;
+  line-height:1.8;
+  border-radius:0 10px 10px 0;
 }
 
-/* VALUES */
+/* MISSION / VISION */
 
-.values-section {
-  background: #f1f8ec;
-  position: relative;
-  overflow: hidden;
+.mission-section{
+  background:#EDF5EC;
+  position:relative;
+  overflow:hidden;
 }
 
-.values-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 19px;
+.mission-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
 }
 
-.value-card {
-  background: white;
-  border: 1px solid #e3eddb;
-  border-radius: 20px;
-  padding: 27px;
-  transition: .35s;
-  position: relative;
-  overflow: hidden;
+.mission-card{
+  border-radius:22px;
+  padding:38px;
+  min-height:275px;
+  position:relative;
+  overflow:hidden;
+  transition:.35s;
 }
 
-.value-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 18px 40px #315f2012;
-  border-color: #b9db9c;
+.mission-card:hover{transform:translateY(-7px)}
+
+.mission-card.dark{
+  background:linear-gradient(145deg,#00351F,#07532C);
+  color:white;
 }
 
-.value-icon {
-  width: 51px;
-  height: 51px;
-  display: grid;
-  place-items: center;
-  border-radius: 16px;
-  background: #eff8e9;
-  color: #589b32;
-  margin-bottom: 22px;
+.mission-card.light{
+  background:white;
+  border:1px solid #DFEBDD;
 }
 
-.value-icon svg { width: 25px; }
-
-.value-card h3 {
-  font-family: Manrope;
-  font-size: 17px;
-  margin-bottom: 10px;
+.mission-card:after{
+  content:"";
+  position:absolute;
+  width:170px;height:170px;
+  border-radius:50%;
+  right:-65px;bottom:-95px;
+  background:rgba(166,245,66,.12);
 }
 
-.value-card p {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.8;
+.mission-icon{
+  width:50px;height:50px;
+  border-radius:15px;
+  display:grid;
+  place-items:center;
+  background:#A6F54220;
+  color:var(--lime);
+  margin-bottom:24px;
+}
+
+.mission-card.light .mission-icon{
+  background:#E9F6E4;
+  color:var(--forest);
+}
+
+.mission-card h3{
+  font-family:Manrope;
+  font-size:22px;
+  margin-bottom:12px;
+}
+
+.mission-card p{
+  font-size:12px;
+  line-height:1.9;
+  max-width:420px;
+  color:#C6D9CB;
+}
+
+.mission-card.light p{color:var(--slate)}
+
+/* WHAT CAMPUSX BRINGS */
+
+.pillars-section{background:white}
+
+.center-heading{text-align:center}
+.center-heading .section-description{margin-left:auto;margin-right:auto}
+
+.pillar-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:17px;
+  margin-top:52px;
+}
+
+.pillar-card{
+  padding:27px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:white;
+  transition:.3s;
+  position:relative;
+  overflow:hidden;
+}
+
+.pillar-card:hover{
+  transform:translateY(-7px);
+  border-color:#B7DDA9;
+  box-shadow:var(--shadow);
+}
+
+.pillar-icon{
+  width:49px;height:49px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  background:#EAF7E4;
+  color:var(--forest2);
+  margin-bottom:22px;
+}
+
+.pillar-card:nth-child(2) .pillar-icon,
+.pillar-card:nth-child(5) .pillar-icon{
+  background:#E3F7C7;
+}
+
+.pillar-card:nth-child(3) .pillar-icon,
+.pillar-card:nth-child(6) .pillar-icon{
+  background:#E5F0ED;
+}
+
+.pillar-card h3{
+  font-family:Manrope;
+  font-size:15px;
+  margin-bottom:10px;
+}
+
+.pillar-card p{
+  color:var(--slate);
+  font-size:11px;
+  line-height:1.9;
 }
 
 /* HOW IT WORKS */
 
-.how-section { background: white; }
-
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 22px;
+.process-section{
+  background:var(--forest);
+  color:white;
+  overflow:hidden;
+  position:relative;
 }
 
-.step-card {
-  border-radius: 20px;
-  padding: 27px;
-  background: #f7fbf4;
-  border: 1px solid var(--border);
-  transition: .3s;
+.process-section:before{
+  content:"";
+  position:absolute;
+  width:500px;height:500px;
+  border-radius:50%;
+  border:1px solid #ffffff12;
+  right:-200px;top:-200px;
+  box-shadow:0 0 0 60px #ffffff05,0 0 0 120px #ffffff04;
 }
 
-.step-card:hover {
-  transform: translateY(-6px);
-  background: #eff8e9;
+.process-section .section-label{color:var(--lime)}
+.process-section .section-description{color:#B9D0C0}
+
+.process-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-top:52px;
+  position:relative;
+  z-index:2;
 }
 
-.step-number {
-  font-family: Manrope;
-  font-size: 38px;
-  font-weight: 800;
-  color: #b6d99b;
-  margin-bottom: 18px;
+.process-card{
+  padding:25px 21px;
+  border:1px solid #ffffff1c;
+  background:#ffffff09;
+  border-radius:17px;
+  transition:.3s;
 }
 
-.step-card h3 {
-  font-family: Manrope;
-  font-size: 18px;
-  margin-bottom: 10px;
+.process-card:hover{
+  background:#ffffff13;
+  transform:translateY(-6px);
+  border-color:#A6F54270;
 }
 
-.step-card p {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.8;
+.process-number{
+  font-family:Manrope;
+  font-size:36px;
+  font-weight:800;
+  color:var(--lime);
+  opacity:.85;
+  margin-bottom:20px;
 }
 
-/* MARKETS */
-
-.markets-section {
-  background: var(--deep);
-  color: white;
-  position: relative;
-  overflow: hidden;
+.process-card h3{
+  font-family:Manrope;
+  font-size:14px;
+  margin-bottom:10px;
 }
 
-.markets-section::before {
-  content: "";
-  position: absolute;
-  width: 450px;
-  height: 450px;
-  border-radius: 50%;
-  border: 1px solid #ffffff14;
-  top: -250px;
-  right: -100px;
-  box-shadow: 0 0 0 45px #ffffff08, 0 0 0 90px #ffffff05;
+.process-card p{
+  font-size:11px;
+  color:#B9D0C0;
+  line-height:1.9;
 }
 
-.markets-section .section-tag { color: var(--lime); }
-.markets-section .section-heading p { color: #c2d6bc; }
+/* VALUES */
 
-.market-grid {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 15px;
-  position: relative;
-  z-index: 2;
+.values-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
 }
 
-.market-card {
-  border: 1px solid #ffffff20;
-  background: #ffffff0d;
-  padding: 23px;
-  border-radius: 18px;
-  transition: .3s;
+.values-list{
+  display:grid;
+  gap:17px;
+  margin-top:30px;
 }
 
-.market-card:hover {
-  background: #ffffff18;
-  transform: translateY(-7px);
-  border-color: #b5e78b;
+.value-item{
+  display:flex;
+  gap:13px;
+  align-items:flex-start;
 }
 
-.market-card .value-icon {
-  background: #ffffff15;
-  color: var(--lime);
+.value-check{
+  width:27px;height:27px;
+  flex-shrink:0;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#E5F5DD;
+  color:#328D26;
 }
 
-.market-card h3 {
-  font-family: Manrope;
-  font-size: 15px;
-  margin-bottom: 9px;
+.value-check svg{width:15px;height:15px}
+
+.value-item strong{
+  display:block;
+  font-size:12px;
+  margin-bottom:5px;
 }
 
-.market-card p {
-  color: #c3d8bc;
-  font-size: 12px;
-  line-height: 1.8;
+.value-item p{
+  color:var(--slate);
+  font-size:11px;
+  line-height:1.7;
 }
 
-/* COMMUNITY */
-
-.community-section {
-  background: #f8fbf5;
+.values-visual{
+  min-height:390px;
+  background:linear-gradient(145deg,#E6F5DE,#F4F8EC);
+  border-radius:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
 }
 
-.community-panel {
-  padding: 55px;
-  border-radius: 27px;
+.values-visual:before,
+.values-visual:after{
+  content:"";
+  position:absolute;
+  border:1px solid #6EAE5D30;
+  border-radius:50%;
+  width:250px;height:250px;
+}
+
+.values-visual:after{width:340px;height:340px}
+
+.values-mark{
+  position:relative;
+  z-index:2;
+  width:70%;
+  filter:drop-shadow(0 15px 25px #174c1c22);
+}
+
+.values-mark img{width:100%;display:block}
+
+/* FINAL CTA */
+
+.cta-section{
+  padding:0 0 100px;
+  background:white;
+}
+
+.cta-box{
+  position:relative;
+  overflow:hidden;
+  padding:65px 40px;
+  text-align:center;
+  border-radius:25px;
   background:
-    radial-gradient(circle at 90% 10%,#c9ed9d,transparent 30%),
-    linear-gradient(120deg,#e7f5dc,#f3f9ed);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-  overflow: hidden;
+    radial-gradient(circle at 80% 0%,#39C51B40,transparent 30%),
+    linear-gradient(120deg,#00351F,#07502A);
+  color:white;
 }
 
-.community-panel h2 {
-  font-family: Manrope;
-  font-size: clamp(28px,4vw,42px);
-  line-height: 1.2;
-  letter-spacing: -1.5px;
-  max-width: 570px;
+.cta-box:before{
+  content:"";
+  position:absolute;
+  width:320px;height:320px;
+  border:1px solid #ffffff20;
+  border-radius:50%;
+  left:-130px;bottom:-240px;
+  box-shadow:0 0 0 45px #ffffff07;
 }
 
-.community-panel p {
-  color: #61745a;
-  line-height: 1.8;
-  font-size: 14px;
-  margin-top: 15px;
-  max-width: 520px;
+.cta-box h2{
+  font-family:Manrope;
+  font-size:clamp(28px,4vw,43px);
+  letter-spacing:-1.7px;
+  position:relative;
+  z-index:2;
 }
 
-.community-symbol {
-  width: 150px;
-  height: 150px;
-  min-width: 150px;
-  border-radius: 45px;
-  background: linear-gradient(145deg,#8dce50,#367c2b);
-  color: white;
-  display: grid;
-  place-items: center;
-  transform: rotate(8deg);
-  box-shadow: 0 20px 35px #3b70252b;
+.cta-box h2 span{color:var(--lime)}
+
+.cta-box p{
+  max-width:550px;
+  margin:15px auto 25px;
+  color:#C6D8CB;
+  font-size:12px;
+  line-height:1.9;
+  position:relative;
+  z-index:2;
 }
 
-.community-symbol svg { width: 70px; height: 70px; }
-
-/* CTA */
-
-.cta-section {
-  padding: 85px 0;
-  background: white;
+.cta-box .btn-primary{
+  position:relative;
+  z-index:2;
 }
-
-.cta-box {
-  background: linear-gradient(120deg,#285c21,#397c29 60%,#6cae3c);
-  padding: 65px 30px;
-  border-radius: 28px;
-  text-align: center;
-  color: white;
-  position: relative;
-  overflow: hidden;
-}
-
-.cta-box::before,
-.cta-box::after {
-  content: "";
-  position: absolute;
-  width: 260px;
-  height: 260px;
-  border: 1px solid #ffffff20;
-  border-radius: 50%;
-}
-
-.cta-box::before { left: -100px; top: -150px; }
-.cta-box::after { right: -80px; bottom: -170px; }
-
-.cta-box h2 {
-  font-family: Manrope;
-  font-size: clamp(30px,4vw,46px);
-  letter-spacing: -1.5px;
-  position: relative;
-  z-index: 2;
-}
-
-.cta-box p {
-  color: #e0f0d9;
-  margin: 15px auto 25px;
-  line-height: 1.8;
-  max-width: 540px;
-  font-size: 14px;
-  position: relative;
-  z-index: 2;
-}
-
-.cta-box .btn-primary {
-  background: var(--lime);
-  color: var(--deep);
-  position: relative;
-  z-index: 2;
-}
-
-.cta-box .btn-primary:hover { background: white; }
 
 /* FOOTER */
 
-footer {
-  background: #102d16;
-  color: white;
-  padding: 55px 0 25px;
+.footer{
+  background:#061D14;
+  color:white;
+  padding:55px 0 25px;
 }
 
-.footer-main {
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
-  flex-wrap: wrap;
-  padding-bottom: 40px;
+.footer-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:30px;
+  padding-bottom:38px;
 }
 
-.footer-brand { max-width: 320px; }
+.footer-logo{width:210px}
+.footer-logo img{width:100%;display:block}
 
-.footer-brand .logo { margin-bottom: 17px; }
-.footer-brand .logo span { color: var(--lime); }
-
-.footer-brand p {
-  color: #a9c1a3;
-  font-size: 13px;
-  line-height: 1.8;
+.footer-description{
+  color:#9FB3A5;
+  max-width:330px;
+  font-size:11px;
+  line-height:1.9;
+  margin-top:17px;
 }
 
-.footer-links h4 {
-  font-family: Manrope;
-  font-size: 13px;
-  margin-bottom: 18px;
+.footer-links{
+  display:flex;
+  gap:55px;
 }
 
-.footer-links a {
-  display: block;
-  color: #a9c1a3;
-  font-size: 12px;
-  margin: 12px 0;
-  transition: .2s;
+.footer-column h4{
+  color:var(--lime);
+  font-size:10px;
+  letter-spacing:1px;
+  margin-bottom:17px;
 }
 
-.footer-links a:hover { color: var(--lime); }
+.footer-column a{
+  display:block;
+  color:#B8C8BD;
+  font-size:11px;
+  margin-bottom:13px;
+  transition:.2s;
+}
 
-.footer-bottom {
-  border-top: 1px solid #ffffff18;
-  padding-top: 22px;
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  flex-wrap: wrap;
-  color: #91a98b;
-  font-size: 11px;
+.footer-column a:hover{color:var(--lime)}
+
+.footer-bottom{
+  border-top:1px solid #ffffff18;
+  padding-top:21px;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  color:#81968A;
+  font-size:10px;
 }
 
 /* ANIMATIONS */
 
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity .75s ease, transform .75s ease;
+.reveal{
+  opacity:0;
+  transform:translateY(25px);
+  transition:opacity .8s ease,transform .8s ease;
 }
 
-.reveal.show {
-  opacity: 1;
-  transform: translateY(0);
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
 }
 
-@keyframes appear {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
 }
 
-.hero-content { animation: appear .8s ease both; }
-.hero-visual { animation: appear 1s .15s ease both; }
+.story-logo{animation:float 6s ease-in-out infinite}
 
 /* MOBILE */
 
-@media(max-width:850px) {
-  .hero-grid, .mission-grid { grid-template-columns: 1fr; }
-  .hero { padding: 75px 0 65px; }
-  .hero-visual { min-height: 390px; }
-  .mission-grid { gap: 35px; }
-  .values-grid { grid-template-columns: repeat(2,1fr); }
-  .market-grid { grid-template-columns: repeat(2,1fr); }
-  .community-panel { padding: 38px; }
+@media(max-width:900px){
+  .nav-links{gap:17px}
+  .nav-links a{font-size:11px}
+  .logo{width:170px}
+  .story-grid{gap:35px}
+  .process-grid{grid-template-columns:repeat(2,1fr)}
+  .pillar-grid{grid-template-columns:repeat(2,1fr)}
 }
 
-@media(max-width:650px) {
-  .nav { height: 67px; }
-  .logo { font-size: 23px; }
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 67px;
-    left: 0;
-    width: 100%;
-    padding: 22px 5%;
-    background: white;
-    border-bottom: 1px solid var(--border);
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    box-shadow: 0 15px 25px #1c45100c;
+@media(max-width:700px){
+  .header{height:68px}
+  .logo{width:155px}
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:68px;
+    left:0;right:0;
+    background:white;
+    padding:23px 5%;
+    border-bottom:1px solid var(--line);
+    flex-direction:column;
+    align-items:flex-start;
+    gap:20px;
+    box-shadow:var(--shadow);
   }
-  .nav-links.open { display: flex; }
-  .nav-action { display: none; }
-  .menu-btn { display: block; }
-
-  .hero { padding: 65px 0 45px; }
-  .hero h1 { letter-spacing: -2.4px; }
-  .hero-copy { font-size: 14px; }
-  .hero-visual { min-height: 360px; }
-  .visual-card { padding: 20px; }
-  .visual-question { font-size: 18px; }
-  .chip-one { right: -3px; }
-  .chip-two { left: -3px; }
-
-  .strip-content { justify-content: center; text-align: center; }
-  .strip-items { justify-content: center; gap: 14px; }
-
-  section.content-section { padding: 72px 0; }
-  .section-heading { margin-bottom: 30px; }
-  .section-heading h2 { letter-spacing: -1.2px; }
-
-  .mission-art { min-height: 290px; }
-  .values-grid, .steps-grid { grid-template-columns: 1fr; }
-  .market-grid { grid-template-columns: 1fr 1fr; }
-  .market-card { padding: 17px; }
-  .market-card h3 { font-size: 13px; }
-  .market-card p { font-size: 11px; }
-
-  .community-panel {
-    padding: 30px 24px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .community-symbol {
-    width: 90px;
-    height: 90px;
-    min-width: 90px;
-    border-radius: 27px;
-  }
-  .community-symbol svg { width: 43px; height: 43px; }
-
-  .cta-box { padding: 48px 22px; }
-  .footer-main { gap: 28px; }
-  .footer-brand { max-width: 100%; }
-  .footer-bottom { flex-direction: column; }
+  .nav-links.open{display:flex}
+  .nav-links a{font-size:13px}
+  .nav-actions .nav-login{display:none}
+  .nav-signup{padding:10px 13px;font-size:10px}
+  .menu-btn{display:block}
+  .hero{padding:75px 0 80px}
+  .hero h1{letter-spacing:-2.5px}
+  .hero-description{font-size:13px}
+  .hero-brand{width:110px;right:2%;bottom:15px}
+  .intro-grid{grid-template-columns:1fr}
+  .intro-item{padding:18px 5%;border-right:0;border-bottom:1px solid var(--line)}
+  .intro-item:last-child{border-bottom:0}
+  .section{padding:70px 0}
+  .story-grid,.values-grid{grid-template-columns:1fr;gap:35px}
+  .story-visual{min-height:290px;order:2}
+  .story-copy{order:1}
+  .mission-grid{grid-template-columns:1fr}
+  .mission-card{padding:28px;min-height:245px}
+  .pillar-grid{grid-template-columns:1fr 1fr;gap:11px;margin-top:35px}
+  .pillar-card{padding:19px}
+  .pillar-card h3{font-size:13px}
+  .pillar-card p{font-size:10px}
+  .pillar-icon{width:43px;height:43px;margin-bottom:16px}
+  .process-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .process-card{padding:18px 14px}
+  .process-number{font-size:29px}
+  .process-card h3{font-size:12px}
+  .process-card p{font-size:10px}
+  .values-visual{min-height:270px}
+  .cta-section{padding-bottom:65px}
+  .cta-box{padding:48px 20px}
+  .footer-top{flex-direction:column}
+  .footer-links{width:100%;justify-content:space-between;gap:15px}
+  .footer-bottom{flex-direction:column}
 }
 
-@media(prefers-reduced-motion:reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-    scroll-behavior: auto !important;
+@media(max-width:390px){
+  .pillar-grid{grid-template-columns:1fr}
+  .process-grid{grid-template-columns:1fr}
+  .hero h1{font-size:41px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
   }
 }
 </style>
@@ -974,403 +949,431 @@ footer {
 
 <body>
 
-<header>
+<!-- HEADER -->
+<header class="header">
   <div class="container nav">
+
     <a href="index.html" class="logo">
-      <div class="logo-mark">
-        <svg viewBox="0 0 24 24">
-          <path d="M4 17V7l8-4 8 4v10l-8 4-8-4Z"/>
-          <path d="m4 7 8 4 8-4M12 11v10"/>
-          <path d="m8 5 8 4"/>
-        </svg>
-      </div>
-      campus<span>X</span>
+      <img src="campusx-logo.jpeg" alt="CampusX Prediction Markets">
     </a>
 
     <nav class="nav-links" id="navLinks">
       <a href="index.html">Home</a>
       <a href="dashboard.html">Dashboard</a>
-      <a href="dashboard.html">Markets</a>
+      <a href="market.html">Market</a>
       <a href="info.html">Info</a>
       <a href="community.html">Community</a>
       <a href="about.html" class="active">About</a>
     </nav>
 
-    <a href="signup.html" class="nav-action">Get started ↗</a>
+    <div class="nav-actions">
+      <a href="login.html" class="nav-login">Sign in</a>
+      <a href="signup.html" class="nav-signup">Get started ↗</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+      </button>
+    </div>
 
-    <button class="menu-btn" id="menuBtn" aria-label="Open navigation">
-      <svg viewBox="0 0 24 24">
-        <path d="M4 7h16M4 12h16M4 17h16"/>
-      </svg>
-    </button>
   </div>
 </header>
 
-<main>
-
 <!-- HERO -->
 <section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-content">
-      <div class="eyebrow">
-        <svg viewBox="0 0 24 24">
-          <path d="m12 3 2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2L12 3Z"/>
-        </svg>
-        GET TO KNOW CAMPUSX
-      </div>
+  <div class="container hero-content">
 
-      <h1>
-        Campus life has a voice.
-        <span>We give it a platform.</span>
-      </h1>
-
-      <p class="hero-copy">
-        CampusX brings students closer to the conversations, events,
-        decisions and moments shaping their campus. A place where
-        opinions meet insight and every student can stay in the know.
-      </p>
-
-      <div class="hero-buttons">
-        <a href="dashboard.html" class="btn-primary">
-          Explore markets
-          <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-        </a>
-        <a href="community.html" class="btn-secondary">
-          Join the community
-        </a>
-      </div>
+    <div class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      GET TO KNOW CAMPUSX
     </div>
 
-    <div class="hero-visual">
-      <div class="visual-glow"></div>
+    <h1>
+      The campus is<br>
+      <span>more than a place.</span>
+      It's a conversation.
+    </h1>
 
-      <div class="floating-chip chip-one">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 3v18M3 12h18"/>
-          <circle cx="12" cy="12" r="9"/>
-        </svg>
-        Campus conversations
-      </div>
+    <p class="hero-description">
+      CampusX brings campus conversations, student perspectives
+      and prediction markets into one connected experience.
+      A space where what happens around you becomes part of
+      the conversation.
+    </p>
 
-      <div class="visual-card">
-        <div class="visual-top">
-          <span class="visual-label">CAMPUSX MARKET PREVIEW</span>
-          <span class="live-pill"><span class="live-dot"></span> ACTIVE</span>
-        </div>
+    <div class="hero-buttons">
+      <a href="market.html" class="btn-primary">
+        Explore the platform
+        <svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
+      <a href="#our-story" class="btn-outline">
+        Discover our story
+        <svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg>
+      </a>
+    </div>
 
-        <div class="visual-question">
-          Who will lead the next big campus conversation?
-        </div>
+  </div>
 
-        <div class="visual-option active">
-          <span>Student community</span>
-          <span>↗</span>
-        </div>
-        <div class="visual-option">
-          <span>Campus events</span>
-          <span>↗</span>
-        </div>
-        <div class="visual-option">
-          <span>Student leadership</span>
-          <span>↗</span>
-        </div>
-      </div>
+  <div class="hero-brand">
+    <img src="campusx-logo.jpeg" alt="">
+  </div>
+</section>
 
-      <div class="floating-chip chip-two">
+<!-- INTRO STRIP -->
+<section class="intro-strip">
+  <div class="container intro-grid">
+
+    <div class="intro-item">
+      <div class="intro-icon">
         <svg viewBox="0 0 24 24">
           <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
           <circle cx="9" cy="7" r="4"/>
           <path d="M20 8v6m3-3h-6"/>
         </svg>
-        Built around students
+      </div>
+      <div>
+        <strong>Student perspectives</strong>
+        <small>Ideas, opinions and campus voices</small>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- STRIP -->
-<div class="trust-strip">
-  <div class="container strip-content">
-    <p>One campus. Many perspectives. One platform.</p>
-    <div class="strip-items">
-      <span><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Student-focused</span>
-      <span><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Community-driven</span>
-      <span><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Campus-powered</span>
-    </div>
-  </div>
-</div>
-
-<!-- MISSION -->
-<section class="content-section mission-section">
-  <div class="container mission-grid">
-    <div class="mission-art reveal">
-      <div class="mission-float one">Ideas that matter ✦</div>
-      <div class="mission-icon">
+    <div class="intro-item">
+      <div class="intro-icon">
         <svg viewBox="0 0 24 24">
-          <path d="M12 3 3 8l9 5 9-5-9-5Z"/>
-          <path d="m3 12 9 5 9-5M3 16l9 5 9-5"/>
+          <path d="M3 3v18h18"/>
+          <path d="m7 14 4-4 4 3 6-7"/>
         </svg>
       </div>
-      <div class="mission-float two">Your campus. Your call.</div>
+      <div>
+        <strong>Prediction markets</strong>
+        <small>Explore outcomes and probabilities</small>
+      </div>
     </div>
 
-    <div class="mission-text reveal">
-      <div class="section-tag">WHY WE EXIST</div>
-      <h3>Making campus conversations more engaging, accessible and meaningful.</h3>
+    <div class="intro-item">
+      <div class="intro-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/>
+        </svg>
+      </div>
+      <div>
+        <strong>Campus culture</strong>
+        <small>Everything happening around campus</small>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- OUR STORY -->
+<section class="section" id="our-story">
+  <div class="container story-grid">
+
+    <div class="story-visual reveal">
+      <div class="story-logo">
+        <img src="campusx-logo.jpeg" alt="CampusX logo">
+      </div>
+      <div class="story-sticker">YOUR CAMPUS. YOUR CALL.</div>
+    </div>
+
+    <div class="story-copy reveal">
+      <div class="section-label">OUR STORY</div>
+      <h2 class="section-title">
+        Built around the<br>
+        <span>campus experience.</span>
+      </h2>
+
       <p>
-        Campus life is full of things worth paying attention to.
-        From student leadership and campus events to sports,
-        college affairs and everyday student conversations,
-        there is always something happening.
+        Campus life is full of moments worth paying attention to.
+        From sports and campus events to student leadership,
+        student union affairs and conversations that shape
+        everyday university life.
       </p>
+
       <p>
-        CampusX was created to bring these conversations together
-        in one digital space, helping students explore what's
-        happening, share perspectives and engage with the issues
-        that matter to their communities.
+        CampusX is designed to give these moments a place.
+        We bring together a platform where students can explore
+        campus-related markets, follow developments and engage
+        with the conversations that matter to their communities.
       </p>
-      <p>
-        We believe campus life should be more than something you
-        watch happen. It should be something you actively take part in.
+
+      <div class="story-highlight">
+        We believe campus experiences deserve a platform that
+        reflects the energy, opinions and perspectives of the
+        people who live them.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MISSION AND VISION -->
+<section class="section mission-section">
+  <div class="container">
+
+    <div class="center-heading reveal">
+      <div class="section-label">WHY WE EXIST</div>
+      <h2 class="section-title">Our purpose. <span>Our direction.</span></h2>
+      <p class="section-description">
+        CampusX is built around a simple idea: campus life is
+        more interesting when people can follow it, understand
+        it and participate in the conversation.
       </p>
+    </div>
+
+    <div class="mission-grid" style="margin-top:45px">
+
+      <div class="mission-card dark reveal">
+        <div class="mission-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2 3 7l9 5 9-5-9-5Z"/>
+            <path d="m3 12 9 5 9-5M3 17l9 5 9-5"/>
+          </svg>
+        </div>
+        <h3>Our mission</h3>
+        <p>
+          To create a connected campus platform where students
+          can explore prediction markets, engage with campus
+          developments and share perspectives through one
+          accessible experience.
+        </p>
+      </div>
+
+      <div class="mission-card light reveal">
+        <div class="mission-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="12" r="6"/>
+            <circle cx="12" cy="12" r="2"/>
+          </svg>
+        </div>
+        <h3>Our vision</h3>
+        <p>
+          To become a recognised destination for campus-focused
+          conversations and prediction markets, connecting
+          student communities through information, participation
+          and shared experiences.
+        </p>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- VALUES -->
-<section class="content-section values-section">
+<!-- WHAT WE BRING -->
+<section class="section pillars-section">
   <div class="container">
-    <div class="section-heading reveal">
-      <div class="section-tag">WHAT DRIVES US</div>
-      <h2>More than a platform.<br><span>A campus experience.</span></h2>
-      <p>
-        Everything we build is guided by the idea that students
-        deserve a more connected and engaging campus experience.
+
+    <div class="center-heading reveal">
+      <div class="section-label">THE CAMPUSX EXPERIENCE</div>
+      <h2 class="section-title">
+        One platform. <span>Many possibilities.</span>
+      </h2>
+      <p class="section-description">
+        CampusX brings different parts of campus life into
+        one environment, making it easier to discover,
+        follow and discuss what matters.
       </p>
     </div>
 
-    <div class="values-grid">
-      <article class="value-card reveal">
-        <div class="value-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-        </div>
-        <h3>Community first</h3>
-        <p>
-          We put students at the centre of the experience.
-          Their voices, ideas and participation matter.
-        </p>
-      </article>
+    <div class="pillar-grid">
 
-      <article class="value-card reveal">
-        <div class="value-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 3v18M3 12h18"/>
-            <circle cx="12" cy="12" r="9"/>
-          </svg>
-        </div>
-        <h3>Curiosity matters</h3>
-        <p>
-          We encourage students to explore campus topics,
-          follow developments and discover different perspectives.
-        </p>
-      </article>
-
-      <article class="value-card reveal">
-        <div class="value-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/>
-            <path d="m9 12 2 2 4-4"/>
-          </svg>
-        </div>
-        <h3>Responsible engagement</h3>
-        <p>
-          We want campus participation to be thoughtful,
-          informed and respectful of different viewpoints.
-        </p>
-      </article>
-
-      <article class="value-card reveal">
-        <div class="value-icon">
+      <div class="pillar-card reveal">
+        <div class="pillar-icon">
           <svg viewBox="0 0 24 24">
             <path d="M3 3v18h18"/>
             <path d="m7 14 4-4 4 3 6-7"/>
           </svg>
         </div>
-        <h3>Insight and discovery</h3>
+        <h3>Prediction markets</h3>
         <p>
-          We make it easier to follow the conversations and
-          developments shaping student life.
+          Explore market questions around campus developments
+          and follow how expectations change over time.
         </p>
-      </article>
+      </div>
 
-      <article class="value-card reveal">
-        <div class="value-icon">
+      <div class="pillar-card reveal">
+        <div class="pillar-icon">
           <svg viewBox="0 0 24 24">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-          </svg>
-        </div>
-        <h3>Opportunity</h3>
-        <p>
-          We create room for students to participate,
-          contribute and connect with campus life.
-        </p>
-      </article>
-
-      <article class="value-card reveal">
-        <div class="value-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 8v4l3 3"/>
             <circle cx="12" cy="12" r="9"/>
-            <path d="M12 3v2M21 12h-2"/>
+            <path d="M12 7v5l3 2"/>
           </svg>
         </div>
-        <h3>Always evolving</h3>
+        <h3>Sports and events</h3>
         <p>
-          Campus life changes. We keep looking for better
-          ways to make the platform useful to students.
+          Follow sporting activities, competitions and
+          other events that bring campus communities together.
         </p>
-      </article>
+      </div>
+
+      <div class="pillar-card reveal">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 21h18M5 21V7l7-4 7 4v14"/>
+            <path d="M9 21v-5h6v5M9 10h.01M15 10h.01"/>
+          </svg>
+        </div>
+        <h3>Campus affairs</h3>
+        <p>
+          Stay connected to developments involving faculties,
+          departments and the wider campus environment.
+        </p>
+      </div>
+
+      <div class="pillar-card reveal">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 3v18M3 12h18"/>
+            <circle cx="12" cy="12" r="9"/>
+          </svg>
+        </div>
+        <h3>Student leadership</h3>
+        <p>
+          Follow student union activities, campus elections
+          and conversations around student representation.
+        </p>
+      </div>
+
+      <div class="pillar-card reveal">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7L3 21l1.9-5.7A8.5 8.5 0 0 1 12 3h.5a8.5 8.5 0 0 1 8 8v.5Z"/>
+          </svg>
+        </div>
+        <h3>Community discussions</h3>
+        <p>
+          A place for campus conversations, shared ideas
+          and perspectives from students.
+        </p>
+      </div>
+
+      <div class="pillar-card reveal">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <h3>Campus information</h3>
+        <p>
+          Discover useful information and stay aware of
+          developments across the campus environment.
+        </p>
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="content-section how-section">
+<section class="section process-section">
   <div class="container">
-    <div class="section-heading reveal">
-      <div class="section-tag">THE CAMPUSX EXPERIENCE</div>
-      <h2>Discover. Participate. <span>Stay connected.</span></h2>
-      <p>
-        CampusX makes it easier to move from simply hearing
-        about campus happenings to actively engaging with them.
+
+    <div class="reveal">
+      <div class="section-label">GETTING STARTED</div>
+      <h2 class="section-title">Your CampusX journey <span style="color:var(--lime)">starts here.</span></h2>
+      <p class="section-description">
+        A straightforward way to become part of the CampusX experience.
       </p>
     </div>
 
-    <div class="steps-grid">
-      <article class="step-card reveal">
-        <div class="step-number">01</div>
-        <h3>Discover what's happening</h3>
-        <p>
-          Explore campus topics, market updates, events,
-          sports and conversations that interest you.
-        </p>
-      </article>
+    <div class="process-grid">
 
-      <article class="step-card reveal">
-        <div class="step-number">02</div>
-        <h3>Share your perspective</h3>
-        <p>
-          Take part in discussions, exchange ideas and
-          connect with other members of your campus community.
-        </p>
-      </article>
+      <div class="process-card reveal">
+        <div class="process-number">01</div>
+        <h3>Create your account</h3>
+        <p>Join CampusX and set up your personal account.</p>
+      </div>
 
-      <article class="step-card reveal">
-        <div class="step-number">03</div>
-        <h3>Keep up with the action</h3>
-        <p>
-          Follow developments and stay connected to the
-          topics shaping your campus experience.
-        </p>
-      </article>
+      <div class="process-card reveal">
+        <div class="process-number">02</div>
+        <h3>Discover your campus</h3>
+        <p>Explore markets, topics and developments that interest you.</p>
+      </div>
+
+      <div class="process-card reveal">
+        <div class="process-number">03</div>
+        <h3>Explore and participate</h3>
+        <p>Follow market activity and engage with campus conversations.</p>
+      </div>
+
+      <div class="process-card reveal">
+        <div class="process-number">04</div>
+        <h3>Stay connected</h3>
+        <p>Keep up with the topics and events shaping your community.</p>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- MARKETS -->
-<section class="content-section markets-section">
-  <div class="container">
-    <div class="section-heading reveal">
-      <div class="section-tag">A WORLD OF CAMPUS TOPICS</div>
-      <h2>There's always something <span>to explore.</span></h2>
-      <p>
-        CampusX brings different areas of student interest
-        into one place, giving campus conversations a wider stage.
+<!-- OUR VALUES -->
+<section class="section">
+  <div class="container values-grid">
+
+    <div class="reveal">
+      <div class="section-label">WHAT GUIDES US</div>
+      <h2 class="section-title">
+        A platform shaped by <span>its community.</span>
+      </h2>
+      <p class="section-description">
+        The CampusX experience is guided by the principles
+        that make a campus community useful, engaging and
+        worth being part of.
       </p>
-    </div>
 
-    <div class="market-grid">
-      <article class="market-card reveal">
-        <div class="value-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 2v20M2 12h20"/>
-            <circle cx="12" cy="12" r="9"/>
-          </svg>
+      <div class="values-list">
+
+        <div class="value-item">
+          <div class="value-check">
+            <svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+          </div>
+          <div>
+            <strong>Student-focused</strong>
+            <p>Designed around the interests and experiences of campus communities.</p>
+          </div>
         </div>
-        <h3>Sports</h3>
-        <p>Follow sporting events, competitions and conversations.</p>
-      </article>
 
-      <article class="market-card reveal">
-        <div class="value-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 3v18M3 12h18"/>
-            <path d="M7 7h10v10H7z"/>
-          </svg>
+        <div class="value-item">
+          <div class="value-check">
+            <svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+          </div>
+          <div>
+            <strong>Accessible experiences</strong>
+            <p>A clear and approachable platform that is easy to explore.</p>
+          </div>
         </div>
-        <h3>Campus events</h3>
-        <p>Explore the events and activities bringing students together.</p>
-      </article>
 
-      <article class="market-card reveal">
-        <div class="value-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M4 21V8l8-5 8 5v13"/>
-            <path d="M9 21v-8h6v8M2 21h20"/>
-          </svg>
+        <div class="value-item">
+          <div class="value-check">
+            <svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+          </div>
+          <div>
+            <strong>Community participation</strong>
+            <p>Making room for different perspectives and campus conversations.</p>
+          </div>
         </div>
-        <h3>College affairs</h3>
-        <p>Stay connected to developments across campus colleges.</p>
-      </article>
 
-      <article class="market-card reveal">
-        <div class="value-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="m19 8 2 2-2 2"/>
-          </svg>
+        <div class="value-item">
+          <div class="value-check">
+            <svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+          </div>
+          <div>
+            <strong>Continuous improvement</strong>
+            <p>Building and refining the experience as campus needs evolve.</p>
+          </div>
         </div>
-        <h3>Student leadership</h3>
-        <p>Engage with student representation and campus leadership.</p>
-      </article>
-    </div>
-  </div>
-</section>
 
-<!-- COMMUNITY -->
-<section class="content-section community-section">
-  <div class="container">
-    <div class="community-panel reveal">
-      <div>
-        <div class="section-tag">YOUR VOICE BELONGS HERE</div>
-        <h2>Campus is better when everyone is part of the conversation.</h2>
-        <p>
-          Connect with other students, share your thoughts,
-          discuss campus happenings and be part of a growing
-          student community.
-        </p>
-        <div style="margin-top:24px">
-          <a href="community.html" class="btn-primary">
-            Explore community
-            <svg viewBox="0 0 24 24">
-              <path d="M5 12h14m-6-6 6 6-6 6"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-
-      <div class="community-symbol">
-        <svg viewBox="0 0 24 24">
-          <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/>
-          <path d="M8 12h.01M12 12h.01M16 12h.01"/>
-        </svg>
       </div>
     </div>
+
+    <div class="values-visual reveal">
+      <div class="values-mark">
+        <img src="campusx-logo.jpeg" alt="CampusX">
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1378,62 +1381,55 @@ footer {
 <section class="cta-section">
   <div class="container">
     <div class="cta-box reveal">
-      <h2>Your campus. Your call.</h2>
+      <h2>Your campus.<br><span>Your call.</span></h2>
       <p>
-        Be part of the conversations, discover what's happening
-        and experience campus life from a different perspective.
+        The conversations, events and developments around
+        your campus deserve your attention. Discover the
+        CampusX experience and be part of what's happening.
       </p>
       <a href="signup.html" class="btn-primary">
-        Get started with CampusX
-        <svg viewBox="0 0 24 24">
-          <path d="M5 12h14m-6-6 6 6-6 6"/>
-        </svg>
+        Join CampusX
+        <svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
       </a>
     </div>
   </div>
 </section>
 
-</main>
-
 <!-- FOOTER -->
-<footer>
+<footer class="footer">
   <div class="container">
-    <div class="footer-main">
-      <div class="footer-brand">
-        <a href="index.html" class="logo">
-          <div class="logo-mark">
-            <svg viewBox="0 0 24 24">
-              <path d="M4 17V7l8-4 8 4v10l-8 4-8-4Z"/>
-              <path d="m4 7 8 4 8-4M12 11v10"/>
-            </svg>
-          </div>
-          campus<span>X</span>
+
+    <div class="footer-top">
+
+      <div>
+        <a href="index.html" class="footer-logo">
+          <img src="campusx-logo.jpeg" alt="CampusX Prediction Markets">
         </a>
-        <p>
-          A platform built around campus conversations,
-          student perspectives and the moments that matter.
-          Your Campus. Your Call.
+        <p class="footer-description">
+          Campus conversations, student perspectives and
+          prediction markets — brought together in one
+          campus-focused experience.
         </p>
       </div>
 
       <div class="footer-links">
-        <h4>Explore</h4>
-        <a href="index.html">Home</a>
-        <a href="market.html">Markets</a>
-        <a href="dashboard.html">Dashboard</a>
-      </div>
 
-      <div class="footer-links">
-        <h4>Community</h4>
-        <a href="community.html">Discussions</a>
-        <a href="info.html">How it works</a>
-        <a href="about.html">About us</a>
-      </div>
+        <div class="footer-column">
+          <h4>EXPLORE</h4>
+          <a href="index.html">Home</a>
+          <a href="market.html">Markets</a>
+          <a href="community.html">Community</a>
+          <a href="dashboard.html">Dashboard</a>
+        </div>
 
-      <div class="footer-links">
-        <h4>Account</h4>
-        <a href="login.html">Sign in</a>
-        <a href="signup.html">Create account</a>
+        <div class="footer-column">
+          <h4>CAMPUSX</h4>
+          <a href="about.html">About us</a>
+          <a href="info.html">Information</a>
+          <a href="login.html">Sign in</a>
+          <a href="signup.html">Create account</a>
+        </div>
+
       </div>
     </div>
 
@@ -1441,6 +1437,7 @@ footer {
       <span>© <span id="year"></span> CampusX. All rights reserved.</span>
       <span>Your Campus. Your Call.</span>
     </div>
+
   </div>
 </footer>
 
@@ -1449,38 +1446,33 @@ footer {
 const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 
-menuBtn.addEventListener("click", () => {
+menuBtn.addEventListener("click",()=>{
   navLinks.classList.toggle("open");
-
-  menuBtn.setAttribute(
-    "aria-label",
-    navLinks.classList.contains("open")
-      ? "Close navigation"
-      : "Open navigation"
-  );
 });
 
-navLinks.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
+navLinks.querySelectorAll("a").forEach(link=>{
+  link.addEventListener("click",()=>{
     navLinks.classList.remove("open");
   });
 });
 
 /* SCROLL REVEAL */
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, {
-  threshold: 0.12
-});
+const revealElements = document.querySelectorAll(".reveal");
 
-document.querySelectorAll(".reveal").forEach(element => {
-  revealObserver.observe(element);
-});
+if("IntersectionObserver" in window){
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:.12});
+
+  revealElements.forEach(element=>observer.observe(element));
+}else{
+  revealElements.forEach(element=>element.classList.add("visible"));
+}
 
 /* FOOTER YEAR */
 document.getElementById("year").textContent =
