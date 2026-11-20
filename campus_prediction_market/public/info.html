@@ -3,1207 +3,1157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f5faef">
-<title>CampusX | Information Centre</title>
+<meta name="theme-color" content="#00351F">
+<meta name="description" content="Learn how CampusX works, explore prediction markets and discover the CampusX experience.">
+<title>Information | CampusX</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  if (!window.lucide) {
-    console.error("Lucide failed to load.");
-    return;
-  }
-
-  lucide.createIcons();
-});
-</script>
-<script
-  src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"
-  onload="renderLucideIcons()"
-  onerror="this.onerror=null;this.src='https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js';"
-></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,500,0,0" rel="stylesheet">
 
 <style>
 :root{
---green:#315f20;
---dark:#1d3d16;
---lime:#c7ed91;
---light:#eff8e9;
---bg:#f7faf4;
---text:#20351c;
---muted:#788b72;
---border:#e2edda;
---white:#fff;
---shadow:0 18px 55px rgba(49,95,32,.09);
+ --forest:#00351F;
+ --forest2:#064B2B;
+ --green:#39C51B;
+ --lime:#A6F542;
+ --ink:#08191C;
+ --slate:#647477;
+ --muted:#879494;
+ --bg:#F5F8F5;
+ --white:#fff;
+ --line:#E5ECE7;
+ --soft:#EAF6E7;
+ --shadow:0 18px 45px rgba(0,45,25,.08);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:100px}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+html{scroll-behavior:smooth}
+body{
+ font-family:'DM Sans',sans-serif;
+ background:var(--bg);
+ color:var(--ink);
+ overflow-x:hidden;
+}
 a{text-decoration:none;color:inherit}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-::selection{background:var(--lime);color:var(--dark)}
-
-.container{width:min(1160px,calc(100% - 40px));margin:auto}
-.section{padding:100px 0}
-.center{text-align:center}
-.center .section-desc{margin:auto}
-
-.section-label{
-display:inline-flex;align-items:center;gap:8px;
-padding:9px 14px;border-radius:30px;
-background:var(--light);color:var(--green);
-font-size:11px;font-weight:800;letter-spacing:1px;
-text-transform:uppercase
+button{font:inherit;cursor:pointer}
+svg{
+ width:22px;height:22px;
+ fill:none;stroke:currentColor;
+ stroke-width:1.8;
+ stroke-linecap:round;
+ stroke-linejoin:round;
+ display:block;
 }
-.section-label i{width:15px;height:15px}
-
-.section-title{
-font:700 clamp(30px,5vw,48px) 'Space Grotesk';
-letter-spacing:-2px;line-height:1.15;margin:18px 0
-}
-.section-title span{color:var(--green)}
-.section-desc{max-width:570px;color:var(--muted);font-size:14px;line-height:1.9}
-
-/* PRELOADER */
-
-.preloader{
-position:fixed;inset:0;z-index:9999;
-background:var(--dark);display:flex;
-align-items:center;justify-content:center;flex-direction:column;gap:15px;
-animation:loaderOut .6s ease 1.2s forwards
-}
-.loader-logo{font:800 48px 'Space Grotesk';color:white;letter-spacing:-5px}
-.loader-logo span{color:var(--lime)}
-.loader-line{width:100px;height:3px;background:#ffffff30;overflow:hidden}
-.loader-line:after{content:"";display:block;width:40%;height:100%;background:var(--lime);animation:loading .8s infinite}
-@keyframes loading{to{transform:translateX(250%)}}
-@keyframes loaderOut{to{opacity:0;visibility:hidden;pointer-events:none}}
-
-/* BACKGROUND */
-
-.orb{
-position:absolute;width:330px;height:330px;border-radius:50%;
-background:radial-gradient(circle,#d9f1c6,transparent 70%);
-pointer-events:none;z-index:-1;animation:orb 9s ease-in-out infinite alternate
-}
-.orb.one{top:150px;right:-150px}
-.orb.two{top:1000px;left:-160px;animation-delay:2s}
-@keyframes orb{to{transform:translate(30px,40px) scale(1.2)}}
+.container{width:min(1200px,91%);margin:auto}
 
 /* NAVIGATION */
 
-header{
-position:sticky;top:0;z-index:1000;
-background:rgba(255,255,255,.94);
-backdrop-filter:blur(18px);
-border-bottom:1px solid var(--border)
+.header{
+ height:76px;
+ background:rgba(255,255,255,.95);
+ backdrop-filter:blur(18px);
+ border-bottom:1px solid var(--line);
+ position:sticky;top:0;z-index:100;
 }
-.navbar{
-height:75px;width:min(1250px,100%);margin:auto;
-padding:0 25px;display:flex;align-items:center;
-justify-content:space-between;gap:20px
+.nav{
+ height:100%;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
 }
-.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.brand-logo{
-width:42px;height:42px;border-radius:13px;
-display:grid;place-items:center;background:var(--green);
-color:white;font:800 21px 'Space Grotesk';
-letter-spacing:-2px;box-shadow:0 5px 15px #315f2030
-}
-.brand-name{font:700 22px 'Space Grotesk';letter-spacing:-1px}
-.brand-name span{color:var(--green)}
-.nav-links{display:flex;align-items:center;gap:5px}
+.logo{width:205px;display:block}
+.logo img{width:100%;display:block}
+.nav-links{display:flex;align-items:center;gap:27px}
 .nav-links a{
-padding:11px 12px;border-radius:10px;
-font-size:12px;font-weight:700;color:#71806b;transition:.3s
+ font-size:12px;font-weight:700;
+ color:#66736C;transition:.2s;
 }
-.nav-links a:hover,.nav-links a.active{background:var(--light);color:var(--green)}
+.nav-links a:hover,.nav-links a.active{color:var(--green)}
 .nav-actions{display:flex;align-items:center;gap:10px}
-.nav-btn{
-padding:12px 18px;border-radius:11px;
-background:var(--green);color:white;font-size:12px;font-weight:800;
-display:flex;align-items:center;gap:8px;transition:.3s
+.nav-login{
+ padding:11px 16px;border:1px solid var(--line);
+ border-radius:9px;font-size:11px;font-weight:800;
 }
-.nav-btn:hover{background:var(--dark);transform:translateY(-3px)}
-.nav-btn i{width:15px}
-.menu-toggle{
-display:none;border:0;width:42px;height:42px;
-border-radius:12px;background:var(--light);color:var(--green)
+.nav-signup{
+ padding:12px 18px;background:var(--forest);
+ color:white;border-radius:9px;
+ font-size:11px;font-weight:800;
+ transition:.25s;
 }
-
-/* REVEAL ANIMATIONS */
-
-.reveal{
-opacity:0;
-transition:opacity .85s ease,transform .85s cubic-bezier(.2,.8,.2,1)
+.nav-signup:hover{background:var(--green);color:var(--forest)}
+.menu-btn{
+ display:none;padding:9px;
+ background:white;border:1px solid var(--line);
+ border-radius:9px;color:var(--forest);
 }
-.left{transform:translateX(-90px) rotate(-3deg)}
-.right{transform:translateX(90px) rotate(3deg)}
-.top{transform:translateY(-70px)}
-.bottom{transform:translateY(70px)}
-.angle{transform:translate(70px,50px) rotate(6deg)}
-.zoom{transform:scale(.75)}
-.reveal.visible{opacity:1;transform:translate(0) rotate(0) scale(1)}
-.d1{transition-delay:.12s}
-.d2{transition-delay:.24s}
-.d3{transition-delay:.36s}
-.d4{transition-delay:.48s}
 
 /* HERO */
 
-.hero{padding:90px 0 105px;min-height:640px;display:flex;align-items:center}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:45px;align-items:center}
+.hero{
+ position:relative;overflow:hidden;
+ padding:83px 0 88px;color:white;
+ background:
+ radial-gradient(circle at 83% 20%,#39C51B42,transparent 28%),
+ radial-gradient(circle at 10% 100%,#A6F54218,transparent 32%),
+ linear-gradient(120deg,#002B19,#07502D 58%,#00351F);
+}
+.hero:before{
+ content:"";position:absolute;
+ width:450px;height:450px;border-radius:50%;
+ border:1px solid #ffffff18;
+ right:-130px;top:-260px;
+ box-shadow:0 0 0 55px #ffffff06,0 0 0 110px #ffffff04;
+}
+.hero-content{position:relative;z-index:2;max-width:790px}
+.eyebrow{
+ display:inline-flex;align-items:center;gap:9px;
+ color:var(--lime);background:#A6F54212;
+ border:1px solid #A6F54245;
+ border-radius:30px;padding:9px 14px;
+ font-size:10px;font-weight:800;letter-spacing:1.5px;
+ margin-bottom:23px;
+}
+.dot{
+ width:7px;height:7px;border-radius:50%;
+ background:var(--lime);box-shadow:0 0 12px var(--lime);
+}
 .hero h1{
-font:700 clamp(43px,6vw,76px) 'Space Grotesk';
-line-height:1.04;letter-spacing:-4px;margin:24px 0
+ font-family:Manrope,sans-serif;
+ font-size:clamp(43px,7vw,73px);
+ line-height:1.08;letter-spacing:-3.5px;
+ font-weight:800;
 }
-.hero h1 span{color:var(--green)}
-.hero-desc{max-width:510px;color:var(--muted);font-size:15px;line-height:1.9}
-.hero-buttons{display:flex;gap:13px;flex-wrap:wrap;margin-top:30px}
-.btn{
-display:inline-flex;align-items:center;gap:9px;
-padding:15px 21px;border-radius:12px;font-size:12px;font-weight:800;transition:.3s
+.hero h1 span{color:var(--lime)}
+.hero p{
+ max-width:610px;margin-top:22px;
+ color:#C7D9CD;font-size:14px;line-height:1.9;
 }
-.btn i{width:16px}
-.btn-primary{background:var(--green);color:white;box-shadow:0 10px 25px #315f2025}
-.btn-primary:hover{background:var(--dark);transform:translateY(-4px)}
-.btn-outline{background:white;border:1px solid var(--border);color:var(--green)}
-.btn-outline:hover{background:var(--light);transform:translateY(-4px)}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn-primary,.btn-outline{
+ display:inline-flex;align-items:center;gap:9px;
+ padding:14px 19px;border-radius:10px;
+ font-size:11px;font-weight:800;transition:.25s;
+}
+.btn-primary{background:var(--lime);color:var(--forest)}
+.btn-primary:hover{transform:translateY(-4px);box-shadow:0 12px 25px #a6f54230}
+.btn-outline{border:1px solid #ffffff50;color:white}
+.btn-outline:hover{border-color:var(--lime);background:#ffffff10}
+.btn-primary svg,.btn-outline svg{width:17px;height:17px}
 
-/* HERO GRAPHIC */
+/* QUICK NAV */
 
-.hero-visual{position:relative;min-height:420px;display:grid;place-items:center}
-.hero-circle{
-width:min(330px,75vw);aspect-ratio:1;border-radius:50%;
-background:linear-gradient(140deg,#e9f8dc,#c9e9ac);
-display:grid;place-items:center;position:relative;
-animation:float 5s ease-in-out infinite
+.quick-nav{
+ background:white;border-bottom:1px solid var(--line);
 }
-.hero-circle:before,.hero-circle:after{
-content:"";position:absolute;inset:-25px;
-border:1px dashed #79a85a;border-radius:50%;
-animation:spin 25s linear infinite
+.quick-grid{
+ display:grid;grid-template-columns:repeat(4,1fr);
 }
-.hero-circle:after{inset:-48px;border-color:#b6d89e;animation-direction:reverse}
-.hero-symbol{
-width:130px;height:130px;background:var(--green);
-border-radius:36px;display:grid;place-items:center;color:white;
-transform:rotate(-8deg);box-shadow:0 25px 50px #315f2040
+.quick-item{
+ display:flex;align-items:center;gap:12px;
+ padding:22px 15px;border-right:1px solid var(--line);
+ transition:.2s;
 }
-.hero-symbol i{width:65px;height:65px;stroke-width:1.5}
-.float-card{
-position:absolute;background:white;padding:15px 17px;
-border-radius:15px;box-shadow:var(--shadow);
-display:flex;align-items:center;gap:11px;z-index:2;
-animation:float 4s ease-in-out infinite
+.quick-item:last-child{border:0}
+.quick-item:hover{background:#F5FAF2}
+.quick-icon{
+ width:41px;height:41px;border-radius:12px;
+ display:grid;place-items:center;
+ background:#EAF7E4;color:var(--forest2);
 }
-.float-card i{width:24px;height:24px;color:var(--green)}
-.float-card strong{display:block;font-size:12px}
-.float-card small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
-.float-one{top:35px;left:0}
-.float-two{bottom:45px;right:0;animation-delay:1.4s}
-.float-three{top:180px;right:-25px;animation-delay:.7s}
-@keyframes float{50%{transform:translateY(-14px)}}
-@keyframes spin{to{transform:rotate(360deg)}}
+.quick-item strong{display:block;font-size:12px}
+.quick-item small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
 
-/* TICKER */
+/* SECTION BASE */
 
-.ticker{background:var(--green);color:white;padding:17px 0;overflow:hidden}
-.ticker-track{display:flex;width:max-content;animation:marquee 28s linear infinite}
-.ticker-item{
-display:flex;align-items:center;gap:15px;
-padding:0 28px;white-space:nowrap;
-font:700 13px 'Space Grotesk'
+.section{padding:90px 0}
+.section-label{
+ color:#399B2A;font-size:10px;
+ font-weight:800;letter-spacing:1.8px;
+ margin-bottom:14px;text-transform:uppercase;
 }
-.ticker-item i{color:var(--lime);width:18px}
-@keyframes marquee{to{transform:translateX(-50%)}}
-
-/* STEPS */
-
-.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:17px;margin-top:50px}
-.step-card{
-background:white;border:1px solid var(--border);
-padding:27px 22px;border-radius:19px;
-position:relative;overflow:hidden;transition:.4s
+.section-title{
+ font-family:Manrope,sans-serif;
+ font-size:clamp(29px,4vw,43px);
+ line-height:1.2;letter-spacing:-1.6px;
+ font-weight:800;
 }
-.step-card:hover{transform:translateY(-10px);box-shadow:var(--shadow)}
+.section-title span{color:var(--green)}
+.section-description{
+ color:var(--slate);font-size:13px;
+ line-height:1.9;max-width:620px;margin-top:15px;
+}
+.center{text-align:center}
+.center .section-description{margin-left:auto;margin-right:auto}
+
+/* INTRO */
+
+.intro-grid{
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:65px;align-items:center;
+}
+.intro-copy p{
+ color:var(--slate);font-size:13px;line-height:2;
+ margin-top:17px;
+}
+.intro-art{
+ min-height:370px;border-radius:24px;
+ background:
+ radial-gradient(circle at 75% 20%,#A6F54255,transparent 35%),
+ linear-gradient(145deg,#00351F,#07532D);
+ display:flex;align-items:center;justify-content:center;
+ position:relative;overflow:hidden;
+}
+.intro-art:before{
+ content:"";position:absolute;width:270px;height:270px;
+ border:1px solid #ffffff30;border-radius:50%;
+ box-shadow:0 0 0 40px #ffffff08,0 0 0 80px #ffffff05;
+}
+.intro-art img{
+ position:relative;z-index:2;
+ width:75%;border-radius:10px;
+ filter:drop-shadow(0 15px 25px #001b0d);
+}
+.art-tag{
+ position:absolute;bottom:23px;right:23px;
+ z-index:3;background:var(--lime);
+ color:var(--forest);padding:11px 15px;
+ border-radius:9px;font-size:9px;font-weight:800;
+}
+
+/* MARKET CATEGORIES */
+
+.categories{background:#EDF5EC}
+.category-grid{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:16px;margin-top:42px;
+}
+.category-card{
+ background:white;border:1px solid #E1EBDF;
+ border-radius:17px;padding:25px;
+ transition:.3s;position:relative;overflow:hidden;
+}
+.category-card:hover{
+ transform:translateY(-6px);
+ box-shadow:var(--shadow);border-color:#B6DCA8;
+}
+.category-icon{
+ width:48px;height:48px;
+ border-radius:14px;background:#EAF7E4;
+ color:var(--forest2);
+ display:grid;place-items:center;margin-bottom:20px;
+}
+.category-card:nth-child(2n) .category-icon{background:#E3F7C7}
+.category-card:nth-child(3n) .category-icon{background:#E4F0EB}
+.category-card h3{font-family:Manrope;font-size:14px;margin-bottom:9px}
+.category-card p{font-size:11px;line-height:1.9;color:var(--slate)}
+
+/* HOW IT WORKS */
+
+.steps-grid{
+ display:grid;grid-template-columns:repeat(4,1fr);
+ gap:15px;margin-top:43px;
+}
+.step{
+ background:white;border:1px solid var(--line);
+ border-radius:17px;padding:24px;
+ transition:.3s;
+}
+.step:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
 .step-number{
-position:absolute;right:17px;top:13px;
-font:700 34px 'Space Grotesk';color:#e7f0e1
+ font-family:Manrope;font-size:35px;
+ font-weight:800;color:var(--green);
+ margin-bottom:20px;
 }
-.icon-box{
-width:54px;height:54px;background:var(--light);
-color:var(--green);display:grid;place-items:center;
-border-radius:16px;margin-bottom:23px;transition:.4s
-}
-.icon-box i{width:25px;height:25px}
-.step-card:hover .icon-box{background:var(--green);color:white;transform:rotate(-12deg) scale(1.1)}
-.step-card h3{font:700 16px 'Space Grotesk';margin-bottom:10px}
-.step-card p{font-size:12px;line-height:1.8;color:var(--muted)}
+.step h3{font-family:Manrope;font-size:13px;margin-bottom:9px}
+.step p{font-size:11px;color:var(--slate);line-height:1.9}
 
-/* MARKETS */
+/* MARKET EXPLAINER */
 
-.market-section{background:#edf6e8;position:relative;overflow:hidden}
-.market-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:45px}
-.market-card{
-background:white;padding:26px;border-radius:20px;
-border:1px solid #dfebd7;position:relative;overflow:hidden;transition:.4s
+.explainer{
+ background:linear-gradient(120deg,#00351F,#07502D);
+ color:white;overflow:hidden;position:relative;
 }
-.market-card:before{
-content:"";position:absolute;width:120px;height:120px;
-background:var(--light);border-radius:50%;right:-45px;top:-45px;transition:.5s
+.explainer:before{
+ content:"";position:absolute;width:400px;height:400px;
+ border-radius:50%;border:1px solid #ffffff17;
+ right:-150px;top:-190px;
+ box-shadow:0 0 0 60px #ffffff05,0 0 0 120px #ffffff04;
 }
-.market-card:hover{transform:translateY(-9px);box-shadow:var(--shadow)}
-.market-card:hover:before{transform:scale(2)}
-.market-icon{
-width:54px;height:54px;background:var(--light);
-color:var(--green);display:grid;place-items:center;
-border-radius:16px;margin-bottom:22px;position:relative;z-index:1;transition:.4s
+.explainer .section-label{color:var(--lime)}
+.explainer .section-description{color:#C4D8CA}
+.explainer-grid{
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:55px;align-items:center;position:relative;z-index:2;
 }
-.market-icon i{width:25px;height:25px}
-.market-card:hover .market-icon{background:var(--green);color:white;transform:rotate(12deg)}
-.market-card h3{font:700 17px 'Space Grotesk';margin-bottom:10px;position:relative}
-.market-card p{font-size:12px;line-height:1.8;color:var(--muted);position:relative}
-.market-tag{
-display:inline-block;margin-top:18px;padding:7px 11px;
-background:var(--light);color:var(--green);
-font-size:10px;font-weight:800;border-radius:20px
+.explainer-points{display:grid;gap:13px;margin-top:28px}
+.explainer-point{
+ display:flex;gap:13px;align-items:flex-start;
+ padding:15px;border:1px solid #ffffff20;
+ border-radius:13px;background:#ffffff09;
+}
+.explainer-point svg{
+ color:var(--lime);width:20px;height:20px;flex-shrink:0;
+}
+.explainer-point strong{display:block;font-size:12px;margin-bottom:5px}
+.explainer-point p{font-size:10px;color:#C1D4C7;line-height:1.7}
+.market-panel{
+ background:white;color:var(--ink);
+ border-radius:20px;padding:27px;
+ box-shadow:0 25px 60px #001a0d40;
+}
+.panel-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.panel-top strong{font-family:Manrope;font-size:14px}
+.live-label{
+ color:#328D26;background:#EAF7E4;
+ border-radius:20px;padding:7px 10px;
+ font-size:9px;font-weight:800;
+}
+.sample-market{
+ border:1px solid var(--line);border-radius:13px;
+ padding:16px;margin-bottom:12px;
+}
+.sample-market small{font-size:9px;color:var(--muted);font-weight:700}
+.sample-market h4{font-size:12px;margin:9px 0 13px}
+.market-meter{
+ height:7px;background:#E9EEE9;
+ border-radius:20px;overflow:hidden;
+}
+.market-meter span{
+ display:block;height:100%;width:68%;
+ background:linear-gradient(90deg,var(--green),var(--lime));
+ border-radius:20px;
+}
+.market-meta{
+ display:flex;justify-content:space-between;
+ margin-top:9px;font-size:9px;color:var(--slate);
+}
+.sample-note{
+ color:var(--muted);font-size:9px;line-height:1.7;
+ margin-top:13px;
 }
 
-/* POSITION EXPLAINER */
+/* ACCOUNT */
 
-.position-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.position-visual{
-min-height:350px;padding:32px;border-radius:26px;
-background:linear-gradient(140deg,#315f20,#193c15);
-color:white;position:relative;overflow:hidden
+.account-section{background:white}
+.account-grid{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:16px;margin-top:40px;
 }
-.position-visual:before,.position-visual:after{
-content:"";position:absolute;border:1px solid #ffffff25;border-radius:50%
+.account-card{
+ border:1px solid var(--line);
+ border-radius:17px;padding:25px;
+ background:white;transition:.3s;
 }
-.position-visual:before{width:280px;height:280px;right:-80px;top:-80px}
-.position-visual:after{width:190px;height:190px;right:-35px;top:-35px}
-.position-visual h3{font:700 24px 'Space Grotesk';position:relative;z-index:1}
-.position-visual p{color:#d2e8c7;font-size:12px;margin-top:8px;position:relative;z-index:1}
-.demo-chart{height:170px;width:100%;margin-top:30px;position:relative;z-index:1}
-.demo-chart svg{width:100%;height:100%;overflow:visible}
-.chart-path{
-fill:none;stroke:var(--lime);stroke-width:4;stroke-linecap:round;
-stroke-dasharray:700;stroke-dashoffset:700;
-animation:drawChart 4s ease-in-out infinite alternate
+.account-card:hover{border-color:#B6DCA8;transform:translateY(-5px)}
+.account-card svg{
+ width:27px;height:27px;color:#359A29;margin-bottom:19px;
 }
-@keyframes drawChart{to{stroke-dashoffset:0}}
-.position-list{display:grid;gap:23px;margin-top:30px}
-.position-item{display:flex;gap:16px}
-.position-item .icon-box{flex-shrink:0;margin:0}
-.position-item h4{font:700 15px 'Space Grotesk';margin-bottom:6px}
-.position-item p{font-size:12px;color:var(--muted);line-height:1.8}
+.account-card h3{font-family:Manrope;font-size:14px;margin-bottom:9px}
+.account-card p{font-size:11px;color:var(--slate);line-height:1.9}
 
-/* MARKET OUTCOMES */
+/* RESPONSIBLE USE */
 
-.outcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:45px}
-.outcome-card{
-background:white;border:1px solid var(--border);
-padding:30px;border-radius:20px;text-align:center;transition:.35s
+.notice-box{
+ background:#EAF5E7;border:1px solid #D5E9CE;
+ border-radius:17px;padding:27px;
+ display:flex;gap:17px;align-items:flex-start;
+ margin-top:35px;
 }
-.outcome-card:hover{transform:translateY(-8px)}
-.outcome-icon{
-width:62px;height:62px;background:var(--light);
-color:var(--green);display:grid;place-items:center;
-border-radius:50%;margin:0 auto 20px
+.notice-icon{
+ background:var(--forest);color:var(--lime);
+ width:45px;height:45px;flex-shrink:0;
+ border-radius:13px;display:grid;place-items:center;
 }
-.outcome-icon i{width:28px;height:28px}
-.outcome-card h3{font:700 17px 'Space Grotesk';margin-bottom:10px}
-.outcome-card p{font-size:12px;line-height:1.8;color:var(--muted)}
-
-/* SUGGEST MARKET */
-
-.suggest-section{padding:100px 0;background:#f1f8eb}
-.suggest-box{
-background:linear-gradient(125deg,#1d3d16,#315f20);
-border-radius:28px;padding:55px;color:white;
-display:grid;grid-template-columns:1fr 1fr;gap:45px;
-align-items:center;position:relative;overflow:hidden
-}
-.suggest-box:before{
-content:"";position:absolute;width:350px;height:350px;
-border:1px solid #ffffff20;border-radius:50%;
-right:-120px;top:-150px;animation:spin 30s linear infinite
-}
-.suggest-copy{position:relative;z-index:1}
-.suggest-copy .section-label{background:#ffffff18;color:var(--lime)}
-.suggest-copy h2{
-font:700 clamp(32px,4vw,47px) 'Space Grotesk';
-letter-spacing:-2px;line-height:1.15;margin:22px 0
-}
-.suggest-copy p{color:#d6e8cf;font-size:13px;line-height:1.9}
-.suggest-form{
-background:white;border-radius:20px;padding:27px;
-color:var(--text);position:relative;z-index:1
-}
-.suggest-form h3{font:700 20px 'Space Grotesk';margin-bottom:20px}
-.form-group{margin-bottom:15px}
-.form-group label{display:block;font-size:11px;font-weight:800;margin-bottom:8px}
-.form-group input,.form-group select,.form-group textarea{
-width:100%;border:1px solid var(--border);
-background:#f9fcf7;padding:13px;border-radius:10px;
-outline:none;color:var(--text);font-size:12px;transition:.3s
-}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
-border-color:var(--green);box-shadow:0 0 0 3px #78b83f20
-}
-.form-group textarea{resize:vertical;min-height:90px}
-.submit-btn{
-width:100%;padding:15px;background:var(--green);
-border:0;border-radius:11px;color:white;
-font-size:12px;font-weight:800;transition:.3s
-}
-.submit-btn:hover{background:var(--dark);transform:translateY(-3px)}
-.form-note{font-size:10px;color:var(--muted);text-align:center;margin-top:12px}
-.success-message{
-display:none;padding:12px;background:var(--light);
-color:var(--green);font-size:12px;font-weight:700;
-border-radius:10px;margin-top:12px;line-height:1.6
-}
+.notice-box h3{font-family:Manrope;font-size:14px;margin-bottom:8px}
+.notice-box p{font-size:11px;color:#536A58;line-height:1.9}
 
 /* FAQ */
 
-.faq-list{max-width:780px;margin:45px auto 0;display:grid;gap:12px}
-.faq-item{background:white;border:1px solid var(--border);border-radius:15px;overflow:hidden}
-.faq-question{
-width:100%;padding:20px;background:none;border:0;
-display:flex;align-items:center;justify-content:space-between;
-gap:15px;text-align:left;color:var(--text);font-size:13px;font-weight:800
+.faq-section{background:#F0F6EF}
+.faq-layout{
+ display:grid;grid-template-columns:.8fr 1.2fr;
+ gap:55px;align-items:start;
 }
-.faq-question i{color:var(--green);transition:.3s;flex-shrink:0}
-.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s ease}
-.faq-answer p{padding:0 20px 20px;color:var(--muted);font-size:12px;line-height:1.9}
-.faq-item.open .faq-answer{max-height:180px}
-.faq-item.open .faq-question i{transform:rotate(180deg)}
+.faq-list{display:grid;gap:11px}
+.faq-item{
+ background:white;border:1px solid var(--line);
+ border-radius:13px;overflow:hidden;
+}
+.faq-question{
+ width:100%;display:flex;justify-content:space-between;
+ align-items:center;gap:15px;text-align:left;
+ padding:18px;background:white;border:0;
+ color:var(--ink);font-size:12px;font-weight:800;
+}
+.faq-question svg{
+ flex-shrink:0;color:var(--forest);
+ transition:transform .25s;
+}
+.faq-answer{
+ display:grid;grid-template-rows:0fr;
+ transition:grid-template-rows .3s ease;
+}
+.faq-answer>div{overflow:hidden}
+.faq-answer p{
+ padding:0 18px 18px;
+ color:var(--slate);font-size:11px;line-height:1.9;
+}
+.faq-item.open .faq-answer{grid-template-rows:1fr}
+.faq-item.open .faq-question svg{transform:rotate(180deg)}
+.faq-side{
+ background:var(--forest);color:white;
+ border-radius:20px;padding:30px;
+ position:sticky;top:100px;
+}
+.faq-side h3{font-family:Manrope;font-size:22px;line-height:1.3}
+.faq-side p{font-size:11px;color:#C2D6C8;line-height:1.9;margin-top:13px}
+.faq-side a{
+ display:inline-flex;margin-top:22px;
+ color:var(--forest);background:var(--lime);
+ padding:12px 15px;border-radius:9px;
+ font-size:10px;font-weight:800;
+}
 
 /* CTA */
 
-.final-cta{
-margin:20px auto 100px;max-width:1110px;
-border-radius:25px;padding:55px 30px;
-text-align:center;background:var(--light);position:relative;overflow:hidden
+.cta{background:white;padding:0 0 85px}
+.cta-box{
+ text-align:center;padding:60px 25px;
+ border-radius:24px;color:white;
+ background:
+ radial-gradient(circle at 80% 0%,#39C51B42,transparent 32%),
+ linear-gradient(120deg,#00351F,#07502D);
+ position:relative;overflow:hidden;
 }
-.final-cta h2{font:700 clamp(30px,5vw,44px) 'Space Grotesk';letter-spacing:-2px}
-.final-cta p{color:var(--muted);margin:15px auto 25px;font-size:13px;line-height:1.8;max-width:500px}
+.cta-box h2{
+ font-family:Manrope;font-size:clamp(28px,4vw,43px);
+ letter-spacing:-1.5px;position:relative;z-index:2;
+}
+.cta-box h2 span{color:var(--lime)}
+.cta-box p{
+ color:#C4D8CA;font-size:12px;
+ line-height:1.9;max-width:530px;
+ margin:15px auto 24px;position:relative;z-index:2;
+}
+.cta-box .btn-primary{position:relative;z-index:2}
 
 /* FOOTER */
 
-footer{background:#193715;color:white;padding:65px 0 25px}
-.footer-grid{
-max-width:1160px;margin:auto;padding:0 25px;
-display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:35px
+.footer{background:#061D14;color:white;padding:50px 0 24px}
+.footer-top{
+ display:flex;justify-content:space-between;
+ gap:30px;padding-bottom:35px;
 }
-.footer-brand .brand-name{color:white}
-.footer-brand p{color:#bdd0b4;font-size:12px;line-height:1.9;margin-top:18px;max-width:270px}
-.footer-col h4{font:700 14px 'Space Grotesk';margin-bottom:20px}
-.footer-col a{display:block;color:#bdd0b4;font-size:12px;margin-bottom:14px;transition:.3s}
-.footer-col a:hover{color:var(--lime);transform:translateX(4px)}
+.footer-logo{width:200px;display:block}
+.footer-logo img{width:100%;display:block}
+.footer-description{
+ max-width:330px;font-size:11px;
+ color:#9FB3A5;line-height:1.9;margin-top:15px;
+}
+.footer-links{display:flex;gap:55px}
+.footer-column h4{
+ color:var(--lime);font-size:10px;
+ letter-spacing:1px;margin-bottom:16px;
+}
+.footer-column a{
+ display:block;font-size:11px;
+ color:#B8C8BD;margin-bottom:12px;
+}
+.footer-column a:hover{color:var(--lime)}
 .footer-bottom{
-max-width:1160px;margin:45px auto 0;padding:20px 25px 0;
-border-top:1px solid #ffffff20;
-display:flex;justify-content:space-between;gap:15px;
-color:#a7bea0;font-size:11px;flex-wrap:wrap
+ border-top:1px solid #ffffff18;
+ padding-top:20px;display:flex;
+ justify-content:space-between;gap:15px;
+ font-size:10px;color:#81968A;
 }
 
-/* BACK TO TOP */
+/* ANIMATIONS */
 
-.back-top{
-position:fixed;bottom:25px;right:25px;width:45px;height:45px;
-border:0;border-radius:14px;background:var(--green);color:white;
-display:grid;place-items:center;z-index:900;
-opacity:0;visibility:hidden;transform:translateY(15px);
-transition:.3s;box-shadow:0 5px 20px #315f2040
+.reveal{
+ opacity:0;transform:translateY(23px);
+ transition:opacity .7s ease,transform .7s ease;
 }
-.back-top.show{opacity:1;visibility:visible;transform:translateY(0)}
-.back-top:hover{background:var(--dark);transform:translateY(-4px)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@keyframes float{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-9px)}
+}
+.intro-art img{animation:float 6s ease-in-out infinite}
 
-/* MOBILE BOTTOM NAV */
-
-.mobile-nav{
-display:none;position:fixed;bottom:0;left:0;right:0;z-index:1001;
-background:rgba(255,255,255,.97);backdrop-filter:blur(18px);
-border-top:1px solid var(--border);
-padding:10px 5px calc(10px + env(safe-area-inset-bottom))
+@media(max-width:950px){
+ .nav-links{gap:15px}
+ .nav-links a{font-size:10px}
+ .logo{width:170px}
+ .steps-grid{grid-template-columns:repeat(2,1fr)}
+ .category-grid{grid-template-columns:repeat(2,1fr)}
 }
-.mobile-nav-inner{display:flex;justify-content:space-around;align-items:center}
-.mobile-nav a{
-display:flex;flex-direction:column;align-items:center;gap:5px;
-font-size:9px;font-weight:700;color:#84917e
+@media(max-width:700px){
+ .header{height:68px}
+ .logo{width:155px}
+ .nav-links{
+  display:none;position:absolute;top:68px;left:0;right:0;
+  background:white;padding:22px 5%;
+  flex-direction:column;align-items:flex-start;
+  gap:20px;border-bottom:1px solid var(--line);
+  box-shadow:var(--shadow);
+ }
+ .nav-links.open{display:flex}
+ .nav-links a{font-size:13px}
+ .nav-actions .nav-login{display:none}
+ .nav-signup{padding:10px 13px;font-size:10px}
+ .menu-btn{display:block}
+ .hero{padding:70px 0}
+ .hero h1{letter-spacing:-2px}
+ .hero p{font-size:12px}
+ .quick-grid{grid-template-columns:1fr 1fr}
+ .quick-item{padding:17px 8px;border-bottom:1px solid var(--line)}
+ .quick-item:nth-child(2){border-right:0}
+ .quick-item strong{font-size:10px}
+ .quick-item small{font-size:9px}
+ .section{padding:68px 0}
+ .intro-grid,.explainer-grid,.faq-layout{grid-template-columns:1fr;gap:32px}
+ .intro-art{min-height:270px}
+ .category-grid{grid-template-columns:1fr 1fr;gap:10px}
+ .category-card{padding:17px}
+ .category-card h3{font-size:12px}
+ .category-card p{font-size:10px}
+ .category-icon{width:42px;height:42px;margin-bottom:15px}
+ .steps-grid{grid-template-columns:1fr 1fr;gap:10px}
+ .step{padding:18px}
+ .step-number{font-size:29px}
+ .step h3{font-size:12px}
+ .step p{font-size:10px}
+ .account-grid{grid-template-columns:1fr 1fr;gap:10px}
+ .account-card{padding:18px}
+ .account-card h3{font-size:12px}
+ .account-card p{font-size:10px}
+ .faq-side{position:static}
+ .notice-box{padding:19px}
+ .footer-top{flex-direction:column}
+ .footer-links{width:100%;justify-content:space-between;gap:15px}
+ .footer-bottom{flex-direction:column}
+ .cta{padding-bottom:60px}
+ .cta-box{padding:45px 19px}
 }
-.mobile-nav a i{width:20px;height:20px}
-.mobile-nav a.active{color:var(--green)}
-
-/* RESPONSIVE */
-
-@media(max-width:1050px){
-.nav-links a{padding:10px 8px;font-size:11px}
-.nav-actions .nav-btn{padding:11px 13px}
-.steps-grid{grid-template-columns:repeat(2,1fr)}
-.suggest-box{padding:40px}
-}
-@media(max-width:850px){
-.navbar{padding:0 20px}
-.nav-links{
-display:none;position:absolute;top:75px;left:0;right:0;
-background:white;padding:18px;
-border-bottom:1px solid var(--border);
-box-shadow:0 15px 30px #315f2010;
-flex-direction:column;align-items:stretch
-}
-.nav-links.open{display:flex;animation:menuIn .3s ease}
-.nav-links a{padding:14px}
-@keyframes menuIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-.menu-toggle{display:grid;place-items:center}
-.nav-actions .nav-btn{display:none}
-.hero-grid{grid-template-columns:1fr;text-align:center}
-.hero-content{display:flex;align-items:center;flex-direction:column}
-.hero-desc{max-width:580px}
-.hero-visual{max-width:550px;width:100%;margin:auto}
-.market-grid{grid-template-columns:repeat(2,1fr)}
-.position-layout{grid-template-columns:1fr;gap:35px}
-.suggest-box{grid-template-columns:1fr}
-.footer-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:600px){
-body{padding-bottom:68px}
-.section{padding:75px 0}
-.container{width:calc(100% - 36px)}
-.navbar{height:68px;padding:0 17px}
-.brand-logo{width:38px;height:38px}
-.brand-name{font-size:20px}
-.nav-links{top:68px}
-.hero{padding:65px 0 75px;min-height:auto}
-.hero h1{font-size:47px;letter-spacing:-2.8px}
-.hero-desc{font-size:13px}
-.hero-visual{min-height:340px;transform:scale(.88)}
-.hero-circle{width:270px}
-.hero-symbol{width:110px;height:110px}
-.hero-symbol i{width:55px;height:55px}
-.float-one{left:-5px;top:15px}
-.float-two{right:-5px;bottom:10px}
-.float-three{right:-5px;top:145px}
-.float-card{padding:11px 13px}
-.float-card strong{font-size:10px}
-.float-card small{font-size:9px}
-.ticker-item{font-size:12px}
-.steps-grid{grid-template-columns:1fr 1fr;gap:12px}
-.step-card{padding:22px 15px}
-.step-card h3{font-size:13px}
-.step-card p{font-size:11px}
-.step-number{font-size:26px}
-.market-grid{grid-template-columns:1fr;gap:13px}
-.market-card{padding:23px}
-.outcome-grid{grid-template-columns:1fr}
-.position-visual{padding:24px;min-height:300px}
-.suggest-section{padding:70px 0}
-.suggest-box{padding:30px 19px;border-radius:22px;gap:28px}
-.suggest-form{padding:22px 17px}
-.suggest-copy h2{font-size:35px}
-.footer-grid{grid-template-columns:1fr 1fr;gap:30px 18px}
-.footer-brand{grid-column:1/-1}
-.footer-bottom{font-size:10px;line-height:1.7}
-.mobile-nav{display:block}
-.final-cta{margin:10px 18px 75px;padding:40px 20px}
-.back-top{bottom:85px;right:17px}
-}
-@media(max-width:370px){
-.hero h1{font-size:40px}
-.steps-grid{grid-template-columns:1fr}
-.float-three{display:none}
-.mobile-nav a{font-size:8px}
+@media(max-width:390px){
+ .category-grid,.steps-grid,.account-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
-*,*::before,*::after{
-animation-duration:.01ms!important;
-animation-iteration-count:1!important;
-scroll-behavior:auto!important;
-transition-duration:.01ms!important
-}
-.reveal{opacity:1;transform:none}
+ *,*:before,*:after{
+  animation:none!important;transition:none!important;
+  scroll-behavior:auto!important;
+ }
 }
 </style>
 </head>
 
 <body>
 
-<div class="preloader">
-<div class="loader-logo">C<span>X</span></div>
-<div class="loader-line"></div>
-</div>
+<!-- NAVIGATION -->
+<header class="header">
+ <div class="container nav">
 
-<div class="orb one"></div>
-<div class="orb two"></div>
+  <a href="index.html" class="logo">
+   <img src="campusx-logo.jpeg" alt="CampusX">
+  </a>
 
-<!-- HEADER -->
+  <nav class="nav-links" id="navLinks">
+   <a href="index.html">Home</a>
+   <a href="dashboard.html">Dashboard</a>
+   <a href="market.html">Market</a>
+   <a href="info.html" class="active">Info</a>
+   <a href="community.html">Community</a>
+   <a href="about.html">About</a>
+  </nav>
 
-<header>
-<nav class="navbar">
+  <div class="nav-actions">
+   <a href="login.html" class="nav-login">Sign in</a>
+   <a href="signup.html" class="nav-signup">Get started ↗</a>
+   <button class="menu-btn" id="menuBtn" aria-label="Open navigation">
+    <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+   </button>
+  </div>
 
-<a href="index.html" class="brand">
-<div class="brand-logo">CX</div>
-<div class="brand-name">Campus<span>X</span></div>
-</a>
-
-<div class="nav-links" id="navLinks">
-<a href="index.html">Home</a>
-<a href="dashboard.html">Dashboard</a>
-<a href="dashboard.html#profile">Profile</a>
-<a href="about.html">About</a>
-<a href="market.html">Market</a>
-<a href="info.html" class="active">Info</a>
-</div>
-
-<div class="nav-actions">
-<a href="login.html" class="nav-btn">Get Started <i data-lucide="arrow-up-right"></i></a>
-<button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
-<i data-lucide="menu"></i>
-</button>
-</div>
-
-</nav>
+ </div>
 </header>
 
 <!-- HERO -->
-
 <section class="hero">
-<div class="container hero-grid">
+ <div class="container hero-content">
 
-<div class="hero-content reveal left">
-<div class="section-label">
-<i data-lucide="sparkles"></i>
-THE CAMPUSX GUIDE
-</div>
+  <div class="eyebrow"><span class="dot"></span> CAMPUSX INFORMATION CENTRE</div>
 
-<h1>Everything you need to know about <span>CampusX.</span></h1>
+  <h1>
+   Everything you need<br>
+   to know about <span>CampusX.</span>
+  </h1>
 
-<p class="hero-desc">
-Welcome to a new way of experiencing campus life.
-Discover campus events, explore prediction markets,
-follow trends and become part of your campus community.
-</p>
+  <p>
+   New to CampusX? Here's your starting point.
+   Understand the platform, discover market categories,
+   learn how participation works and get familiar with
+   the features that bring campus life together.
+  </p>
 
-<div class="hero-buttons">
-<a href="market.html" class="btn btn-primary">Explore Markets <i data-lucide="arrow-up-right"></i></a>
-<a href="#how-it-works" class="btn btn-outline">How it works <i data-lucide="play"></i></a>
-</div>
-</div>
+  <div class="hero-actions">
+   <a href="#getting-started" class="btn-primary">
+    Get started
+    <svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+   </a>
+   <a href="#faqs" class="btn-outline">
+    Browse FAQs
+    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5"/></svg>
+   </a>
+  </div>
 
-<div class="hero-visual reveal zoom">
-<div class="hero-circle">
-<div class="hero-symbol">
-<i data-lucide="graduation-cap"></i>
-</div>
-</div>
-
-<div class="float-card float-one">
-<i data-lucide="trending-up"></i>
-<div><strong>Campus Trends</strong><small>Stay in the loop</small></div>
-</div>
-
-<div class="float-card float-two">
-<i data-lucide="users"></i>
-<div><strong>Your Community</strong><small>One campus. Many voices.</small></div>
-</div>
-
-<div class="float-card float-three">
-<i data-lucide="chart-no-axes-combined"></i>
-<div><strong>Live Markets</strong><small>Explore possibilities</small></div>
-</div>
-</div>
-
-</div>
+ </div>
 </section>
 
-<!-- TICKER -->
+<!-- QUICK LINKS -->
+<section class="quick-nav">
+ <div class="container quick-grid">
 
-<div class="ticker">
-<div class="ticker-track">
-<div class="ticker-item"><i data-lucide="zap"></i> CAMPUS ENERGY</div>
-<div class="ticker-item"><i data-lucide="chart-line"></i> PREDICTION MARKETS</div>
-<div class="ticker-item"><i data-lucide="calendar-days"></i> CAMPUS EVENTS</div>
-<div class="ticker-item"><i data-lucide="users"></i> COMMUNITY VOICES</div>
-<div class="ticker-item"><i data-lucide="sparkles"></i> YOUR CAMPUS. YOUR CALL.</div>
-<div class="ticker-item"><i data-lucide="zap"></i> CAMPUS ENERGY</div>
-<div class="ticker-item"><i data-lucide="chart-line"></i> PREDICTION MARKETS</div>
-<div class="ticker-item"><i data-lucide="calendar-days"></i> CAMPUS EVENTS</div>
-<div class="ticker-item"><i data-lucide="users"></i> COMMUNITY VOICES</div>
-<div class="ticker-item"><i data-lucide="sparkles"></i> YOUR CAMPUS. YOUR CALL.</div>
-</div>
-</div>
+  <a href="#getting-started" class="quick-item">
+   <div class="quick-icon">
+    <svg viewBox="0 0 24 24"><path d="M12 2 3 7l9 5 9-5-9-5Z"/><path d="m3 12 9 5 9-5"/></svg>
+   </div>
+   <div><strong>Getting started</strong><small>Learn the basics</small></div>
+  </a>
+
+  <a href="#categories" class="quick-item">
+   <div class="quick-icon">
+    <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 6-7"/></svg>
+   </div>
+   <div><strong>Market categories</strong><small>Explore topics</small></div>
+  </a>
+
+  <a href="#accounts" class="quick-item">
+   <div class="quick-icon">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/></svg>
+   </div>
+   <div><strong>Your account</strong><small>Account information</small></div>
+  </a>
+
+  <a href="#faqs" class="quick-item">
+   <div class="quick-icon">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.5 9a2.5 2.5 0 1 1 4.4 1.6c-1.2 1.2-1.9 1.5-1.9 3.4M12 17h.01"/></svg>
+   </div>
+   <div><strong>FAQs</strong><small>Find answers</small></div>
+  </a>
+
+ </div>
+</section>
+
+<!-- INTRODUCTION -->
+<section class="section" id="getting-started">
+ <div class="container intro-grid">
+
+  <div class="intro-copy reveal">
+   <div class="section-label">WELCOME TO CAMPUSX</div>
+   <h2 class="section-title">
+    One place for the <span>campus experience.</span>
+   </h2>
+
+   <p>
+    CampusX is a campus-focused platform that brings
+    prediction markets, student perspectives and campus
+    conversations together.
+   </p>
+
+   <p>
+    It gives users a way to discover market questions,
+    follow campus developments and explore different
+    topics across their university communities.
+   </p>
+
+   <p>
+    Whether you're interested in sports, student leadership,
+    campus events or wider university affairs, CampusX
+    is designed to make those topics easier to discover.
+   </p>
+  </div>
+
+  <div class="intro-art reveal">
+   <img src="campusx-logo.jpeg" alt="CampusX logo">
+   <div class="art-tag">YOUR CAMPUS. YOUR CALL.</div>
+  </div>
+
+ </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section categories" id="categories">
+ <div class="container">
+
+  <div class="center reveal">
+   <div class="section-label">EXPLORE THE PLATFORM</div>
+   <h2 class="section-title">What can you explore <span>on CampusX?</span></h2>
+   <p class="section-description">
+    CampusX brings together different areas of campus life.
+    Explore topics that matter to you and your community.
+   </p>
+  </div>
+
+  <div class="category-grid">
+
+   <article class="category-card reveal">
+    <div class="category-icon">
+     <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 6-7"/></svg>
+    </div>
+    <h3>Sports markets</h3>
+    <p>Explore questions around sporting events, match outcomes and competitions.</p>
+   </article>
+
+   <article class="category-card reveal">
+    <div class="category-icon">
+     <svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg>
+    </div>
+    <h3>Campus elections</h3>
+    <p>Follow student leadership contests, election developments and campus representation.</p>
+   </article>
+
+   <article class="category-card reveal">
+    <div class="category-icon">
+     <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 10h.01M15 10h.01M9 14h.01M15 14h.01"/></svg>
+    </div>
+    <h3>College affairs</h3>
+    <p>Discover topics involving faculties, departments and university developments.</p>
+   </article>
+
+   <article class="category-card reveal">
+    <div class="category-icon">
+     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    </div>
+    <h3>Campus events</h3>
+    <p>Explore questions around programmes, activities and events across campus.</p>
+   </article>
+
+   <article class="category-card reveal">
+    <div class="category-icon">
+     <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>
+    </div>
+    <h3>Student union affairs</h3>
+    <p>Follow student union activities, decisions and matters affecting student communities.</p>
+   </article>
+
+   <article class="category-card reveal">
+    <div class="category-icon">
+     <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7L3 21l1.9-5.7A8.5 8.5 0 0 1 12 3h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg>
+    </div>
+    <h3>Community topics</h3>
+    <p>Discover conversations and questions that reflect the interests of campus communities.</p>
+   </article>
+
+  </div>
+ </div>
+</section>
 
 <!-- HOW IT WORKS -->
-
-<section class="section" id="how-it-works">
-<div class="container">
-
-<div class="center reveal top">
-<div class="section-label"><i data-lucide="compass"></i> GETTING STARTED</div>
-<h2 class="section-title">Your campus experience,<br><span>reimagined.</span></h2>
-<p class="section-desc">
-CampusX brings campus activities and prediction markets
-together in one interactive platform. Here's how to get started.
-</p>
-</div>
-
-<div class="steps-grid">
-
-<div class="step-card reveal left">
-<span class="step-number">01</span>
-<div class="icon-box"><i data-lucide="user-plus"></i></div>
-<h3>Create an account</h3>
-<p>Join CampusX and set up your account to access the platform and its features.</p>
-</div>
-
-<div class="step-card reveal bottom d1">
-<span class="step-number">02</span>
-<div class="icon-box"><i data-lucide="search"></i></div>
-<h3>Explore markets</h3>
-<p>Discover campus events, trending topics, community predictions and available markets.</p>
-</div>
-
-<div class="step-card reveal top d2">
-<span class="step-number">03</span>
-<div class="icon-box"><i data-lucide="chart-no-axes-combined"></i></div>
-<h3>Follow the trends</h3>
-<p>Study market movements, follow changing opinions and explore different outcomes.</p>
-</div>
-
-<div class="step-card reveal right d3">
-<span class="step-number">04</span>
-<div class="icon-box"><i data-lucide="users"></i></div>
-<h3>Be part of it</h3>
-<p>Stay connected, share ideas and help shape the conversations happening on campus.</p>
-</div>
-
-</div>
-</div>
-</section>
-
-<!-- MARKET CATEGORIES -->
-
-<section class="section market-section" id="market-types">
-<div class="container">
-
-<div class="center reveal bottom">
-<div class="section-label"><i data-lucide="layers"></i> EXPLORE THE POSSIBILITIES</div>
-<h2 class="section-title">More than just <span>markets.</span></h2>
-<p class="section-desc">
-CampusX covers different aspects of campus life.
-Explore topics that matter to students and the wider community.
-</p>
-</div>
-
-<div class="market-grid">
-
-<div class="market-card reveal left">
-<div class="market-icon"><i data-lucide="vote"></i></div>
-<h3>Campus Elections</h3>
-<p>Follow student union elections, leadership contests, candidates and important campus decisions.</p>
-<span class="market-tag">STUDENT POLITICS</span>
-</div>
-
-<div class="market-card reveal bottom d1">
-<div class="market-icon"><i data-lucide="calendar-days"></i></div>
-<h3>Campus Events</h3>
-<p>Explore upcoming events, concerts, departmental programmes and activities around campus.</p>
-<span class="market-tag">CAMPUS LIFE</span>
-</div>
-
-<div class="market-card reveal right d2">
-<div class="market-icon"><i data-lucide="graduation-cap"></i></div>
-<h3>Academic Trends</h3>
-<p>Follow conversations around academic calendars, examinations and important school developments.</p>
-<span class="market-tag">ACADEMICS</span>
-</div>
-
-<div class="market-card reveal left d1">
-<div class="market-icon"><i data-lucide="music"></i></div>
-<h3>Entertainment</h3>
-<p>Keep up with music, entertainment, popular culture and trending conversations.</p>
-<span class="market-tag">ENTERTAINMENT</span>
-</div>
-
-<div class="market-card reveal bottom d2">
-<div class="market-icon"><i data-lucide="trophy"></i></div>
-<h3>Sports</h3>
-<p>Explore sporting events, team performances, competitions and other sporting discussions.</p>
-<span class="market-tag">SPORTS</span>
-</div>
-
-<div class="market-card reveal right d3">
-<div class="market-icon"><i data-lucide="globe"></i></div>
-<h3>General Trends</h3>
-<p>Discover broader conversations, public developments and topics that capture people's attention.</p>
-<span class="market-tag">TRENDING TOPICS</span>
-</div>
-
-</div>
-</div>
-</section>
-
-<!-- UNDERSTANDING MARKETS -->
-
 <section class="section">
-<div class="container position-layout">
+ <div class="container">
 
-<div class="position-visual reveal left">
-<h3>Watch the movement.</h3>
-<p>Follow how market opinions change over time.</p>
+  <div class="center reveal">
+   <div class="section-label">HOW IT WORKS</div>
+   <h2 class="section-title">Getting around <span>CampusX.</span></h2>
+   <p class="section-description">
+    The platform is designed to make discovering and
+    following campus-related markets straightforward.
+   </p>
+  </div>
 
-<div class="demo-chart">
-<svg viewBox="0 0 500 180" preserveAspectRatio="none">
-<path d="M0 140 L55 125 L100 145 L150 90 L200 108 L255 65 L305 95 L355 40 L405 60 L455 20 L500 35" class="chart-path"/>
-</svg>
-</div>
-</div>
+  <div class="steps-grid">
 
-<div class="reveal right">
-<div class="section-label"><i data-lucide="chart-no-axes-combined"></i> UNDERSTANDING CAMPUSX</div>
-<h2 class="section-title">Markets made <span>simple.</span></h2>
-<p class="section-desc">
-CampusX uses market-style interfaces to help users
-explore opinions and changing expectations around different topics.
-</p>
+   <div class="step reveal">
+    <div class="step-number">01</div>
+    <h3>Create an account</h3>
+    <p>Register and set up your CampusX account to access the platform.</p>
+   </div>
 
-<div class="position-list">
+   <div class="step reveal">
+    <div class="step-number">02</div>
+    <h3>Explore markets</h3>
+    <p>Browse available market questions and discover topics that interest you.</p>
+   </div>
 
-<div class="position-item">
-<div class="icon-box"><i data-lucide="activity"></i></div>
-<div>
-<h4>Market movements</h4>
-<p>Observe how market indicators change as new information and opinions emerge.</p>
-</div>
-</div>
+   <div class="step reveal">
+    <div class="step-number">03</div>
+    <h3>Understand the details</h3>
+    <p>Read the question, available outcomes, closing time and resolution information.</p>
+   </div>
 
-<div class="position-item">
-<div class="icon-box"><i data-lucide="users"></i></div>
-<div>
-<h4>Community participation</h4>
-<p>Explore what other members think about different campus topics.</p>
-</div>
-</div>
+   <div class="step reveal">
+    <div class="step-number">04</div>
+    <h3>Follow developments</h3>
+    <p>Keep track of market activity and follow the eventual outcome.</p>
+   </div>
 
-<div class="position-item">
-<div class="icon-box"><i data-lucide="clock"></i></div>
-<div>
-<h4>Market timelines</h4>
-<p>Follow relevant market updates and their stated resolution timelines.</p>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
+  </div>
+ </div>
 </section>
 
-<!-- WHY CAMPUSX -->
+<!-- PREDICTION MARKETS EXPLAINED -->
+<section class="section explainer">
+ <div class="container explainer-grid">
 
-<section class="section market-section">
-<div class="container">
+  <div class="reveal">
+   <div class="section-label">UNDERSTANDING MARKETS</div>
+   <h2 class="section-title">What is a <span style="color:var(--lime)">prediction market?</span></h2>
+   <p class="section-description">
+    A prediction market is a market built around a question
+    about a future event. Participants consider possible
+    outcomes and the market reflects the collective
+    expectations of its participants.
+   </p>
 
-<div class="center reveal top">
-<div class="section-label"><i data-lucide="heart"></i> WHY CAMPUSX</div>
-<h2 class="section-title">Built around <span>your campus.</span></h2>
-<p class="section-desc">
-A platform designed to make campus conversations more interactive,
-accessible and engaging.
-</p>
-</div>
+   <div class="explainer-points">
 
-<div class="outcome-grid">
+    <div class="explainer-point">
+     <svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+     <div>
+      <strong>A question with possible outcomes</strong>
+      <p>Each market is centred on a clearly defined event or question.</p>
+     </div>
+    </div>
 
-<div class="outcome-card reveal left">
-<div class="outcome-icon"><i data-lucide="radio-tower"></i></div>
-<h3>Stay informed</h3>
-<p>Keep up with important conversations, campus developments and trending topics.</p>
-</div>
+    <div class="explainer-point">
+     <svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+     <div>
+      <strong>Market expectations</strong>
+      <p>Market prices or displayed probabilities can change as expectations change.</p>
+     </div>
+    </div>
 
-<div class="outcome-card reveal bottom d1">
-<div class="outcome-icon"><i data-lucide="messages-square"></i></div>
-<h3>Join conversations</h3>
-<p>Discover different perspectives and become part of your campus community.</p>
-</div>
+    <div class="explainer-point">
+     <svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>
+     <div>
+      <strong>Resolution</strong>
+      <p>The market is resolved according to its published rules and verified outcome.</p>
+     </div>
+    </div>
 
-<div class="outcome-card reveal right d2">
-<div class="outcome-icon"><i data-lucide="lightbulb"></i></div>
-<h3>Share ideas</h3>
-<p>Bring new topics to the platform and suggest markets that deserve attention.</p>
-</div>
+   </div>
+  </div>
 
-</div>
-</div>
+  <div class="market-panel reveal">
+   <div class="panel-top">
+    <strong>Illustrative market</strong>
+    <span class="live-label">EXAMPLE</span>
+   </div>
+
+   <div class="sample-market">
+    <small>CAMPUS EVENTS</small>
+    <h4>Will the campus event take place this month?</h4>
+    <div class="market-meter"><span></span></div>
+    <div class="market-meta">
+     <span>Illustrative expectation</span>
+     <strong>68%</strong>
+    </div>
+   </div>
+
+   <div class="sample-market">
+    <small>STUDENT AFFAIRS</small>
+    <h4>Will the announced meeting hold this week?</h4>
+    <div class="market-meter"><span style="width:45%"></span></div>
+    <div class="market-meta">
+     <span>Illustrative expectation</span>
+     <strong>45%</strong>
+    </div>
+   </div>
+
+   <p class="sample-note">
+    These are fictional examples for educational purposes.
+    They do not represent live CampusX market prices or
+    actual event predictions.
+   </p>
+  </div>
+
+ </div>
 </section>
 
-<!-- SUGGEST A MARKET -->
+<!-- ACCOUNT INFORMATION -->
+<section class="section account-section" id="accounts">
+ <div class="container">
 
-<section class="suggest-section" id="suggest-market">
-<div class="container">
-<div class="suggest-box">
+  <div class="center reveal">
+   <div class="section-label">YOUR CAMPUSX ACCOUNT</div>
+   <h2 class="section-title">Your account, <span>your experience.</span></h2>
+   <p class="section-description">
+    Different areas of the platform help you manage your
+    activity and navigate your CampusX experience.
+   </p>
+  </div>
 
-<div class="suggest-copy reveal left">
-<div class="section-label"><i data-lucide="lightbulb"></i> YOUR IDEA MATTERS</div>
+  <div class="account-grid">
 
-<h2>Got a market idea? Let's hear it.</h2>
+   <div class="account-card reveal">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/></svg>
+    <h3>Profile</h3>
+    <p>Your profile contains your personal account information and relevant user details.</p>
+   </div>
 
-<p>
-Have something happening on campus that deserves its own market?
-Suggest it to CampusX. Your idea could become the next topic
-everyone is following.
-<br><br>
-From campus elections to events and trending conversations,
-we want to hear what matters to you.
-</p>
-</div>
+   <div class="account-card reveal">
+    <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 6-7"/></svg>
+    <h3>Dashboard</h3>
+    <p>Your dashboard provides a central place to view your account and platform activity.</p>
+   </div>
 
-<form class="suggest-form reveal right" id="suggestForm">
+   <div class="account-card reveal">
+    <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+    <h3>Notifications</h3>
+    <p>Stay informed about relevant platform updates and account notifications.</p>
+   </div>
 
-<h3>Suggest a market</h3>
+   <div class="account-card reveal">
+    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7L3 21l1.9-5.7A8.5 8.5 0 0 1 12 3h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg>
+    <h3>Community</h3>
+    <p>Explore the community area for discussions and conversations around campus topics.</p>
+   </div>
 
-<div class="form-group">
-<label for="marketTitle">MARKET TITLE</label>
-<input id="marketTitle" name="title" type="text"
-placeholder="e.g. Who will win the next SUG election?" required maxlength="100">
-</div>
+   <div class="account-card reveal">
+    <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+    <h3>Market details</h3>
+    <p>Review market descriptions, possible outcomes and resolution information.</p>
+   </div>
 
-<div class="form-group">
-<label for="marketCategory">MARKET CATEGORY</label>
-<select id="marketCategory" name="category" required>
-<option value="">Select a category</option>
-<option>Campus Elections</option>
-<option>Campus Events</option>
-<option>Academics</option>
-<option>Entertainment</option>
-<option>Sports</option>
-<option>General Trends</option>
-<option>Other</option>
-</select>
-</div>
+   <div class="account-card reveal">
+    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg>
+    <h3>Account security</h3>
+    <p>Use the available account security and authentication features to protect your account.</p>
+   </div>
 
-<div class="form-group">
-<label for="marketDescription">DESCRIBE YOUR IDEA</label>
-<textarea id="marketDescription" name="description"
-placeholder="Tell us what this market should be about..." required maxlength="1000"></textarea>
-</div>
+  </div>
+ </div>
+</section>
 
-<div class="form-group">
-<label for="suggestEmail">YOUR EMAIL (OPTIONAL)</label>
-<input id="suggestEmail" name="email" type="email" placeholder="you@example.com">
-</div>
+<!-- IMPORTANT NOTICE -->
+<section class="section" style="padding-top:0;background:white">
+ <div class="container">
 
-<button type="submit" class="submit-btn" id="submitBtn">
-Submit Market Suggestion <i data-lucide="arrow-right"></i>
-</button>
+  <div class="notice-box reveal">
+   <div class="notice-icon">
+    <svg viewBox="0 0 24 24"><path d="M12 9v4m0 4h.01"/><path d="M10.3 3.9 1.8 18.2A2 2 0 0 0 3.5 21h17a2 2 0 0 0 1.7-2.8L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+   </div>
+   <div>
+    <h3>Important information about participation</h3>
+    <p>
+     Always read the rules and details of a market before
+     participating. Market expectations are not guarantees
+     of an outcome. Outcomes depend on the event and the
+     market's published resolution criteria. Participation
+     may involve financial risk where real-money features
+     are offered. Follow applicable laws, age requirements
+     and platform rules.
+    </p>
+   </div>
+  </div>
 
-<div class="success-message" id="successMessage" role="status">
-<i data-lucide="check-circle"></i>
-Your suggestion has been received on this page. Backend submission will be enabled when CampusX is connected.
-</div>
-
-<p class="form-note">Your ideas help shape the CampusX experience.</p>
-
-</form>
-
-</div>
-</div>
+ </div>
 </section>
 
 <!-- FAQ -->
+<section class="section faq-section" id="faqs">
+ <div class="container faq-layout">
 
-<section class="section" id="faq">
-<div class="container">
+  <div class="faq-side reveal">
+   <div class="section-label" style="color:var(--lime)">NEED CLARITY?</div>
+   <h3>Frequently asked questions.</h3>
+   <p>
+    Find answers to common questions about CampusX,
+    its features and how the platform works.
+   </p>
+   <a href="community.html">Visit Community ↗</a>
+  </div>
 
-<div class="center reveal top">
-<div class="section-label"><i data-lucide="help-circle"></i> NEED CLARITY?</div>
-<h2 class="section-title">Frequently asked <span>questions.</span></h2>
-<p class="section-desc">A few things you might want to know about CampusX.</p>
-</div>
+  <div class="faq-list reveal">
 
-<div class="faq-list">
+   <div class="faq-item open">
+    <button class="faq-question" aria-expanded="true">
+     What exactly is CampusX?
+     <svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg>
+    </button>
+    <div class="faq-answer">
+     <div><p>CampusX is a campus-focused platform that brings prediction markets, student perspectives and campus conversations together.</p></div>
+    </div>
+   </div>
 
-<div class="faq-item reveal left">
-<button class="faq-question">
-What is CampusX?
-<i data-lucide="chevron-down"></i>
-</button>
-<div class="faq-answer">
-<p>CampusX is a campus-focused platform combining prediction markets, campus events and interactive community experiences.</p>
-</div>
-</div>
+   <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+     Who can use CampusX?
+     <svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg>
+    </button>
+    <div class="faq-answer">
+     <div><p>Eligibility depends on the platform's applicable terms, age requirements and location restrictions. Review the registration requirements before creating an account.</p></div>
+    </div>
+   </div>
 
-<div class="faq-item reveal right">
-<button class="faq-question">
-What can I find on CampusX?
-<i data-lucide="chevron-down"></i>
-</button>
-<div class="faq-answer">
-<p>You can explore different market categories, campus developments, student events and other trending topics.</p>
-</div>
-</div>
+   <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+     What types of markets are available?
+     <svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg>
+    </button>
+    <div class="faq-answer">
+     <div><p>CampusX is designed around topics such as sports, campus elections, student union affairs, college affairs and campus events. Actual available markets depend on what has been published on the platform.</p></div>
+    </div>
+   </div>
 
-<div class="faq-item reveal left">
-<button class="faq-question">
-Can I suggest a new market?
-<i data-lucide="chevron-down"></i>
-</button>
-<div class="faq-answer">
-<p>Yes! Use the Suggest a Market form on this page to share your idea with the CampusX team.</p>
-</div>
-</div>
+   <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+     How do I understand a market?
+     <svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg>
+    </button>
+    <div class="faq-answer">
+     <div><p>Read the market question, review the available outcomes, check the closing time and understand the published resolution criteria before participating.</p></div>
+    </div>
+   </div>
 
-<div class="faq-item reveal right">
-<button class="faq-question">
-Is CampusX only for elections?
-<i data-lucide="chevron-down"></i>
-</button>
-<div class="faq-answer">
-<p>No. CampusX covers a wider range of topics, including campus events, entertainment, academics, sports and general trends.</p>
-</div>
-</div>
+   <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+     Are market probabilities guaranteed?
+     <svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg>
+    </button>
+    <div class="faq-answer">
+     <div><p>No. Displayed probabilities or market prices represent market expectations. They are not guarantees that an event will happen.</p></div>
+    </div>
+   </div>
 
-<div class="faq-item reveal left">
-<button class="faq-question">
-How do I get started?
-<i data-lucide="chevron-down"></i>
-</button>
-<div class="faq-answer">
-<p>Create an account, explore available markets and discover the different experiences CampusX offers.</p>
-</div>
-</div>
+   <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+     Can I discuss campus topics?
+     <svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg>
+    </button>
+    <div class="faq-answer">
+     <div><p>The CampusX community area is intended for campus-related discussions and shared perspectives, subject to the features currently enabled and community guidelines.</p></div>
+    </div>
+   </div>
 
-</div>
-</div>
+   <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+     Where can I get help?
+     <svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg>
+    </button>
+    <div class="faq-answer">
+     <div><p>Use the available support or contact channels provided by CampusX. You can also check the community area for platform announcements and updates.</p></div>
+    </div>
+   </div>
+
+  </div>
+ </div>
 </section>
 
 <!-- CTA -->
-
-<div class="container">
-<section class="final-cta reveal zoom">
-<div class="section-label"><i data-lucide="rocket"></i> YOUR CAMPUS. YOUR CALL.</div>
-<h2>Ready to explore CampusX?</h2>
-<p>
-Discover what's happening, explore new markets and become
-part of the conversations shaping your campus.
-</p>
-<a href="index.html" class="btn btn-primary">
-Explore CampusX <i data-lucide="arrow-up-right"></i>
-</a>
+<section class="cta">
+ <div class="container">
+  <div class="cta-box reveal">
+   <h2>Now that you know.<br><span>Explore CampusX.</span></h2>
+   <p>
+    Discover what's happening, explore available markets
+    and become part of the campus conversation.
+   </p>
+   <a href="market.html" class="btn-primary">
+    Explore markets
+    <svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+   </a>
+  </div>
+ </div>
 </section>
-</div>
 
 <!-- FOOTER -->
+<footer class="footer">
+ <div class="container">
 
-<footer>
-<div class="footer-grid">
+  <div class="footer-top">
+   <div>
+    <a href="index.html" class="footer-logo">
+     <img src="campusx-logo.jpeg" alt="CampusX">
+    </a>
+    <p class="footer-description">
+     Campus conversations, student perspectives and
+     prediction markets — brought together in one
+     campus-focused experience.
+    </p>
+   </div>
 
-<div class="footer-brand">
-<a href="index.html" class="brand">
-<div class="brand-logo">CX</div>
-<div class="brand-name">Campus<span>X</span></div>
-</a>
-<p>
-Your campus. Your call.
-A new way to discover campus activities,
-follow trends and explore prediction markets.
-</p>
-</div>
+   <div class="footer-links">
+    <div class="footer-column">
+     <h4>EXPLORE</h4>
+     <a href="index.html">Home</a>
+     <a href="market.html">Markets</a>
+     <a href="community.html">Community</a>
+     <a href="dashboard.html">Dashboard</a>
+    </div>
 
-<div class="footer-col">
-<h4>Explore</h4>
-<a href="index.html">Home</a>
-<a href="dashboard.html">Dashboard</a>
-<a href="market.html">Markets</a>
-<a href="dashboard.html#profile">Profile</a>
-</div>
+    <div class="footer-column">
+     <h4>CAMPUSX</h4>
+     <a href="about.html">About us</a>
+     <a href="info.html">Information</a>
+     <a href="login.html">Sign in</a>
+     <a href="signup.html">Create account</a>
+    </div>
+   </div>
+  </div>
 
-<div class="footer-col">
-<h4>Discover</h4>
-<a href="about.html">About CampusX</a>
-<a href="info.html">Information</a>
-<a href="#how-it-works">How it works</a>
-<a href="#suggest-market">Suggest a market</a>
-</div>
+  <div class="footer-bottom">
+   <span>© <span id="year"></span> CampusX. All rights reserved.</span>
+   <span>Your Campus. Your Call.</span>
+  </div>
 
-<div class="footer-col">
-<h4>Help</h4>
-<a href="#faq">FAQs</a>
-<a href="#suggest-market">Contact / Suggestions</a>
-<a href="terms.html">Terms of Service</a>
-<a href="privacy.html">Privacy Policy</a>
-</div>
-
-</div>
-
-<div class="footer-bottom">
-<span>© <span id="year"></span> CampusX. All rights reserved.</span>
-<span>Built for campus. Powered by ideas.</span>
-</div>
+ </div>
 </footer>
 
-<!-- MOBILE NAVIGATION -->
-
-<nav class="mobile-nav">
-<div class="mobile-nav-inner">
-<a href="index.html"><i data-lucide="house"></i><span>Home</span></a>
-<a href="dashboard.html"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
-<a href="dashboard.html#profile"><i data-lucide="user-round"></i><span>Profile</span></a>
-<a href="about.html"><i data-lucide="info"></i><span>About</span></a>
-<a href="market.html"><i data-lucide="chart-line"></i><span>Market</span></a>
-</div>
-</nav>
-
-<button class="back-top" id="backTop" aria-label="Back to top">
-<i data-lucide="arrow-up"></i>
-</button>
-
 <script>
-/* ICONS */
+/* MOBILE NAVIGATION */
+const menuBtn=document.getElementById("menuBtn");
+const navLinks=document.getElementById("navLinks");
 
-function renderIcons(){
-if(window.lucide){
-lucide.createIcons();
-}
-}
-renderIcons();
-
-/* MOBILE MENU */
-
-const menuToggle=document.getElementById('menuToggle');
-const navLinks=document.getElementById('navLinks');
-
-menuToggle.addEventListener('click',()=>{
-navLinks.classList.toggle('open');
-const icon=menuToggle.querySelector('i');
-icon.setAttribute('data-lucide',
-navLinks.classList.contains('open')?'x':'menu');
-renderIcons();
+menuBtn.addEventListener("click",()=>{
+ navLinks.classList.toggle("open");
 });
 
-navLinks.querySelectorAll('a').forEach(link=>{
-link.addEventListener('click',()=>{
-navLinks.classList.remove('open');
-menuToggle.querySelector('i').setAttribute('data-lucide','menu');
-renderIcons();
-});
-});
-
-document.addEventListener('click',e=>{
-if(!navLinks.contains(e.target)&&!menuToggle.contains(e.target)){
-navLinks.classList.remove('open');
-menuToggle.querySelector('i').setAttribute('data-lucide','menu');
-renderIcons();
-}
-});
-
-/* SCROLL ENTRANCE ANIMATIONS */
-
-const revealObserver=new IntersectionObserver((entries)=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add('visible');
-revealObserver.unobserve(entry.target);
-}
-});
-},{threshold:.12});
-
-document.querySelectorAll('.reveal').forEach(element=>{
-revealObserver.observe(element);
+navLinks.querySelectorAll("a").forEach(link=>{
+ link.addEventListener("click",()=>{
+  navLinks.classList.remove("open");
+ });
 });
 
 /* FAQ ACCORDION */
+document.querySelectorAll(".faq-question").forEach(button=>{
+ button.addEventListener("click",()=>{
+  const item=button.closest(".faq-item");
+  const wasOpen=item.classList.contains("open");
 
-document.querySelectorAll('.faq-question').forEach(button=>{
-button.addEventListener('click',()=>{
-const item=button.closest('.faq-item');
-const wasOpen=item.classList.contains('open');
+  document.querySelectorAll(".faq-item").forEach(other=>{
+   other.classList.remove("open");
+   other.querySelector(".faq-question").setAttribute("aria-expanded","false");
+  });
 
-document.querySelectorAll('.faq-item').forEach(faq=>{
-faq.classList.remove('open');
+  if(!wasOpen){
+   item.classList.add("open");
+   button.setAttribute("aria-expanded","true");
+  }
+ });
 });
 
-if(!wasOpen)item.classList.add('open');
-});
-});
+/* SCROLL ANIMATIONS */
+const revealItems=document.querySelectorAll(".reveal");
 
-/* BACK TO TOP */
+if("IntersectionObserver" in window){
+ const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+   if(entry.isIntersecting){
+    entry.target.classList.add("visible");
+    observer.unobserve(entry.target);
+   }
+  });
+ },{threshold:.12});
 
-const backTop=document.getElementById('backTop');
-
-window.addEventListener('scroll',()=>{
-backTop.classList.toggle('show',window.scrollY>450);
-});
-
-backTop.addEventListener('click',()=>{
-window.scrollTo({top:0,behavior:'smooth'});
-});
-
-/* ACTIVE MOBILE LINK */
-
-const currentPage=window.location.pathname.split('/').pop()||'index.html';
-
-document.querySelectorAll('.mobile-nav a').forEach(link=>{
-const href=link.getAttribute('href');
-if(href===currentPage){
-link.classList.add('active');
+ revealItems.forEach(item=>observer.observe(item));
+}else{
+ revealItems.forEach(item=>item.classList.add("visible"));
 }
-});
-
-/* SUGGEST MARKET FORM
-   FRONTEND ONLY - CONNECT BACKEND LATER
-*/
-
-const suggestForm=document.getElementById('suggestForm');
-const successMessage=document.getElementById('successMessage');
-
-suggestForm.addEventListener('submit',function(e){
-e.preventDefault();
-
-if(!suggestForm.checkValidity()){
-suggestForm.reportValidity();
-return;
-}
-
-const button=document.getElementById('submitBtn');
-button.disabled=true;
-button.textContent='Suggestion received';
-successMessage.style.display='block';
-
-suggestForm.reset();
-
-setTimeout(()=>{
-button.disabled=false;
-button.innerHTML='Submit Market Suggestion <i data-lucide="arrow-right"></i>';
-renderIcons();
-},2500);
-});
 
 /* FOOTER YEAR */
-
-document.getElementById('year').textContent=new Date().getFullYear();
-
-/* SMOOTH ANCHOR SCROLL */
-
-document.querySelectorAll('a[href^="#"]').forEach(link=>{
-link.addEventListener('click',function(e){
-const target=document.querySelector(this.getAttribute('href'));
-if(target){
-e.preventDefault();
-target.scrollIntoView({behavior:'smooth',block:'start'});
-}
-});
-});
+document.getElementById("year").textContent=new Date().getFullYear();
 </script>
 
 </body>
