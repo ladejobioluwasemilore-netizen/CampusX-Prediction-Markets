@@ -8,12 +8,16 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <script>
-  function renderLucideIcons() {
-    if (window.lucide?.createIcons) window.lucide.createIcons();
+document.addEventListener("DOMContentLoaded", () => {
+  if (!window.lucide) {
+    console.error("Lucide failed to load.");
+    return;
   }
 
-  document.addEventListener("DOMContentLoaded", renderLucideIcons);
+  lucide.createIcons();
+});
 </script>
 <script
   src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"
