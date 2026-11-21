@@ -814,5 +814,62 @@ document.addEventListener('keydown',e=>{
   if(e.key === 'Escape') closeModal();
 });
 </script>
+  const campusIcons = {
+  "chart-line": '<path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-5 5"/>',
+  "bell": '<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/>',
+  "user": '<circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/>',
+  "users": '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  "comments": '<path d="M21 11.5a8.5 8.5 0 0 1-9 8.5 9 9 0 0 1-4-.9L3 21l1.9-4.2A8 8 0 1 1 21 11.5Z"/>',
+  "message": '<path d="M21 11.5a8.5 8.5 0 0 1-9 8.5 9 9 0 0 1-4-.9L3 21l1.9-4.2A8 8 0 1 1 21 11.5Z"/>',
+  "fire": '<path d="M12 22c4.4 0 7-3 7-7 0-3-2-5-4-7 0 3-2 4-2 4 0-5-3-8-5-10 0 5-3 8-3 13 0 4 3 7 7 7Z"/>',
+  "circle-dot": '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/>',
+  "search": '<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>',
+  "plus": '<path d="M12 5v14M5 12h14"/>',
+  "paperclip": '<path d="m21 11.5-8.5 8.5a5 5 0 0 1-7-7L15 3a3.5 3.5 0 0 1 5 5L9 19"/>',
+  "face-smile": '<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>',
+  "paper-plane": '<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
+  "phone": '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.8L7.5 10a16 16 0 0 0 6 6l1.5-1.5a2 2 0 0 1 1.8-.6l3 .5a2 2 0 0 1 2.2 2.5Z"/>',
+  "video": '<rect x="3" y="5" width="13" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3"/>',
+  "circle-info": '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
+  "ellipsis": '<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
+  "image": '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>',
+  "microphone": '<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/>',
+  "file-lines": '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>',
+  "film": '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 3v18M17 3v18M3 8h4M3 16h4M17 8h4M17 16h4"/>',
+  "location-dot": '<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
+  "pen": '<path d="m16 4 4 4L8 20H4v-4Z"/>',
+  "square-poll-vertical": '<path d="M3 3v18h18"/><path d="M8 16v-5M13 16V6M18 16v-8"/>',
+  "at": '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M16 12v2a2 2 0 0 0 4 0v-2"/>',
+  "heart": '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/>',
+  "comment": '<path d="M21 11.5a8.5 8.5 0 0 1-9 8.5 9 9 0 0 1-4-.9L3 21l1.9-4.2A8 8 0 1 1 21 11.5Z"/>',
+  "share-nodes": '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4"/>',
+  "bookmark": '<path d="M6 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18l-6-4-6 4Z"/>',
+  "arrow-right": '<path d="M5 12h14M12 5l7 7-7 7"/>',
+  "calendar": '<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  "house": '<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1Z"/>',
+  "grid-2": '<rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/>',
+  "xmark": '<path d="m18 6-12 12M6 6l12 12"/>',
+  "rocket": '<path d="M4.5 16.5c-1.5 1.5-2 5-2 5s3.5-.5 5-2"/><path d="M12 15l-3-3a22 22 0 0 1 2-5c3-4 8-5 11-5 0 3-1 8-5 11a22 22 0 0 1-5 2Z"/><path d="M9 12H4l-2 4 6 1M12 15v5l4-2 1-6"/>',
+  "circle-check": '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+  "check-double": '<path d="m2 12 4 4L16 6M9 12l4 4 9-10"/>',
+  "sliders": '<path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4"/>',
+  "earth-africa": '<circle cx="12" cy="12" r="9"/><path d="m8 4 2 3-1 3 3 2 1 4-2 4M15 4l-1 3 3 2-1 3 3 2"/>'
+};
+
+function loadCampusIcons(){
+  document.querySelectorAll('i[class*="fa-"]').forEach(icon=>{
+    const name = [...icon.classList].find(c=>c !== "fa-solid" && c !== "fa-regular" && c.startsWith("fa-"))?.replace("fa-","");
+    if(!name || !campusIcons[name]) return;
+
+    const svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+    svg.setAttribute("viewBox","0 0 24 24");
+    svg.setAttribute("class","local-icon");
+    svg.setAttribute("aria-hidden","true");
+    svg.innerHTML = campusIcons[name];
+    icon.replaceWith(svg);
+  });
+}
+
+document.addEventListener("DOMContentLoaded",loadCampusIcons);
 </body>
 </html>
