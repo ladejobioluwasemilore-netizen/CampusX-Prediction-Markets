@@ -241,7 +241,28 @@ html.cx-reveal-enabled .reveal-on-scroll:not(.is-visible){opacity:0;transform:tr
   visibility: visible;
   opacity: 1;
 }
+svg.local-icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.12em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
 
+.icon-btn svg.local-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.chat-tools svg.local-icon {
+  width: 15px;
+  height: 15px;
+}
 /* Sign-up "check your email" pop-up */
 .email-check-modal{text-align:center}
 .email-check-icon{width:64px;height:64px;border-radius:50%;margin:6px auto 4px;display:grid;place-items:center;background:#e7f4df;color:#164d32}
