@@ -44,7 +44,13 @@ body.dashboard-page{background:#f6f8f4}.dash-topbar{position:sticky;top:0;z-inde
 </div><button type="button" class="btn btn-primary" id="savePreferences">Save preferences</button><p class="settings-feedback" id="settingsFeedback" aria-live="polite"></p>
 </section></section>
 </main><div class="payment-modal-backdrop" id="marketPaymentModal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle"><section class="payment-modal"><button type="button" class="payment-close" id="checkoutClose" aria-label="Close payment">×</button><div class="eyebrow dark">CAMPUSX CHECKOUT</div><h2 id="checkoutTitle">Review your position</h2><p id="checkoutQuestion" class="checkout-question">Selected market</p><div class="checkout-selected"><span>YOUR SELECTION</span><b id="checkoutSide">YES</b><small id="checkoutPrice">0% · ₦0.00 per share</small></div><label class="checkout-amount-label">Stake amount <div class="checkout-amount"><span>₦</span><input id="checkoutAmount" type="number" min="1000" max="1000000" step="100" value="1000" inputmode="numeric"></div></label><div class="checkout-limits"><span>Minimum ₦1,000</span><span>Maximum ₦1,000,000</span></div><div class="checkout-estimates"><div><small>ESTIMATED SHARES</small><b id="checkoutShares">0</b></div><div><small>POTENTIAL PAYOUT</small><b id="checkoutPayout">₦0.00</b></div><div><small>POTENTIAL PROFIT</small><b id="checkoutProfit">₦0.00</b></div></div><div class="checkout-wallet"><div><small>PAYMENT SOURCE</small><b>CampusX wallet</b></div><strong id="checkoutWallet">₦0.00</strong></div><small id="checkoutLimitHint" class="checkout-hint">Review your position before confirming.</small><button type="button" class="btn btn-primary full" id="checkoutConfirm">Confirm position →</button><button type="button" class="checkout-add-funds" id="checkoutAddFunds">Need funds? Go to wallet</button><p class="checkout-disclaimer">Potential payout is an estimate based on the displayed listing price and excludes future fees or price changes. Payment processing requires an active verified provider.</p></section></div>
-<div class="toast" id="toast"></div><script src="dashboard.js"></script></body></html>
+<div class="toast" id="toast"></div><script src="dashboard.js"></script>
+<script type="module">
+  // Vercel Web Analytics
+  import { inject } from 'https://cdn.jsdelivr.net/npm/@vercel/analytics@1/dist/index.mjs';
+  inject();
+</script>
+</body></html>
 <style>
 /* Directional odds chart: rising green, falling red, animated on every published odds change. */
 .tracked-chart{position:relative;padding-bottom:15px;height:82px;box-sizing:border-box}

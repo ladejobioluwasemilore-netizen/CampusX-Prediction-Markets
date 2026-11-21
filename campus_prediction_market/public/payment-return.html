@@ -14,4 +14,9 @@
 </style></head>
 <body><main class="card"><div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h1>Payment status is being checked</h1><p>SquadCo has returned you to CampusX. Do not treat this redirect alone as proof of payment. Your transaction must be verified securely before any account or market activity is updated.</p><div class="ref" id="paymentRef">Transaction reference: checking…</div><a class="btn" href="/dashboard.html">Return to CampusX</a></main>
 <script>const ref=new URLSearchParams(location.search).get('transaction_ref')||new URLSearchParams(location.search).get('reference');document.getElementById('paymentRef').textContent=ref?'Transaction reference: '+ref:'No transaction reference was supplied.';</script>
+<script type="module">
+  // Vercel Web Analytics
+  import { inject } from 'https://cdn.jsdelivr.net/npm/@vercel/analytics@1/dist/index.mjs';
+  inject();
+</script>
 </body></html>

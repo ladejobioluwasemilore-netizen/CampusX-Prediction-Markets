@@ -264,7 +264,13 @@ const seen=new WeakSet();let io;
 const attach=()=>{document.querySelectorAll(selector).forEach((el,i)=>{if(seen.has(el))return;seen.add(el);el.classList.add('cx-reveal');if(!io){io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('cx-in');io.unobserve(entry.target)}}),{threshold:.08,rootMargin:'0px 0px -35px 0px'});}io.observe(el);});};
 attach();new MutationObserver(attach).observe(document.querySelector('main')||document.body,{childList:true,subtree:true});
 })();
-</script></body></html>
+</script>
+<script type="module">
+  // Vercel Web Analytics
+  import { inject } from 'https://cdn.jsdelivr.net/npm/@vercel/analytics@1/dist/index.mjs';
+  inject();
+</script>
+</body></html>
 <style>
 /* Directional odds chart: rising green, falling red, animated on every published odds change. */
 .tracked-chart{position:relative;padding-bottom:15px;height:82px;box-sizing:border-box}
