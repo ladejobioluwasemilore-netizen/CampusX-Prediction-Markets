@@ -3,249 +3,359 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#092d19">
-<title>CampusX Community | Your Campus. Your Call.</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="/favicon.png.PNG">
-<link rel="apple-touch-icon" href="/favicon.png.PNG">
+<meta name="theme-color" content="#073d20">
+<title>Community | CampusX</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" 
-  rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 <style>
 :root{
---forest:#092d19;
---forest2:#124526;
---green:#398b35;
---lime:#b9f45b;
---bg:#f4f8f1;
---white:#fff;
---ink:#18271c;
---muted:#758176;
---line:#e7eee3;
---soft:#edf6e7;
---shadow:0 12px 35px rgba(17,55,27,.07);
+  --green:#20b52f;
+  --dark:#073d20;
+  --deep:#003d20;
+  --lime:#a7ef36;
+  --pale:#eff9ed;
+  --bg:#f6faf5;
+  --white:#fff;
+  --text:#17251b;
+  --muted:#829087;
+  --border:#e8eee8;
+  --shadow:0 12px 35px rgba(7,61,32,.07);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden}
-button,input,select{font:inherit}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+button,input,textarea{font:inherit}
 button{cursor:pointer}
 a{text-decoration:none;color:inherit}
-svg{width:20px;height:20px;display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.container{width:min(1250px,93%);margin:auto}
-
-/* NAVIGATION */
-.topbar{height:76px;background:#ffffffed;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;backdrop-filter:blur(18px)}
-.nav{height:100%;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px;font-family:Manrope,sans-serif;font-size:24px;font-weight:800;letter-spacing:-1.4px}
-.brand img{width:43px;height:43px;object-fit:cover;border-radius:12px}
-.brand span{color:var(--green)}
-.navlinks{display:flex;align-items:center;gap:25px;color:#687568;font-size:13px;font-weight:700}
-.navlinks a:hover,.navlinks a.active{color:var(--green)}
-.nav-right{display:flex;align-items:center;gap:12px}
-.nav-avatar{width:39px;height:39px;border-radius:50%;background:linear-gradient(145deg,#c9f58b,#6eae48);color:var(--forest);display:grid;place-items:center;font-weight:800;font-size:13px;border:3px solid #eff7e8}
-.menu-button{display:none;background:white;border:1px solid var(--line);border-radius:11px;padding:9px;color:var(--forest)}
-
-/* NOTIFICATION BELL */
-.notification-wrap{position:relative}
-.notification-button{width:40px;height:40px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--forest2);display:grid;place-items:center;position:relative;transition:.2s}
-.notification-button:hover{background:#eff8e8;transform:translateY(-2px)}
-.notification-count{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;padding:0 4px;background:#ed5d63;color:white;border:2px solid white;border-radius:20px;display:grid;place-items:center;font-size:9px;font-weight:800}
-.notification-panel{display:none;position:absolute;top:52px;right:-55px;width:340px;background:white;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 60px #102c1720;z-index:250;overflow:hidden;animation:notificationOpen .25s ease}
-.notification-panel.open{display:block}
-@keyframes notificationOpen{from{opacity:0;transform:translateY(-9px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
-.notification-heading{display:flex;justify-content:space-between;align-items:center;padding:18px;border-bottom:1px solid var(--line)}
-.notification-heading h3{font-family:Manrope;font-size:15px}
-.notification-heading p{font-size:10px;color:var(--muted);margin-top:4px}
-.notification-heading button{border:0;background:transparent;color:var(--green);font-size:10px;font-weight:800}
-.notification-list{max-height:330px;overflow-y:auto}
-.notification-item{display:flex;gap:11px;padding:15px 17px;border-bottom:1px solid #f1f4ee}
-.notification-item:hover{background:#f8fbf5}
-.notification-item.unread{background:#f3f9ed}
-.notification-item strong{font-size:11px;display:block}
-.notification-item p{font-size:10px;color:#778373;line-height:1.5;margin-top:4px}
-.notification-item small{display:block;color:#a0aa9d;font-size:9px;margin-top:6px}
-.notification-symbol{width:35px;height:35px;flex-shrink:0;border-radius:11px;display:grid;place-items:center}
-.notification-symbol svg{width:17px;height:17px}
-.notification-symbol.green{background:#e5f5d9;color:#4d9638}
-.notification-symbol.purple{background:#eee8ff;color:#8062c1}
-.notification-symbol.orange{background:#fff0dc;color:#d18a37}
-.notification-bottom{padding:13px;text-align:center;color:#98a393;font-size:9px}
-
-/* HERO */
-.hero{background:radial-gradient(circle at 85% 0%,#b9f45b38,transparent 30%),linear-gradient(115deg,#092d19,#124526 70%,#205d2e);color:white;padding:47px 0 54px;position:relative;overflow:hidden}
-.hero:before{content:"";position:absolute;width:440px;height:440px;border:1px solid #ffffff12;border-radius:50%;right:-140px;top:-290px;box-shadow:0 0 0 45px #ffffff08,0 0 0 95px #ffffff05}
-.hero-content{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:25px}
-.hero-tag{display:inline-flex;gap:8px;align-items:center;background:#ffffff12;border:1px solid #ffffff22;color:#d8ff91;border-radius:30px;padding:8px 13px;font-size:10px;font-weight:800;letter-spacing:1px;margin-bottom:15px}
-.hero-tag svg{width:15px;height:15px}
-.hero h1{font-family:Manrope,sans-serif;font-size:clamp(32px,5vw,49px);line-height:1.1;letter-spacing:-2px}
-.hero h1 span{color:var(--lime)}
-.hero p{color:#c5d9c5;font-size:14px;line-height:1.8;max-width:560px;margin-top:13px}
-.hero-stats{display:flex;gap:12px;flex-wrap:wrap}
-.hero-stat{min-width:112px;background:#ffffff10;border:1px solid #ffffff20;border-radius:15px;padding:16px}
-.hero-stat strong{display:block;font-family:Manrope;font-size:22px;color:var(--lime)}
-.hero-stat small{display:block;font-size:10px;color:#c8dac5;margin-top:3px}
-
-/* PAGE LAYOUT */
-.main-layout{display:grid;grid-template-columns:220px minmax(0,1fr) 250px;gap:22px;padding-top:29px;padding-bottom:70px;align-items:start}
-.sidebar,.rightbar{position:sticky;top:96px;display:flex;flex-direction:column;gap:16px}
-.side-card,.right-card{background:white;border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:0 4px 18px #11371b08}
-.side-title{font-size:10px;color:#98a396;font-weight:800;letter-spacing:1.1px;margin-bottom:14px}
-.side-link{display:flex;align-items:center;gap:12px;padding:11px 10px;border-radius:11px;font-size:12px;font-weight:700;color:#667466;transition:.2s;cursor:pointer}
-.side-link svg{width:18px;height:18px}
-.side-link:hover,.side-link.active{background:#edf7e7;color:var(--green)}
-.campus-card{background:linear-gradient(145deg,#e6f6d7,#f6fbea);border:1px solid #dcebcf;border-radius:18px;padding:19px;position:relative;overflow:hidden}
-.campus-card:after{content:"CX";position:absolute;right:-5px;bottom:-23px;font-family:Manrope;font-weight:800;font-size:75px;color:#398b350d}
-.campus-card h3{font-family:Manrope;font-size:15px;position:relative;z-index:1}
-.campus-card p{font-size:11px;color:#667a60;line-height:1.7;margin:8px 0 13px;position:relative;z-index:1}
-.campus-card a{color:var(--green);font-size:11px;font-weight:800;position:relative;z-index:1}
-
-/* FEED */
-.feed{min-width:0}
-.feed-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px;gap:12px}
-.feed-heading h2{font-family:Manrope;font-size:21px;letter-spacing:-.7px}
-.feed-heading p{color:var(--muted);font-size:11px;margin-top:4px}
-.sort-select{border:1px solid var(--line);border-radius:10px;background:white;padding:10px;font-size:11px;font-weight:700;color:#657263}
-
-/* COMPOSER */
-.composer{background:white;border:1px solid var(--line);border-radius:19px;padding:18px;margin-bottom:17px;box-shadow:0 5px 20px #11371b09}
-.composer-top{display:flex;align-items:center;gap:12px}
-.user-avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#234f23;background:linear-gradient(145deg,#d8f69c,#8fc85a);flex-shrink:0}
-.composer-input{flex:1;min-width:0;background:#f6f9f4;border:1px solid transparent;border-radius:30px;padding:13px 17px;color:var(--ink);outline:none;font-size:12px;transition:.2s}
-.composer-input:focus{border-color:#b6d99c;background:white}
-.composer-input::placeholder{color:#9ba69a}
-.composer-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:15px;padding-top:13px;border-top:1px solid #f0f3ed;gap:10px}
-.composer-tools{display:flex;gap:8px}
-.tool-button{display:flex;align-items:center;gap:7px;border:0;background:transparent;color:#788576;padding:8px 9px;border-radius:9px;font-size:10px;font-weight:700}
-.tool-button:hover{background:#eff7e9;color:var(--green)}
-.tool-button svg{width:17px;height:17px}
-.publish-button{border:0;background:var(--forest2);color:white;padding:10px 16px;border-radius:10px;font-size:11px;font-weight:800;transition:.2s}
-.publish-button:hover{background:var(--green);transform:translateY(-2px)}
-.image-preview{display:none;margin-top:13px;position:relative;width:fit-content}
-.image-preview img{width:125px;height:100px;object-fit:cover;border-radius:12px}
-.remove-image{position:absolute;top:5px;right:5px;border:0;width:23px;height:23px;border-radius:50%;color:white;background:#172117cc;display:grid;place-items:center}
-.remove-image svg{width:13px}
-
-/* FILTERS */
-.filters{display:flex;gap:8px;overflow-x:auto;padding:2px 0 13px;scrollbar-width:none}
-.filters::-webkit-scrollbar{display:none}
-.filter{border:1px solid var(--line);background:white;color:#748171;border-radius:30px;padding:9px 15px;white-space:nowrap;font-size:10px;font-weight:800;transition:.2s}
-.filter.active,.filter:hover{background:var(--forest2);border-color:var(--forest2);color:white}
-
-/* POSTS */
-.post{background:white;border:1px solid var(--line);border-radius:19px;padding:19px;margin-bottom:15px;box-shadow:0 4px 17px #11371b07;transition:.25s;animation:postIn .5s ease both}
-.post:hover{box-shadow:var(--shadow);border-color:#d5e6ca}
-@keyframes postIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.post-header{display:flex;align-items:center;gap:11px}
-.post-avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;flex-shrink:0}
-.avatar-a{background:#dff2cb;color:#376c29}
-.avatar-b{background:#e9e0ff;color:#684aa1}
-.avatar-c{background:#ffe7d4;color:#a75b2e}
-.post-user{min-width:0;flex:1}
-.post-user strong{display:flex;align-items:center;gap:5px;font-size:12px}
-.verified{width:14px;height:14px;color:#4c9d3e}
-.post-user small{display:block;font-size:10px;color:#98a294;margin-top:3px}
-.post-menu{border:0;background:transparent;color:#8d998a;padding:5px}
-.post-category{display:inline-block;margin-top:14px;background:#eff7e9;color:#4d8a37;padding:6px 9px;border-radius:6px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
-.post-text{font-size:13px;line-height:1.85;color:#455345;margin-top:12px}
-.post-image{margin-top:14px;border-radius:13px;overflow:hidden;background:#edf4e9;max-height:310px}
-.post-image img{width:100%;max-height:310px;object-fit:cover;display:block}
-.post-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid #f0f3ed;margin-top:16px;padding-top:13px}
-.post-actions{display:flex;align-items:center;gap:17px}
-.post-action{border:0;background:transparent;color:#7c8979;display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700}
-.post-action svg{width:17px;height:17px}
-.post-action:hover{color:var(--green)}
-.post-action.liked{color:#e45b6b}
-.post-action.liked svg{fill:#e45b6b}
-.share-action{border:0;background:#f0f7eb;color:#4b8438;padding:8px 10px;border-radius:9px;display:flex;align-items:center;gap:6px;font-size:10px;font-weight:800}
-.share-action svg{width:15px;height:15px}
-
-/* RIGHT COLUMN */
-.right-card h3{font-family:Manrope;font-size:14px;margin-bottom:15px}
-.trending-item{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid #f0f3ed}
-.trending-item:last-child{border:0;padding-bottom:0}
-.trend-number{width:27px;height:27px;border-radius:9px;background:#eff7e9;color:#4a8a35;display:grid;place-items:center;font-weight:800;font-size:10px;flex-shrink:0}
-.trending-item strong{font-size:11px;display:block;line-height:1.5}
-.trending-item small{color:#96a093;font-size:9px;display:block;margin-top:3px}
-.member{display:flex;align-items:center;gap:10px;margin:13px 0}
-.member-avatar{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:800;background:#e5f1d9;color:#477936}
-.member-info{flex:1;min-width:0}
-.member-info strong{display:block;font-size:10px}
-.member-info small{display:block;color:#9aa496;font-size:9px;margin-top:3px}
-.follow-button{border:1px solid #dcebd3;background:#f4f9ef;color:#4a8737;padding:7px 9px;border-radius:8px;font-size:9px;font-weight:800}
-.community-note{background:linear-gradient(145deg,#0e3a20,#28652e);color:white;border-radius:18px;padding:20px;position:relative;overflow:hidden}
-.community-note h3{font-family:Manrope;font-size:15px;margin-bottom:8px}
-.community-note p{color:#c8ddc7;font-size:10px;line-height:1.8}
-
-/* COMING SOON MODAL */
-.modal-overlay{position:fixed;inset:0;background:#04170baa;backdrop-filter:blur(7px);z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
-.modal-overlay.show{display:flex;animation:fadeIn .25s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.soon-modal{width:min(410px,100%);background:white;border-radius:25px;padding:32px 27px;text-align:center;position:relative;overflow:hidden;animation:modalIn .35s cubic-bezier(.2,.8,.2,1);box-shadow:0 25px 90px #0004}
-@keyframes modalIn{from{transform:translateY(20px) scale(.94);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
-.soon-modal:before{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:#eff9e7;top:-150px;left:50%;transform:translateX(-50%)}
-.soon-icon{width:76px;height:76px;border-radius:24px;display:grid;place-items:center;margin:0 auto 20px;background:linear-gradient(145deg,#baf66b,#75bd43);color:#16451f;position:relative;box-shadow:0 12px 30px #8dcf5740}
-.soon-icon svg{width:36px;height:36px}
-.soon-label{display:inline-block;background:#eff8e8;color:#4b8b35;font-size:9px;font-weight:800;letter-spacing:1px;padding:7px 11px;border-radius:30px;margin-bottom:13px}
-.soon-modal h2{font-family:Manrope;font-size:27px;letter-spacing:-1px;margin-bottom:10px}
-.soon-modal p{color:#788475;font-size:12px;line-height:1.8;margin-bottom:22px}
-.soon-close{width:100%;border:0;background:var(--forest2);color:white;border-radius:12px;padding:14px;font-size:12px;font-weight:800}
-.modal-x{position:absolute;right:15px;top:15px;z-index:2;border:0;background:#f0f5ec;color:#61725c;width:31px;height:31px;border-radius:50%;display:grid;place-items:center}
-
-/* RANDOM POPUPS */
-.random-popup{position:fixed;z-index:280;top:88px;right:22px;width:min(340px,calc(100% - 32px));background:white;border:1px solid #e6eee0;border-radius:15px;padding:14px;display:flex;align-items:center;gap:12px;box-shadow:0 14px 45px #092d1925;opacity:0;transform:translateX(35px);pointer-events:none;transition:.4s cubic-bezier(.2,.8,.2,1)}
-.random-popup.show{opacity:1;transform:translateX(0)}
-.random-popup-icon{width:40px;height:40px;border-radius:12px;background:#eaf7df;color:#398b35;display:grid;place-items:center;flex-shrink:0}
-.random-popup-content{flex:1;min-width:0}
-.random-popup-content strong{font-size:11px;display:block}
-.random-popup-content p{color:#788475;font-size:10px;margin-top:4px;line-height:1.5}
-.random-popup-close{border:0;background:transparent;color:#98a393;align-self:flex-start;font-size:17px}
-
-/* TOAST */
-.toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:400;background:#143c20;color:white;border:1px solid #ffffff20;box-shadow:0 12px 35px #0003;padding:13px 18px;border-radius:13px;font-size:11px;font-weight:700;transition:.3s;white-space:nowrap}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-
-/* MOBILE NAV */
-.mobile-bottom{display:none}
-
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
+  outline:3px solid rgba(32,181,47,.3);
+  outline-offset:3px;
+}
+.topbar{
+  height:76px;background:#fff;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;position:sticky;top:0;z-index:50;
+}
+.brand{display:flex;align-items:center;gap:11px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:23px;color:var(--dark)}
+.brand img{width:42px;height:42px;object-fit:contain}
+.brand-mark{
+  width:40px;height:40px;background:var(--dark);border-radius:13px;
+  display:grid;place-items:center;color:var(--lime);font-size:19px;
+}
+.top-links{display:flex;align-items:center;gap:30px}
+.top-links a{font-size:13px;font-weight:700;color:#6b786e;transition:.2s}
+.top-links a:hover,.top-links a.active{color:var(--green)}
+.top-actions{display:flex;align-items:center;gap:12px}
+.icon-btn{
+  width:41px;height:41px;border:1px solid var(--border);background:#fff;
+  border-radius:13px;color:var(--dark);position:relative;transition:.25s;
+}
+.icon-btn:hover{background:var(--pale);transform:translateY(-2px)}
+.notification-dot{
+  position:absolute;right:8px;top:7px;width:8px;height:8px;
+  border-radius:50%;background:#ff594f;border:2px solid white;
+}
+.avatar{
+  width:39px;height:39px;border-radius:50%;display:grid;place-items:center;
+  background:#dff3d8;color:var(--dark);font-weight:800;
+}
+.page{max-width:1440px;margin:auto;padding:30px 5% 100px}
+.hero{
+  background:linear-gradient(120deg,#073d20,#0a6330 65%,#15813b);
+  color:white;border-radius:25px;padding:34px 38px;position:relative;
+  overflow:hidden;display:flex;align-items:center;justify-content:space-between;
+  min-height:205px;box-shadow:var(--shadow);margin-bottom:25px;
+}
+.hero:before,.hero:after{
+  content:"";position:absolute;border:1px solid rgba(255,255,255,.12);
+  border-radius:50%;width:300px;height:300px;right:9%;top:-180px;
+}
+.hero:after{width:210px;height:210px;right:3%;top:-130px}
+.hero-content{position:relative;z-index:2;max-width:650px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;background:rgba(167,239,54,.15);
+  color:var(--lime);border:1px solid rgba(167,239,54,.25);
+  padding:7px 12px;border-radius:30px;font-size:11px;font-weight:800;
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:15px;
+}
+.hero h1{font:800 clamp(27px,4vw,40px)/1.15 'Plus Jakarta Sans',sans-serif;letter-spacing:-1.5px}
+.hero p{color:#d3e9d7;font-size:14px;margin-top:12px;line-height:1.7}
+.hero-art{
+  position:relative;z-index:2;width:125px;height:125px;border-radius:35px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  display:grid;place-items:center;font-size:55px;color:var(--lime);
+  transform:rotate(-8deg);animation:float 4s ease-in-out infinite;
+  margin-right:35px;
+}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-12px) rotate(1deg)}}
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:27px;
+}
+.stat{
+  background:#fff;border:1px solid var(--border);border-radius:17px;
+  padding:17px;display:flex;align-items:center;gap:13px;
+  transition:.25s;animation:rise .5s both;
+}
+.stat:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.stat-icon{
+  width:43px;height:43px;border-radius:14px;background:var(--pale);
+  color:var(--green);display:grid;place-items:center;font-size:17px;
+}
+.stat strong{display:block;font:800 20px 'Plus Jakarta Sans',sans-serif}
+.stat span{font-size:11px;color:var(--muted);font-weight:600}
+@keyframes rise{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.section-heading{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:15px;gap:10px;
+}
+.section-heading h2{font:800 19px 'Plus Jakarta Sans',sans-serif}
+.section-heading p{font-size:12px;color:var(--muted);margin-top:4px}
+.pill{
+  border:0;background:var(--pale);color:var(--dark);padding:9px 13px;
+  border-radius:10px;font-size:11px;font-weight:800;
+}
+.main-grid{
+  display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,.8fr);
+  gap:22px;align-items:start;
+}
+.panel{
+  background:white;border:1px solid var(--border);border-radius:19px;
+  padding:19px;box-shadow:0 5px 20px rgba(7,61,32,.025);
+}
+.panel-title{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;font:800 15px 'Plus Jakarta Sans',sans-serif;
+}
+.panel-title small{font:600 11px 'DM Sans',sans-serif;color:var(--muted)}
+.chat-layout{display:grid;grid-template-columns:235px minmax(0,1fr);min-height:530px;overflow:hidden;padding:0}
+.chat-sidebar{border-right:1px solid var(--border);padding:17px 12px}
+.chat-search{
+  display:flex;align-items:center;gap:8px;background:#f5f8f5;
+  border:1px solid var(--border);padding:11px;border-radius:11px;margin-bottom:15px;
+}
+.chat-search i{color:#91a095;font-size:12px}
+.chat-search input{border:0;background:transparent;outline:none;width:100%;font-size:12px}
+.chat-tabs{display:flex;gap:5px;margin-bottom:13px}
+.chat-tabs button{
+  border:0;background:#f4f7f3;color:#758177;padding:7px 9px;
+  border-radius:8px;font-size:10px;font-weight:800;
+}
+.chat-tabs button.active{background:var(--dark);color:white}
+.chat-person{
+  width:100%;display:flex;align-items:center;gap:10px;padding:11px 7px;
+  border:0;background:white;text-align:left;border-radius:12px;transition:.2s;
+}
+.chat-person:hover,.chat-person.active{background:var(--pale)}
+.person-avatar{
+  width:39px;height:39px;border-radius:50%;display:grid;place-items:center;
+  color:var(--dark);background:#e3f3dc;font-weight:800;position:relative;flex-shrink:0;
+}
+.person-avatar.purple{background:#eee6ff;color:#7252a8}
+.person-avatar.orange{background:#fff0dc;color:#b8792a}
+.person-avatar.blue{background:#e2efff;color:#3670b0}
+.online{
+  position:absolute;width:10px;height:10px;border:2px solid white;
+  border-radius:50%;background:#20c45a;right:0;bottom:0;
+}
+.person-info{min-width:0;flex:1}
+.person-info strong{display:block;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.person-info span{display:block;color:var(--muted);font-size:10px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-time{font-size:9px;color:#9aa59c;align-self:flex-start}
+.chat-main{display:flex;flex-direction:column;min-width:0}
+.chat-header{
+  padding:16px 18px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.chat-header-user{display:flex;align-items:center;gap:10px;min-width:0}
+.chat-header-user strong{font-size:12px;display:block}
+.chat-header-user span{font-size:10px;color:#20b52f;display:block;margin-top:3px}
+.chat-tools{display:flex;gap:7px}
+.chat-tools button{
+  width:33px;height:33px;border:1px solid var(--border);background:#fff;
+  border-radius:10px;color:#637469;transition:.2s;
+}
+.chat-tools button:hover{background:var(--pale);color:var(--green)}
+.messages{
+  padding:19px;display:flex;flex-direction:column;gap:13px;
+  min-height:330px;max-height:400px;overflow-y:auto;background:#fbfdfb;
+}
+.day-label{text-align:center;color:#9aa59c;font-size:10px;margin:3px 0}
+.message{display:flex;align-items:flex-end;gap:8px;max-width:82%;animation:rise .25s both}
+.message.mine{align-self:flex-end;flex-direction:row-reverse}
+.message .mini-avatar{
+  width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  background:#e3f3dc;color:var(--dark);font-size:9px;font-weight:800;flex-shrink:0;
+}
+.bubble{
+  background:white;border:1px solid var(--border);padding:10px 12px;
+  border-radius:13px 13px 13px 3px;font-size:11px;line-height:1.6;
+  box-shadow:0 2px 7px rgba(0,0,0,.02);overflow-wrap:anywhere;
+}
+.mine .bubble{background:var(--dark);color:white;border-color:var(--dark);border-radius:13px 13px 3px 13px}
+.bubble small{display:block;text-align:right;font-size:9px;opacity:.6;margin-top:5px}
+.typing{font-size:10px;color:var(--muted);padding:0 20px 10px;display:none}
+.typing.show{display:block}
+.composer{padding:12px 15px;border-top:1px solid var(--border)}
+.composer-row{
+  display:flex;align-items:center;gap:9px;background:#f6f9f6;
+  border:1px solid var(--border);padding:7px 9px;border-radius:13px;
+}
+.composer-row button{border:0;background:transparent;color:#78877b;padding:5px}
+.composer-row textarea{
+  border:0;background:transparent;resize:none;outline:none;flex:1;
+  min-width:0;font-size:11px;max-height:70px;
+}
+.send-btn{
+  background:var(--green)!important;color:white!important;width:34px;height:34px;
+  border-radius:10px!important;transition:.2s;
+}
+.send-btn:hover{transform:scale(1.08)}
+.composer-hint{font-size:9px;color:#9ba79d;margin:8px 2px 0}
+.quick-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.quick-actions button{
+  background:white;border:1px solid var(--border);border-radius:9px;
+  padding:8px 10px;font-size:10px;color:#637469;font-weight:700;
+}
+.quick-actions button:hover{background:var(--pale);color:var(--green)}
+.feed-section{margin-top:29px}
+.create-post{
+  display:flex;gap:12px;align-items:center;padding:14px;
+  border:1px solid var(--border);border-radius:16px;background:white;margin-bottom:14px;
+}
+.create-post input{
+  flex:1;min-width:0;border:0;background:#f5f8f5;padding:13px 15px;
+  border-radius:12px;font-size:12px;outline:none;
+}
+.primary-btn{
+  border:0;background:var(--green);color:white;padding:12px 16px;
+  border-radius:11px;font-size:11px;font-weight:800;transition:.2s;
+}
+.primary-btn:hover{background:var(--dark);transform:translateY(-2px)}
+.post{background:white;border:1px solid var(--border);border-radius:17px;padding:17px;margin-bottom:13px;animation:rise .35s both}
+.post-head{display:flex;align-items:center;gap:10px}
+.post-head strong{font-size:12px;display:block}
+.post-head small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.post-menu{margin-left:auto;border:0;background:transparent;color:#89968c}
+.post-text{font-size:12px;line-height:1.8;margin:14px 0;color:#3d4c40}
+.post-image{width:100%;max-height:300px;object-fit:cover;border-radius:13px;margin-bottom:10px}
+.post-actions{
+  border-top:1px solid var(--border);padding-top:12px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.post-actions button{border:0;background:transparent;color:#7d8b80;font-size:11px;font-weight:700}
+.post-actions button:hover{color:var(--green)}
+.post-actions button.liked{color:#e94e6c}
+.side-stack{display:flex;flex-direction:column;gap:16px}
+.trend{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 0;border-bottom:1px solid #f0f3f0;
+}
+.trend:last-child{border:0}
+.trend strong{font-size:11px;display:block}
+.trend span{font-size:10px;color:var(--muted);display:block;margin-top:4px}
+.trend b{font-size:10px;color:var(--green)}
+.member{display:flex;align-items:center;gap:10px;padding:9px 0}
+.member strong{font-size:11px;display:block}
+.member span{font-size:10px;color:var(--muted);display:block;margin-top:3px}
+.member .online-text{margin-left:auto;color:var(--green);font-size:9px;font-weight:800}
+.event-card{
+  background:linear-gradient(135deg,#eff9ed,#e1f4dc);
+  border-radius:14px;padding:15px;margin-top:12px;
+}
+.event-card .date{font-size:10px;font-weight:800;color:var(--green)}
+.event-card h3{font-size:13px;margin:8px 0 5px}
+.event-card p{font-size:10px;color:#758177;line-height:1.6}
+.event-card button{margin-top:12px;background:var(--dark);color:white;border:0;padding:9px 12px;border-radius:9px;font-size:10px;font-weight:800}
+.bottom-nav{
+  display:none;position:fixed;bottom:0;left:0;right:0;background:white;
+  border-top:1px solid var(--border);padding:9px 10px calc(9px + env(safe-area-inset-bottom));
+  z-index:60;justify-content:space-around;
+}
+.bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:9px;color:#839087;font-weight:700}
+.bottom-nav a i{font-size:17px}
+.bottom-nav a.active{color:var(--green)}
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(3,25,12,.55);backdrop-filter:blur(5px);
+  z-index:100;display:none;align-items:center;justify-content:center;padding:18px;
+}
+.modal-backdrop.show{display:flex;animation:fade .2s}
+.modal{
+  background:white;border-radius:22px;width:min(440px,100%);padding:25px;
+  box-shadow:0 25px 80px rgba(0,0,0,.2);animation:pop .25s both;position:relative;
+}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:translateY(15px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.modal-icon{
+  width:58px;height:58px;border-radius:18px;background:var(--pale);
+  color:var(--green);display:grid;place-items:center;font-size:24px;margin-bottom:17px;
+}
+.modal h2{font:800 21px 'Plus Jakarta Sans',sans-serif;margin-bottom:8px}
+.modal p{font-size:12px;color:#78867b;line-height:1.8}
+.modal-close{
+  position:absolute;right:17px;top:17px;width:32px;height:32px;
+  border:0;background:#f3f6f3;border-radius:10px;color:#647267;
+}
+.modal-buttons{display:flex;gap:9px;margin-top:20px}
+.modal-buttons button{flex:1}
+.secondary-btn{
+  background:#f2f6f2;color:#536256;border:0;border-radius:11px;
+  padding:12px;font-size:11px;font-weight:800;
+}
+.toast{
+  position:fixed;right:22px;bottom:25px;background:var(--dark);color:white;
+  padding:13px 17px;border-radius:13px;z-index:150;font-size:12px;
+  box-shadow:var(--shadow);display:flex;align-items:center;gap:10px;
+  opacity:0;transform:translateY(15px);pointer-events:none;transition:.3s;
+}
+.toast.show{opacity:1;transform:translateY(0)}
+.upload-preview{max-width:100%;max-height:180px;border-radius:12px;margin-top:10px;display:none}
+.emoji-pop{display:none;position:absolute;bottom:55px;left:12px;background:white;border:1px solid var(--border);box-shadow:var(--shadow);border-radius:13px;padding:9px;z-index:5;gap:5px;flex-wrap:wrap;width:190px}
+.emoji-pop.show{display:flex}
+.emoji-pop button{border:0;background:#f7faf7;border-radius:7px;padding:5px;font-size:17px}
 @media(max-width:1050px){
-.main-layout{grid-template-columns:205px minmax(0,1fr)}
-.rightbar{display:none}
-.hero-stats{display:none}
+  .main-grid{grid-template-columns:1fr}
+  .side-stack{display:grid;grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:700px){
-.topbar{height:65px}
-.brand{font-size:22px}
-.brand img{width:39px;height:39px}
-.navlinks{display:none;position:absolute;top:65px;left:0;right:0;background:white;padding:20px 5%;flex-direction:column;align-items:flex-start;gap:19px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
-.navlinks.open{display:flex}
-.menu-button{display:block}
-.hero{padding:35px 0 38px}
-.hero-content{display:block}
-.hero h1{font-size:36px}
-.hero p{font-size:12px}
-.main-layout{display:block;padding-top:19px;padding-bottom:100px}
-.sidebar{display:none}
-.feed-heading h2{font-size:19px}
-.composer{padding:14px}
-.composer-input{font-size:11px;padding:12px}
-.tool-button{padding:7px}
-.tool-button span{display:none}
-.publish-button{padding:10px 13px}
-.post{padding:15px}
-.post-text{font-size:12px}
-.post-actions{gap:13px}
-.notification-panel{position:fixed;top:72px;right:12px;width:min(360px,calc(100vw - 24px))}
-.random-popup{top:76px;right:12px}
-.mobile-bottom{position:fixed;display:flex;justify-content:space-around;align-items:center;bottom:0;left:0;right:0;height:68px;background:#fffffff5;backdrop-filter:blur(18px);border-top:1px solid var(--line);z-index:150;padding-bottom:env(safe-area-inset-bottom)}
-.mobile-bottom a{display:flex;flex-direction:column;align-items:center;gap:4px;color:#899486;font-size:9px;font-weight:700}
-.mobile-bottom a svg{width:20px;height:20px}
-.mobile-bottom a.active{color:var(--green)}
-.toast{bottom:85px}
+@media(max-width:720px){
+  .topbar{height:65px;padding:0 17px}
+  .top-links{display:none}
+  .page{padding:18px 14px 100px}
+  .hero{padding:25px 22px;min-height:180px;border-radius:20px}
+  .hero-art{width:75px;height:75px;font-size:33px;margin-right:0;border-radius:22px}
+  .hero p{font-size:12px;max-width:270px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:9px}
+  .stat{padding:12px;gap:9px}
+  .stat-icon{width:36px;height:36px}
+  .stat strong{font-size:17px}
+  .chat-layout{grid-template-columns:1fr}
+  .chat-sidebar{border-right:0;border-bottom:1px solid var(--border);padding:12px}
+  .chat-person-list{display:flex;overflow-x:auto;gap:5px}
+  .chat-person{min-width:145px;width:auto}
+  .chat-search{margin-bottom:10px}
+  .chat-tabs{display:none}
+  .messages{min-height:260px;max-height:350px;padding:14px}
+  .chat-header{padding:13px}
+  .chat-tools button{width:30px;height:30px}
+  .side-stack{grid-template-columns:1fr}
+  .bottom-nav{display:flex}
+  .toast{left:14px;right:14px;bottom:75px;justify-content:center}
+  .create-post{gap:8px}
+  .create-post input{padding:12px;font-size:11px}
+  .primary-btn{padding:11px}
 }
-@media(prefers-reduced-motion:reduce){
-*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+@media(max-width:390px){
+  .hero-art{display:none}
+  .chat-tools{gap:4px}
+  .chat-tools button{width:27px;height:27px}
+  .post-actions{gap:12px}
 }
 </style>
 </head>
@@ -253,454 +363,456 @@ svg{width:20px;height:20px;display:block;fill:none;stroke:currentColor;stroke-wi
 <body>
 
 <header class="topbar">
-<div class="container nav">
-<a href="index.html" class="brand">
-<img src="D511C17A-9CFD-4F28-9497-DDBB332E1D9E.jpg" alt="CampusX logo">
-campus<span>X</span>
-</a>
+  <a class="brand" href="index.html">
+    <img src="campusx-logo.jpeg" alt="CampusX logo"
+         onerror="this.style.display='none';document.getElementById('brandFallback').style.display='grid'">
+    <span class="brand-mark" id="brandFallback" style="display:none"><i class="fa-solid fa-chart-line"></i></span>
+    CampusX
+  </a>
 
-<nav class="navlinks" id="navlinks">
-<a href="index.html">Home</a>
-<a href="dashboard.html">Dashboard</a>
-<a href="market.html">Markets</a>
-<a href="info.html">Info</a>
-<a href="community.html" class="active">Community</a>
-<a href="about.html">About</a>
-</nav>
+  <nav class="top-links">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="market.html">Markets</a>
+    <a href="community.html" class="active">Community</a>
+    <a href="about.html">About</a>
+  </nav>
 
-<div class="nav-right">
-
-<div class="notification-wrap">
-<button class="notification-button" id="notificationButton" aria-label="Open notifications">
-<svg viewBox="0 0 24 24">
-<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
-<path d="M10 21h4"/>
-</svg>
-<span class="notification-count" id="notificationCount">3</span>
-</button>
-
-<div class="notification-panel" id="notificationPanel">
-<div class="notification-heading">
-<div>
-<h3>Notifications</h3>
-<p>You have new activity</p>
-</div>
-<button id="markRead">Mark all read</button>
-</div>
-
-<div class="notification-list" id="notificationList">
-<div class="notification-item unread">
-<div class="notification-symbol green">
-<svg viewBox="0 0 24 24"><path d="M12 5v14m-7-7h14"/></svg>
-</div>
-<div><strong>Welcome to CampusX!</strong><p>Your campus community is waiting for you.</p><small>Just now</small></div>
-</div>
-
-<div class="notification-item unread">
-<div class="notification-symbol purple">
-<svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7"/></svg>
-</div>
-<div><strong>Community discussions</strong><p>There's plenty happening around campus.</p><small>10 minutes ago</small></div>
-</div>
-
-<div class="notification-item unread">
-<div class="notification-symbol orange">
-<svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg>
-</div>
-<div><strong>Stay connected</strong><p>Discover what's trending in your community.</p><small>30 minutes ago</small></div>
-</div>
-</div>
-<div class="notification-bottom">You're all caught up with CampusX.</div>
-</div>
-</div>
-
-<div class="nav-avatar">CX</div>
-
-<button class="menu-button" id="menuButton" aria-label="Open menu">
-<svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-</button>
-</div>
-</div>
+  <div class="top-actions">
+    <button class="icon-btn" onclick="comingSoon('Notifications')" aria-label="Notifications">
+      <i class="fa-regular fa-bell"></i><span class="notification-dot"></span>
+    </button>
+    <button class="icon-btn" onclick="comingSoon('Your profile')" aria-label="Profile">
+      <i class="fa-regular fa-user"></i>
+    </button>
+    <div class="avatar">J</div>
+  </div>
 </header>
 
-<section class="hero">
-<div class="container hero-content">
-<div>
-<div class="hero-tag">
-<svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6m3-3h-6"/></svg>
-THE CAMPUSX COMMUNITY
-</div>
-<h1>Your campus.<br><span>Your people. Your conversations.</span></h1>
-<p>What's happening on campus? What's everyone talking about? Join the conversation, share your perspective and stay connected to your student community.</p>
-</div>
-<div class="hero-stats">
-<div class="hero-stat"><strong>01</strong><small>One community</small></div>
-<div class="hero-stat"><strong>∞</strong><small>Conversations</small></div>
-<div class="hero-stat"><strong>CX</strong><small>Your campus space</small></div>
-</div>
-</div>
-</section>
+<main class="page">
 
-<main class="container main-layout">
+  <section class="hero">
+    <div class="hero-content">
+      <div class="eyebrow"><i class="fa-solid fa-users"></i> CAMPUSX COMMUNITY</div>
+      <h1>Your campus. Your people.<br>Your voice.</h1>
+      <p>Connect with students, share ideas, discuss campus happenings and stay part of everything going on around you.</p>
+    </div>
+    <div class="hero-art"><i class="fa-solid fa-comments"></i></div>
+  </section>
 
-<aside class="sidebar">
-<div class="side-card">
-<div class="side-title">Community menu</div>
-<div class="side-link active" data-filter="all"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>All discussions</div>
-<div class="side-link" data-filter="trending"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-11c0-4-3-7-5-8 0 4-2 5-3 6-1-3-3-4-3-4C8 9 4 12 4 16a8 8 0 0 0 8 6Z"/></svg>Trending</div>
-<div class="side-link" data-filter="campus"><svg viewBox="0 0 24 24"><path d="M4 21V8l8-5 8 5v13M9 21v-8h6v8M2 21h20"/></svg>Campus life</div>
-<div class="side-link" data-filter="sports"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 3 2 6-5 4m11-10-2 6 5 4M8 21l4-5 4 5"/></svg>Sports</div>
-<div class="side-link" data-filter="academics"><svg viewBox="0 0 24 24"><path d="m2 10 10-5 10 5-10 5-10-5Z"/><path d="M6 12v5c4 3 8 3 12 0v-5M22 10v6"/></svg>Academics</div>
-<div class="side-link" data-filter="general"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7"/></svg>General talk</div>
-</div>
+  <section class="stats">
+    <div class="stat">
+      <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+      <div><strong>2.4k+</strong><span>Community members</span></div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><i class="fa-solid fa-comments"></i></div>
+      <div><strong>680+</strong><span>Discussions</span></div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><i class="fa-solid fa-fire"></i></div>
+      <div><strong>24</strong><span>Trending topics</span></div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><i class="fa-solid fa-circle-dot"></i></div>
+      <div><strong>128</strong><span>Students online</span></div>
+    </div>
+  </section>
 
-<div class="campus-card">
-<h3>It's your community.</h3>
-<p>Stay informed, share ideas and connect with the people around you.</p>
-<a href="about.html">Discover CampusX ↗</a>
-</div>
-</aside>
+  <div class="section-heading">
+    <div>
+      <h2><i class="fa-solid fa-message" style="color:var(--green);margin-right:7px"></i> Messages</h2>
+      <p>Your campus conversations in one place.</p>
+    </div>
+    <button class="pill" onclick="comingSoon('New conversation')"><i class="fa-solid fa-plus"></i> New chat</button>
+  </div>
 
-<section class="feed">
-<div class="feed-heading">
-<div><h2>Community feed</h2><p>See what's happening around your campus.</p></div>
-<select class="sort-select" id="sortSelect" aria-label="Sort discussions">
-<option value="latest">Latest</option>
-<option value="popular">Popular</option>
-</select>
-</div>
+  <section class="panel chat-layout">
 
-<div class="composer">
-<div class="composer-top">
-<div class="user-avatar">CX</div>
-<input class="composer-input" id="postInput" type="text" placeholder="What's happening on your campus?">
-</div>
+    <aside class="chat-sidebar">
+      <div class="chat-search">
+        <i class="fa-solid fa-search"></i>
+        <input id="chatSearch" placeholder="Search conversations..." oninput="filterChats()">
+      </div>
 
-<div class="image-preview" id="imagePreview">
-<img id="previewImage" alt="Selected image preview">
-<button class="remove-image" id="removeImage" aria-label="Remove image">
-<svg viewBox="0 0 24 24"><path d="m18 6-12 12M6 6l12 12"/></svg>
-</button>
-</div>
+      <div class="chat-tabs">
+        <button class="active" onclick="setChatTab(this,'all')">All</button>
+        <button onclick="setChatTab(this,'unread')">Unread</button>
+        <button onclick="comingSoon('Archived chats')">Archived</button>
+      </div>
 
-<div class="composer-bottom">
-<div class="composer-tools">
-<button class="tool-button" id="imageButton"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Photo</span></button>
-<button class="tool-button" id="topicButton"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg><span>Topic</span></button>
-</div>
-<button class="publish-button" id="publishButton">Publish post </button>
-</div>
-<input type="file" id="imageUpload" accept="image/*" hidden>
-</div>
+      <div class="chat-person-list" id="chatList">
+        <button class="chat-person active" data-name="amara okafor" onclick="selectChat('Amara Okafor','AO','purple',true)">
+          <div class="person-avatar purple">AO<span class="online"></span></div>
+          <div class="person-info"><strong>Amara Okafor</strong><span>Have you seen the update?</span></div>
+          <span class="chat-time">2m</span>
+        </button>
 
-<div class="filters">
-<button class="filter active" data-filter="all">All posts</button>
-<button class="filter" data-filter="trending">Trending</button>
-<button class="filter" data-filter="campus">Campus life</button>
-<button class="filter" data-filter="sports">Sports</button>
-<button class="filter" data-filter="academics">Academics</button>
-<button class="filter" data-filter="general">General</button>
-</div>
+        <button class="chat-person" data-name="tobi oladipo" onclick="selectChat('Tobi Oladipo','TO','orange',true)">
+          <div class="person-avatar orange">TO<span class="online"></span></div>
+          <div class="person-info"><strong>Tobi Oladipo</strong><span>That market is interesting</span></div>
+          <span class="chat-time">8m</span>
+        </button>
 
-<div id="postList">
+        <button class="chat-person" data-name="faith kemi" onclick="selectChat('Faith Kemi','FK','blue',false)">
+          <div class="person-avatar blue">FK</div>
+          <div class="person-info"><strong>Faith Kemi</strong><span>Thank you!</span></div>
+          <span class="chat-time">1h</span>
+        </button>
 
-<article class="post" data-category="campus" data-popularity="95">
-<div class="post-header">
-<div class="post-avatar avatar-a">AO</div>
-<div class="post-user"><strong>Adeola O. <svg class="verified" viewBox="0 0 24 24"><path d="m12 2 3 2 4-.1 1 4 3 3-2 4 .1 4-4 1-3 2-3-2-4 .1-1-4-3-3 2-4-.1-4 4-1 3-2Z"/><path d="m8 12 3 3 5-6"/></svg></strong><small>2 hours ago · Student community</small></div>
-<button class="post-menu" aria-label="More options">•••</button>
-</div>
-<span class="post-category">Campus life</span>
-<p class="post-text">There's something special about campus life. The random conversations, unexpected friendships and all the little moments that make university memorable. What's one thing you enjoy most about your campus?</p>
-<div class="post-footer">
-<div class="post-actions">
-<button class="post-action like-button"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg><span>24</span></button>
-<button class="post-action comment-button"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7L3 21l1.9-5.7A8.5 8.5 0 0 1 12 3h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg>8 comments</button>
-</div>
-<button class="share-action"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4m-6.8 7 6.8 4"/></svg>Share</button>
-</div>
-</article>
+        <button class="chat-person" data-name="campus connect" onclick="selectChat('Campus Connect','CC','',true)">
+          <div class="person-avatar">CC</div>
+          <div class="person-info"><strong>Campus Connect</strong><span>Samuel: See you guys there</span></div>
+          <span class="chat-time">3h</span>
+        </button>
 
-<article class="post" data-category="sports" data-popularity="87">
-<div class="post-header">
-<div class="post-avatar avatar-b">TM</div>
-<div class="post-user"><strong>Tobi M.</strong><small>4 hours ago · Sports</small></div>
-<button class="post-menu" aria-label="More options">•••</button>
-</div>
-<span class="post-category">Sports</span>
-<p class="post-text">Match day conversations are always different! Which team do you think has the strongest squad this season? Let's hear your opinions.</p>
-<div class="post-footer">
-<div class="post-actions">
-<button class="post-action like-button"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg><span>18</span></button>
-<button class="post-action comment-button"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7L3 21l1.9-5.7A8.5 8.5 0 0 1 12 3h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg>5 comments</button>
-</div>
-<button class="share-action"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4m-6.8 7 6.8 4"/></svg>Share</button>
-</div>
-</article>
+        <button class="chat-person" data-name="samuel ade" onclick="selectChat('Samuel Ade','SA','',false)">
+          <div class="person-avatar">SA</div>
+          <div class="person-info"><strong>Samuel Ade</strong><span>Sent you a message</span></div>
+          <span class="chat-time">Yesterday</span>
+        </button>
+      </div>
+    </aside>
 
-<article class="post" data-category="academics" data-popularity="76">
-<div class="post-header">
-<div class="post-avatar avatar-c">FK</div>
-<div class="post-user"><strong>Favour K.</strong><small>Yesterday · Academics</small></div>
-<button class="post-menu" aria-label="More options">•••</button>
-</div>
-<span class="post-category">Academics</span>
-<p class="post-text">What's your best strategy for balancing lectures, assignments and personal time? Share tips that have actually worked for you.</p>
-<div class="post-footer">
-<div class="post-actions">
-<button class="post-action like-button"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg><span>31</span></button>
-<button class="post-action comment-button"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7L3 21l1.9-5.7A8.5 8.5 0 0 1 12 3h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg>12 comments</button>
-</div>
-<button class="share-action"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4m-6.8 7 6.8 4"/></svg>Share</button>
-</div>
-</article>
+    <section class="chat-main">
+      <div class="chat-header">
+        <div class="chat-header-user">
+          <div class="person-avatar purple" id="activeAvatar">AO<span class="online"></span></div>
+          <div><strong id="activeName">Amara Okafor</strong><span id="activeStatus">● Online</span></div>
+        </div>
+        <div class="chat-tools">
+          <button title="Voice call" onclick="comingSoon('Voice calls')"><i class="fa-solid fa-phone"></i></button>
+          <button title="Video call" onclick="comingSoon('Video calls')"><i class="fa-solid fa-video"></i></button>
+          <button title="Chat information" onclick="comingSoon('Chat information')"><i class="fa-solid fa-circle-info"></i></button>
+        </div>
+      </div>
 
-</div>
-</section>
+      <div class="messages" id="messages">
+        <div class="day-label">TODAY</div>
+        <div class="message">
+          <div class="mini-avatar">AO</div>
+          <div class="bubble">Hey! Have you checked what is happening on campus this week?<small>10:31 AM</small></div>
+        </div>
+        <div class="message mine">
+          <div class="bubble">Not yet. What's happening?<small>10:32 AM · <i class="fa-solid fa-check-double"></i></small></div>
+        </div>
+        <div class="message">
+          <div class="mini-avatar">AO</div>
+          <div class="bubble">There is a student event coming up. People are already talking about it in the community.<small>10:33 AM</small></div>
+        </div>
+        <div class="message mine">
+          <div class="bubble">Interesting! Send me the details when you can.<small>10:34 AM · <i class="fa-solid fa-check-double"></i></small></div>
+        </div>
+      </div>
 
-<aside class="rightbar">
-<div class="right-card">
-<h3>Trending conversations</h3>
-<div class="trending-item"><div class="trend-number">01</div><div><strong>What's happening around campus?</strong><small>Campus life · Popular discussion</small></div></div>
-<div class="trending-item"><div class="trend-number">02</div><div><strong>Inter-faculty sports updates</strong><small>Sports · Community topic</small></div></div>
-<div class="trending-item"><div class="trend-number">03</div><div><strong>Best ways to prepare for exams</strong><small>Academics · Student tips</small></div></div>
-</div>
+      <div class="typing" id="typing"><i class="fa-solid fa-ellipsis"></i> Amara is typing...</div>
 
-<div class="right-card">
-<h3>Community voices</h3>
-<div class="member"><div class="member-avatar">AO</div><div class="member-info"><strong>Adeola O.</strong><small>Campus contributor</small></div><button class="follow-button">Follow</button></div>
-<div class="member"><div class="member-avatar" style="background:#eee5ff;color:#7250a8">TM</div><div class="member-info"><strong>Tobi M.</strong><small>Sports enthusiast</small></div><button class="follow-button">Follow</button></div>
-<div class="member"><div class="member-avatar" style="background:#ffe8d7;color:#a85d35">FK</div><div class="member-info"><strong>Favour K.</strong><small>Student voice</small></div><button class="follow-button">Follow</button></div>
-</div>
+      <div class="composer">
+        <div class="composer-row" style="position:relative">
+          <button title="Attach file" onclick="comingSoon('File sharing')"><i class="fa-solid fa-paperclip"></i></button>
+          <button title="Emoji" onclick="toggleEmoji()"><i class="fa-regular fa-face-smile"></i></button>
+          <textarea id="messageInput" rows="1" placeholder="Write a message..." onkeydown="messageKey(event)"></textarea>
+          <button class="send-btn" onclick="sendMessage()" aria-label="Send message"><i class="fa-solid fa-paper-plane"></i></button>
+          <div class="emoji-pop" id="emojiPop">
+            <button onclick="addEmoji('😀')">😀</button><button onclick="addEmoji('😂')">😂</button>
+            <button onclick="addEmoji('❤️')">❤️</button><button onclick="addEmoji('🔥')">🔥</button>
+            <button onclick="addEmoji('👏')">👏</button><button onclick="addEmoji('😍')">😍</button>
+            <button onclick="addEmoji('🙌')">🙌</button><button onclick="addEmoji('👀')">👀</button>
+          </div>
+        </div>
+        <div class="quick-actions">
+          <button onclick="comingSoon('Photo sharing')"><i class="fa-regular fa-image"></i> Photo</button>
+          <button onclick="comingSoon('Voice notes')"><i class="fa-solid fa-microphone"></i> Voice note</button>
+          <button onclick="comingSoon('Document sharing')"><i class="fa-regular fa-file-lines"></i> Document</button>
+          <button onclick="comingSoon('GIF sharing')"><i class="fa-solid fa-film"></i> GIF</button>
+          <button onclick="comingSoon('Location sharing')"><i class="fa-solid fa-location-dot"></i> Location</button>
+        </div>
+        <div class="composer-hint">Demo messages are temporary and only visible in this browser.</div>
+      </div>
+    </section>
+  </section>
 
-<div class="community-note">
-<h3>Your campus. Your call.</h3>
-<p>A space for ideas, conversations and student perspectives. Make your campus experience count.</p>
-</div>
-</aside>
+  <section class="feed-section">
+    <div class="section-heading">
+      <div><h2><i class="fa-solid fa-earth-africa" style="color:var(--green);margin-right:7px"></i> Campus discussions</h2>
+      <p>What's happening in your campus community?</p></div>
+      <button class="pill" onclick="comingSoon('Community filters')"><i class="fa-solid fa-sliders"></i> Filters</button>
+    </div>
+
+    <div class="create-post">
+      <div class="avatar">J</div>
+      <input id="postInput" placeholder="Share something with your campus...">
+      <button class="primary-btn" onclick="publishPost()"><i class="fa-solid fa-pen"></i> Publish</button>
+    </div>
+    <div style="margin:-5px 0 14px 57px;display:flex;gap:15px;flex-wrap:wrap">
+      <button class="pill" onclick="document.getElementById('postImage').click()"><i class="fa-regular fa-image"></i> Add photo</button>
+      <input type="file" id="postImage" accept="image/*" hidden onchange="previewPostImage(event)">
+      <button class="pill" onclick="comingSoon('Poll creation')"><i class="fa-solid fa-square-poll-vertical"></i> Create poll</button>
+      <button class="pill" onclick="comingSoon('Community tagging')"><i class="fa-solid fa-at"></i> Tag</button>
+    </div>
+    <img id="postPreview" class="upload-preview" style="margin:0 0 14px 57px">
+
+    <div id="feed">
+      <article class="post">
+        <div class="post-head">
+          <div class="person-avatar purple">AO</div>
+          <div><strong>Amara Okafor</strong><small>Computer Science · 18 minutes ago</small></div>
+          <button class="post-menu" onclick="comingSoon('Post options')"><i class="fa-solid fa-ellipsis"></i></button>
+        </div>
+        <p class="post-text">The energy around campus this week is different! So many interesting things happening. What event are you looking forward to the most? 👀</p>
+        <div class="post-actions">
+          <button onclick="likePost(this)"><i class="fa-regular fa-heart"></i> <span>24</span> Likes</button>
+          <button onclick="comingSoon('Comments')"><i class="fa-regular fa-comment"></i> 12 Comments</button>
+          <button onclick="sharePost()"><i class="fa-solid fa-share-nodes"></i> Share</button>
+          <button onclick="comingSoon('Saved posts')"><i class="fa-regular fa-bookmark"></i> Save</button>
+        </div>
+      </article>
+
+      <article class="post">
+        <div class="post-head">
+          <div class="person-avatar orange">TO</div>
+          <div><strong>Tobi Oladipo</strong><small>Engineering · 42 minutes ago</small></div>
+          <button class="post-menu" onclick="comingSoon('Post options')"><i class="fa-solid fa-ellipsis"></i></button>
+        </div>
+        <p class="post-text">Quick question: what is one thing you wish our campus would improve? Let's hear your thoughts. 💬</p>
+        <div class="post-actions">
+          <button onclick="likePost(this)"><i class="fa-regular fa-heart"></i> <span>18</span> Likes</button>
+          <button onclick="comingSoon('Comments')"><i class="fa-regular fa-comment"></i> 9 Comments</button>
+          <button onclick="sharePost()"><i class="fa-solid fa-share-nodes"></i> Share</button>
+          <button onclick="comingSoon('Saved posts')"><i class="fa-regular fa-bookmark"></i> Save</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="side-stack" style="margin-top:25px">
+    <div class="panel">
+      <div class="panel-title">Trending topics <small>Explore all <i class="fa-solid fa-arrow-right"></i></small></div>
+      <div class="trend"><div><strong>#CampusLife</strong><span>142 discussions</span></div><b>↑ 24%</b></div>
+      <div class="trend"><div><strong>#StudentEvents</strong><span>98 discussions</span></div><b>↑ 18%</b></div>
+      <div class="trend"><div><strong>#CampusXMarkets</strong><span>76 discussions</span></div><b>↑ 12%</b></div>
+      <div class="trend"><div><strong>#StudentTalk</strong><span>54 discussions</span></div><b>↑ 8%</b></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Students online <small>128 active</small></div>
+      <div class="member"><div class="person-avatar purple">AO<span class="online"></span></div><div><strong>Amara Okafor</strong><span>Computer Science</span></div><span class="online-text">ONLINE</span></div>
+      <div class="member"><div class="person-avatar orange">TO<span class="online"></span></div><div><strong>Tobi Oladipo</strong><span>Engineering</span></div><span class="online-text">ONLINE</span></div>
+      <div class="member"><div class="person-avatar blue">FK<span class="online"></span></div><div><strong>Faith Kemi</strong><span>Management Sciences</span></div><span class="online-text">ONLINE</span></div>
+      <button class="pill" style="width:100%;margin-top:10px" onclick="comingSoon('Member directory')">View community members <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Campus events <small><i class="fa-regular fa-calendar"></i></small></div>
+      <div class="event-card">
+        <div class="date"><i class="fa-regular fa-calendar"></i> UPCOMING EVENT</div>
+        <h3>Campus Connect Meetup</h3>
+        <p>Meet students, connect with new people and join the conversation.</p>
+        <button onclick="comingSoon('Event registration')">Explore event <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </section>
 </main>
 
-<!-- MOBILE NAV -->
-<nav class="mobile-bottom">
-<a href="index.html"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1V10Z"/></svg>Home</a>
-<a href="dashboard.html"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</a>
-<a href="market.html"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l4-4 4 3 6-7"/></svg>Markets</a>
-<a href="community.html" class="active"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7L3 21l1.9-5.7A8.5 8.5 0 0 1 12 3h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg>Community</a>
-<a href="about.html"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 11v5m0-8h.01"/></svg>About</a>
+<nav class="bottom-nav">
+  <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
+  <a href="market.html"><i class="fa-solid fa-chart-line"></i>Markets</a>
+  <a href="community.html" class="active"><i class="fa-solid fa-users"></i>Community</a>
+  <a href="dashboard.html"><i class="fa-solid fa-grid-2"></i>Dashboard</a>
+  <a href="dashboard.html#profile"><i class="fa-regular fa-user"></i>Profile</a>
 </nav>
 
-<!-- COMING SOON MODAL -->
-<div class="modal-overlay" id="comingSoonModal">
-<div class="soon-modal">
-<button class="modal-x" id="modalX" aria-label="Close">×</button>
-<div class="soon-icon">
-<svg viewBox="0 0 24 24"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/><path d="M12 3v2"/></svg>
-</div>
-<div class="soon-label">A NEW EXPERIENCE IS ON THE WAY</div>
-<h2>Publishing is coming soon!</h2>
-<p>We're getting the CampusX community ready for your posts, pictures and conversations. Publishing isn't available just yet, but it will be here soon.</p>
-<button class="soon-close" id="closeModal">Got it, can't wait!</button>
-</div>
+<div class="modal-backdrop" id="comingModal" onclick="backdropClose(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-icon"><i class="fa-solid fa-rocket"></i></div>
+    <h2 id="modalTitle">Coming soon!</h2>
+    <p id="modalText">We're working on this feature. It will become available when the required CampusX services are ready.</p>
+    <div class="modal-buttons">
+      <button class="primary-btn" onclick="closeModal()">Got it</button>
+    </div>
+  </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span id="toastText">Done!</span></div>
 
 <script>
-/* MOBILE MENU */
-const navlinks=document.getElementById("navlinks");
-document.getElementById("menuButton").addEventListener("click",()=>navlinks.classList.toggle("open"));
-navlinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>navlinks.classList.remove("open")));
+let selectedImage = null;
+let activeChat = "Amara Okafor";
 
-/* TOAST */
-let toastTimer;
+function comingSoon(feature){
+  document.getElementById('modalTitle').textContent = feature + ' — Coming Soon';
+  document.getElementById('modalText').textContent =
+    'This feature requires backend services and database integration. We are preparing it for a future CampusX update.';
+  document.getElementById('comingModal').classList.add('show');
+}
+function closeModal(){
+  document.getElementById('comingModal').classList.remove('show');
+}
+function backdropClose(e){
+  if(e.target.id === 'comingModal') closeModal();
+}
 function showToast(message){
-const toast=document.getElementById("toast");
-toast.textContent=message;
-toast.classList.add("show");
-clearTimeout(toastTimer);
-toastTimer=setTimeout(()=>toast.classList.remove("show"),2600);
+  const toast = document.getElementById('toast');
+  document.getElementById('toastText').textContent = message;
+  toast.classList.add('show');
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(()=>toast.classList.remove('show'),2600);
 }
 
-/* COMING SOON MODAL */
-const modal=document.getElementById("comingSoonModal");
-function showComingSoon(){modal.classList.add("show");document.body.style.overflow="hidden"}
-function closeComingSoon(){modal.classList.remove("show");document.body.style.overflow=""}
-document.getElementById("publishButton").addEventListener("click",showComingSoon);
-document.getElementById("modalX").addEventListener("click",closeComingSoon);
-document.getElementById("closeModal").addEventListener("click",closeComingSoon);
-modal.addEventListener("click",e=>{if(e.target===modal)closeComingSoon()});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeComingSoon()});
-
-/* IMAGE PREVIEW */
-const imageUpload=document.getElementById("imageUpload");
-const imagePreview=document.getElementById("imagePreview");
-const previewImage=document.getElementById("previewImage");
-let selectedImageUrl=null;
-
-document.getElementById("imageButton").addEventListener("click",()=>imageUpload.click());
-imageUpload.addEventListener("change",()=>{
-const file=imageUpload.files[0];
-if(!file)return;
-if(!file.type.startsWith("image/")){showToast("Please select an image.");return}
-if(selectedImageUrl)URL.revokeObjectURL(selectedImageUrl);
-selectedImageUrl=URL.createObjectURL(file);
-previewImage.src=selectedImageUrl;
-imagePreview.style.display="block";
-showToast("Image selected. Publishing is coming soon.");
-});
-document.getElementById("removeImage").addEventListener("click",()=>{
-if(selectedImageUrl)URL.revokeObjectURL(selectedImageUrl);
-selectedImageUrl=null;
-previewImage.removeAttribute("src");
-imagePreview.style.display="none";
-imageUpload.value="";
-});
-document.getElementById("topicButton").addEventListener("click",()=>showToast("Topics and tags are coming soon."));
-
-/* FILTERS */
-const filterButtons=document.querySelectorAll(".filter");
-const sideLinks=document.querySelectorAll(".side-link");
-const postList=document.getElementById("postList");
-
-function applyFilter(filter){
-document.querySelectorAll(".post").forEach(post=>{
-const category=post.dataset.category;
-post.style.display=filter==="all"||(filter==="trending"?Number(post.dataset.popularity)>=85:category===filter)?"block":"none";
-});
-filterButtons.forEach(b=>b.classList.toggle("active",b.dataset.filter===filter));
-sideLinks.forEach(b=>b.classList.toggle("active",b.dataset.filter===filter));
+function sendMessage(){
+  const input = document.getElementById('messageInput');
+  const value = input.value.trim();
+  if(!value) return;
+  const messages = document.getElementById('messages');
+  const message = document.createElement('div');
+  message.className = 'message mine';
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.appendChild(document.createTextNode(value));
+  const time = document.createElement('small');
+  time.innerHTML = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) +
+    ' · <i class="fa-solid fa-check-double"></i>';
+  bubble.appendChild(time);
+  message.appendChild(bubble);
+  messages.appendChild(message);
+  input.value = '';
+  messages.scrollTop = messages.scrollHeight;
 }
-filterButtons.forEach(b=>b.addEventListener("click",()=>applyFilter(b.dataset.filter)));
-sideLinks.forEach(b=>b.addEventListener("click",()=>applyFilter(b.dataset.filter)));
-
-/* SORT */
-document.getElementById("sortSelect").addEventListener("change",e=>{
-const posts=[...document.querySelectorAll(".post")];
-if(e.target.value==="popular")posts.sort((a,b)=>Number(b.dataset.popularity)-Number(a.dataset.popularity));
-else posts.sort((a,b)=>Number(b.dataset.order||0)-Number(a.dataset.order||0));
-posts.forEach(p=>postList.appendChild(p));
-});
-
-/* LIKES */
-document.querySelectorAll(".like-button").forEach(button=>{
-button.addEventListener("click",()=>{
-const count=button.querySelector("span");
-const liked=button.classList.toggle("liked");
-const original=Number(button.dataset.original||count.textContent);
-button.dataset.original=original;
-count.textContent=liked?original+1:original;
-});
-});
-
-/* COMMENTS, FOLLOW AND POST OPTIONS */
-document.querySelectorAll(".comment-button").forEach(b=>b.addEventListener("click",()=>showToast("Community comments are coming soon.")));
-document.querySelectorAll(".follow-button").forEach(b=>b.addEventListener("click",()=>showToast("Following will be available soon.")));
-document.querySelectorAll(".post-menu").forEach(b=>b.addEventListener("click",()=>showToast("More post options are coming soon.")));
-
-/* NATIVE SHARING */
-document.querySelectorAll(".share-action").forEach(button=>{
-button.addEventListener("click",async()=>{
-const post=button.closest(".post");
-const text=post.querySelector(".post-text").innerText;
-const data={title:"CampusX Community",text,url:window.location.href};
-try{
-if(navigator.share)await navigator.share(data);
-else if(navigator.clipboard){await navigator.clipboard.writeText(text+"\n"+window.location.href);showToast("Post link copied!")}
-else showToast("Sharing isn't supported in this browser.");
-}catch(error){if(error.name!=="AbortError")showToast("Unable to open sharing options.")}
-});
-});
-
-/* NOTIFICATION PANEL */
-const notificationButton=document.getElementById("notificationButton");
-const notificationPanel=document.getElementById("notificationPanel");
-const notificationCount=document.getElementById("notificationCount");
-const notificationList=document.getElementById("notificationList");
-
-notificationButton.addEventListener("click",e=>{
-e.stopPropagation();
-notificationPanel.classList.toggle("open");
-});
-notificationPanel.addEventListener("click",e=>e.stopPropagation());
-document.addEventListener("click",()=>notificationPanel.classList.remove("open"));
-
-function updateUnreadCount(){
-const count=notificationList.querySelectorAll(".notification-item.unread").length;
-notificationCount.textContent=count;
-notificationCount.style.display=count?"grid":"none";
+function messageKey(e){
+  if(e.key === 'Enter' && !e.shiftKey){
+    e.preventDefault();
+    sendMessage();
+  }
 }
-
-document.getElementById("markRead").addEventListener("click",()=>{
-notificationList.querySelectorAll(".notification-item").forEach(item=>item.classList.remove("unread"));
-updateUnreadCount();
-showToast("All notifications marked as read.");
-});
-
-function addNotification(title,message){
-const item=document.createElement("div");
-item.className="notification-item unread";
-const icon=document.createElement("div");
-icon.className="notification-symbol green";
-icon.innerHTML='<svg viewBox="0 0 24 24"><path d="M12 5v14m-7-7h14"/></svg>';
-const content=document.createElement("div");
-const heading=document.createElement("strong");
-heading.textContent=title;
-const paragraph=document.createElement("p");
-paragraph.textContent=message;
-const time=document.createElement("small");
-time.textContent="Just now";
-content.append(heading,paragraph,time);
-item.append(icon,content);
-notificationList.prepend(item);
-updateUnreadCount();
+function toggleEmoji(){
+  document.getElementById('emojiPop').classList.toggle('show');
 }
-
-/* RANDOM POPUP NOTIFICATIONS */
-const randomNotifications=[
-{title:"Campus conversations",message:"Students are sharing what's happening around campus."},
-{title:"New community activity",message:"There's something new to discover in the community."},
-{title:"Trending discussion",message:"A campus topic is getting attention. Check it out!"},
-{title:"Stay in the loop",message:"Don't miss the latest conversations on CampusX."},
-{title:"CampusX update",message:"Your community space is growing. Explore the feed!"}
-];
-
-function showRandomNotification(){
-let popup=document.getElementById("randomPopup");
-if(!popup){
-popup=document.createElement("div");
-popup.id="randomPopup";
-popup.className="random-popup";
-popup.innerHTML=`
-<div class="random-popup-icon">
-<svg viewBox="0 0 24 24"><path d="M12 5v14m-7-7h14"/></svg>
-</div>
-<div class="random-popup-content">
-<strong id="randomPopupTitle"></strong>
-<p id="randomPopupMessage"></p>
-</div>
-<button class="random-popup-close" aria-label="Close">×</button>`;
-document.body.appendChild(popup);
-popup.querySelector(".random-popup-close").addEventListener("click",()=>popup.classList.remove("show"));
+function addEmoji(emoji){
+  const input = document.getElementById('messageInput');
+  input.value += emoji;
+  input.focus();
+  document.getElementById('emojiPop').classList.remove('show');
 }
-const item=randomNotifications[Math.floor(Math.random()*randomNotifications.length)];
-document.getElementById("randomPopupTitle").textContent=item.title;
-document.getElementById("randomPopupMessage").textContent=item.message;
-popup.classList.remove("show");
-requestAnimationFrame(()=>popup.classList.add("show"));
-addNotification(item.title,item.message);
-clearTimeout(window.randomPopupTimeout);
-window.randomPopupTimeout=setTimeout(()=>popup.classList.remove("show"),4500);
+function selectChat(name, initials, color, online){
+  activeChat = name;
+  document.getElementById('activeName').textContent = name;
+  document.getElementById('activeAvatar').textContent = initials;
+  document.getElementById('activeAvatar').className = 'person-avatar ' + color;
+  if(online){
+    document.getElementById('activeAvatar').innerHTML = initials + '<span class="online"></span>';
+  }
+  document.getElementById('activeStatus').textContent = online ? '● Online' : '● Recently active';
+  document.querySelectorAll('.chat-person').forEach(item=>item.classList.remove('active'));
+  const clicked = [...document.querySelectorAll('.chat-person')].find(item=>item.dataset.name === name.toLowerCase());
+  if(clicked) clicked.classList.add('active');
+  const messages = document.getElementById('messages');
+  messages.innerHTML = '<div class="day-label">TODAY</div>';
+  const bubble = document.createElement('div');
+  bubble.className = 'message';
+  const avatar = document.createElement('div');
+  avatar.className = 'mini-avatar';
+  avatar.textContent = initials;
+  const textBubble = document.createElement('div');
+  textBubble.className = 'bubble';
+  textBubble.textContent = 'Hey! Welcome to our conversation. This is a sample chat preview.';
+  const small = document.createElement('small');
+  small.textContent = '10:31 AM';
+  textBubble.appendChild(small);
+  bubble.append(avatar,textBubble);
+  messages.appendChild(bubble);
+}
+function filterChats(){
+  const value = document.getElementById('chatSearch').value.toLowerCase();
+  document.querySelectorAll('.chat-person').forEach(item=>{
+    item.style.display = item.dataset.name.includes(value) ? 'flex' : 'none';
+  });
+}
+function setChatTab(button,tab){
+  document.querySelectorAll('.chat-tabs button').forEach(b=>b.classList.remove('active'));
+  button.classList.add('active');
+  if(tab === 'unread') showToast('Unread conversation filter selected');
+  else showToast('Showing all conversations');
+}
+function likePost(button){
+  const liked = button.classList.toggle('liked');
+  const icon = button.querySelector('i');
+  const count = button.querySelector('span');
+  let number = Number(count.textContent);
+  count.textContent = liked ? number + 1 : Math.max(0,number - 1);
+  icon.className = liked ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
+}
+function sharePost(){
+  const shareData = {
+    title:'CampusX Community',
+    text:'Join the conversation on CampusX!',
+    url:window.location.href
+  };
+  if(navigator.share){
+    navigator.share(shareData).catch(()=>{});
+  }else if(navigator.clipboard){
+    navigator.clipboard.writeText(shareData.url).then(()=>showToast('Link copied to clipboard'));
+  }else{
+    showToast('Share is not supported on this browser');
+  }
+}
+function previewPostImage(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  if(!file.type.startsWith('image/')){
+    showToast('Please select an image');
+    return;
+  }
+  selectedImage = file;
+  const preview = document.getElementById('postPreview');
+  preview.src = URL.createObjectURL(file);
+  preview.style.display = 'block';
+}
+function publishPost(){
+  const input = document.getElementById('postInput');
+  const text = input.value.trim();
+  if(!text && !selectedImage){
+    showToast('Write something or add a photo first');
+    return;
+  }
+  const post = document.createElement('article');
+  post.className = 'post';
+  const head = document.createElement('div');
+  head.className = 'post-head';
+  head.innerHTML = '<div class="avatar">J</div><div><strong>You</strong><small>Just now</small></div>';
+  post.appendChild(head);
+  if(text){
+    const paragraph = document.createElement('p');
+    paragraph.className = 'post-text';
+    paragraph.textContent = text;
+    post.appendChild(paragraph);
+  }
+  if(selectedImage){
+    const image = document.createElement('img');
+    image.className = 'post-image';
+    image.src = URL.createObjectURL(selectedImage);
+    image.alt = 'Uploaded discussion image';
+    post.appendChild(image);
+  }
+  const actions = document.createElement('div');
+  actions.className = 'post-actions';
+  actions.innerHTML =
+    '<button onclick="likePost(this)"><i class="fa-regular fa-heart"></i> <span>0</span> Likes</button>' +
+    '<button onclick="comingSoon(\\'Comments\\')"><i class="fa-regular fa-comment"></i> Comments</button>' +
+    '<button onclick="sharePost()"><i class="fa-solid fa-share-nodes"></i> Share</button>' +
+    '<button onclick="comingSoon(\\'Saved posts\\')"><i class="fa-regular fa-bookmark"></i> Save</button>';
+  post.appendChild(actions);
+  document.getElementById('feed').prepend(post);
+  input.value = '';
+  selectedImage = null;
+  document.getElementById('postImage').value = '';
+  document.getElementById('postPreview').style.display = 'none';
+  showToast('Your local preview post has been published');
 }
 
-function scheduleRandomNotification(){
-const delay=25000+Math.random()*25000;
-setTimeout(()=>{
-if(!document.hidden&&!modal.classList.contains("show"))showRandomNotification();
-scheduleRandomNotification();
-},delay);
-}
-
-setTimeout(scheduleRandomNotification,12000);
+document.addEventListener('keydown',e=>{
+  if(e.key === 'Escape') closeModal();
+});
 </script>
 </body>
 </html>
