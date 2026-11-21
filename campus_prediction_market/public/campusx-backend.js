@@ -23,13 +23,15 @@ const sb = cfg ? createClient(cfg.url, cfg.key, { auth: { storage: authStorage, 
 function friendly(error) {
   const m = String(error?.message || error || '');
   if (/invalid login credentials/i.test(m)) return 'Incorrect email or password.';
-  if (/email not confirmed/i.test(m)) return 'Please confirm your email address first. Check your inbox for the confirmation link.';
+  if (/email not confirmed/i.test(m)) return 'Please confirm your email address first. Check your inbox (and spam folder) for the confirmation link.';
   if (/already registered|already been registered/i.test(m)) return 'An account with this email already exists. Switch to Sign in.';
   if (/password/i.test(m) && /(weak|short|least)/i.test(m)) return 'Use a stronger password with at least 8 characters.';
   if (/rate limit|too many/i.test(m)) return 'Too many attempts. Please wait a minute and try again.';
   return m || 'Something went wrong. Please try again.';
 }
 const fail = e => { throw new Error(friendly(e)); };
+// The confirmation link brings people back to this site's home page, wherever it is hosted.
+const confirmUrl = () => `${location.origin}${location.pathname.replace(/[^/]*$/, '')}index.html`;
 
 function toUser(p, roles) {
   const isAdmin = roles.includes('admin');
@@ -62,7 +64,7 @@ const api = sb ? {
     localStorage.setItem(REMEMBER_FLAG, remember ? '1' : '0');
     const { data, error } = await sb.auth.signUp({
       email, password,
-      options: { data: { full_name: name }, emailRedirectTo: `${location.origin}/campusx/index.html` },
+      options: { data: { full_name: name }, emailRedirectTo: confirmUrl() },
     });
     if (error) fail(error);
     // Supabase hides duplicate signups by returning a user with no identities.
@@ -84,6 +86,10 @@ const api = sb ? {
     return user;
   },
   async signOut() { await sb.auth.signOut(); cache(null); },
+  async resendConfirmation(email) {
+    const { error } = await sb.auth.resend({ type: 'signup', email, options: { emailRedirectTo: confirmUrl() } });
+    if (error) fail(error);
+  },
   async currentUser() {
     const { data: { user: authUser } } = await sb.auth.getUser();
     if (!authUser) { cache(null); return null; }

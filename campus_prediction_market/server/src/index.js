@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 const googleClient=new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const PUBLIC_DIR=fileURLToPath(new URL('../../public/',import.meta.url));
 const app=express(), pool=new pg.Pool({connectionString:process.env.DATABASE_URL,ssl:process.env.PGSSL==='true'?{rejectUnauthorized:true}:undefined, max:10, idleTimeoutMillis:30000, connectionTimeoutMillis:10000});
-app.use(helmet({contentSecurityPolicy:{directives:{defaultSrc:["'self'"],scriptSrc:["'self'","'unsafe-inline'",'https://accounts.google.com'],styleSrc:["'self'","'unsafe-inline'",'https://fonts.googleapis.com'],fontSrc:["'self'",'https://fonts.gstatic.com','data:'],imgSrc:["'self'",'data:','https:'],connectSrc:["'self'",'https://accounts.google.com'],frameSrc:['https://accounts.google.com'],objectSrc:["'none'"],baseUri:["'self'"],formAction:["'self'"]}}}));
+app.use(helmet({contentSecurityPolicy:{directives:{defaultSrc:["'self'"],scriptSrc:["'self'","'unsafe-inline'",'https://accounts.google.com','https://esm.sh'],styleSrc:["'self'","'unsafe-inline'",'https://fonts.googleapis.com'],fontSrc:["'self'",'https://fonts.gstatic.com','data:'],imgSrc:["'self'",'data:','https:'],connectSrc:["'self'",'https://accounts.google.com','https://*.supabase.co','wss://*.supabase.co'],frameSrc:['https://accounts.google.com'],objectSrc:["'none'"],baseUri:["'self'"],formAction:["'self'"]}}}));
 app.use(cors({origin:(process.env.ALLOWED_ORIGINS||'http://localhost:8000').split(','),credentials:true}));
 app.use(express.json({limit:'32kb'}));
 app.use('/api',rateLimit({windowMs:60_000,limit:120,standardHeaders:true,legacyHeaders:false}));
