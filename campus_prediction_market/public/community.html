@@ -3,926 +3,110 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#073d20">
 <title>CampusX | Community</title>
-
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
-:root {
-  --green:#20b52f;
-  --dark:#073d20;
-  --lime:#a7ef36;
-  --pale:#eff9ed;
-  --white:#fff;
-  --text:#18251b;
-  --muted:#78847a;
-  --border:#e9eee9;
-  --shadow:0 12px 40px rgba(7,61,32,.08);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#f7faf6;color:var(--text);
-}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-a{text-decoration:none;color:inherit}
-svg{width:20px;height:20px;fill:none;stroke:currentColor;
-  stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
-  flex-shrink:0}
-.topbar{
-  height:76px;background:#fff;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 5%;position:sticky;top:0;z-index:30;
-}
-.brand{display:flex;align-items:center;gap:10px;font-size:23px;
-  font-weight:850;color:var(--dark);letter-spacing:-1px}
-.brand img{width:42px;height:42px;object-fit:contain}
-.brand span{color:var(--green)}
-.nav{display:flex;align-items:center;gap:30px}
-.nav a{font-size:14px;font-weight:650;color:#68756a;transition:.2s}
-.nav a:hover,.nav a.active{color:var(--green)}
-.top-actions{display:flex;align-items:center;gap:12px}
-.icon-btn{
-  width:43px;height:43px;border:1px solid var(--border);
-  border-radius:14px;background:#fff;display:grid;place-items:center;
-  position:relative;transition:.2s;color:var(--dark)
-}
-.icon-btn:hover{background:var(--pale);transform:translateY(-2px)}
-.unread-dot{
-  position:absolute;right:8px;top:7px;width:9px;height:9px;
-  border-radius:50%;background:#f04444;border:2px solid white;
-}
-.avatar{
-  width:39px;height:39px;border-radius:50%;background:var(--dark);
-  color:#fff;display:grid;place-items:center;font-weight:800;
-}
-.notification-wrap{position:relative}
-.notification-panel{
-  display:none;position:absolute;right:0;top:55px;width:330px;
-  background:#fff;border:1px solid var(--border);border-radius:19px;
-  box-shadow:var(--shadow);padding:18px;z-index:60;
-  animation:drop .2s ease;
-}
-.notification-panel.open{display:block}
-@keyframes drop{from{opacity:0;transform:translateY(-8px)}
-to{opacity:1;transform:translateY(0)}}
-.notification-head{display:flex;justify-content:space-between;
-  align-items:center;margin-bottom:14px}
-.notification-head h3{font-size:17px}
-.notification-head button{border:0;background:none;color:var(--green);
-  font-size:12px;font-weight:750}
-.notification-item{display:flex;gap:11px;padding:12px 0;
-  border-bottom:1px solid var(--border);font-size:13px;line-height:1.5}
-.notification-item:last-child{border:0}
-.notification-icon{
-  width:36px;height:36px;border-radius:12px;background:var(--pale);
-  color:var(--green);display:grid;place-items:center;
-}
-.notification-item small{display:block;color:var(--muted);margin-top:3px}
-.layout{
-  max-width:1380px;margin:32px auto;padding:0 28px;
-  display:grid;grid-template-columns:245px minmax(0,1fr) 280px;
-  gap:25px;align-items:start;
-}
-.side-card,.card{
-  background:#fff;border:1px solid var(--border);
-  border-radius:20px;box-shadow:0 4px 18px rgba(0,0,0,.025);
-}
-.side-card{padding:20px;margin-bottom:18px}
-.side-title{font-size:12px;color:var(--muted);font-weight:800;
-  text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
-.side-link{
-  display:flex;align-items:center;gap:12px;padding:12px;
-  border-radius:12px;font-size:13px;font-weight:650;
-  color:#657167;transition:.2s;margin-bottom:4px;
-}
-.side-link:hover,.side-link.active{background:var(--pale);color:var(--green)}
-.side-link svg{width:19px;height:19px}
-.hero{
-  background:linear-gradient(120deg,#073d20,#11652b 65%,#20b52f);
-  color:#fff;border-radius:23px;padding:29px;position:relative;
-  overflow:hidden;margin-bottom:20px;
-}
-.hero:after{
-  content:"";position:absolute;width:240px;height:240px;border-radius:50%;
-  border:40px solid rgba(255,255,255,.07);right:-50px;top:-100px;
-}
-.hero-tag{font-size:11px;font-weight:800;letter-spacing:1.7px;
-  color:var(--lime);text-transform:uppercase;margin-bottom:13px}
-.hero h1{font-size:clamp(25px,4vw,36px);letter-spacing:-1.2px;
-  margin-bottom:9px;position:relative;z-index:1}
-.hero p{font-size:14px;color:#d8efdc;max-width:440px;line-height:1.6}
-.hero-stats{display:flex;gap:30px;margin-top:24px}
-.hero-stat strong{display:block;font-size:21px}
-.hero-stat span{font-size:11px;color:#d0e8d4}
-.card{padding:20px;margin-bottom:18px}
-.card-heading{display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:16px}
-.card-heading h2{font-size:17px;letter-spacing:-.3px}
-.card-heading small{color:var(--muted);font-size:12px}
-.composer{display:flex;gap:12px;align-items:flex-start}
-.composer textarea{
-  width:100%;min-height:85px;border:1px solid var(--border);
-  border-radius:14px;padding:14px;resize:vertical;outline:none;
-  background:#fbfdfb;font-size:14px;
-}
-.composer textarea:focus{border-color:var(--green)}
-.composer-bottom{display:flex;align-items:center;justify-content:space-between;
-  margin-top:13px;gap:10px;flex-wrap:wrap}
-.tool-row{display:flex;gap:8px;flex-wrap:wrap}
-.tool-btn{
-  display:flex;align-items:center;gap:7px;border:0;background:var(--pale);
-  color:var(--dark);padding:9px 12px;border-radius:10px;
-  font-size:12px;font-weight:700;
-}
-.tool-btn svg{width:17px;height:17px;color:var(--green)}
-.primary-btn{
-  border:0;background:var(--green);color:#fff;border-radius:11px;
-  padding:11px 19px;font-size:13px;font-weight:800;
-  transition:.2s;
-}
-.primary-btn:hover{background:var(--dark);transform:translateY(-2px)}
-.filter-row{display:flex;gap:8px;overflow-x:auto;margin-bottom:16px}
-.filter{
-  padding:9px 15px;border-radius:30px;border:1px solid var(--border);
-  background:#fff;color:#6d786e;font-size:12px;font-weight:700;
-  white-space:nowrap;
-}
-.filter.active{background:var(--dark);color:#fff;border-color:var(--dark)}
-.post{padding:20px;margin-bottom:15px}
-.post-top{display:flex;align-items:center;gap:11px}
-.post-avatar{
-  width:43px;height:43px;border-radius:50%;background:#e5f6e4;
-  color:var(--dark);display:grid;place-items:center;font-weight:850;
-}
-.post-user{font-size:13px;font-weight:800}
-.post-meta{font-size:11px;color:var(--muted);margin-top:4px}
-.post-menu{margin-left:auto;border:0;background:none;color:#88948a}
-.post-text{font-size:14px;line-height:1.75;margin:17px 0;color:#39463b}
-.post-image{width:100%;max-height:360px;object-fit:cover;
-  border-radius:15px;margin-bottom:14px;display:block}
-.post-actions{display:flex;gap:22px;border-top:1px solid var(--border);
-  padding-top:14px}
-.post-action{
-  border:0;background:none;color:#778278;display:flex;align-items:center;
-  gap:7px;font-size:12px;font-weight:700;
-}
-.post-action svg{width:18px;height:18px}
-.post-action.liked{color:#e34e67}
-.comment-box{display:none;margin-top:15px}
-.comment-box.open{display:flex;gap:8px}
-.comment-box input{flex:1;min-width:0;border:1px solid var(--border);
-  border-radius:10px;padding:11px;outline:none}
-.comment-box button{border:0;background:var(--green);color:white;
-  border-radius:10px;padding:0 14px}
-.comment-list{font-size:12px;color:#536054;margin-top:10px}
-.right-card{padding:19px;margin-bottom:18px}
-.member{display:flex;align-items:center;gap:10px;margin:13px 0}
-.member-avatar{width:34px;height:34px;border-radius:50%;
-  display:grid;place-items:center;background:#eaf6e8;font-size:12px;
-  font-weight:800;color:var(--dark)}
-.member-info{font-size:12px;font-weight:750}
-.member-info small{display:block;color:var(--muted);font-weight:500;margin-top:3px}
-.online{width:8px;height:8px;background:#22c55e;border-radius:50%;
-  margin-left:auto}
-.trend{display:flex;justify-content:space-between;padding:12px 0;
-  border-bottom:1px solid var(--border);font-size:12px}
-.trend:last-child{border:0}
-.trend strong{display:block;margin-bottom:4px}
-.trend span{color:var(--muted);font-size:11px}
-.event-box{background:var(--pale);padding:15px;border-radius:14px}
-.event-box strong{font-size:13px}
-.event-box p{font-size:12px;color:#667366;line-height:1.6;margin:8px 0}
-.event-box button{border:0;background:var(--dark);color:white;
-  padding:9px 12px;border-radius:9px;font-size:11px;font-weight:750}
-.chat-layout{display:grid;grid-template-columns:215px minmax(0,1fr);
-  min-height:390px;overflow:hidden;padding:0}
-.chat-list{border-right:1px solid var(--border);padding:17px}
-.chat-list h3{font-size:15px;margin-bottom:13px}
-.chat-search{width:100%;padding:10px;border:1px solid var(--border);
-  border-radius:10px;outline:none;font-size:12px;margin-bottom:12px}
-.chat-person{display:flex;align-items:center;gap:9px;padding:11px 7px;
-  border-radius:12px;cursor:pointer}
-.chat-person.active,.chat-person:hover{background:var(--pale)}
-.chat-person .member-avatar{flex-shrink:0}
-.chat-person strong{font-size:11px;display:block}
-.chat-person small{font-size:10px;color:var(--muted)}
-.chat-window{display:flex;flex-direction:column;min-width:0}
-.chat-header{display:flex;align-items:center;gap:10px;padding:16px;
-  border-bottom:1px solid var(--border)}
-.chat-header strong{font-size:13px}
-.chat-header small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
-.chat-messages{padding:18px;flex:1;min-height:220px;max-height:290px;
-  overflow:auto;background:#fcfefc}
-.bubble{max-width:78%;padding:11px 13px;border-radius:14px;
-  background:#edf3ed;font-size:12px;line-height:1.5;margin-bottom:10px;
-  width:fit-content}
-.bubble.mine{background:var(--dark);color:white;margin-left:auto;
-  border-bottom-right-radius:4px}
-.bubble:not(.mine){border-bottom-left-radius:4px}
-.chat-compose{padding:13px;display:flex;gap:8px;border-top:1px solid var(--border)}
-.chat-compose input{flex:1;min-width:0;border:1px solid var(--border);
-  border-radius:11px;padding:11px;font-size:12px;outline:none}
-.chat-compose button{width:42px;border:0;background:var(--green);
-  color:white;border-radius:11px;display:grid;place-items:center}
-.chat-compose button svg{width:18px}
-.toast{
-  position:fixed;bottom:25px;left:50%;transform:translate(-50%,20px);
-  background:var(--dark);color:white;padding:13px 19px;border-radius:13px;
-  font-size:13px;box-shadow:var(--shadow);opacity:0;pointer-events:none;
-  z-index:100;transition:.3s;display:flex;align-items:center;gap:9px;
-  max-width:90vw;
-}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.modal-backdrop{
-  display:none;position:fixed;inset:0;background:rgba(3,22,10,.55);
-  z-index:90;align-items:center;justify-content:center;padding:20px;
-  backdrop-filter:blur(5px);
-}
-.modal-backdrop.open{display:flex}
-.modal{
-  width:min(420px,100%);background:#fff;border-radius:23px;
-  padding:28px;text-align:center;animation:pop .25s ease;
-}
-@keyframes pop{from{transform:scale(.94);opacity:0}
-to{transform:scale(1);opacity:1}}
-.modal-icon{
-  width:65px;height:65px;background:var(--pale);color:var(--green);
-  display:grid;place-items:center;border-radius:20px;margin:0 auto 17px;
-}
-.modal-icon svg{width:30px;height:30px}
-.modal h2{font-size:21px;margin-bottom:9px}
-.modal p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:19px}
-.modal button{width:100%}
-.close-modal{border:0;background:none;color:var(--muted);
-  margin-top:14px;font-size:12px}
-.share-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.share-options button{border:1px solid var(--border);background:#fff;
-  border-radius:12px;padding:14px;font-size:12px;font-weight:700;
-  display:flex;align-items:center;justify-content:center;gap:8px}
-.share-options button:hover{background:var(--pale)}
-#imagePreview{display:none;max-width:100%;max-height:220px;
-  border-radius:12px;margin-top:12px}
-.mobile-nav{display:none}
-.empty-state{text-align:center;color:var(--muted);font-size:13px;padding:25px}
-@media(max-width:1050px){
-  .layout{grid-template-columns:210px minmax(0,1fr)}
-  .right-column{display:none}
-}
-@media(max-width:720px){
-  .topbar{height:65px;padding:0 16px}
-  .nav{display:none}
-  .brand{font-size:20px}
-  .brand img{width:36px;height:36px}
-  .layout{display:block;margin:17px auto;padding:0 13px}
-  .left-column{display:none}
-  .hero{padding:24px 20px}
-  .hero-stats{gap:20px}
-  .card{padding:16px;border-radius:17px}
-  .chat-layout{grid-template-columns:105px minmax(0,1fr)}
-  .chat-list{padding:10px 6px}
-  .chat-list h3{font-size:12px}
-  .chat-person{gap:5px;padding:9px 4px}
-  .chat-person .member-avatar{width:29px;height:29px}
-  .chat-person strong{font-size:10px}
-  .chat-person small{display:none}
-  .chat-search{font-size:10px;padding:8px}
-  .chat-messages{padding:12px}
-  .bubble{font-size:11px}
-  .post-actions{gap:14px}
-  .post-action{font-size:11px}
-  .mobile-nav{
-    position:fixed;bottom:0;left:0;right:0;height:67px;background:#fff;
-    border-top:1px solid var(--border);display:flex;justify-content:space-around;
-    align-items:center;z-index:35;padding-bottom:env(safe-area-inset-bottom);
-  }
-  .mobile-nav a{display:flex;flex-direction:column;align-items:center;
-    gap:4px;color:#829083;font-size:9px;font-weight:700}
-  .mobile-nav a.active{color:var(--green)}
-  .mobile-nav svg{width:20px;height:20px}
-  body{padding-bottom:75px}
-  .notification-panel{position:fixed;top:72px;right:10px;width:min(330px,calc(100vw - 20px))}
-}
+:root{--green:#20b52f;--dark:#073d20;--lime:#a7ef36;--pale:#eff9ed;--text:#17251b;--muted:#829087;--border:#e9eee9}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:"DM Sans",sans-serif;background:#f8fbf8;color:var(--text)}button,input,textarea,select{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}
+header{height:70px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 7%;position:sticky;top:0;z-index:10}
+.logo{display:flex;align-items:center;max-width:260px}.brand-logo{display:block;width:230px;max-width:100%;height:auto;object-fit:contain}
+nav{display:flex;gap:25px}nav a{font-size:13px;font-weight:700;color:#758078}nav a:hover,nav a.active{color:var(--green)}
+.head-actions{display:flex;gap:10px;align-items:center}.head-actions button,.avatar{width:38px;height:38px;border:1px solid var(--border);background:white;border-radius:12px;color:var(--dark)}.avatar{display:grid;place-items:center;border-radius:50%;background:#e1f5d9;font-weight:800}
+main{max-width:1400px;margin:auto;padding:32px 7% 70px}.hero{background:linear-gradient(120deg,#073d20,#0b6d32,#20b52f);border-radius:25px;padding:42px;color:white;position:relative;overflow:hidden;animation:rise .7s}
+.hero:after{content:"";position:absolute;width:300px;height:300px;border:1px solid #ffffff35;border-radius:50%;right:8%;top:-120px}.eyebrow{font-size:11px;color:var(--lime);font-weight:800;letter-spacing:2px;margin-bottom:15px}.hero h1{font:800 clamp(30px,4vw,46px)/1.2 "Plus Jakarta Sans";letter-spacing:-1px}.hero h1 span{color:var(--lime)}.hero p{font-size:14px;line-height:1.8;color:#ffffffc9;max-width:510px;margin-top:14px}.hero-buttons{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}.btn{padding:13px 18px;border:0;border-radius:11px;font-size:12px;font-weight:800;transition:.25s}.btn:hover{transform:translateY(-3px)}.primary{background:var(--lime);color:var(--dark)}.outline{background:#ffffff20;border:1px solid #ffffff55;color:white}.hero-art{position:absolute;right:12%;top:45px;width:180px;height:180px;display:grid;place-items:center}.hero-art:before{content:"";position:absolute;inset:0;border:1px dashed #ffffff80;border-radius:50%;animation:spin 20s linear infinite}.hero-art i{font-size:60px;color:var(--lime);animation:float 4s infinite}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:22px 0 30px}.stat{background:white;border:1px solid var(--border);border-radius:15px;padding:17px;display:flex;gap:11px;align-items:center;transition:.25s}.stat:hover{transform:translateY(-4px);box-shadow:0 12px 30px #073d2010}.stat-icon{width:40px;height:40px;border-radius:12px;background:var(--pale);color:var(--green);display:grid;place-items:center}.stat strong{display:block;font-size:19px}.stat small{color:var(--muted);font-size:10px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:22px;align-items:start}.heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.heading h2{font:700 21px "Plus Jakarta Sans"}.heading p{font-size:12px;color:var(--muted);margin-top:5px}
+.create,.post,.side-card{background:white;border:1px solid var(--border);border-radius:17px;padding:18px;margin-bottom:16px}.create-top,.post-head{display:flex;gap:11px;align-items:center}.user-avatar{width:41px;height:41px;border-radius:50%;display:grid;place-items:center;background:#e1f5d9;color:var(--dark);font-weight:800;flex-shrink:0}.create-input{flex:1;text-align:left;border:1px solid var(--border);background:#f8faf8;padding:13px;border-radius:11px;color:#829087;font-size:12px}.create-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #f0f2f0;margin-top:15px;padding-top:13px;gap:10px}.tools{display:flex;gap:14px;flex-wrap:wrap}.tools button{background:none;border:0;color:#758078;font-size:11px;font-weight:700}.tools i{color:var(--green);margin-right:5px}.post-button{background:var(--green);color:white;border:0;border-radius:10px;padding:11px 16px;font-size:11px;font-weight:800}
+#search{width:100%;padding:13px;border:1px solid var(--border);border-radius:11px;background:white;font-size:12px;outline:none}.filters{display:flex;gap:7px;flex-wrap:wrap;margin:17px 0}.filter{padding:9px 14px;border:1px solid var(--border);border-radius:30px;background:white;color:#758078;font-size:10px;font-weight:800}.filter.active,.filter:hover{background:var(--dark);color:white;border-color:var(--dark)}
+.post{transition:.25s;animation:rise .5s}.post:hover{transform:translateY(-3px);box-shadow:0 12px 30px #073d2010}.user-info{flex:1}.user-info strong{font-size:12px;display:block}.user-info small{font-size:10px;color:var(--muted)}.post-menu{border:0;background:none;color:#89958c}.tag{display:inline-block;margin:15px 0 8px;padding:6px 9px;background:var(--pale);color:#368c38;border-radius:6px;font-size:9px;font-weight:800}.post h3{font:700 15px/1.5 "Plus Jakarta Sans";margin-bottom:7px}.post p{font-size:12px;color:#69766e;line-height:1.8}.post-footer{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #f0f2f0;margin-top:15px;padding-top:13px;flex-wrap:wrap}.post-actions{display:flex;gap:17px}.action{border:0;background:none;color:#839087;font-size:10px;font-weight:700}.action i{margin-right:5px}.action:hover,.action.liked{color:var(--green)}
+.comments{display:none;border-top:1px solid var(--border);margin-top:13px;padding-top:13px}.comments.open{display:block;animation:rise .3s}.comment{background:#f6f9f6;padding:11px;border-radius:10px;font-size:11px;margin-bottom:9px}.comment-form{display:flex;gap:8px}.comment-form input{flex:1;min-width:0;padding:10px;border:1px solid var(--border);border-radius:9px;font-size:11px}.comment-form button{background:var(--green);color:white;border:0;border-radius:9px;padding:0 13px}
+.market{background:#f8fcf7;border:1px solid var(--border);border-radius:12px;padding:13px;margin-top:13px}.market small{color:var(--muted);font-size:9px}.market strong{font-size:12px;display:block;margin:6px 0 11px}.market-options{display:flex;gap:8px}.market-options button{flex:1;padding:10px;background:white;border:1px solid var(--border);border-radius:9px;text-align:left;font-size:10px;color:#718071}.market-options b{color:var(--green);display:block;font-size:12px;margin-bottom:4px}
+.side-card h3{font:700 14px "Plus Jakarta Sans";margin-bottom:16px}.topic,.member{display:flex;align-items:center;gap:10px;margin-bottom:14px;cursor:pointer}.topic-icon{width:36px;height:36px;background:var(--pale);color:var(--green);border-radius:10px;display:grid;place-items:center}.topic-info,.member-info{flex:1}.topic-info strong,.member-info strong{display:block;font-size:11px}.topic-info small,.member-info small{font-size:9px;color:var(--muted)}.member .user-avatar{width:34px;height:34px;font-size:10px}.follow{border:0;background:var(--pale);color:var(--green);padding:7px 9px;border-radius:8px;font-size:9px;font-weight:800}.follow.following{background:var(--dark);color:white}.banner{background:linear-gradient(145deg,#eaf8e6,#f8fff5);border:1px solid #dcefd8;border-radius:16px;padding:20px;text-align:center;margin-bottom:16px}.banner i{font-size:25px;color:var(--green);margin-bottom:11px}.banner h3{font:700 15px "Plus Jakarta Sans"}.banner p{font-size:10px;color:#718071;line-height:1.7;margin:9px 0 13px}.banner button{width:100%;padding:11px;background:var(--dark);color:white;border:0;border-radius:9px;font-size:10px;font-weight:800}.guidelines{font-size:10px;color:#718071;line-height:2.2}.guidelines i{color:var(--green)}
+footer{text-align:center;background:white;border-top:1px solid var(--border);padding:28px 15px 90px;color:#829087;font-size:10px}footer strong{color:var(--dark)}.mobile-nav{display:none}.modal-bg{position:fixed;inset:0;background:#04190c99;backdrop-filter:blur(6px);z-index:100;display:none;place-items:center;padding:15px}.modal-bg.show{display:grid}.modal{background:white;border-radius:19px;padding:23px;width:100%;max-width:470px;animation:rise .3s}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.modal-head h2{font:700 19px "Plus Jakarta Sans"}.close{border:0;background:#f0f5ef;border-radius:9px;width:34px;height:34px}.modal textarea{width:100%;min-height:135px;border:1px solid var(--border);border-radius:11px;padding:13px;resize:vertical;font-size:12px;outline:none}.modal select{width:100%;margin-top:11px;padding:12px;border:1px solid var(--border);border-radius:9px}.modal-submit{width:100%;background:var(--green);color:white;border:0;border-radius:9px;padding:13px;margin-top:13px;font-weight:800}.toast{position:fixed;bottom:30px;left:50%;transform:translate(-50%,100px);opacity:0;background:var(--dark);color:white;padding:13px 18px;border-radius:11px;z-index:200;font-size:11px;transition:.3s}.toast.show{transform:translate(-50%,0);opacity:1}
+@keyframes rise{from{opacity:0;transform:translateY(17px)}to{opacity:1;transform:translateY(0)}}@keyframes float{50%{transform:translateY(-10px)}}@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:950px){header{padding:0 4%}main{padding-left:4%;padding-right:4%}.layout{grid-template-columns:minmax(0,1fr) 250px}.hero-art{right:5%}}
+@media(max-width:760px){nav{display:none}.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){header{height:63px;padding:0 15px}main{padding:17px 13px 30px}.hero{padding:27px 20px;min-height:255px;border-radius:20px}.hero h1{font-size:29px}.hero p{font-size:12px;max-width:330px}.hero-art{right:-90px;opacity:.2}.stats{grid-template-columns:repeat(2,1fr);gap:8px;margin:15px 0 24px}.stat{padding:11px;gap:8px}.stat-icon{width:33px;height:33px}.stat strong{font-size:16px}.stat small{font-size:9px}.sidebar{grid-template-columns:1fr}.create,.post,.side-card{padding:14px}.post h3{font-size:14px}.post p{font-size:11px}.tools{gap:9px}.tools button{font-size:9px}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;width:100%;justify-content:space-around;background:#ffffffed;backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:10px 5px max(9px,env(safe-area-inset-bottom));z-index:50}.mobile-nav a{display:flex;flex-direction:column;align-items:center;gap:5px;color:#849087;font-size:9px;font-weight:700}.mobile-nav i{font-size:17px}.mobile-nav a.active{color:var(--green)}footer{padding-bottom:95px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+.notification-wrap{position:relative}.notification-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:#ff5a52;right:7px;top:6px;border:2px solid white}
+.notification-panel{display:none;position:absolute;right:0;top:49px;width:285px;background:white;border:1px solid var(--border);border-radius:15px;padding:14px;box-shadow:0 18px 45px #073d2020;z-index:30;animation:pop .22s ease}
+.notification-panel.show{display:block}.notification-title{font:700 13px "Plus Jakarta Sans";display:flex;justify-content:space-between;margin-bottom:10px}.notification-title span{font:800 9px "DM Sans";color:var(--green);background:var(--pale);padding:4px 7px;border-radius:20px}
+.notification-item{display:flex;gap:10px;align-items:flex-start;padding:11px 4px;border-top:1px solid #f0f2f0}.notification-item>i{color:var(--green);background:var(--pale);width:30px;height:30px;display:grid;place-items:center;border-radius:9px;flex-shrink:0}.notification-item b{display:block;font-size:10px}.notification-item small{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+.upload-row{display:flex;align-items:center;gap:10px;margin-top:12px}.upload-label{display:inline-flex;align-items:center;gap:7px;padding:10px 12px;border:1px solid var(--border);border-radius:9px;color:var(--green);font-size:11px;font-weight:800;cursor:pointer}.upload-label input{display:none}.image-preview{display:none;max-width:100%;max-height:190px;object-fit:cover;border-radius:11px;margin-top:12px;border:1px solid var(--border)}.post-image{display:block;width:100%;max-height:360px;object-fit:cover;border-radius:13px;margin-top:13px}
+@keyframes pop{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+
 </style>
 </head>
-
 <body>
-
-<!-- SVG ICON LIBRARY -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></symbol>
-<symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M18 17V9M13 17V5M8 17v-3"/></symbol>
-<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
-<symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></symbol>
-<symbol id="i-message" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.5 8.5 0 0 1 8.7 3.9a8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></symbol>
-<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
-<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
-<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></symbol>
-<symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4zM22 2 11 13"/></symbol>
-<symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8z"/></symbol>
-<symbol id="i-comment" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.5 8.5 0 0 1 8.7 3.9a8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></symbol>
-<symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4m-6.6 7 6.6 4.4"/></symbol>
-<symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
-<symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.1 2.1 0 0 0-2.9-.1zM12 15l-3-3a22 22 0 0 1 2-3c3.5-4 8-5 8-5s-1 4.5-5 8a22 22 0 0 1-2 3z"/><path d="m9 12-4 1 3 3m4-1 1-4 3 3"/></symbol>
-<symbol id="i-paperclip" viewBox="0 0 24 24"><path d="m21 11.5-8.5 8.5a5 5 0 0 1-7-7l9-9a3.5 3.5 0 0 1 5 5l-9 9a2 2 0 0 1-3-3l8-8"/></symbol>
-<symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.4 2.8a2 2 0 0 1-.6 1.7L7 10.1a16 16 0 0 0 6 6l1.9-1.9a2 2 0 0 1 1.7-.6l2.8.4a2 2 0 0 1 1.6 1.9z"/></symbol>
-<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></symbol>
-<symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 22a8 8 0 0 0 8-8c0-4-3-7-5-9 0 4-2 5-3 5 0-4-2-7-4-9 0 6-4 9-4 13a8 8 0 0 0 8 8z"/></symbol>
-<symbol id="i-close" viewBox="0 0 24 24"><path d="m18 6-12 12M6 6l12 12"/></symbol>
-<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
-</svg>
-
-<header class="topbar">
-  <a class="brand" href="index.html">
-    <img src="campusx-logo.jpeg" alt="CampusX logo"
-      onerror="this.style.display='none'">
-    Campus<span>X</span>
-  </a>
-
-  <nav class="nav">
-    <a href="index.html">Home</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="market.html">Markets</a>
-    <a href="about.html">About</a>
-    <a href="info.html">Info</a>
-    <a href="community.html" class="active">Community</a>
-  </nav>
-
-  <div class="top-actions">
-    <div class="notification-wrap">
-      <button class="icon-btn" id="notificationButton"
-        aria-label="Notifications" aria-expanded="false">
-        <svg><use href="#i-bell"/></svg>
-        <span class="unread-dot" id="unreadDot"></span>
-      </button>
-      <div class="notification-panel" id="notificationPanel">
-        <div class="notification-head">
-          <h3>Notifications</h3>
-          <button id="markAllRead">Mark all as read</button>
-        </div>
-        <div id="notificationList">
-          <div class="notification-item">
-            <div class="notification-icon"><svg><use href="#i-heart"/></svg></div>
-            <div><strong>New appreciation</strong><br>Your campus discussion is getting attention.
-              <small>Just now</small></div>
-          </div>
-          <div class="notification-item">
-            <div class="notification-icon"><svg><use href="#i-message"/></svg></div>
-            <div><strong>New conversation</strong><br>Students are discussing campus events.
-              <small>12 minutes ago</small></div>
-          </div>
-          <div class="notification-item">
-            <div class="notification-icon"><svg><use href="#i-users"/></svg></div>
-            <div><strong>Welcome to CampusX</strong><br>Your campus community is waiting.
-              <small>Today</small></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button class="icon-btn" onclick="showComingSoon('Account settings')"
-      aria-label="Account settings"><svg><use href="#i-user"/></svg></button>
-    <div class="avatar">C</div>
-  </div>
+<header>
+<a href="index.html" class="logo"><img src="campusx-logo.jpeg" alt="CampusX Prediction Markets" class="brand-logo"></a>
+<nav><a href="index.html">Home</a><a href="dashboard.html">Dashboard</a><a href="market.html">Market</a><a class="active" href="community.html">Community</a><a href="about.html">About</a></nav>
+<div class="head-actions"><button aria-label="Search" onclick="document.getElementById('search').focus()"><i class="fa-solid fa-magnifying-glass"></i></button><div class="notification-wrap"><button id="notificationBell" aria-label="Notifications" onclick="toggleNotifications()"><i class="fa-regular fa-bell"></i><span class="notification-dot"></span></button><div class="notification-panel" id="notificationPanel"><div class="notification-title">Notifications <span>NEW</span></div><div class="notification-item"><i class="fa-solid fa-heart"></i><div><b>Welcome to CampusX</b><small>Your campus community starts here.</small></div></div><div class="notification-item"><i class="fa-solid fa-fire"></i><div><b>Trending on campus</b><small>Join the latest student discussions.</small></div></div><div class="notification-item"><i class="fa-solid fa-users"></i><div><b>Find your people</b><small>Connect with students across campuses.</small></div></div></div></div><a class="avatar" href="dashboard.html#profile">U</a></div>
 </header>
-
-<div class="layout">
-
-<aside class="left-column">
-  <div class="side-card">
-    <div class="side-title">Main menu</div>
-    <a class="side-link" href="index.html"><svg><use href="#i-home"/></svg> Home</a>
-    <a class="side-link" href="dashboard.html"><svg><use href="#i-chart"/></svg> Dashboard</a>
-    <a class="side-link" href="market.html"><svg><use href="#i-chart"/></svg> Prediction markets</a>
-    <a class="side-link active" href="community.html"><svg><use href="#i-users"/></svg> Community</a>
-    <a class="side-link" href="dashboard.html#profile"><svg><use href="#i-user"/></svg> My profile</a>
-  </div>
-  <div class="side-card">
-    <div class="side-title">Your community</div>
-    <a class="side-link" href="#discussions"><svg><use href="#i-message"/></svg> Discussions</a>
-    <a class="side-link" href="#messages"><svg><use href="#i-message"/></svg> Messages</a>
-    <a class="side-link" href="#trending"><svg><use href="#i-fire"/></svg> Trending topics</a>
-    <a class="side-link" href="#" onclick="showComingSoon('Saved posts');return false"><svg><use href="#i-check"/></svg> Saved posts</a>
-  </div>
-  <div class="side-card">
-    <div class="side-title">CampusX</div>
-    <p style="font-size:12px;line-height:1.7;color:#7b877c">
-      Your campus. Your call. Connect with students, share ideas and follow what's happening around your university.
-    </p>
-  </div>
-</aside>
-
 <main>
-  <section class="hero">
-    <div class="hero-tag">CampusX community</div>
-    <h1>Your campus has a voice.</h1>
-    <p>Connect with students, exchange ideas, follow campus conversations and stay part of what matters.</p>
-    <div class="hero-stats">
-      <div class="hero-stat"><strong>2.4K+</strong><span>Community members</span></div>
-      <div class="hero-stat"><strong>180+</strong><span>Conversations</span></div>
-      <div class="hero-stat"><strong>24/7</strong><span>Campus energy</span></div>
-    </div>
-  </section>
-
-  <section class="card" id="messages">
-    <div class="card-heading">
-      <div><h2>Messages</h2><small>Stay connected with your campus</small></div>
-      <button class="icon-btn" style="width:36px;height:36px"
-        onclick="showComingSoon('New conversations')"><svg><use href="#i-plus"/></svg></button>
-    </div>
-
-    <div class="chat-layout side-card">
-      <div class="chat-list">
-        <h3>Chats</h3>
-        <input class="chat-search" id="chatSearch" placeholder="Search chats...">
-        <div id="chatPeople">
-          <div class="chat-person active" data-name="Campus Updates" onclick="switchChat(this,'Campus Updates','CU')">
-            <div class="member-avatar">CU</div><div><strong>Campus Updates</strong><small>Welcome to CampusX</small></div>
-          </div>
-          <div class="chat-person" data-name="Daniel" onclick="switchChat(this,'Daniel','D')">
-            <div class="member-avatar">D</div><div><strong>Daniel</strong><small>What's happening?</small></div>
-          </div>
-          <div class="chat-person" data-name="Student Hub" onclick="switchChat(this,'Student Hub','SH')">
-            <div class="member-avatar">SH</div><div><strong>Student Hub</strong><small>Join the conversation</small></div>
-          </div>
-          <div class="chat-person" data-name="Amara" onclick="switchChat(this,'Amara','A')">
-            <div class="member-avatar">A</div><div><strong>Amara</strong><small>Hey there!</small></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="chat-window">
-        <div class="chat-header">
-          <div class="member-avatar" id="chatAvatar">CU</div>
-          <div><strong id="chatName">Campus Updates</strong><small>CampusX community</small></div>
-          <button class="icon-btn" style="margin-left:auto;width:35px;height:35px"
-            onclick="showComingSoon('Voice and video calls')"><svg><use href="#i-phone"/></svg></button>
-        </div>
-        <div class="chat-messages" id="chatMessages">
-          <div class="bubble">Welcome to CampusX! This is your community messaging preview.</div>
-          <div class="bubble">Connect with other students and stay updated.</div>
-        </div>
-        <div class="chat-compose">
-          <button class="icon-btn" style="width:38px;height:38px"
-            onclick="showComingSoon('File attachments')"><svg><use href="#i-paperclip"/></svg></button>
-          <input id="chatInput" placeholder="Write a message..." maxlength="500">
-          <button id="sendMessage" aria-label="Send message"><svg><use href="#i-send"/></svg></button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="card" id="discussions">
-    <div class="card-heading">
-      <div><h2>Start a discussion</h2><small>What's happening on your campus?</small></div>
-      <span style="color:var(--green);font-size:12px;font-weight:800">● Community</span>
-    </div>
-    <div class="composer">
-      <div class="avatar">C</div>
-      <textarea id="postInput" placeholder="Share an idea, ask a question or start a conversation..."></textarea>
-    </div>
-    <img id="imagePreview" alt="Selected image preview">
-    <div class="composer-bottom">
-      <div class="tool-row">
-        <label class="tool-btn" for="postImage" style="cursor:pointer">
-          <svg><use href="#i-image"/></svg> Photo
-        </label>
-        <input type="file" id="postImage" accept="image/*" hidden>
-        <button class="tool-btn" onclick="showComingSoon('Poll creation')">
-          <svg><use href="#i-chart"/></svg> Poll
-        </button>
-        <button class="tool-btn" onclick="showComingSoon('Events')">
-          <svg><use href="#i-calendar"/></svg> Event
-        </button>
-      </div>
-      <button class="primary-btn" id="publishPost">Publish post</button>
-    </div>
-  </section>
-
-  <div class="filter-row" id="filterRow">
-    <button class="filter active" data-filter="all">For you</button>
-    <button class="filter" data-filter="trending">Trending</button>
-    <button class="filter" data-filter="questions">Questions</button>
-    <button class="filter" data-filter="campus">Campus life</button>
-  </div>
-
-  <div id="feed">
-    <article class="card post" data-category="campus">
-      <div class="post-top">
-        <div class="post-avatar">ST</div>
-        <div><div class="post-user">Student Talk</div><div class="post-meta">Campus community · 15 minutes ago</div></div>
-        <button class="post-menu" onclick="showComingSoon('Post options')"><svg><use href="#i-more"/></svg></button>
-      </div>
-      <p class="post-text">What's one thing you think every student should experience before graduating? Let's hear your thoughts. 👀</p>
-      <div class="post-actions">
-        <button class="post-action like-btn"><svg><use href="#i-heart"/></svg><span>24 Likes</span></button>
-        <button class="post-action comment-toggle"><svg><use href="#i-comment"/></svg><span>8 Comments</span></button>
-        <button class="post-action share-btn"><svg><use href="#i-share"/></svg><span>Share</span></button>
-      </div>
-      <div class="comment-box"><input placeholder="Write a comment..."><button class="comment-send">Send</button></div>
-      <div class="comment-list"></div>
-    </article>
-
-    <article class="card post" data-category="questions">
-      <div class="post-top">
-        <div class="post-avatar">J</div>
-        <div><div class="post-user">Jayden</div><div class="post-meta">Student · 42 minutes ago</div></div>
-        <button class="post-menu" onclick="showComingSoon('Post options')"><svg><use href="#i-more"/></svg></button>
-      </div>
-      <p class="post-text">Quick question: if you could change one thing about student life on campus, what would it be? Academics, accommodation, transport or something else?</p>
-      <div class="post-actions">
-        <button class="post-action like-btn"><svg><use href="#i-heart"/></svg><span>17 Likes</span></button>
-        <button class="post-action comment-toggle"><svg><use href="#i-comment"/></svg><span>12 Comments</span></button>
-        <button class="post-action share-btn"><svg><use href="#i-share"/></svg><span>Share</span></button>
-      </div>
-      <div class="comment-box"><input placeholder="Write a comment..."><button class="comment-send">Send</button></div>
-      <div class="comment-list"></div>
-    </article>
-  </div>
-</main>
-
-<aside class="right-column">
-  <div class="side-card right-card" id="trending">
-    <div class="card-heading"><h2>Trending topics</h2><svg style="color:var(--green)"><use href="#i-fire"/></svg></div>
-    <div class="trend"><div><strong>#CampusLife</strong><span>Student conversations</span></div><b>2.1k</b></div>
-    <div class="trend"><div><strong>#StudentExperience</strong><span>Popular discussion</span></div><b>1.4k</b></div>
-    <div class="trend"><div><strong>#CampusEvents</strong><span>What's happening</span></div><b>980</b></div>
-    <div class="trend"><div><strong>#CampusX</strong><span>Community updates</span></div><b>750</b></div>
-  </div>
-
-  <div class="side-card right-card">
-    <div class="card-heading"><h2>Active students</h2><small>Online preview</small></div>
-    <div class="member"><div class="member-avatar">D</div><div class="member-info">Daniel<small>Student</small></div><span class="online"></span></div>
-    <div class="member"><div class="member-avatar">A</div><div class="member-info">Amara<small>Student</small></div><span class="online"></span></div>
-    <div class="member"><div class="member-avatar">K</div><div class="member-info">Kenny<small>Student</small></div><span class="online"></span></div>
-    <div class="member"><div class="member-avatar">M</div><div class="member-info">Mariam<small>Student</small></div><span class="online"></span></div>
-  </div>
-
-  <div class="side-card right-card">
-    <div class="card-heading"><h2>Campus spotlight</h2><svg style="color:var(--green)"><use href="#i-calendar"/></svg></div>
-    <div class="event-box">
-      <strong>Something happening on campus?</strong>
-      <p>Discover campus events and student activities as CampusX expands.</p>
-      <button onclick="showComingSoon('Campus events')">Explore events</button>
-    </div>
-  </div>
+<section class="hero"><div class="eyebrow"><i class="fa-solid fa-circle-nodes"></i> THE CAMPUSX COMMUNITY</div><h1>Your campus.<br><span>Your people. Your voice.</span></h1><p>Connect with students, share your thoughts, discover trending conversations and be part of what's happening across campus.</p><div class="hero-buttons"><button class="btn primary" onclick="openModal()"><i class="fa-solid fa-plus"></i> Start a discussion</button><button class="btn outline" onclick="document.getElementById('feed').scrollIntoView({behavior:'smooth'})">Explore discussions ↓</button></div><div class="hero-art"><i class="fa-solid fa-comments"></i></div></section>
+<section class="stats">
+<div class="stat"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><div><strong>12,480</strong><small>Community members</small></div></div>
+<div class="stat"><div class="stat-icon"><i class="fa-solid fa-comments"></i></div><div><strong>328</strong><small>Active discussions</small></div></div>
+<div class="stat"><div class="stat-icon"><i class="fa-solid fa-fire"></i></div><div><strong>46</strong><small>Trending topics</small></div></div>
+<div class="stat"><div class="stat-icon"><i class="fa-solid fa-circle-dot"></i></div><div><strong>1.2k</strong><small>Students online</small></div></div>
+</section>
+<div class="layout">
+<section id="feed">
+<div class="heading"><div><h2>Community feed</h2><p>See what students are talking about.</p></div><span style="font-size:10px;color:var(--green);font-weight:800">● COMMUNITY</span></div>
+<div class="create"><div class="create-top"><div class="user-avatar">U</div><button class="create-input" onclick="openModal()">What's happening on your campus?</button></div><div class="create-bottom"><div class="tools"><button onclick="openModal()"><i class="fa-regular fa-image"></i> Media</button><button onclick="openModal('Questions')"><i class="fa-regular fa-circle-question"></i> Ask</button><button onclick="openModal('Markets')"><i class="fa-solid fa-chart-line"></i> Market</button></div><button class="post-button" onclick="openModal()">Create post</button></div></div>
+<input id="search" type="search" placeholder="Search discussions...">
+<div class="filters"><button class="filter active" data-filter="all">For you</button><button class="filter" data-filter="Trending">Trending</button><button class="filter" data-filter="Campus life">Campus life</button><button class="filter" data-filter="Markets">Markets</button><button class="filter" data-filter="Questions">Questions</button></div>
+<div id="posts">
+<article class="post" data-category="Trending"><div class="post-head"><div class="user-avatar" style="background:#efe3ff;color:#7440a7">AO</div><div class="user-info"><strong>Amara Okafor <i class="fa-solid fa-circle-check" style="color:var(--green)"></i></strong><small>FUNAAB · Statistics · 12 min ago</small></div><button class="post-menu"><i class="fa-solid fa-ellipsis"></i></button></div><span class="tag">TRENDING</span><h3>What's one thing about campus life that nobody prepared you for? 😂</h3><p>I'll go first. The way a simple 8am lecture can turn into a full-day adventure. You leave your hostel in the morning and somehow return at 8pm. What's yours?</p><div class="post-footer"><div class="post-actions"><button class="action" onclick="like(this)"><i class="fa-regular fa-heart"></i> <span>248</span></button><button class="action" onclick="comments(this)"><i class="fa-regular fa-comment"></i> 36</button><button class="action" onclick="share(this)"><i class="fa-solid fa-share-nodes"></i> Share</button></div><small>12 min ago</small></div><div class="comments"><div class="comment"><b>John David:</b> Transportation. Especially when it rains. 😭</div><div class="comment-form"><input placeholder="Write a comment..."><button onclick="commentSend(this)"><i class="fa-solid fa-paper-plane"></i></button></div></div></article>
+<article class="post" data-category="Markets"><div class="post-head"><div class="user-avatar" style="background:#fff0dc;color:#b16a18">TO</div><div class="user-info"><strong>Tobi Oladipo</strong><small>UNILAG · Economics · 28 min ago</small></div><button class="post-menu"><i class="fa-solid fa-ellipsis"></i></button></div><span class="tag">MARKET DISCUSSION</span><h3>Do you think campus prediction markets will be interesting?</h3><p>I think students will have very different opinions on this one. Curious to see what everyone thinks.</p><div class="market"><small>CAMPUSX MARKET IDEA</small><strong>Will the next major campus event exceed expectations?</strong><div class="market-options"><button onclick="vote(this)"><b>YES</b>More likely</button><button onclick="vote(this)"><b>NO</b>Less likely</button></div></div><div class="post-footer"><div class="post-actions"><button class="action" onclick="like(this)"><i class="fa-regular fa-heart"></i> <span>186</span></button><button class="action" onclick="comments(this)"><i class="fa-regular fa-comment"></i> 21</button><button class="action" onclick="share(this)"><i class="fa-solid fa-share-nodes"></i> Share</button></div><small>28 min ago</small></div><div class="comments"><div class="comment"><b>Mary K.:</b> Definitely yes. Campus events are always unpredictable!</div><div class="comment-form"><input placeholder="Write a comment..."><button onclick="commentSend(this)"><i class="fa-solid fa-paper-plane"></i></button></div></div></article>
+<article class="post" data-category="Questions"><div class="post-head"><div class="user-avatar" style="background:#e0efff;color:#3067a0">FK</div><div class="user-info"><strong>Faith Kemi</strong><small>OAU · Computer Science · 1 hour ago</small></div><button class="post-menu"><i class="fa-solid fa-ellipsis"></i></button></div><span class="tag">QUESTION</span><h3>What's the best skill a student can learn before graduation?</h3><p>I'm trying to build a useful skill outside academics. Would love to hear what has worked for other students. Tech, business, creative skills — anything.</p><div class="post-footer"><div class="post-actions"><button class="action" onclick="like(this)"><i class="fa-regular fa-heart"></i> <span>97</span></button><button class="action" onclick="comments(this)"><i class="fa-regular fa-comment"></i> 42</button><button class="action" onclick="share(this)"><i class="fa-solid fa-share-nodes"></i> Share</button></div><small>1 hour ago</small></div><div class="comments"><div class="comment"><b>Samuel A.:</b> Communication and problem solving. They apply everywhere.</div><div class="comment-form"><input placeholder="Write a comment..."><button onclick="commentSend(this)"><i class="fa-solid fa-paper-plane"></i></button></div></div></article>
+<article class="post" data-category="Campus life"><div class="post-head"><div class="user-avatar" style="background:#ffe4ed;color:#a53f66">NE</div><div class="user-info"><strong>Ngozi Eze</strong><small>UNILAG · Mass Communication · 2 hours ago</small></div><button class="post-menu"><i class="fa-solid fa-ellipsis"></i></button></div><span class="tag">CAMPUS LIFE</span><h3>Let's share underrated places on our campuses.</h3><p>Not the usual popular spots. I'm talking about those quiet places where you can read, relax or just clear your head.</p><div class="post-footer"><div class="post-actions"><button class="action" onclick="like(this)"><i class="fa-regular fa-heart"></i> <span>73</span></button><button class="action" onclick="comments(this)"><i class="fa-regular fa-comment"></i> 18</button><button class="action" onclick="share(this)"><i class="fa-solid fa-share-nodes"></i> Share</button></div><small>2 hours ago</small></div><div class="comments"><div class="comment-form"><input placeholder="Write a comment..."><button onclick="commentSend(this)"><i class="fa-solid fa-paper-plane"></i></button></div></div></article>
+</div><p id="empty" style="display:none;text-align:center;padding:28px;color:var(--muted);font-size:12px">No discussions found. Try another search.</p>
+</section>
+<aside class="sidebar">
+<div class="side-card"><h3>Trending topics</h3>
+<div class="topic" onclick="chooseTopic('Trending')"><div class="topic-icon"><i class="fa-solid fa-fire"></i></div><div class="topic-info"><strong>#CampusLife</strong><small>2.4k conversations</small></div></div>
+<div class="topic" onclick="chooseTopic('Markets')"><div class="topic-icon"><i class="fa-solid fa-chart-line"></i></div><div class="topic-info"><strong>#CampusMarkets</strong><small>1.8k conversations</small></div></div>
+<div class="topic" onclick="chooseTopic('Questions')"><div class="topic-icon"><i class="fa-solid fa-lightbulb"></i></div><div class="topic-info"><strong>#StudentIdeas</strong><small>940 conversations</small></div></div>
+<div class="topic" onclick="chooseTopic('Campus life')"><div class="topic-icon"><i class="fa-solid fa-graduation-cap"></i></div><div class="topic-info"><strong>#StudentExperience</strong><small>720 conversations</small></div></div></div>
+<div class="side-card"><h3>Active members <span style="color:var(--green);font-size:9px">● Online</span></h3>
+<div class="member"><div class="user-avatar">AO</div><div class="member-info"><strong>Amara Okafor</strong><small>Statistics · FUNAAB</small></div><button class="follow" onclick="follow(this)">Follow</button></div>
+<div class="member"><div class="user-avatar" style="background:#fff0dc">TO</div><div class="member-info"><strong>Tobi Oladipo</strong><small>Economics · UNILAG</small></div><button class="follow" onclick="follow(this)">Follow</button></div>
+<div class="member"><div class="user-avatar" style="background:#e0efff">FK</div><div class="member-info"><strong>Faith Kemi</strong><small>Computer Science · OAU</small></div><button class="follow" onclick="follow(this)">Follow</button></div>
+<div class="member"><div class="user-avatar" style="background:#ffe4ed">NE</div><div class="member-info"><strong>Ngozi Eze</strong><small>Mass Comm. · UNILAG</small></div><button class="follow" onclick="follow(this)">Follow</button></div></div>
+<div class="banner"><i class="fa-solid fa-rocket"></i><h3>Your voice matters.</h3><p>Start a conversation, share an idea and make your campus experience count.</p><button onclick="openModal()">Start a discussion →</button></div>
+<div class="side-card"><h3>Community guidelines</h3><div class="guidelines"><i class="fa-solid fa-check"></i> Respect everyone's opinions.<br><i class="fa-solid fa-check"></i> Keep discussions friendly.<br><i class="fa-solid fa-check"></i> Avoid misinformation.<br><i class="fa-solid fa-check"></i> No harassment or spam.</div></div>
 </aside>
-
 </div>
-
-<nav class="mobile-nav">
-  <a href="index.html"><svg><use href="#i-home"/></svg>Home</a>
-  <a href="market.html"><svg><use href="#i-chart"/></svg>Markets</a>
-  <a href="community.html" class="active"><svg><use href="#i-users"/></svg>Community</a>
-  <a href="#messages"><svg><use href="#i-message"/></svg>Messages</a>
-  <a href="dashboard.html#profile"><svg><use href="#i-user"/></svg>Profile</a>
-</nav>
-
-<div class="toast" id="toast">
-  <svg><use href="#i-check"/></svg><span id="toastText">Done</span>
-</div>
-
-<div class="modal-backdrop" id="comingModal">
-  <div class="modal">
-    <div class="modal-icon"><svg><use href="#i-rocket"/></svg></div>
-    <h2>Coming Soon</h2>
-    <p id="comingText">This feature is currently being prepared for CampusX.</p>
-    <button class="primary-btn" onclick="closeModal('comingModal')">Got it</button>
-  </div>
-</div>
-
-<div class="modal-backdrop" id="shareModal">
-  <div class="modal">
-    <div class="modal-icon"><svg><use href="#i-share"/></svg></div>
-    <h2>Share this post</h2>
-    <p>Share this conversation with your friends.</p>
-    <div class="share-options">
-      <button onclick="nativeShare()">↗ Share on device</button>
-      <button onclick="shareWhatsApp()">WhatsApp</button>
-      <button onclick="copyPostLink()">Copy link</button>
-      <button onclick="closeModal('shareModal')">Cancel</button>
-    </div>
-  </div>
-</div>
-
+</main>
+<footer><strong>CampusX</strong> · Your Campus. Your Call.<br><br>© 2026 CampusX. All rights reserved.</footer>
+<nav class="mobile-nav"><a href="index.html"><i class="fa-solid fa-house"></i>Home</a><a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i>Dashboard</a><a href="market.html"><i class="fa-solid fa-chart-line"></i>Market</a><a class="active" href="community.html"><i class="fa-solid fa-users"></i>Community</a><a href="dashboard.html#profile"><i class="fa-solid fa-user"></i>Profile</a></nav>
+<div class="modal-bg" id="modal"><div class="modal"><div class="modal-head"><h2>Start a discussion</h2><button class="close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button></div><textarea id="postText" placeholder="Share something with your campus community..."></textarea><div class="upload-row"><label class="upload-label"><i class="fa-regular fa-image"></i> Add a picture<input id="postImage" type="file" accept="image/*" onchange="previewImage(event)"></label><span id="uploadName" style="font-size:10px;color:var(--muted)">JPG, PNG or WEBP</span></div><img id="imagePreview" class="image-preview" alt="Selected picture preview"><select id="postCategory"><option>Campus life</option><option>Trending</option><option>Markets</option><option>Questions</option></select><button class="modal-submit" onclick="publish()">Publish discussion</button></div></div>
+<div class="toast" id="toast"></div>
 <script>
-/* CAMPUSX COMMUNITY JAVASCRIPT */
-
-const $ = (selector, root=document) => root.querySelector(selector);
-const $$ = (selector, root=document) => [...root.querySelectorAll(selector)];
-
-let selectedImage = "";
-let currentShareText = "Join the conversation on CampusX!";
-let activeChat = "Campus Updates";
-let chatHistory = {};
-
-function showToast(message) {
-  const toast = $("#toast");
-  $("#toastText").textContent = message;
-  toast.classList.add("show");
-  clearTimeout(window.toastTimer);
-  window.toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
-}
-
-function showComingSoon(feature) {
-  $("#comingText").textContent =
-    feature + " requires a secure backend and database. This feature will be available in a future CampusX update.";
-  $("#comingModal").classList.add("open");
-}
-
-function closeModal(id) {
-  $("#" + id).classList.remove("open");
-}
-
-$$(".modal-backdrop").forEach(modal => {
-  modal.addEventListener("click", event => {
-    if (event.target === modal) modal.classList.remove("open");
-  });
-});
-
-/* NOTIFICATIONS */
-const notificationButton = $("#notificationButton");
-const notificationPanel = $("#notificationPanel");
-
-notificationButton.addEventListener("click", event => {
-  event.stopPropagation();
-  const opened = notificationPanel.classList.toggle("open");
-  notificationButton.setAttribute("aria-expanded", String(opened));
-});
-
-notificationPanel.addEventListener("click", event => event.stopPropagation());
-
-document.addEventListener("click", () => {
-  notificationPanel.classList.remove("open");
-  notificationButton.setAttribute("aria-expanded", "false");
-});
-
-$("#markAllRead").addEventListener("click", () => {
-  $("#unreadDot").style.display = "none";
-  showToast("Notifications marked as read");
-});
-
-/* OPTIONAL DEMO POP-UP NOTIFICATION */
-function showDemoNotification() {
-  showToast("Welcome to the CampusX community!");
-}
-
-/* IMAGE UPLOAD PREVIEW */
-$("#postImage").addEventListener("change", event => {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  if (!file.type.startsWith("image/")) {
-    showToast("Please select an image file.");
-    return;
-  }
-
-  if (file.size > 5 * 1024 * 1024) {
-    showToast("Image must be smaller than 5MB.");
-    event.target.value = "";
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onload = () => {
-    selectedImage = reader.result;
-    $("#imagePreview").src = selectedImage;
-    $("#imagePreview").style.display = "block";
-    showToast("Image added to your post");
-  };
-  reader.readAsDataURL(file);
-});
-
-/* PUBLISH POSTS - FRONTEND PREVIEW */
-$("#publishPost").addEventListener("click", () => {
-  const text = $("#postInput").value.trim();
-
-  if (!text && !selectedImage) {
-    showToast("Write something or add a photo first.");
-    return;
-  }
-
-  const article = document.createElement("article");
-  article.className = "card post";
-  article.dataset.category = "campus";
-
-  const top = document.createElement("div");
-  top.className = "post-top";
-
-  const avatar = document.createElement("div");
-  avatar.className = "post-avatar";
-  avatar.textContent = "C";
-
-  const user = document.createElement("div");
-  const username = document.createElement("div");
-  username.className = "post-user";
-  username.textContent = "You";
-
-  const meta = document.createElement("div");
-  meta.className = "post-meta";
-  meta.textContent = "Just now · CampusX community";
-
-  user.append(username, meta);
-  top.append(avatar, user);
-
-  const content = document.createElement("p");
-  content.className = "post-text";
-  content.textContent = text;
-
-  article.append(top);
-  if (text) article.append(content);
-
-  if (selectedImage) {
-    const image = document.createElement("img");
-    image.className = "post-image";
-    image.src = selectedImage;
-    image.alt = "Uploaded community post image";
-    article.append(image);
-  }
-
-  const actions = document.createElement("div");
-  actions.className = "post-actions";
-  actions.innerHTML = `
-    <button class="post-action like-btn"><svg><use href="#i-heart"/></svg><span>0 Likes</span></button>
-    <button class="post-action comment-toggle"><svg><use href="#i-comment"/></svg><span>0 Comments</span></button>
-    <button class="post-action share-btn"><svg><use href="#i-share"/></svg><span>Share</span></button>
-  `;
-
-  const comments = document.createElement("div");
-  comments.className = "comment-box";
-  comments.innerHTML = '<input placeholder="Write a comment..."><button class="comment-send">Send</button>';
-
-  const commentList = document.createElement("div");
-  commentList.className = "comment-list";
-
-  article.append(actions, comments, commentList);
-  $("#feed").prepend(article);
-
-  $("#postInput").value = "";
-  $("#postImage").value = "";
-  $("#imagePreview").style.display = "none";
-  selectedImage = "";
-
-  showToast("Your post was added to this preview.");
-});
-
-/* FEED INTERACTIONS */
-document.addEventListener("click", event => {
-  const like = event.target.closest(".like-btn");
-  if (like) {
-    like.classList.toggle("liked");
-    const label = $("span", like);
-    let count = parseInt(label.textContent) || 0;
-    label.textContent = (count + (like.classList.contains("liked") ? 1 : -1)) + " Likes";
-    return;
-  }
-
-  const commentToggle = event.target.closest(".comment-toggle");
-  if (commentToggle) {
-    const post = commentToggle.closest(".post");
-    $(".comment-box", post).classList.toggle("open");
-    return;
-  }
-
-  const commentSend = event.target.closest(".comment-send");
-  if (commentSend) {
-    const post = commentSend.closest(".post");
-    const input = $("input", commentSend.parentElement);
-    const value = input.value.trim();
-    if (!value) return;
-
-    const line = document.createElement("p");
-    line.style.marginTop = "8px";
-    line.textContent = "You: " + value;
-    $(".comment-list", post).append(line);
-    input.value = "";
-    showToast("Comment added to this preview.");
-    return;
-  }
-
-  const share = event.target.closest(".share-btn");
-  if (share) {
-    const post = share.closest(".post");
-    currentShareText = $(".post-text", post)?.textContent || "Join CampusX!";
-    $("#shareModal").classList.add("open");
-  }
-});
-
-/* SHARING */
-async function nativeShare() {
-  const data = {
-    title: "CampusX Community",
-    text: currentShareText,
-    url: window.location.href
-  };
-
-  if (navigator.share) {
-    try {
-      await navigator.share(data);
-    } catch (error) {
-      if (error.name !== "AbortError") showToast("Unable to open sharing options.");
-    }
-  } else {
-    copyPostLink();
-  }
-  closeModal("shareModal");
-}
-
-function shareWhatsApp() {
-  const url = "https://wa.me/?text=" +
-    encodeURIComponent(currentShareText + " " + window.location.href);
-  window.open(url, "_blank");
-  closeModal("shareModal");
-}
-
-async function copyPostLink() {
-  try {
-    await navigator.clipboard.writeText(window.location.href);
-    showToast("Link copied!");
-  } catch (error) {
-    showToast("Copy is unavailable in this browser.");
-  }
-  closeModal("shareModal");
-}
-
-/* CHAT SWITCHING */
-function switchChat(element, name, initials) {
-  $$(".chat-person").forEach(item => item.classList.remove("active"));
-  element.classList.add("active");
-
-  if (activeChat) {
-    chatHistory[activeChat] = $("#chatMessages").innerHTML;
-  }
-
-  activeChat = name;
-  $("#chatName").textContent = name;
-  $("#chatAvatar").textContent = initials;
-
-  $("#chatMessages").innerHTML = chatHistory[name] ||
-    '<div class="bubble">You are now viewing the ' +
-    name.replace(/[<>]/g, "") + ' conversation preview.</div>';
-  $("#chatMessages").scrollTop = $("#chatMessages").scrollHeight;
-}
-
-$("#chatSearch").addEventListener("input", event => {
-  const query = event.target.value.toLowerCase();
-  $$(".chat-person").forEach(person => {
-    person.style.display = person.dataset.name.toLowerCase().includes(query)
-      ? "flex" : "none";
-  });
-});
-
-/* SEND LOCAL DEMO MESSAGE */
-function sendMessage() {
-  const input = $("#chatInput");
-  const value = input.value.trim();
-  if (!value) return;
-
-  const bubble = document.createElement("div");
-  bubble.className = "bubble mine";
-  bubble.textContent = value;
-
-  $("#chatMessages").append(bubble);
-  input.value = "";
-  $("#chatMessages").scrollTop = $("#chatMessages").scrollHeight;
-
-  chatHistory[activeChat] = $("#chatMessages").innerHTML;
-}
-
-$("#sendMessage").addEventListener("click", sendMessage);
-
-$("#chatInput").addEventListener("keydown", event => {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    sendMessage();
-  }
-});
-
-/* FEED FILTERS */
-$("#filterRow").addEventListener("click", event => {
-  const button = event.target.closest(".filter");
-  if (!button) return;
-
-  $$(".filter").forEach(item => item.classList.remove("active"));
-  button.classList.add("active");
-
-  const category = button.dataset.filter;
-  $$(".post", $("#feed")).forEach(post => {
-    post.style.display =
-      category === "all" ||
-      category === "trending" ||
-      post.dataset.category === category
-      ? "block" : "none";
-  });
-});
-
-/* ESCAPE KEY */
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") {
-    $$(".modal-backdrop").forEach(modal => modal.classList.remove("open"));
-    notificationPanel.classList.remove("open");
-  }
-});
+let activeFilter="all";
+function toast(message){const t=document.getElementById("toast");t.textContent=message;t.classList.add("show");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove("show"),2400)}
+function openModal(category){document.getElementById("modal").classList.add("show");if(category)document.getElementById("postCategory").value=category}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+function like(button){button.classList.toggle("liked");const icon=button.querySelector("i"),count=button.querySelector("span");const liked=button.classList.contains("liked");icon.className=liked?"fa-solid fa-heart":"fa-regular fa-heart";count.textContent=Number(count.textContent)+(liked?1:-1)}
+function comments(button){button.closest(".post").querySelector(".comments").classList.toggle("open")}
+function commentSend(button){const input=button.previousElementSibling;if(!input.value.trim())return;const item=document.createElement("div");item.className="comment";const strong=document.createElement("strong");strong.textContent="You: ";item.append(strong,document.createTextNode(input.value.trim()));button.closest(".comments").insertBefore(item,button.closest(".comment-form"));input.value=""}
+function follow(button){const on=button.classList.toggle("following");button.textContent=on?"Following":"Follow";toast(on?"You're now following this member":"Unfollowed member")}
+function vote(button){const group=button.parentElement;group.querySelectorAll("button").forEach(b=>{b.style.borderColor="var(--border)";b.style.background="white"});button.style.borderColor="var(--green)";button.style.background="var(--pale)";toast("Your demo response has been recorded")}
+async function share(button){const post=button.closest(".post");const title=post.querySelector("h3").textContent;const text=title+" — CampusX Community";try{if(navigator.share){await navigator.share({title:"CampusX Community",text,url:location.href});}else if(navigator.clipboard){await navigator.clipboard.writeText(text+" "+location.href);toast("Share sheet is not supported here. Link copied instead.");}else{toast("Sharing is not supported by this browser.");}}catch(e){if(e.name!=="AbortError")toast("Unable to open sharing options");}}
+function chooseTopic(category){document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter===category));activeFilter=category;filterPosts()}
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{activeFilter=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));filterPosts()}));
+document.getElementById("search").addEventListener("input",filterPosts);
+function filterPosts(){const q=document.getElementById("search").value.toLowerCase();let shown=0;document.querySelectorAll("#posts .post").forEach(p=>{const matchCategory=activeFilter==="all"||p.dataset.category===activeFilter;const matchText=p.textContent.toLowerCase().includes(q);p.style.display=matchCategory&&matchText?"block":"none";if(matchCategory&&matchText)shown++});document.getElementById("empty").style.display=shown?"none":"block"}
+function toggleNotifications(){document.getElementById("notificationPanel").classList.toggle("show");document.querySelector(".notification-dot").style.display="none"}
+document.addEventListener("click",e=>{const wrap=document.querySelector(".notification-wrap");if(wrap&&!wrap.contains(e.target))document.getElementById("notificationPanel").classList.remove("show")});
+function previewImage(event){const file=event.target.files[0];if(!file)return;if(!file.type.startsWith("image/")){toast("Please choose an image file");event.target.value="";return}const reader=new FileReader();reader.onload=()=>{const img=document.getElementById("imagePreview");img.src=reader.result;img.style.display="block";document.getElementById("uploadName").textContent=file.name};reader.readAsDataURL(file)}
+function publish(){const text=document.getElementById("postText").value.trim();const file=document.getElementById("postImage").files[0];if(!text&&!file){toast("Add some text or a picture first");return}const category=document.getElementById("postCategory").value;const post=document.createElement("article");post.className="post";post.dataset.category=category;const head=document.createElement("div");head.className="post-head";head.innerHTML='<div class="user-avatar">U</div><div class="user-info"><strong>You</strong><small>Your campus · Just now</small></div>';const tag=document.createElement("span");tag.className="tag";tag.textContent=category.toUpperCase();const title=document.createElement("h3");title.textContent=text||"Shared a picture with the community";const footer=document.createElement("div");footer.className="post-footer";footer.innerHTML='<div class="post-actions"><button class="action" onclick="like(this)"><i class="fa-regular fa-heart"></i> <span>0</span></button><button class="action" onclick="comments(this)"><i class="fa-regular fa-comment"></i> 0</button><button class="action" onclick="share(this)"><i class="fa-solid fa-share-nodes"></i> Share</button></div><small>Just now</small>';const commentsBox=document.createElement("div");commentsBox.className="comments";commentsBox.innerHTML='<div class="comment-form"><input placeholder="Write a comment..."><button onclick="commentSend(this)"><i class="fa-solid fa-paper-plane"></i></button></div>';post.append(head,tag,title);if(file){const reader=new FileReader();reader.onload=()=>{const image=document.createElement("img");image.className="post-image";image.src=reader.result;image.alt="Picture shared by a community member";post.insertBefore(image,footer)};reader.readAsDataURL(file)}post.append(footer,commentsBox);document.getElementById("posts").prepend(post);document.getElementById("postText").value="";document.getElementById("postImage").value="";document.getElementById("imagePreview").src="";document.getElementById("imagePreview").style.display="none";document.getElementById("uploadName").textContent="JPG, PNG or WEBP";closeModal();activeFilter="all";document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter==="all"));document.getElementById("search").value="";filterPosts();toast("Your discussion has been added");post.scrollIntoView({behavior:"smooth",block:"center"})}
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
+window.addEventListener("load",()=>setTimeout(()=>{if(!sessionStorage.getItem("cxCommunityWelcome")){toast("Welcome to the CampusX community 👋");sessionStorage.setItem("cxCommunityWelcome","1")}},1200));
 </script>
 </body>
 </html>
