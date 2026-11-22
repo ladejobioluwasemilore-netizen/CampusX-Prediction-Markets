@@ -363,4 +363,109 @@ function closeComingSoon() {
     .classList.remove("show");
 }
 </script>
+  <div id="comingNotification">
+  <div class="coming-icon">
+    <i class="fa-solid fa-clock"></i>
+  </div>
+  <div class="coming-message">
+    <strong>Coming Soon!</strong>
+    <span>This feature is currently under development.</span>
+  </div>
+  <button id="closeComing" aria-label="Close">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+
+<style>
+#comingNotification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  width: 300px;
+  max-width: calc(100vw - 40px);
+  background: #111827;
+  color: white;
+  border: 1px solid #374151;
+  border-radius: 14px;
+  box-shadow: 0 12px 35px #0005;
+  font-family: inherit;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-15px);
+  transition: .3s ease;
+}
+
+#comingNotification.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.coming-icon {
+  background: #2563eb33;
+  color: #60a5fa;
+  padding: 13px;
+  border-radius: 12px;
+  font-size: 19px;
+}
+
+.coming-message {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.coming-message strong {
+  font-size: 14px;
+}
+
+.coming-message span {
+  color: #cbd5e1;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+#closeComing {
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+}
+</style>
+
+<script>
+(function () {
+  const notification = document.getElementById("comingNotification");
+  const close = document.getElementById("closeComing");
+  let timer;
+
+  document.addEventListener("click", function(e) {
+    const link = e.target.closest(".coming-soon-link");
+
+    if (link) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      notification.classList.add("active");
+
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        notification.classList.remove("active");
+      }, 3500);
+    }
+  });
+
+  close.addEventListener("click", function() {
+    notification.classList.remove("active");
+    clearTimeout(timer);
+  });
+})();
+</script>
 </body></html>
