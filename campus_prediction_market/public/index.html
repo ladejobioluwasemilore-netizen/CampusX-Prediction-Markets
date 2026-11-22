@@ -476,4 +476,35 @@ function closeComingSoon() {
   });
 })();
 </script>
+  <script>
+(() => {
+  const toast = document.getElementById("campusComingToast");
+  const close = document.getElementById("campusToastClose");
+
+  if (!toast || !close) return;
+
+  let timer;
+
+  document.addEventListener("click", function(e) {
+    const link = e.target.closest(".coming-soon-link");
+
+    if (!link) return;
+
+    e.preventDefault();
+
+    toast.classList.add("active");
+
+    clearTimeout(timer);
+
+    timer = setTimeout(() => {
+      toast.classList.remove("active");
+    }, 3500);
+  });
+
+  close.addEventListener("click", () => {
+    toast.classList.remove("active");
+    clearTimeout(timer);
+  });
+})();
+</script>
 </body></html>
