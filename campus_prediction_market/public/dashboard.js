@@ -83,7 +83,7 @@ function openSlipExpansion(){
   document.body.appendChild(panel);
   panel.querySelector('.cx-slip-close').addEventListener('click',closeSlipExpansion);
   panel.querySelector('.cx-slip-back').addEventListener('click',closeSlipExpansion);
-  panel.addEventListener('click',e=>{if(e.target===panel)closeSlipExpansion()});
+  panel.addEventListener('click',e=>{  if(e.target===panel){   closeSlipExpansion();   return;  }   const removeButton=e.target.closest('[data-remove-slip]');  if(!removeButton)return;   e.preventDefault();   const index=Number(removeButton.dataset.removeSlip);   if(!Number.isInteger(index)||index<0||index>=slipSelections.length)return;   slipSelections.splice(index,1);   renderSlip();  renderMarkets();  openSlipExpansion(); });
   panel.querySelector('.cx-slip-proceed').addEventListener('click',()=>{
    const stakeCopy=document.getElementById('cxSlipExpansionStake');
    const stakeField=document.getElementById('slipStake');
