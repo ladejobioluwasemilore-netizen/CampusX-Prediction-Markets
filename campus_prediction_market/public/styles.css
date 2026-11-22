@@ -273,3 +273,74 @@ svg.local-icon {
 .email-check-spam .material-symbols-outlined{font-size:20px;color:#b7791f}
 #emailCheckResend{margin-top:10px}
 #emailCheckResend:disabled{opacity:.55;cursor:not-allowed}
+#campusComingToast {
+  position: fixed;
+  top: 25px;
+  right: 20px;
+  width: 320px;
+  max-width: calc(100% - 40px);
+  background: #101827;
+  color: white;
+  padding: 17px;
+  border: 1px solid #263750;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  z-index: 999999;
+  box-shadow: 0 15px 40px rgba(0,0,0,.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: all .3s ease;
+}
+
+#campusComingToast.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.campus-toast-icon {
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  background: #2563eb25;
+  color: #60a5fa;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+}
+
+.campus-toast-icon svg {
+  width: 23px;
+  height: 23px;
+}
+
+.campus-toast-text {
+  flex: 1;
+}
+
+.campus-toast-text strong {
+  font-size: 14px;
+}
+
+.campus-toast-text p {
+  font-size: 12px;
+  color: #aebbd0;
+  line-height: 1.5;
+  margin: 5px 0 0;
+}
+
+#campusToastClose {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 5px;
+}
+
+#campusToastClose svg {
+  width: 18px;
+  height: 18px;
+}
