@@ -25,7 +25,7 @@ main{max-width:1240px;margin:auto;padding:30px 20px 65px}.hero{position:relative
 .compose-modal{display:none;position:fixed;inset:0;background:#04190c99;backdrop-filter:blur(5px);z-index:60;place-items:center;padding:15px}.compose-modal.show{display:grid}
 .compose-dialog{background:white;width:min(490px,100%);padding:20px;border-radius:18px;box-shadow:0 22px 65px #001b0b44;animation:rise .22s}
 .compose-modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.compose-modal-head h2{font-size:18px;margin:0}
-.compose-dialog textarea{width:100%;min-height:125px;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:12px;font:12px inherit;outline-color:var(--g)}
+.compose-dialog textarea{width:100%;min-height:125px;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:12px;font:12px system-ui,-apple-system,Segoe UI,sans-serif;outline-color:var(--g)}
 .compose-modal-foot{display:flex;align-items:center;gap:10px;margin-top:10px}.upload-choice{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:9px;padding:9px 11px;color:var(--g);font-size:10px;font-weight:850;cursor:pointer}.upload-choice input{display:none}#draftFileName{font-size:9px;color:var(--muted)}.draft-preview{display:none;max-width:100%;max-height:180px;border-radius:10px;margin-top:10px}
 .publish-modal{width:100%;margin-top:13px;background:var(--g);color:white;border:0;border-radius:9px;padding:12px;font-size:11px;font-weight:900}
 </style>
@@ -70,7 +70,8 @@ function closeComposer(){const modal=document.getElementById("composeModal");mod
 function previewDraftImage(event){const file=event.target.files&&event.target.files[0];if(!file)return;if(!file.type.startsWith("image/")){showToast("Please choose an image file");event.target.value="";return;}const reader=new FileReader();reader.onload=()=>{document.getElementById("draftPreview").src=reader.result;document.getElementById("draftPreview").style.display="block";document.getElementById("draftFileName").textContent=file.name;};reader.readAsDataURL(file);}
 document.getElementById("composeModal").addEventListener("click",event=>{if(event.target.id==="composeModal")closeComposer();});
 document.addEventListener("keydown",event=>{if(event.key==="Escape")closeComposer();});
-\nfunction comingSoon(){showToast("Publishing posts is coming soon.")}
+
+function comingSoon(){showToast("Publishing posts is coming soon.")}
 function toggleNotices(){const panel=$("#noticePanel");const opening=!panel.classList.contains("show");panel.classList.toggle("show",opening);$("#noticeDot").style.display="none";if(opening)showToast("You have 3 CampusX notifications");}
 document.addEventListener("click",e=>{if(!e.target.closest(".noticewrap"))$("#noticePanel").classList.remove("show")});
 function likePost(button){button.classList.toggle("liked");const count=button.querySelector("span");const current=Number(count.textContent)||0;count.textContent=current+(button.classList.contains("liked")?1:-1);showToast(button.classList.contains("liked")?"You liked this post":"Like removed");}
