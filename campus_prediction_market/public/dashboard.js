@@ -93,12 +93,25 @@ function openSlipExpansion(){
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSlipExpansion()});
  }
  const body=panel.querySelector('#cxSlipExpansionBody');
- const source=document.getElementById('slipSelections');
- if(source && source.innerHTML.trim()){
-  body.innerHTML=source.innerHTML;
- }else{
-  body.innerHTML='<div class="cx-slip-empty">No markets selected yet. Choose a YES or NO outcome to add one.</div>';
- }
+const source=document.getElementById('slipSelections');
+
+body.innerHTML=slipSelections.length && source
+ ? source.innerHTML
+ : '<div class="cx-slip-empty">No markets selected yet. Choose a YES or NO outcome to add one.</div>';
+
+body.onclick=e=>{
+ const removeBtn=e.target.closest('[data-remove-slip]');
+ if(!removeBtn)return;
+
+ const index=Number(removeBtn.dataset.removeSlip);
+ if(!Number.isInteger(index)||index<0||index>=slipSelections.length)return;
+
+ slipSelections.splice(index,1);
+
+ renderSlip();
+ renderMarkets();
+ openSlipExpansion();
+};
  const summary=document.querySelector('#multiMarketSlip .slip-summary,#multiMarketSlip .slip-totals,#multiMarketSlip .slip-footer');
  if(summary){const wrap=document.createElement('div');wrap.className='cx-slip-summary-copy';const copy=summary.cloneNode(true);copy.querySelector('label')?.remove();copy.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));wrap.appendChild(copy);body.appendChild(wrap)}
  const stake=document.getElementById('slipStake');
