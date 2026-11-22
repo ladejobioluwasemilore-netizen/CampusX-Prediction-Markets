@@ -111,7 +111,7 @@ body.landing-only #marketRuntime{display:none!important}.material-symbols-outlin
     <svg viewBox="0 0 24 24" aria-hidden="true">
     <circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
   </a>
-  <a href="community.html" id="communityNav" title="Community">
+  <a href="javascript:void(0)" onclick="showComingSoon(event) id="communityNav">
     <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
         <circle cx="9" cy="7" r="4"/>
@@ -279,5 +279,88 @@ body.landing-only #marketRuntime{display:none!important}.material-symbols-outlin
     }, 3800);
   }
 })();
+
+</script>
+  <style>
+.coming-toast {
+  position: fixed;
+  top: 25px;
+  right: 20px;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: min(330px, calc(100% - 40px));
+  padding: 16px;
+  background: #111827;
+  color: white;
+  border: 1px solid #334155;
+  border-radius: 15px;
+  box-shadow: 0 10px 35px #0005;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-15px);
+  transition: .3s ease;
+}
+
+.coming-toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.coming-toast .toast-icon {
+  background: #1e3a8a;
+  color: #60a5fa;
+  padding: 13px;
+  border-radius: 12px;
+}
+
+.coming-toast p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+.coming-toast button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+</style>
+
+<div class="coming-toast" id="comingToast">
+  <div class="toast-icon">
+    <i class="fa-solid fa-clock"></i>
+  </div>
+  <div>
+    <strong>Coming Soon!</strong>
+    <p>This feature is currently under development.</p>
+  </div>
+  <button onclick="closeComingSoon()">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+
+<script>
+function showComingSoon(event) {
+  event.preventDefault();
+
+  const toast = document.getElementById("comingToast");
+  toast.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(() => {
+    closeComingSoon();
+  }, 3500);
+}
+
+function closeComingSoon() {
+  document.getElementById("comingToast")
+    .classList.remove("show");
+}
 </script>
 </body></html>
