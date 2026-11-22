@@ -88,7 +88,7 @@ function openSlipExpansion(){
    const stakeCopy=document.getElementById('cxSlipExpansionStake');
    const stakeField=document.getElementById('slipStake');
    if(stakeCopy&&stakeField){stakeField.value=stakeCopy.value;stakeField.dispatchEvent(new Event('input',{bubbles:true}));}
-   document.getElementById('placeMultiSlip')?.click();
+   closeSlipExpansion(); switchView('wallet');
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSlipExpansion()});
  }
