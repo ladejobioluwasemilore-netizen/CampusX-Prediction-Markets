@@ -1,210 +1,642 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f5f7fb" />
-  <title>CampusX — Prediction Markets</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="dash.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#103d2d">
+<title>CampusX — Prediction Markets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+:root{
+ --green:#174b36;--green2:#103b2b;--deep:#09271d;
+ --sage:#9ab99f;--lime:#b5ce83;--bg:#f4f7f4;
+ --white:#fff;--ink:#17251e;--muted:#849188;
+ --line:#e5ebe6;--red:#d95b5b;--gold:#d7a84b;
+ --shadow:0 12px 35px rgba(12,43,28,.07);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:13px}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--sage);outline-offset:2px}
+.app{min-height:100vh}
+.sidebar{position:fixed;inset:0 auto 0 0;width:225px;background:#fff;border-right:1px solid var(--line);padding:22px 15px;display:flex;flex-direction:column;z-index:30;transition:.25s}
+.brand{display:flex;align-items:center;gap:10px;padding:3px 8px 27px}
+.brand-mark{width:35px;height:35px;border-radius:11px;background:var(--green);display:grid;place-items:center;color:#fff;font:800 17px Manrope}
+.brand strong{font:800 18px Manrope;letter-spacing:-.6px;color:var(--green2)}
+.brand small{display:block;font-size:9px;color:var(--muted);letter-spacing:1.3px;margin-top:2px}
+.nav-label{font-size:9px;font-weight:800;letter-spacing:1.4px;color:#a0aaa3;padding:13px 10px 7px}
+.nav{display:grid;gap:4px}
+.nav button{border:0;background:transparent;color:#718077;display:flex;align-items:center;gap:11px;padding:10px 11px;border-radius:9px;text-align:left;font-size:12px;font-weight:650;transition:.2s}
+.nav button svg{width:16px;height:16px}
+.nav button:hover,.nav button.active{background:#edf4ee;color:var(--green)}
+.nav button.active{font-weight:800}
+.sidebar-bottom{margin-top:auto}
+.sidebar-note{background:#f1f6f1;border:1px solid #e5eee5;border-radius:11px;padding:12px;margin:12px 2px}
+.sidebar-note b{font-size:11px;color:var(--green)}
+.sidebar-note p{font-size:10px;line-height:1.5;color:var(--muted);margin:5px 0 0}
+.user-mini{display:flex;align-items:center;gap:9px;padding:13px 5px 0;border-top:1px solid var(--line)}
+.avatar{width:32px;height:32px;border-radius:50%;background:#e2eee3;color:var(--green);display:grid;place-items:center;font-size:11px;font-weight:800;flex:none}
+.user-mini b{font-size:11px;display:block}
+.user-mini small{font-size:10px;color:var(--muted)}
+.main{margin-left:225px;min-height:100vh}
+.topbar{height:65px;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:20}
+.top-left{display:flex;align-items:center;gap:12px}
+.crumb{font-size:11px;color:var(--muted)}
+.crumb b{color:var(--ink)}
+.top-actions{display:flex;align-items:center;gap:9px}
+.icon-btn{width:34px;height:34px;border:1px solid var(--line);background:white;border-radius:9px;display:grid;place-items:center;color:#637269}
+.icon-btn svg{width:16px;height:16px}
+.top-user{display:flex;align-items:center;gap:8px;margin-left:4px}
+.top-user .avatar{width:29px;height:29px}
+.top-user b{font-size:11px}
+.content{padding:25px 28px 45px;max-width:1500px;margin:auto}
+.page{display:none;animation:appear .25s ease}
+.page.active{display:block}
+@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.page-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}
+.page-heading h1{font:800 21px Manrope;letter-spacing:-.7px;margin:0}
+.page-heading p{font-size:11px;color:var(--muted);margin:5px 0 0}
+.btn{border:0;border-radius:9px;padding:10px 14px;font-weight:750;font-size:11px;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:.2s}
+.btn svg{width:14px;height:14px}
+.btn-primary{background:var(--green);color:white}
+.btn-primary:hover{background:var(--green2);transform:translateY(-1px)}
+.btn-light{background:#edf3ee;color:var(--green)}
+.btn-outline{background:white;border:1px solid var(--line);color:var(--ink)}
+.btn-danger{background:#fff0f0;color:#c24c4c}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.grid{display:grid;gap:14px}
+.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:17px}
+.stat,.panel,.market-card{background:white;border:1px solid var(--line);border-radius:13px;box-shadow:0 3px 15px rgba(15,44,27,.025)}
+.stat{padding:15px}
+.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:10px;font-weight:700}
+.stat-icon{width:29px;height:29px;border-radius:9px;background:#edf4ee;color:var(--green);display:grid;place-items:center}
+.stat-icon svg{width:15px;height:15px}
+.stat-value{font:800 21px Manrope;margin-top:12px;letter-spacing:-.7px}
+.stat-foot{font-size:10px;color:var(--muted);margin-top:4px}
+.panel{padding:17px;margin-bottom:15px}
+.panel-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}
+.panel-heading h3{font:800 13px Manrope;margin:0}
+.panel-heading small{font-size:10px;color:var(--muted)}
+.hero{background:linear-gradient(120deg,#103c2b,#1b563d);border-radius:15px;padding:23px;color:#fff;margin-bottom:16px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:230px;height:230px;border:1px solid rgba(255,255,255,.1);border-radius:50%;right:-50px;top:-110px;box-shadow:0 0 0 35px rgba(255,255,255,.025),0 0 0 70px rgba(255,255,255,.02)}
+.hero-content{position:relative;z-index:1;max-width:620px}
+.hero-kicker{font-size:9px;letter-spacing:1.8px;text-transform:uppercase;color:#b7d3bc;font-weight:800}
+.hero h2{font:800 24px Manrope;letter-spacing:-.8px;margin:10px 0 7px}
+.hero p{font-size:11px;line-height:1.6;color:#d4e3d7;margin:0 0 15px;max-width:480px}
+.hero .btn{background:#d8e8d5;color:#123b2b}
+.hero-count{display:flex;gap:8px;margin:13px 0}
+.count-unit{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:8px 12px;min-width:55px;text-align:center}
+.count-unit b{display:block;font:800 17px Manrope}
+.count-unit small{font-size:8px;color:#d1e1d4;text-transform:uppercase}
+.toolbar{display:flex;gap:9px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.search{position:relative;flex:1;min-width:180px}
+.search svg{position:absolute;left:11px;top:10px;width:15px;height:15px;color:#91a096}
+.search input{width:100%;height:36px;border:1px solid var(--line);border-radius:9px;padding:0 12px 0 34px;background:white;font-size:11px;outline:none}
+.search input:focus{border-color:#9bb8a0}
+.pills{display:flex;gap:5px;flex-wrap:wrap}
+.pill{border:1px solid var(--line);background:white;border-radius:20px;padding:8px 12px;font-size:10px;font-weight:700;color:#738077}
+.pill.active{background:var(--green);border-color:var(--green);color:white}
+.market-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.market-card{padding:15px;transition:.22s;min-width:0}
+.market-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.market-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.market-category{font-size:9px;text-transform:uppercase;letter-spacing:1px;font-weight:800;color:var(--green)}
+.status{font-size:9px;font-weight:800;border-radius:20px;padding:5px 8px;background:#edf5ee;color:#39744b}
+.status.void{background:#fff0f0;color:#c44d4d}
+.status.closed{background:#f0f1f1;color:#7b8580}
+.market-card h3{font:800 14px/1.4 Manrope;margin:0 0 6px}
+.market-desc{font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:12px}
+.outcomes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.outcome{border:1px solid var(--line);border-radius:9px;background:#fafcf9;padding:9px;text-align:left;transition:.18s;min-width:0}
+.outcome:hover{border-color:#91b49a;background:#f0f7f1}
+.outcome.selected{border-color:var(--green);background:#edf5ee;box-shadow:inset 0 0 0 1px var(--green)}
+.outcome b{font-size:11px;display:block;overflow-wrap:anywhere}
+.outcome span{display:block;font:800 15px Manrope;color:var(--green);margin-top:5px}
+.outcome small{font-size:9px;color:var(--muted)}
+.market-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid #f0f2f0}
+.market-foot small{font-size:9px;color:var(--muted)}
+.market-actions{display:flex;gap:6px;align-items:center}
+.text-btn{border:0;background:none;color:var(--green);font-size:10px;font-weight:800;padding:5px}
+.chart-wrap{height:180px;position:relative}
+canvas{width:100%;height:100%;display:block}
+.slip{position:fixed;right:20px;bottom:18px;width:310px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 15px 45px rgba(0,0,0,.16);z-index:40;overflow:hidden;transform:translateY(calc(100% + 35px));transition:.3s}
+.slip.open{transform:translateY(0)}
+.slip-head{padding:13px 15px;background:var(--green);color:white;display:flex;justify-content:space-between;align-items:center}
+.slip-head b{font:800 12px Manrope}
+.slip-body{padding:13px}
+.slip-item{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:8px 0;font-size:10px}
+.slip-item button{border:0;background:none;color:var(--red)}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:10px;font-weight:800;color:#68776d;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px 11px;background:white;font-size:11px;color:var(--ink);outline:none}
+.field textarea{min-height:65px;resize:vertical}
+.field input:focus,.field select:focus{border-color:#8eae95}
+.field-hint{font-size:9px;color:var(--muted);line-height:1.5;margin-top:5px}
+.modal-backdrop{position:fixed;inset:0;background:rgba(6,25,17,.48);z-index:100;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-backdrop.show{display:flex}
+.modal{width:min(460px,100%);max-height:90vh;overflow:auto;background:white;border-radius:15px;box-shadow:0 25px 70px rgba(0,0,0,.2);animation:appear .2s}
+.modal-head{display:flex;justify-content:space-between;align-items:center;padding:17px 19px;border-bottom:1px solid var(--line)}
+.modal-head h3{font:800 14px Manrope;margin:0}
+.modal-body{padding:18px}
+.modal-close{border:0;background:#f2f5f2;border-radius:8px;width:29px;height:29px;display:grid;place-items:center}
+.modal-close svg{width:15px;height:15px}
+.modal-foot{display:flex;gap:8px;justify-content:flex-end;margin-top:15px}
+.notice{padding:11px;border-radius:9px;background:#f1f6f1;color:#49634f;font-size:10px;line-height:1.5;margin:10px 0}
+.notice.warning{background:#fff7e8;color:#8b682a}
+.notice.error{background:#fff0f0;color:#b54b4b}
+.empty{padding:30px;text-align:center;color:var(--muted);font-size:11px}
+.empty svg{width:26px;height:26px;margin-bottom:8px;color:#9eada2}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:520px}
+th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #edf0ed;font-size:10px}
+th{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:#89958d}
+td b{font-size:10px}
+.admin-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:14px}
+.outcome-row{display:grid;grid-template-columns:1fr 95px 30px;gap:7px;margin-bottom:7px}
+.outcome-row input{min-width:0;border:1px solid var(--line);border-radius:7px;padding:9px;font-size:10px}
+.outcome-row button{border:0;border-radius:7px;background:#fff0f0;color:#bf4b4b}
+.mobile-menu{display:none}
+.toast{position:fixed;top:78px;right:20px;background:#173f2e;color:white;padding:11px 15px;border-radius:9px;box-shadow:var(--shadow);font-size:11px;z-index:200;opacity:0;transform:translateY(-8px);pointer-events:none;transition:.25s}
+.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:1000px){.stats{grid-template-columns:repeat(2,1fr)}.content{padding:20px}.topbar{padding:0 20px}}
+@media(max-width:760px){
+ .sidebar{transform:translateX(-100%);box-shadow:none}.sidebar.open{transform:translateX(0);box-shadow:15px 0 40px rgba(0,0,0,.12)}
+ .main{margin-left:0}.mobile-menu{display:grid}.topbar{height:58px;padding:0 13px}.content{padding:17px 13px 35px}
+ .market-grid{grid-template-columns:1fr}.admin-grid{grid-template-columns:1fr}
+ .hero{padding:18px}.hero h2{font-size:20px}.page-heading h1{font-size:19px}
+ .slip{right:10px;bottom:10px;width:min(340px,calc(100% - 20px))}
+}
+@media(max-width:420px){
+ .stats{gap:8px}.stat{padding:11px}.stat-value{font-size:18px}
+ .stat-top{font-size:9px}.top-user b{display:none}
+ .page-heading{align-items:flex-start}.page-heading .btn{padding:9px}
+ .toolbar{gap:7px}.pill{padding:7px 9px}
+}
+</style>
 </head>
 <body>
-  <div id="welcome-splash" class="welcome-splash hidden"><div class="welcome-splash-card"><div class="welcome-splash-logo">CX</div><span class="eyebrow">WELCOME TO CAMPUSX</span><h1>Welcome, <strong id="welcome-splash-name">Trader</strong></h1><p>Your campus prediction experience is ready.</p><div class="welcome-splash-loader"><span></span></div></div></div>
-  <div id="login-screen" class="login-screen">
-    <div class="login-art">
-      <div class="art-glow"></div>
-      <div class="brand brand-large"><span class="brand-mark">CX</span><span>CAMPUSX</span></div>
-      <div class="login-copy">
-        <span class="eyebrow">THE PULSE OF WHAT'S NEXT</span>
-        <h1>See the odds.<br><em>Make your call.</em></h1>
-        <p>A smarter way to follow predictions, explore markets and track your positions.</p>
-        <div class="mini-stats">
-          <div><strong>120+</strong><span>Live markets</span></div>
-          <div><strong>24/7</strong><span>Market activity</span></div>
-          <div><strong>₦</strong><span>Naira-based demo</span></div>
-        </div>
-      </div>
-      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-    </div>
-    <div class="login-panel">
-      <div class="login-form-wrap">
-        <div class="brand brand-mobile"><span class="brand-mark">CX</span><span>CAMPUSX</span></div>
-        <span class="eyebrow">WELCOME TO CX</span>
-        <h2>Sign in to your account</h2>
-        <p class="muted">Enter your name and email to continue.</p>
-        <form id="login-form">
-          <label for="login-name">Full name</label>
-          <div class="input-wrap"><i data-lucide="user-round"></i><input id="login-name" name="name" placeholder="e.g. Alex Johnson" required minlength="2"></div>
-          <label for="login-email">Email address</label>
-          <div class="input-wrap"><i data-lucide="mail"></i><input id="login-email" name="email" type="email" placeholder="you@example.com" required></div>
-          <button class="btn btn-primary btn-wide" type="submit">Continue to dashboard <i data-lucide="arrow-right"></i></button>
-        </form>
-        <div class="login-note"><i data-lucide="shield-check"></i><span>Frontend preview. Accounts and balances are stored locally in this browser only.</span></div>
-      </div>
-      <div class="login-footer">© 2026 CampusX <span>Markets are for demonstration only</span></div>
-    </div>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+ <div class="brand"><div class="brand-mark">C</div><div><strong>CampusX</strong><small>Predict · Explore · Win</small></div></div>
+ <div class="nav-label">WORKSPACE</div>
+ <nav class="nav">
+  <button class="active" data-page="overview"><i data-lucide="layout-dashboard"></i> Overview</button>
+  <button data-page="markets"><i data-lucide="chart-no-axes-combined"></i> Markets</button>
+  <button data-page="portfolio"><i data-lucide="briefcase-business"></i> My positions</button>
+  <button data-page="wallet"><i data-lucide="wallet"></i> Wallet</button>
+ </nav>
+ <div class="nav-label">ACCOUNT</div>
+ <nav class="nav">
+  <button data-page="profile"><i data-lucide="user-round"></i> Profile</button>
+  <button data-page="settings"><i data-lucide="settings-2"></i> Settings</button>
+ </nav>
+ <div class="nav-label admin-only" style="display:none">ADMINISTRATION</div>
+ <nav class="nav admin-only" style="display:none">
+  <button data-page="admin"><i data-lucide="shield-check"></i> Admin overview</button>
+  <button data-page="manage"><i data-lucide="sliders-horizontal"></i> Manage markets</button>
+  <button data-page="users"><i data-lucide="users"></i> Users & activity</button>
+ </nav>
+ <div class="sidebar-bottom">
+  <div class="sidebar-note"><b>Your campus. Your predictions.</b><p>Explore campus events, follow market movements and manage your positions.</p></div>
+  <div class="user-mini"><div class="avatar" id="sideAvatar">U</div><div><b id="sideName">Guest User</b><small id="sideRole">Member account</small></div></div>
+ </div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+ <div class="top-left"><button class="icon-btn mobile-menu" onclick="toggleSidebar()"><i data-lucide="menu"></i></button><div class="crumb">CampusX / <b id="crumb">Overview</b></div></div>
+ <div class="top-actions">
+  <button class="icon-btn" onclick="showToast('You are all caught up.')"><i data-lucide="bell"></i></button>
+  <div class="top-user"><div class="avatar" id="topAvatar">U</div><b id="topName">Guest User</b></div>
+  <button class="icon-btn" title="Sign out" onclick="logout()"><i data-lucide="log-out"></i></button>
+ </div>
+</header>
+
+<div class="content">
+<section class="page active" id="page-overview">
+ <div class="hero">
+  <div class="hero-content">
+   <div class="hero-kicker">CampusX prediction markets</div>
+   <h2>Your campus. Your predictions.</h2>
+   <p>Explore campus events, compare outcomes and follow the markets that matter to your community.</p>
+   <button class="btn" onclick="navigate('markets')">Explore markets <i data-lucide="arrow-up-right"></i></button>
   </div>
+ </div>
+ <div class="grid stats">
+  <div class="stat"><div class="stat-top">Wallet balance <span class="stat-icon"><i data-lucide="wallet"></i></span></div><div class="stat-value" id="overviewBalance">₦0.00</div><div class="stat-foot">Available balance</div></div>
+  <div class="stat"><div class="stat-top">Open markets <span class="stat-icon"><i data-lucide="chart-line"></i></span></div><div class="stat-value" id="overviewMarkets">0</div><div class="stat-foot">Currently accepting positions</div></div>
+  <div class="stat"><div class="stat-top">My positions <span class="stat-icon"><i data-lucide="layers"></i></span></div><div class="stat-value" id="overviewPositions">0</div><div class="stat-foot">Your selected outcomes</div></div>
+  <div class="stat"><div class="stat-top">Total staked <span class="stat-icon"><i data-lucide="coins"></i></span></div><div class="stat-value" id="overviewStaked">₦0.00</div><div class="stat-foot">Across your positions</div></div>
+ </div>
+ <div class="panel">
+  <div class="panel-heading"><h3>Election market countdown</h3><small>Countdown requested for 102 days</small></div>
+  <div id="electionCountdown" style="font:800 23px Manrope;color:var(--green)">102d 00h 00m 00s</div>
+  <div class="field-hint">The countdown is saved on this device. Set the official election deadline in the admin settings when confirmed.</div>
+ </div>
+ <div class="panel">
+  <div class="panel-heading"><h3>Market activity</h3><small>Price movement from recorded changes</small></div>
+  <div class="chart-wrap"><canvas id="overviewChart"></canvas></div>
+ </div>
+ <div class="panel">
+  <div class="panel-heading"><h3>Trending markets</h3><button class="text-btn" onclick="navigate('markets')">View all markets →</button></div>
+  <div class="market-grid" id="overviewMarketsList"></div>
+ </div>
+</section>
 
-  <div id="app" class="app-shell hidden">
-    <aside class="sidebar" id="sidebar">
-      <div class="brand sidebar-brand"><span class="brand-mark">CX</span><span>CAMPUSX</span></div>
-      <div class="sidebar-label">WORKSPACE</div>
-      <nav class="main-nav">
-        <button class="nav-link active" data-view="overview"><i data-lucide="layout-dashboard"></i>Overview</button>
-        <button class="nav-link" data-view="markets"><i data-lucide="chart-no-axes-combined"></i>Explore markets<span class="nav-count">120+</span></button>
-        <button class="nav-link" data-view="elections"><i data-lucide="landmark"></i>Election markets</button>
-        <button class="nav-link" data-view="positions"><i data-lucide="chart-line"></i>My positions</button>
-        <button class="nav-link" data-view="weekly"><i data-lucide="trophy"></i>Weekly challenge<span class="new-dot"></span></button>
-      </nav>
-      <div class="sidebar-label">YOUR ACCOUNT</div>
-      <nav class="main-nav">
-        <button class="nav-link" data-view="wallet"><i data-lucide="wallet"></i>Wallet</button>
-        <button class="nav-link" data-view="notifications"><i data-lucide="bell"></i>Notifications<span class="unread-count">3</span></button>
-        <button class="nav-link" data-view="settings"><i data-lucide="settings-2"></i>Profile & settings</button>
-      </nav>
-      <div id="admin-nav-wrap" class="hidden">
-        <div class="sidebar-label">ADMINISTRATION</div>
-        <nav class="main-nav">
-          <button class="nav-link" data-view="admin-markets"><i data-lucide="sliders-horizontal"></i>Market manager</button>
-          <button class="nav-link" data-view="admin-users"><i data-lucide="users"></i>Account directory</button>
-          <button class="nav-link" data-view="admin-requests"><i data-lucide="clipboard-list"></i>Wallet requests</button>
-        </nav>
-      </div>
-      <div class="sidebar-bottom">
-        <div class="help-card"><div class="help-icon"><i data-lucide="life-buoy"></i></div><strong>Need a hand?</strong><span>Explore the demo or contact support.</span><button id="help-btn">Help centre <i data-lucide="arrow-up-right"></i></button></div>
-        <div class="profile-row"><div class="avatar" id="side-avatar">A</div><div class="profile-meta"><strong id="side-name">Alex Johnson</strong><span id="side-role">Trader account</span></div><button id="logout-btn" class="icon-btn" title="Sign out"><i data-lucide="log-out"></i></button></div>
-      </div>
-    </aside>
+<section class="page" id="page-markets">
+ <div class="page-heading"><div><h1>Explore markets</h1><p>Find a market and select the outcome you believe in.</p></div><button class="btn btn-primary" onclick="openSlip()"><i data-lucide="receipt"></i> My slip <span id="slipCount">0</span></button></div>
+ <div class="toolbar"><div class="search"><i data-lucide="search"></i><input id="marketSearch" placeholder="Search markets, events or outcomes..." oninput="renderMarkets()"></div><div class="pills" id="marketFilters"><button class="pill active" data-filter="all">All</button><button class="pill" data-filter="elections">Elections</button><button class="pill" data-filter="sports">Sports</button><button class="pill" data-filter="campus">Campus events</button></div></div>
+ <div class="market-grid" id="marketList"></div>
+</section>
 
-    <main class="main-area">
-      <header class="topbar">
-        <button class="icon-btn mobile-menu" id="mobile-menu"><i data-lucide="menu"></i></button>
-        <div class="breadcrumb"><span>Workspace</span><i data-lucide="chevron-right"></i><strong id="page-crumb">Overview</strong></div>
-        <div class="top-actions">
-          <div class="market-status"><span class="pulse"></span> Markets live</div>
-          <button class="icon-btn notification-top" data-view="notifications"><i data-lucide="bell"></i><b></b></button>
-          <button class="top-avatar" id="top-avatar" title="Profile and settings">A</button>
-        </div>
-      </header>
-      <div class="page-content">
-        <section id="view-overview" class="view active">
-          <div class="welcome-row"><div><div class="eyebrow">TUESDAY, 25 NOVEMBER 2026</div><h1>Good to see you, <span id="welcome-name">Alex</span> <span class="wave">✦</span></h1><p class="muted">Here’s what’s happening across your markets today.</p></div><button class="btn btn-secondary" data-view="markets"><i data-lucide="compass"></i> Explore markets</button></div>
-          <div class="stat-grid">
-            <div class="stat-card balance-card"><div class="stat-top"><span>Available balance</span><i data-lucide="wallet"></i></div><div class="stat-value" id="overview-balance">₦250,000.00</div><div class="stat-foot"><span class="positive"><i data-lucide="trending-up"></i> Demo wallet</span><button class="text-btn" data-view="wallet">Manage wallet <i data-lucide="arrow-up-right"></i></button></div></div>
-            <div class="stat-card"><div class="stat-top"><span>Open positions</span><i data-lucide="chart-no-axes-combined"></i></div><div class="stat-value" id="open-positions">0</div><div class="stat-foot"><span class="muted">Your active selections</span><button class="text-btn" data-view="positions">View positions <i data-lucide="arrow-up-right"></i></button></div></div>
-            <div class="stat-card"><div class="stat-top"><span>Total staked</span><i data-lucide="layers-3"></i></div><div class="stat-value" id="total-staked">₦0.00</div><div class="stat-foot"><span class="muted">Across active positions</span><span class="soft-pill">This account</span></div></div>
-            <div class="stat-card"><div class="stat-top"><span>Potential returns</span><i data-lucide="badge-naira"></i></div><div class="stat-value" id="potential-returns">₦0.00</div><div class="stat-foot"><span class="muted">If current picks win</span><span class="soft-pill green">Estimated</span></div></div>
-          </div>
-          <div class="content-grid">
-            <div class="panel market-panel"><div class="panel-heading"><div><span class="eyebrow">DON'T MISS THE MOMENT</span><h3>Trending markets</h3><p class="muted">Popular predictions gaining attention.</p></div><button class="text-btn" data-view="markets">View all <i data-lucide="arrow-right"></i></button></div><div id="trending-list" class="trending-list"></div></div>
-            <div class="panel election-card"><div class="election-visual"><div class="election-orb"><i data-lucide="landmark"></i></div><span class="eyebrow">CAMPUS ELECTIONS</span><h3>The countdown is on.</h3><p>Follow the race across SUG, colleges and departments.</p><div class="countdown" id="countdown"><div><strong>102</strong><span>Days</span></div><b>:</b><div><strong>08</strong><span>Hours</span></div><b>:</b><div><strong>42</strong><span>Mins</span></div><b>:</b><div><strong>18</strong><span>Secs</span></div></div><button class="btn btn-white" data-view="elections">Explore elections <i data-lucide="arrow-right"></i></button></div></div>
-          </div>
-          <div class="panel categories-panel"><div class="panel-heading"><div><h3>Explore by category</h3><p class="muted">Find the markets you care about.</p></div></div><div class="category-grid" id="category-grid"></div></div>
-          <div class="panel"><div class="panel-heading"><div><h3>Weekly prediction challenge</h3><p class="muted">10 difficult predictions. One ₦1,000,000 prize pool concept.</p></div><button class="text-btn" data-view="weekly">View challenge <i data-lucide="arrow-right"></i></button></div><div class="challenge-strip"><div class="challenge-icon"><i data-lucide="trophy"></i></div><div><strong>Can you call all 10?</strong><span>Demo entry stake starts at ₦10,000.</span></div><div class="challenge-prize"><span>TOP PRIZE</span><strong>₦1,000,000</strong></div><button class="btn btn-primary" data-view="weekly">Enter challenge</button></div></div>
-        </section>
+<section class="page" id="page-portfolio">
+ <div class="page-heading"><div><h1>My positions</h1><p>Review the outcomes you have selected.</p></div></div>
+ <div class="panel"><div class="table-wrap"><table><thead><tr><th>Market</th><th>Outcome</th><th>Price</th><th>Stake</th><th>Status</th></tr></thead><tbody id="positionsTable"></tbody></table></div></div>
+</section>
 
-        <section id="view-markets" class="view">
-          <div class="page-title-row"><div><span class="eyebrow">FIND YOUR EDGE</span><h1>Explore markets</h1><p class="muted">Browse live predictions and choose an outcome.</p></div><div class="market-total"><strong id="market-total">120</strong><span>open markets</span></div></div>
-          <div class="market-toolbar"><div class="search-box"><i data-lucide="search"></i><input id="market-search" placeholder="Search markets, teams, categories..." /></div><div class="filter-wrap"><i data-lucide="list-filter"></i><select id="category-filter"><option value="All">All categories</option><option>Football</option><option>Politics</option><option>Entertainment</option><option>Campus</option><option>Basketball</option><option>Other</option></select></div><div class="filter-wrap"><i data-lucide="arrow-down-wide-narrow"></i><select id="sort-filter"><option value="popular">Most popular</option><option value="closing">Closing soon</option><option value="newest">Recently added</option></select></div></div>
-          <div class="market-tabs" id="market-tabs"><button class="active" data-market-tab="All">All markets</button><button data-market-tab="Popular">Popular</button><button data-market-tab="New">New</button><button data-market-tab="Closing">Closing soon</button></div>
-          <div id="market-grid" class="market-grid"></div>
-        </section>
+<section class="page" id="page-wallet">
+ <div class="page-heading"><div><h1>Wallet</h1><p>Manage your CampusX wallet.</p></div></div>
+ <div class="grid stats" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+  <div class="stat"><div class="stat-top">Available balance <span class="stat-icon"><i data-lucide="wallet"></i></span></div><div class="stat-value" id="walletBalance">₦0.00</div><div class="stat-foot">Your current wallet balance</div></div>
+  <div class="stat"><div class="stat-top">Transactions <span class="stat-icon"><i data-lucide="receipt"></i></span></div><div class="stat-value" id="transactionCount">0</div><div class="stat-foot">Recorded on this device</div></div>
+ </div>
+ <div class="panel"><div class="panel-heading"><h3>Wallet actions</h3></div><div style="display:flex;gap:9px;flex-wrap:wrap"><button class="btn btn-primary" onclick="openWalletModal('deposit')"><i data-lucide="plus"></i> Add funds</button><button class="btn btn-outline" onclick="openWalletModal('withdraw')"><i data-lucide="arrow-up-right"></i> Withdraw</button></div></div>
+ <div class="panel"><div class="panel-heading"><h3>Recent transactions</h3></div><div class="table-wrap"><table><thead><tr><th>Type</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead><tbody id="transactionsTable"></tbody></table></div></div>
+</section>
 
-        <section id="view-elections" class="view">
-          <div class="election-banner"><div><span class="eyebrow">FUNAAB CAMPUS ELECTIONS</span><h1>Every vote has a story.</h1><p>Explore predictions across student government, colleges and departments.</p></div><div class="election-count"><span>COUNTDOWN TO CLOSING</span><div id="election-countdown" class="countdown large"></div><small>Demo countdown: official date not yet configured.</small></div></div>
-          <div class="election-tabs" id="election-tabs"><button class="active" data-election="SUG">SUG</button><button data-election="COLLEGES">Colleges</button><button data-election="DEPARTMENT">Department</button></div>
-          <div id="college-select-wrap" class="college-select hidden"><label for="college-select">Choose a college</label><select id="college-select"></select></div>
-          <div class="panel-heading election-section-heading"><div><h3 id="election-section-title">SUG markets</h3><p class="muted">Campus election markets and candidate predictions.</p></div></div>
-          <div id="election-market-grid" class="market-grid"></div>
-        </section>
+<section class="page" id="page-profile">
+ <div class="page-heading"><div><h1>Profile</h1><p>Update your account details.</p></div></div>
+ <div class="panel" style="max-width:520px">
+  <div class="field"><label>Full name</label><input id="profileName"></div>
+  <div class="field"><label>Email address</label><input id="profileEmail" type="email" disabled></div>
+  <button class="btn btn-primary" onclick="saveProfile()">Save profile</button>
+ </div>
+</section>
 
-        <section id="view-positions" class="view">
-          <div class="page-title-row"><div><span class="eyebrow">YOUR PORTFOLIO</span><h1>My positions</h1><p class="muted">Track your selections and indicative market movement.</p></div><div class="soft-pill green"><span class="pulse"></span> Live demo updates</div></div>
-          <div class="stat-grid compact"><div class="stat-card"><div class="stat-top"><span>Active positions</span><i data-lucide="activity"></i></div><div class="stat-value" id="position-count">0</div></div><div class="stat-card"><div class="stat-top"><span>Total staked</span><i data-lucide="wallet"></i></div><div class="stat-value" id="position-staked">₦0</div></div><div class="stat-card"><div class="stat-top"><span>Potential payout</span><i data-lucide="trending-up"></i></div><div class="stat-value" id="position-payout">₦0</div></div></div>
-          <div id="positions-list" class="positions-list"></div>
-        </section>
+<section class="page" id="page-settings">
+ <div class="page-heading"><div><h1>Settings</h1><p>Account preferences and security.</p></div></div>
+ <div class="panel"><h3 style="font:800 13px Manrope">Account session</h3><p class="field-hint">You are signed in as <b id="settingsEmail"></b>.</p><button class="btn btn-outline" onclick="logout()">Sign out</button></div>
+</section>
 
-        <section id="view-weekly" class="view">
-          <div class="weekly-hero"><div><span class="eyebrow">CX WEEKLY CHALLENGE</span><h1>10 picks. One big call.</h1><p>Take on this week's toughest prediction markets for a chance at the demo ₦1,000,000 prize.</p><div class="weekly-meta"><span><i data-lucide="calendar-days"></i> Resets every Monday</span><span><i data-lucide="wallet"></i> Minimum entry ₦10,000</span></div></div><div class="weekly-trophy"><i data-lucide="trophy"></i><span>WEEKLY PRIZE</span><strong>₦1,000,000</strong></div></div>
-          <div class="panel"><div class="panel-heading"><div><h3>This week's 10 hardest predictions</h3><p class="muted">Select one outcome for each challenge market.</p><span id="weekly-closing-label" class="muted">Closing date to be announced</span></div><div id="weekly-admin-tools"></div><span class="soft-pill">10 markets</span></div><div id="weekly-markets" class="weekly-list"></div><div class="weekly-entry"><div><strong>Entry stake</strong><span>Minimum ₦10,000 · Demo only</span></div><input id="weekly-stake" type="number" min="10000" value="10000"><button class="btn btn-primary" id="weekly-enter">Submit challenge entry</button></div></div>
-        </section>
+<section class="page" id="page-admin">
+ <div class="page-heading"><div><h1>Admin overview</h1><p>Figures calculated from records stored in this application.</p></div><button class="btn btn-primary" onclick="navigate('manage')">Manage markets</button></div>
+ <div class="grid stats">
+  <div class="stat"><div class="stat-top">Total markets</div><div class="stat-value" id="adminMarketCount">0</div></div>
+  <div class="stat"><div class="stat-top">Open markets</div><div class="stat-value" id="adminOpenCount">0</div></div>
+  <div class="stat"><div class="stat-top">Total positions</div><div class="stat-value" id="adminPositionCount">0</div></div>
+  <div class="stat"><div class="stat-top">Recorded transactions</div><div class="stat-value" id="adminTransactionCount">0</div></div>
+ </div>
+ <div class="panel"><div class="panel-heading"><h3>Platform activity</h3><small>Stored application records</small></div><div class="table-wrap"><table><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody id="adminMetrics"></tbody></table></div></div>
+ <div class="panel"><div class="panel-heading"><h3>Recent admin activity</h3></div><div id="auditList" class="empty">No admin actions recorded yet.</div></div>
+</section>
 
-        <section id="view-wallet" class="view">
-          <div class="page-title-row"><div><span class="eyebrow">YOUR MONEY, AT A GLANCE</span><h1>Wallet</h1><p class="muted">Manage your demo funds and view wallet activity.</p></div><span class="soft-pill"><i data-lucide="lock"></i> Frontend demo</span></div>
-          <div class="wallet-hero"><div class="wallet-pattern"></div><div class="wallet-head"><span><i data-lucide="wallet"></i> CX WALLET</span><span class="wallet-chip">NGN · DEMO</span></div><span class="wallet-label">AVAILABLE BALANCE</span><div class="wallet-balance" id="wallet-balance">₦250,000.00</div><div class="wallet-foot"><span id="wallet-user">Alex Johnson</span><span>•••• &nbsp; •••• &nbsp; 2026</span></div></div>
-          <div class="wallet-actions"><button class="wallet-action" id="open-deposit"><span class="action-icon deposit"><i data-lucide="arrow-down-left"></i></span><strong>Deposit</strong><small>Add demo funds</small></button><button class="wallet-action" id="open-withdraw"><span class="action-icon withdraw"><i data-lucide="arrow-up-right"></i></span><strong>Withdraw</strong><small>Request payout</small></button><button class="wallet-action" id="wallet-history-btn"><span class="action-icon history"><i data-lucide="receipt-text"></i></span><strong>Transactions</strong><small>View activity</small></button></div>
-          <div class="panel"><div class="panel-heading"><div><h3>Recent transactions</h3><p class="muted">Your local wallet activity.</p></div><span class="soft-pill">Latest first</span></div><div id="transactions-list" class="transactions-list"></div></div>
-          <p class="disclaimer"><i data-lucide="info"></i> This is a frontend prototype. Deposit and withdrawal requests are recorded locally only. No bank lookup, payment, transfer or account-name verification occurs.</p>
-        </section>
+<section class="page" id="page-manage">
+ <div class="page-heading"><div><h1>Manage markets</h1><p>Create markets, add outcomes and control market status.</p></div><button class="btn btn-primary" onclick="openMarketModal()"> <i data-lucide="plus"></i> Create market</button></div>
+ <div class="panel"><div class="table-wrap"><table><thead><tr><th>Market</th><th>Outcomes</th><th>Status</th><th>Actions</th></tr></thead><tbody id="manageTable"></tbody></table></div></div>
+</section>
 
-        <section id="view-notifications" class="view">
-          <div class="page-title-row"><div><span class="eyebrow">STAY IN THE LOOP</span><h1>Notifications</h1><p class="muted">Updates, market activity and account messages.</p></div><button class="btn btn-secondary" id="mark-read">Mark all as read</button></div>
-          <div class="notification-filters"><button class="active">All activity</button><button>Unread</button><button>Markets</button><button>Account</button></div><div id="notifications-list" class="notifications-list"></div>
-        </section>
+<section class="page" id="page-users">
+ <div class="page-heading"><div><h1>Users & activity</h1><p>Accounts and activity available in this browser.</p></div></div>
+ <div class="panel"><div class="notice warning">User accounts and cross-device activity require a shared backend database. This page only displays the account currently signed in on this device.</div><div id="userSummary"></div></div>
+</section>
+</div>
+</main>
+</div>
 
-        <section id="view-settings" class="view">
-          <div class="page-title-row"><div><span class="eyebrow">YOUR ACCOUNT</span><h1>Profile & settings</h1><p class="muted">Personalise your CampusX experience.</p></div><span class="soft-pill">Saved on this device</span></div>
-          <div class="settings-layout">
-            <div class="panel profile-hero"><div class="profile-avatar-xl" id="settings-avatar">A</div><div><span class="eyebrow">ACCOUNT PROFILE</span><h2 id="settings-display-name">Your name</h2><p id="settings-display-email" class="muted">you@example.com</p><span id="settings-role-pill" class="soft-pill">Trader account</span></div></div>
-            <form id="profile-form" class="panel settings-panel"><div class="panel-heading"><div><h3>Personal information</h3><p class="muted">Update how your name appears across the dashboard.</p></div><i data-lucide="user-round-cog"></i></div>
-              <div class="settings-fields"><div class="field"><label for="settings-name">Display name</label><input id="settings-name" name="name" minlength="2" maxlength="60" required></div><div class="field"><label for="settings-email">Email address</label><input id="settings-email" type="email" readonly disabled><div class="hint">Email is fixed for this demo account.</div></div></div>
-              <div class="modal-actions"><button class="btn btn-primary" type="submit"><i data-lucide="save"></i> Save profile</button></div>
-            </form>
-            <div class="panel settings-panel"><div class="panel-heading"><div><h3>Preferences</h3><p class="muted">Choose how the app behaves on this device.</p></div><i data-lucide="sliders-horizontal"></i></div>
-              <div class="preference-row"><div><strong>Market movement alerts</strong><span>Show local notifications about odds changes.</span></div><label class="switch"><input id="pref-market-alerts" type="checkbox"><span></span></label></div>
-              <div class="preference-row"><div><strong>Weekly challenge reminders</strong><span>Keep challenge updates visible in your notifications.</span></div><label class="switch"><input id="pref-weekly-alerts" type="checkbox"><span></span></label></div>
-              <div class="preference-row"><div><strong>Compact market cards</strong><span>Use a denser market layout when browsing.</span></div><label class="switch"><input id="pref-compact" type="checkbox"><span></span></label></div>
-              <div class="settings-fields currency-field"><div class="field"><label for="pref-currency">Display currency</label><select id="pref-currency"><option value="NGN">Nigerian Naira (₦)</option><option value="USD">US Dollar ($)</option></select><div class="hint">Display preference only. Wallet records remain in naira.</div></div></div>
-            </div>
-            <div class="panel settings-panel security-note"><i data-lucide="shield-check"></i><div><strong>Account and privacy</strong><p>Your profile and preferences are saved in this browser only. Secure sign-in, cross-device sync, and protected admin permissions will be handled by the backend when connected.</p><button type="button" class="text-btn" id="settings-logout">Sign out <i data-lucide="log-out"></i></button></div></div>
-          </div>
-        </section>
+<div class="slip" id="slip">
+ <div class="slip-head"><b>My market slip</b><button style="border:0;background:none;color:white" onclick="closeSlip()">✕</button></div>
+ <div class="slip-body"><div id="slipItems"></div>
+  <div class="field" style="margin-top:12px"><label>Stake amount (₦)</label><input id="stakeInput" type="number" min="100" placeholder="Enter stake"></div>
+  <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:12px"><span>Estimated return</span><b id="estimatedReturn">₦0.00</b></div>
+  <button class="btn btn-primary" style="width:100%" onclick="placePositions()">Confirm positions</button>
+ </div>
+</div>
 
-        <section id="view-admin-markets" class="view">
-          <div class="page-title-row"><div><span class="eyebrow">ADMIN CONSOLE</span><h1>Market manager</h1><p class="muted">Create, update and manage market listings.</p></div><button class="btn btn-primary" id="create-market-btn"><i data-lucide="plus"></i> Create market</button></div>
-          <div class="admin-kpis"><div class="stat-card"><span>All markets</span><strong id="admin-total">120</strong></div><div class="stat-card"><span>Open</span><strong id="admin-open">120</strong></div><div class="stat-card"><span>Suspended / void</span><strong id="admin-void">0</strong></div></div>
-          <div class="panel"><div class="admin-table-head"><div><h3>All markets</h3><p class="muted">Changes update the frontend market views and slip immediately.</p></div><div class="search-box small"><i data-lucide="search"></i><input id="admin-market-search" placeholder="Find a market..."></div></div><div class="table-scroll"><table><thead><tr><th>Market</th><th>Category</th><th>Type</th><th>Status</th><th>Closing</th><th>Actions</th></tr></thead><tbody id="admin-market-table"></tbody></table></div></div>
-        </section>
-
-        <section id="view-admin-users" class="view">
-          <div class="page-title-row"><div><span class="eyebrow">ADMIN CONSOLE</span><h1>Account directory</h1><p class="muted">Review locally saved demo accounts and their activity.</p></div><span class="soft-pill">Browser-local directory</span></div>
-          <div class="panel"><div class="admin-table-head"><div><h3>Registered accounts</h3><p class="muted">Only accounts created in this browser are visible.</p></div><div class="search-box small"><i data-lucide="search"></i><input id="user-search" placeholder="Search name or email..."></div></div><div class="table-scroll"><table><thead><tr><th>User</th><th>Email</th><th>Wallet</th><th>Positions</th><th>Status</th><th>Actions</th></tr></thead><tbody id="user-table"></tbody></table></div></div>
-        </section>
-
-        <section id="view-admin-requests" class="view">
-          <div class="page-title-row"><div><span class="eyebrow">ADMIN CONSOLE</span><h1>Wallet requests</h1><p class="muted">Review demo deposit and withdrawal requests.</p></div><span class="soft-pill">Local records only</span></div>
-          <div class="panel"><div class="panel-heading"><div><h3>Pending requests</h3><p class="muted">No real payment or bank verification is performed.</p></div></div><div id="admin-requests-list" class="transactions-list"></div></div>
-        </section>
-      </div>
-      <footer class="app-footer"><span>© 2026 CampusX</span><span>Frontend preview · Not a financial service</span><span>Built for the next generation of predictions</span></footer>
-    </main>
-    <nav class="mobile-tabbar" aria-label="Mobile navigation">
-      <button data-view="overview" class="active"><i data-lucide="house"></i><span>Home</span></button>
-      <button data-view="markets"><i data-lucide="chart-no-axes-combined"></i><span>Markets</span></button>
-      <button data-view="positions"><i data-lucide="chart-line"></i><span>Positions</span></button>
-      <button data-view="wallet"><i data-lucide="wallet"></i><span>Wallet</span></button>
-      <button data-view="settings"><i data-lucide="user-round"></i><span>Profile</span></button>
-    </nav>
+<div class="modal-backdrop" id="walletModal">
+ <div class="modal">
+  <div class="modal-head"><h3 id="walletModalTitle">Add funds</h3><button class="modal-close" onclick="closeModal('walletModal')"><i data-lucide="x"></i></button></div>
+  <div class="modal-body">
+   <div class="field"><label>Bank name</label><select id="bankName"><option value="">Select your bank</option><option>Access Bank</option><option>Access Bank (Diamond)</option><option>Ecobank</option><option>Fidelity Bank</option><option>First Bank</option><option>FCMB</option><option>GTBank</option><option>Keystone Bank</option><option>Moniepoint</option><option>OPay</option><option>Palmpay</option><option>Stanbic IBTC</option><option>Sterling Bank</option><option>UBA</option><option>Union Bank</option><option>Unity Bank</option><option>Wema Bank</option><option>Zenith Bank</option><option>Other</option></select></div>
+   <div class="field"><label>Account number</label><input id="accountNumber" inputmode="numeric" maxlength="10" placeholder="10-digit account number"></div>
+   <div class="field"><label>Amount (₦)</label><input id="walletAmount" type="number" min="100" placeholder="Enter amount"></div>
+   <div id="accountVerification" class="notice">Your account holder name will be retrieved by the connected verification service before you continue.</div>
+   <button class="btn btn-primary" style="width:100%" onclick="verifyBankAccount()">Verify account details</button>
+   <div class="modal-foot"><button class="btn btn-outline" onclick="closeModal('walletModal')">Cancel</button><button class="btn btn-primary" id="walletContinue" disabled onclick="continueWallet()">Continue</button></div>
   </div>
+ </div>
+</div>
 
-  <button id="slip-fab" class="slip-fab hidden"><span class="fab-icon"><i data-lucide="ticket-check"></i></span><span><strong>My slip</strong><small><b id="fab-count">0</b> selections</small></span><span class="fab-arrow"><i data-lucide="arrow-up-right"></i></span></button>
-  <div id="slip-backdrop" class="drawer-backdrop"></div>
-  <aside id="slip-drawer" class="slip-drawer">
-    <div class="drawer-head"><div><span class="eyebrow">YOUR SELECTIONS</span><h2>Market slip <span id="slip-count" class="count-bubble">0</span></h2></div><button class="icon-btn" id="close-slip"><i data-lucide="x"></i></button></div>
-    <div id="slip-items" class="slip-items"><div class="empty-state"><i data-lucide="ticket"></i><strong>Your slip is empty</strong><span>Choose a market outcome to get started.</span></div></div>
-    <div class="slip-footer"><div class="stake-row"><label for="stake-input">Stake amount</label><div class="stake-input-wrap"><span>₦</span><input id="stake-input" type="number" min="100" value="1000"></div></div><div class="slip-summary"><div><span>Combined odds</span><strong id="combined-odds">1.00x</strong></div><div><span>Potential return</span><strong id="slip-return">₦1,000.00</strong></div></div><div class="slip-wallet"><span>Available balance</span><strong id="slip-balance">₦250,000.00</strong></div><button class="btn btn-primary btn-wide" id="confirm-slip">Confirm selection <i data-lucide="arrow-right"></i></button><small class="slip-legal">Demo only. No real-money wager or payment is made.</small></div>
-  </aside>
-
-  <div id="modal-backdrop" class="modal-backdrop">
-    <div class="modal" id="modal">
-      <div class="modal-head"><div><span class="eyebrow" id="modal-eyebrow">CAMPUSX</span><h2 id="modal-title">Create market</h2></div><button class="icon-btn" id="modal-close"><i data-lucide="x"></i></button></div>
-      <div id="modal-body"></div>
-    </div>
+<div class="modal-backdrop" id="marketModal">
+ <div class="modal">
+  <div class="modal-head"><h3 id="marketModalTitle">Create market</h3><button class="modal-close" onclick="closeModal('marketModal')"><i data-lucide="x"></i></button></div>
+  <div class="modal-body">
+   <input type="hidden" id="editMarketId">
+   <div class="field"><label>Market title</label><input id="newMarketTitle" placeholder="e.g. Who will win the SUG election?"></div>
+   <div class="field"><label>Description</label><textarea id="newMarketDescription" placeholder="Add context about this market"></textarea></div>
+   <div class="field"><label>Category</label><select id="newMarketCategory"><option value="campus">Campus events</option><option value="elections">Elections</option><option value="sports">Sports</option></select></div>
+   <div class="field"><label>Market type</label><select id="newMarketType" onchange="marketTypeChanged()"><option value="binary">Yes / No</option><option value="multi">Multiple outcomes</option></select><div class="field-hint">Choose Yes / No for two outcomes, or Multiple outcomes to add as many options as required.</div></div>
+   <div class="field"><label>Outcomes and prices</label><div id="outcomeEditor"></div><button class="btn btn-light" type="button" id="addOutcomeBtn" onclick="addOutcomeRow()">+ Add another outcome</button></div>
+   <div class="field"><label>Market closing date</label><input id="newMarketDeadline" type="datetime-local"></div>
+   <div class="modal-foot"><button class="btn btn-outline" onclick="closeModal('marketModal')">Cancel</button><button class="btn btn-primary" onclick="saveMarket()">Save market</button></div>
   </div>
-  <div id="toast-region" class="toast-region"></div>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="app2.js"></script>
+ </div>
+</div>
+
+<div class="modal-backdrop" id="loginModal">
+ <div class="modal">
+  <div class="modal-head"><h3>Welcome to CampusX</h3></div>
+  <div class="modal-body">
+   <p class="field-hint" style="margin-bottom:15px">Sign in or create your account to continue.</p>
+   <div class="field"><label>Full name</label><input id="loginName" placeholder="Your full name"></div>
+   <div class="field"><label>Email address</label><input id="loginEmail" type="email" placeholder="you@example.com"></div>
+   <div class="field"><label>Password / access code</label><input id="loginPassword" type="password" placeholder="Enter password or admin access code"></div>
+   <div class="field"><label>Account type</label><select id="loginType"><option value="member">Member</option><option value="admin">Administrator</option></select></div>
+   <div class="notice warning">Administrator permissions must be verified on a secure server before using this application with real users or funds.</div>
+   <button class="btn btn-primary" style="width:100%" onclick="login()">Continue to CampusX</button>
+  </div>
+ </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const money=n=>'₦'+Number(n||0).toLocaleString('en-NG',{minimumFractionDigits:2,maximumFractionDigits:2});
+const get=(key,fallback)=>{try{return JSON.parse(localStorage.getItem('cx_'+key))??fallback}catch{return fallback}};
+const put=(key,value)=>localStorage.setItem('cx_'+key,JSON.stringify(value));
+const uid=()=>Math.random().toString(36).slice(2,10);
+let user=get('user',null);
+let markets=get('markets',[
+ {id:'m1',title:'Who will win the SUG presidential election?',description:'Predict the candidate who will emerge as the next SUG president.',category:'elections',status:'open',type:'multi',outcomes:[{id:'o1',name:'Candidate A',price:2.1},{id:'o2',name:'Candidate B',price:1.8},{id:'o3',name:'Candidate C',price:3.2}],history:[2.1,2.05,2.15,2.1]},
+ {id:'m2',title:'Which college will win the inter-college football final?',description:'Select the college you expect to lift the trophy.',category:'sports',status:'open',type:'multi',outcomes:[{id:'o1',name:'COLENG',price:2.0},{id:'o2',name:'COLCOMPS',price:2.4},{id:'o3',name:'COLPHYS',price:3.1}],history:[2.2,2.1,2.0]},
+ {id:'m3',title:'Will the literary night event hold this semester?',description:'Predict whether the event will take place before the end of the semester.',category:'campus',status:'open',type:'binary',outcomes:[{id:'yes',name:'Yes',price:1.65},{id:'no',name:'No',price:2.2}],history:[1.7,1.68,1.65]},
+ {id:'m4',title:'Who will win the inter-college debate?',description:'Choose the college you expect to win the final debate.',category:'campus',status:'open',type:'multi',outcomes:[{id:'o1',name:'COLENG',price:2.0},{id:'o2',name:'COLCOMPS',price:2.4},{id:'o3',name:'COLPHYS',price:2.8},{id:'o4',name:'COLVET',price:3.3}],history:[2.2,2.1,2.0]}
+]);
+let positions=get('positions',[]);
+let transactions=get('transactions',[]);
+let audit=get('audit',[]);
+let slip=[];
+let currentWalletAction='deposit';
+let verifiedAccount=null;
+let activeFilter='all';
+let countdownEnd=get('electionEnd',null);
+if(!countdownEnd){countdownEnd=Date.now()+102*86400000;put('electionEnd',countdownEnd)}
+
+function saveAll(){put('markets',markets);put('positions',positions);put('transactions',transactions);put('audit',audit)}
+function showToast(message){const t=$('toast');t.textContent=message;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)}
+function auditLog(action){audit.unshift({action,date:new Date().toLocaleString()});audit=audit.slice(0,40);put('audit',audit)}
+function isAdmin(){return user?.role==='admin'}
+function initials(name){return (name||'U').trim().split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase()}
+function updateUserUI(){
+ const name=user?.name||'Guest User',email=user?.email||'';
+ ['topName','sideName'].forEach(id=>$(id).textContent=name);
+ ['topAvatar','sideAvatar'].forEach(id=>$(id).textContent=initials(name));
+ $('sideRole').textContent=isAdmin()?'Administrator':'Member account';
+ $('profileName').value=user?.name||'';
+ $('profileEmail').value=email;
+ $('settingsEmail').textContent=email;
+ document.querySelectorAll('.admin-only').forEach(el=>el.style.display=isAdmin()?'':'none');
+}
+function login(){
+ const name=$('loginName').value.trim(),email=$('loginEmail').value.trim().toLowerCase(),password=$('loginPassword').value,type=$('loginType').value;
+ if(!name||!email||!password)return showToast('Please complete all sign-in fields.');
+ if(!/^\S+@\S+\.\S+$/.test(email))return showToast('Enter a valid email address.');
+ const admins={
+  'progjossytech@gmail.com':'Jossy08',
+  'shinaayomiawwal@gmail.com':'Awwa_1',
+  'rachealkumapayi@gmail.com':'Honey13',
+  'mohd.yusuph08@gmail.com':'Yusuph24',
+  'amusafarid@gmail.com':'Farid10',
+  'digimide1@gmail.com':'Digimide00'
+ };
+ if(type==='admin'&&admins[email]!==password)return showToast('Administrator credentials are incorrect.');
+ if(type==='admin'&&!admins[email])return showToast('This email is not authorised for admin access.');
+ user={name,email,role:type==='admin'?'admin':'member'};
+ put('user',user);$('loginModal').classList.remove('show');updateUserUI();renderAll();showToast('Welcome to CampusX, '+name+'.');
+}
+function logout(){user=null;put('user',null);$('loginModal').classList.add('show');updateUserUI()}
+function saveProfile(){const name=$('profileName').value.trim();if(!name)return showToast('Enter your name.');user.name=name;put('user',user);updateUserUI();showToast('Profile updated.')}
+function navigate(page){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ $('page-'+page)?.classList.add('active');
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+ $('crumb').textContent=page.replace(/^\w/,c=>c.toUpperCase()).replace('Manage','Manage markets');
+ $('sidebar').classList.remove('open');
+ renderAll();
+}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
+function toggleSidebar(){$('sidebar').classList.toggle('open')}
+function closeModal(id){$(id).classList.remove('show')}
+function openModal(id){$(id).classList.add('show')}
+function renderAll(){updateUserUI();renderOverview();renderMarkets();renderPortfolio();renderWallet();renderAdmin();renderManage();renderUsers();updateSlipCount();if(window.lucide)lucide.createIcons()}
+function renderOverview(){
+ $('overviewBalance').textContent=money(get('balance',0));
+ $('overviewMarkets').textContent=markets.filter(m=>m.status==='open').length;
+ $('overviewPositions').textContent=positions.length;
+ $('overviewStaked').textContent=money(positions.reduce((a,p)=>a+p.stake,0));
+ const target=$('overviewMarketsList');target.innerHTML='';
+ markets.filter(m=>m.status==='open').slice(0,4).forEach(m=>target.appendChild(marketCard(m)));
+ drawChart($('overviewChart'),markets[0]?.history||[]);
+}
+function marketCard(m){
+ const card=document.createElement('article');card.className='market-card';
+ const status=m.status==='void'?'void':m.status==='closed'?'closed':'';
+ card.innerHTML=`<div class="market-head"><span class="market-category">${escapeHTML(m.category)}</span><span class="status ${status}">${m.status.toUpperCase()}</span></div><h3>${escapeHTML(m.title)}</h3><div class="market-desc">${escapeHTML(m.description||'')}</div><div class="outcomes"></div><div class="market-foot"><small>${m.outcomes.length} outcomes · ${m.type==='binary'?'Yes / No':'Multi-outcome'}</small><div class="market-actions"><button class="text-btn" onclick="viewMarketChart('${m.id}')">Chart</button></div></div>`;
+ const wrap=card.querySelector('.outcomes');
+ m.outcomes.forEach(o=>{
+  const selected=slip.some(s=>s.marketId===m.id&&s.outcomeId===o.id);
+  const b=document.createElement('button');b.className='outcome'+(selected?' selected':'');b.disabled=m.status!=='open';
+  b.innerHTML=`<b>${escapeHTML(o.name)}</b><span>${Number(o.price).toFixed(2)}x</span><small>Potential multiplier</small>`;
+  b.onclick=()=>selectOutcome(m.id,o.id);wrap.appendChild(b);
+ });
+ return card;
+}
+function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function renderMarkets(){
+ const query=($('marketSearch')?.value||'').toLowerCase(),list=$('marketList');list.innerHTML='';
+ const filtered=markets.filter(m=>(activeFilter==='all'||m.category===activeFilter)&&(`${m.title} ${m.description} ${m.outcomes.map(o=>o.name).join(' ')}`).toLowerCase().includes(query));
+ if(!filtered.length){list.innerHTML='<div class="empty">No markets match your search.</div>';return}
+ filtered.forEach(m=>list.appendChild(marketCard(m)));
+}
+$('marketFilters').addEventListener('click',e=>{const b=e.target.closest('[data-filter]');if(!b)return;activeFilter=b.dataset.filter;document.querySelectorAll('.pill').forEach(x=>x.classList.toggle('active',x===b));renderMarkets()});
+function selectOutcome(marketId,outcomeId){
+ const m=markets.find(x=>x.id===marketId);if(!m||m.status!=='open')return;
+ const index=slip.findIndex(s=>s.marketId===marketId);
+ if(index>=0){if(slip[index].outcomeId===outcomeId){slip.splice(index,1)}else{slip[index]={marketId,outcomeId}}}
+ else slip.push({marketId,outcomeId});
+ updateSlipCount();renderMarkets();renderOverview();renderSlip();$('slip').classList.add('open');
+}
+function updateSlipCount(){$('slipCount').textContent=slip.length}
+function openSlip(){renderSlip();$('slip').classList.add('open')}
+function closeSlip(){$('slip').classList.remove('open')}
+function renderSlip(){
+ const wrap=$('slipItems');wrap.innerHTML='';
+ if(!slip.length){wrap.innerHTML='<div class="empty">Choose an outcome from a market to add it here.</div>';$('estimatedReturn').textContent=money(0);return}
+ slip.forEach((s,i)=>{
+  const m=markets.find(x=>x.id===s.marketId),o=m?.outcomes.find(x=>x.id===s.outcomeId);if(!m||!o)return;
+  const row=document.createElement('div');row.className='slip-item';row.innerHTML=`<span><b>${escapeHTML(m.title)}</b><br>${escapeHTML(o.name)} · ${o.price}x</span><button onclick="removeSlip(${i})">Remove</button>`;wrap.appendChild(row);
+ });
+ calculateReturn();
+}
+function removeSlip(i){slip.splice(i,1);renderSlip();renderMarkets();updateSlipCount()}
+function calculateReturn(){
+ const stake=Number($('stakeInput').value||0),mult=slip.reduce((a,s)=>{const m=markets.find(x=>x.id===s.marketId),o=m?.outcomes.find(x=>x.id===s.outcomeId);return a*(o?.price||1)},1);
+ $('estimatedReturn').textContent=money(stake*mult);
+}
+$('stakeInput').addEventListener('input',calculateReturn);
+function placePositions(){
+ const stake=Number($('stakeInput').value||0),balance=get('balance',0);
+ if(!user)return showToast('Sign in first.');
+ if(!slip.length)return showToast('Select at least one outcome.');
+ if(stake<100)return showToast('Minimum stake is ₦100.');
+ if(stake>balance)return showToast('Insufficient wallet balance.');
+ const selections=slip.map(s=>{const m=markets.find(x=>x.id===s.marketId),o=m?.outcomes.find(x=>x.id===s.outcomeId);return m&&o&&m.status==='open'?{marketId:m.id,market:m.title,outcome:o.name,price:o.price}:null}).filter(Boolean);
+ if(selections.length!==slip.length)return showToast('One of your selected markets is no longer open.');
+ const multiplier=selections.reduce((a,s)=>a*s.price,1);
+ put('balance',balance-stake);
+ positions.push({id:uid(),user:user.email,selections,stake,multiplier,created:new Date().toISOString(),status:'active'});
+ transactions.unshift({type:'Market position',amount:-stake,date:new Date().toLocaleString(),status:'Recorded'});
+ slip=[];$('stakeInput').value='';saveAll();closeSlip();renderAll();showToast('Your selections have been recorded.');
+}
+function renderPortfolio(){
+ const body=$('positionsTable');body.innerHTML='';
+ if(!positions.length){body.innerHTML='<tr><td colspan="5" class="empty">You have no positions yet.</td></tr>';return}
+ positions.filter(p=>!user||p.user===user.email).forEach(p=>p.selections.forEach(s=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${escapeHTML(s.market)}</td><td>${escapeHTML(s.outcome)}</td><td>${s.price}x</td><td>${money(p.stake)}</td><td><span class="status">${escapeHTML(p.status)}</span></td>`;body.appendChild(tr)}));
+}
+function renderWallet(){
+ $('walletBalance').textContent=money(get('balance',0));$('transactionCount').textContent=transactions.length;
+ const body=$('transactionsTable');body.innerHTML='';
+ if(!transactions.length){body.innerHTML='<tr><td colspan="4" class="empty">No transactions recorded.</td></tr>';return}
+ transactions.slice(0,30).forEach(t=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${escapeHTML(t.type)}</td><td>${money(t.amount)}</td><td>${escapeHTML(t.date)}</td><td>${escapeHTML(t.status)}</td>`;body.appendChild(tr)});
+}
+function openWalletModal(action){
+ if(!user)return showToast('Sign in first.');
+ currentWalletAction=action;verifiedAccount=null;$('walletContinue').disabled=true;
+ $('walletModalTitle').textContent=action==='deposit'?'Add funds':'Withdraw funds';
+ $('accountVerification').textContent='Your account holder name will be retrieved by the connected verification service before you continue.';
+ $('bankName').value='';$('accountNumber').value='';$('walletAmount').value='';
+ openModal('walletModal');
+}
+async function verifyBankAccount(){
+ const bank=$('bankName').value,account=$('accountNumber').value,amount=Number($('walletAmount').value);
+ if(!bank||!/^\d{10}$/.test(account)||amount<100)return showToast('Enter a bank, valid 10-digit account number and amount.');
+ $('accountVerification').className='notice warning';
+ $('accountVerification').textContent='Account verification requires a secure backend connection. No account name has been verified.';
+ $('walletContinue').disabled=true;
+ // Connect your backend here. Do not expose a bank-resolution API secret in browser JavaScript.
+ // Example: POST /api/bank/resolve { bankCode, accountNumber }
+ showToast('Bank verification service is not connected yet.');
+}
+function continueWallet(){
+ if(!verifiedAccount)return showToast('Verify the bank account first.');
+}
+function renderAdmin(){
+ if(!isAdmin())return;
+ $('adminMarketCount').textContent=markets.length;
+ $('adminOpenCount').textContent=markets.filter(m=>m.status==='open').length;
+ $('adminPositionCount').textContent=positions.length;
+ $('adminTransactionCount').textContent=transactions.length;
+ const totalStaked=positions.reduce((a,p)=>a+p.stake,0),balance=get('balance',0);
+ $('adminMetrics').innerHTML=`<tr><td>Recorded user wallet balance</td><td>${money(balance)}</td></tr><tr><td>Total recorded stake</td><td>${money(totalStaked)}</td></tr><tr><td>Voided markets</td><td>${markets.filter(m=>m.status==='void').length}</td></tr><tr><td>Closed markets</td><td>${markets.filter(m=>m.status==='closed').length}</td></tr>`;
+ $('auditList').innerHTML=audit.length?audit.slice(0,15).map(a=>`<div class="slip-item"><span>${escapeHTML(a.action)}</span><small>${escapeHTML(a.date)}</small></div>`).join(''):'<div class="empty">No admin actions recorded yet.</div>';
+}
+function renderManage(){
+ if(!isAdmin())return;
+ const body=$('manageTable');body.innerHTML='';
+ markets.forEach(m=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td><b>${escapeHTML(m.title)}</b><br><small>${escapeHTML(m.category)}</small></td><td>${m.outcomes.length}</td><td><span class="status ${m.status==='void'?'void':m.status==='closed'?'closed':''}">${m.status}</span></td><td><div style="display:flex;gap:4px;flex-wrap:wrap"><button class="btn btn-light" onclick="editMarket('${m.id}')">Edit</button><button class="btn btn-outline" onclick="changeStatus('${m.id}')">${m.status==='open'?'Void':'Resume'}</button><button class="btn btn-danger" onclick="deleteMarket('${m.id}')">Delete</button></div></td>`;
+  body.appendChild(tr);
+ });
+}
+function renderUsers(){
+ if(!isAdmin())return;
+ $('userSummary').innerHTML=user?`<b>${escapeHTML(user.name)}</b><p class="field-hint">${escapeHTML(user.email)} · ${escapeHTML(user.role)}</p>`:'No signed-in user.';
+}
+function openMarketModal(){
+ if(!isAdmin())return;
+ $('editMarketId').value='';$('marketModalTitle').textContent='Create market';
+ $('newMarketTitle').value='';$('newMarketDescription').value='';$('newMarketCategory').value='campus';$('newMarketType').value='binary';$('newMarketDeadline').value='';
+ marketTypeChanged();openModal('marketModal');
+}
+function marketTypeChanged(){
+ const binary=$('newMarketType').value==='binary';
+ $('outcomeEditor').innerHTML='';
+ if(binary){addOutcomeRow('Yes','1.90');addOutcomeRow('No','1.90')}
+ else{addOutcomeRow('Outcome 1','2.00');addOutcomeRow('Outcome 2','2.00')}
+ $('addOutcomeBtn').style.display=binary?'none':'inline-flex';
+}
+function addOutcomeRow(name='',price='2.00'){
+ const row=document.createElement('div');row.className='outcome-row';
+ row.innerHTML=`<input class="outcome-name" placeholder="Outcome name" value="${escapeHTML(name)}"><input class="outcome-price" type="number" min="1.01" step=".01" placeholder="Price" value="${price}"><button type="button" title="Remove outcome">×</button>`;
+ row.querySelector('button').onclick=()=>{if($('outcomeEditor').children.length>2||$('newMarketType').value==='multi')row.remove()};
+ $('outcomeEditor').appendChild(row);
+}
+function editMarket(id){
+ const m=markets.find(x=>x.id===id);if(!m)return;
+ $('editMarketId').value=id;$('marketModalTitle').textContent='Edit market';
+ $('newMarketTitle').value=m.title;$('newMarketDescription').value=m.description;$('newMarketCategory').value=m.category;$('newMarketType').value=m.type;$('newMarketDeadline').value=m.deadline||'';
+ $('outcomeEditor').innerHTML='';m.outcomes.forEach(o=>addOutcomeRow(o.name,o.price));
+ $('addOutcomeBtn').style.display=m.type==='binary'?'none':'inline-flex';openModal('marketModal');
+}
+function saveMarket(){
+ const title=$('newMarketTitle').value.trim(),description=$('newMarketDescription').value.trim(),category=$('newMarketCategory').value,type=$('newMarketType').value;
+ const outcomes=[...$('outcomeEditor').querySelectorAll('.outcome-row')].map(r=>({id:uid(),name:r.querySelector('.outcome-name').value.trim(),price:Number(r.querySelector('.outcome-price').value)}));
+ if(!title)return showToast('Enter a market title.');
+ if(outcomes.length<2||outcomes.some(o=>!o.name||!Number.isFinite(o.price)||o.price<=1))return showToast('Add at least two outcomes with prices above 1.00.');
+ if(type==='binary'&&outcomes.length!==2)return showToast('Binary markets must have exactly two outcomes.');
+ const id=$('editMarketId').value;
+ if(id){
+  const m=markets.find(x=>x.id===id);m.title=title;m.description=description;m.category=category;m.type=type;
+  m.outcomes=outcomes.map((o,i)=>({...o,id:m.outcomes[i]?.id||o.id}));m.history.push(outcomes[0].price);
+  auditLog('Edited market: '+title);
+ }else{
+  markets.unshift({id:uid(),title,description,category,type,status:'open',outcomes,history:[outcomes[0].price],deadline:$('newMarketDeadline').value});
+  auditLog('Created market: '+title);
+ }
+ saveAll();closeModal('marketModal');renderAll();showToast('Market saved.');
+}
+function changeStatus(id){
+ const m=markets.find(x=>x.id===id);if(!m)return;
+ if(m.status==='void'||m.status==='closed'){m.status='open';auditLog('Resumed market: '+m.title)}
+ else{m.status='void';auditLog('Voided market: '+m.title)}
+ saveAll();renderAll();showToast('Market status updated.');
+}
+function deleteMarket(id){
+ if(!confirm('Delete this market? This cannot be undone.'))return;
+ const m=markets.find(x=>x.id===id);markets=markets.filter(x=>x.id!==id);slip=slip.filter(s=>s.marketId!==id);
+ auditLog('Deleted market: '+(m?.title||id));saveAll();renderAll();showToast('Market deleted.');
+}
+function viewMarketChart(id){
+ const m=markets.find(x=>x.id===id);if(!m)return;
+ showToast('Latest recorded price: '+Number(m.outcomes[0]?.price||0).toFixed(2)+'x');
+}
+function drawChart(canvas,data){
+ if(!canvas)return;
+ const ctx=canvas.getContext('2d'),w=canvas.clientWidth,h=canvas.clientHeight,dpr=window.devicePixelRatio||1;
+ canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
+ if(!data||data.length<2){ctx.fillStyle='#89968e';ctx.font='11px DM Sans';ctx.fillText('Price history will appear as market prices change.',8,25);return}
+ const min=Math.min(...data)-.1,max=Math.max(...data)+.1,range=max-min||1;
+ ctx.strokeStyle='#edf1ed';ctx.lineWidth=1;
+ for(let i=0;i<4;i++){const y=12+(h-28)*i/3;ctx.beginPath();ctx.moveTo(5,y);ctx.lineTo(w-5,y);ctx.stroke()}
+ const pts=data.map((v,i)=>({x:8+(w-16)*i/(data.length-1),y:h-12-(v-min)/range*(h-30)}));
+ const grad=ctx.createLinearGradient(0,0,0,h);grad.addColorStop(0,'rgba(23,75,54,.18)');grad.addColorStop(1,'rgba(23,75,54,0)');
+ ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.lineTo(pts.at(-1).x,h-10);ctx.lineTo(pts[0].x,h-10);ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+ ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.strokeStyle='#174b36';ctx.lineWidth=2;ctx.stroke();
+}
+function updateCountdown(){
+ let ms=countdownEnd-Date.now();if(ms<0)ms=0;
+ const d=Math.floor(ms/86400000),h=Math.floor(ms%86400000/3600000),m=Math.floor(ms%3600000/60000),s=Math.floor(ms%60000/1000);
+ $('electionCountdown').textContent=`${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+}
+window.addEventListener('resize',()=>{drawChart($('overviewChart'),markets[0]?.history||[])});
+$('marketList').addEventListener('click',()=>{});
+updateUserUI();renderAll();updateCountdown();setInterval(updateCountdown,1000);
+if(!user)openModal('loginModal');
+</script>
 </body>
 </html>
