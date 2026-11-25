@@ -1,369 +1,449 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071b15"><title>CampusX — Prediction Markets</title>
+
 <style>
-:root{--bg:#07130f;--panel:#0d211a;--panel2:#10291f;--line:#1b3a2d;--text:#edf7f0;--muted:#8ca99a;--green:#0d8b58;--lime:#b8f36b;--red:#f07171;--gold:#e7bd68;--shadow:0 18px 55px #0005;color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -20%,#174b35 0,transparent 38%),var(--bg);color:var(--text);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}body.light{--bg:#f3f7f4;--panel:#fff;--panel2:#f5faf6;--line:#dce9df;--text:#13251b;--muted:#62776a;--shadow:0 18px 45px #183d2514;color-scheme:light;background:radial-gradient(ellipse at 80% -20%,#d9f4e3 0,transparent 40%),var(--bg)}button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}.app{display:grid;grid-template-columns:245px minmax(0,1fr);min-height:100vh}.side{position:sticky;top:0;height:100vh;border-right:1px solid var(--line);padding:24px 16px;background:color-mix(in srgb,var(--panel) 92%,transparent);display:flex;flex-direction:column;z-index:5}.brand{display:flex;align-items:center;gap:11px;padding:4px 9px 30px}.brandmark{height:39px;width:39px;border-radius:13px;background:#092e20;display:grid;place-items:center;color:var(--lime);font-weight:900;font-size:19px;letter-spacing:-2px}.brandname{font-size:19px;font-weight:850;letter-spacing:-.8px}.brandname span{color:var(--lime)}.brand small{display:block;color:var(--muted);font-size:8px;letter-spacing:2px;font-weight:800;margin-top:-2px}.navlabel{color:var(--muted);font-size:10px;letter-spacing:1.5px;font-weight:800;padding:12px 12px 8px}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:var(--muted);text-align:left;padding:11px 12px;border-radius:10px;display:flex;align-items:center;gap:12px;font-weight:650}.nav button.active,.nav button:hover{background:#0d8b581c;color:var(--lime)}body.light .nav button.active,body.light .nav button:hover{background:#e7f6eb;color:#087647}.ico{width:18px;height:18px;display:inline-grid;place-items:center;flex:none}.ico svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.sidebottom{margin-top:auto}.userchip{border-top:1px solid var(--line);padding:17px 8px 0;display:flex;align-items:center;gap:10px}.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#126e48,#b8f36b);color:#062116;display:grid;place-items:center;font-weight:900}.userchip strong{display:block;font-size:12px}.userchip small{color:var(--muted);font-size:10px}.main{min-width:0}.topbar{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(18px);z-index:4}.crumb{color:var(--muted);font-size:12px}.crumb b{color:var(--text)}.topactions{display:flex;align-items:center;gap:10px}.iconbtn{width:37px;height:37px;border:1px solid var(--line);background:var(--panel);border-radius:11px;color:var(--muted);display:grid;place-items:center}.primary{border:0;background:var(--lime);color:#102419;font-weight:850;padding:10px 15px;border-radius:10px}.primary:hover{filter:brightness(1.06);transform:translateY(-1px)}.ghost{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:9px 13px;border-radius:10px;font-weight:700}.content{padding:28px 32px 60px;max-width:1500px;margin:auto}.welcome{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:23px}.eyebrow{color:var(--lime);font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase}.welcome h1{font-size:28px;letter-spacing:-1.1px;margin:5px 0}.welcome p{margin:0;color:var(--muted)}.date{color:var(--muted);font-size:11px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:23px}.stat,.panel,.market,.walletcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.stat{padding:17px 18px}.stathead{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}.statval{font-size:23px;font-weight:850;letter-spacing:-.8px;margin:8px 0 2px}.positive{color:#45c58a}.negative{color:var(--red)}.statfoot{font-size:10px;color:var(--muted)}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:17px;align-items:start}.sectionhead{display:flex;align-items:center;justify-content:space-between;margin:0 0 14px}.sectionhead h2{font-size:16px;margin:0;letter-spacing:-.3px}.sectionhead p{color:var(--muted);font-size:11px;margin:3px 0 0}.tools{display:flex;gap:8px;flex-wrap:wrap}.search{width:min(230px,100%);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;color:var(--text);outline:none}.search:focus,input:focus,select:focus{border-color:var(--green);outline:2px solid #0d8b5825}.tabs{display:flex;gap:6px;overflow:auto;padding:2px 0 14px}.tab{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:7px 12px;border-radius:9px;font-size:11px;font-weight:750}.tab.active{background:#0d8b5820;color:var(--lime);border-color:#0d8b5860}.marketgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.market{padding:16px;transition:.2s;min-width:0}.market:hover{transform:translateY(-2px);border-color:#28744f}.marketmeta{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:10px}.tag{padding:4px 7px;border-radius:6px;background:#0d8b581b;color:var(--lime);font-weight:800;font-size:9px;text-transform:uppercase;letter-spacing:.5px}.status{color:#57c88d;font-size:10px;font-weight:800}.market h3{font-size:14px;line-height:1.4;margin:13px 0 11px;min-height:40px}.outcomes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.outcome{border:1px solid var(--line);background:var(--panel2);padding:9px;border-radius:9px;text-align:left;color:var(--text)}.outcome:hover{border-color:var(--green);background:#0d8b5818}.outcome small{display:block;color:var(--muted);font-size:9px}.outcome strong{font-size:16px}.marketfoot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:12px;padding-top:10px;color:var(--muted);font-size:10px}.spark{width:78px;height:24px}.spark polyline{fill:none;stroke:#45c58a;stroke-width:2}.sidepanel{display:grid;gap:13px}.panel{padding:17px}.panel h3{margin:0 0 13px;font-size:14px}.balance{font-size:27px;font-weight:900;letter-spacing:-1px}.muted{color:var(--muted)}.walletactions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.walletactions button{padding:9px}.activity{display:grid;gap:12px}.activityrow{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px}.activityrow small{display:block;color:var(--muted);font-size:9px}.activityrow strong{font-size:11px}.dot{width:8px;height:8px;border-radius:50%;background:var(--lime);display:inline-block;margin-right:7px}.page{display:none}.page.active{display:block}.empty{padding:35px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:13px}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:600px}.table th,.table td{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:11px}.table th{color:var(--muted);font-weight:700}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:grid;gap:6px}.field label{font-size:10px;color:var(--muted);font-weight:750}.field input,.field select{width:100%;background:var(--panel2);border:1px solid var(--line);padding:10px 11px;border-radius:9px;color:var(--text)}.field.full{grid-column:1/-1}.modalback{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;padding:18px;z-index:20}.modalback.show{display:flex}.modal{width:min(510px,100%);max-height:90vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:21px;box-shadow:0 30px 90px #0008}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.modalhead h2{font-size:17px;margin:0}.close{border:0;background:transparent;color:var(--muted);font-size:23px}.notice{padding:10px 12px;border:1px solid #b8f36b44;background:#b8f36b12;color:var(--lime);border-radius:9px;font-size:10px;margin:12px 0}.slipitem{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:11px}.slipitem button{background:none;border:0;color:var(--red)}.mobilemenu{display:none}.toast{position:fixed;bottom:22px;right:22px;background:var(--panel2);border:1px solid var(--line);padding:12px 16px;border-radius:11px;box-shadow:var(--shadow);z-index:50;display:none}.toast.show{display:block}.adminonly{display:none}.subnav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.subnav button{background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:8px 11px;font-size:11px}.subnav button.active{color:var(--lime);border-color:var(--green)}.chartbox{height:100px;width:100%;margin-top:8px}.chartbox svg{width:100%;height:100%}.chartbox polyline{fill:none;stroke:#45c58a;stroke-width:2.5}.chartbox .area{fill:#45c58a18;stroke:none}
-@media(max-width:1100px){.layout{grid-template-columns:minmax(0,1fr) 270px}.stats{grid-template-columns:repeat(2,1fr)}}@media(max-width:800px){.app{grid-template-columns:1fr}.side{position:fixed;left:-270px;width:245px;transition:.25s;box-shadow:var(--shadow)}.side.open{left:0}.topbar{padding:0 16px;height:62px}.content{padding:22px 16px 45px}.mobilemenu{display:grid}.layout{grid-template-columns:1fr}.sidepanel{grid-template-columns:repeat(2,minmax(0,1fr))}.marketgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.welcome h1{font-size:23px}}@media(max-width:520px){.marketgrid{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:13px}.statval{font-size:19px}.sidepanel{grid-template-columns:1fr}.welcome{align-items:flex-start;flex-direction:column}.topactions .hide-sm{display:none}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.content{padding-left:13px;padding-right:13px}}
+/* =====================================================
+   CAMPUSX — COMPLETE RESPONSIVE MOBILE NAVIGATION PATCH
+   ===================================================== */
 
-/* CAMPUSX PREMIUM VISUAL REFRESH */
-:root{--green:#087a4c;--lime:#baf477;--panel:#0b1e17;--panel2:#10281e;--line:#203e30;--shadow:0 22px 70px #0007}
-body{background:radial-gradient(ellipse at 78% -8%,#1c6845 0,transparent 32%),radial-gradient(ellipse at 0% 48%,#0b3023 0,transparent 28%),#06110d;letter-spacing:-.12px}
-body.light{background:radial-gradient(ellipse at 80% -10%,#d3f5df 0,transparent 35%),#f2f7f3}
-.side{background:linear-gradient(180deg,#0a1c14f5,#07140ff5);border-right-color:#254b37;box-shadow:14px 0 45px #0002}
-.brand{padding-bottom:38px}.brandmark{box-shadow:0 0 0 5px #b8f36b12,0 10px 30px #0005;background:linear-gradient(145deg,#0a4029,#071e15)}
-.topbar{height:76px;padding-inline:clamp(16px,3vw,42px);border-bottom-color:#294b37;background:#07130fdb}
-body.light .topbar{background:#f4faf5e8}
-.content{padding:clamp(18px,3vw,38px);max-width:1600px}
-.welcome{padding:26px 28px;border:1px solid #b8f36b24;border-radius:20px;background:linear-gradient(112deg,#103b28 0%,#0b241a 58%,#10291f 100%);box-shadow:0 18px 55px #0003;position:relative;overflow:hidden;margin-bottom:22px}
-.welcome:after{content:"";position:absolute;width:260px;height:260px;border:1px solid #b8f36b20;border-radius:50%;right:-45px;top:-145px;box-shadow:0 0 0 25px #b8f36b08,0 0 0 55px #b8f36b06}
-.welcome h1{font-size:clamp(25px,3vw,36px);letter-spacing:-1.5px}.welcome p{font-size:12px}
-.eyebrow{letter-spacing:2.4px;color:#c2fa7a}
-.stats{gap:14px}.stat{position:relative;overflow:hidden;padding:19px;border-radius:17px;background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--panel) 78%,#174b32));transition:transform .2s,border-color .2s}.stat:hover{transform:translateY(-3px);border-color:#5da878}.statval{font-size:clamp(21px,2vw,28px)}
-.panel,.market{border-radius:17px;box-shadow:0 12px 35px #0002}.market{padding:18px;background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--panel) 88%,#1b5739));transition:transform .22s,box-shadow .22s,border-color .22s}.market:hover{transform:translateY(-4px);box-shadow:0 18px 40px #0004;border-color:#55a877}.market h3{font-size:15px;line-height:1.5;min-height:45px}.outcome{padding:11px 12px;border-radius:11px;transition:.18s}.outcome strong{font-size:18px}.outcome:hover{transform:translateY(-2px);box-shadow:0 7px 18px #0002}
-.primary{background:linear-gradient(135deg,#c7ff82,#a8e85d);box-shadow:0 7px 20px #a9e85d20;transition:transform .18s,filter .18s}.primary:hover{filter:brightness(1.08);transform:translateY(-2px)}.ghost,.iconbtn,.tab{transition:.18s}.ghost:hover,.iconbtn:hover,.tab:hover{border-color:#4b986b;color:var(--lime);transform:translateY(-1px)}
-.sectionhead h2{font-size:17px}.tabs{padding-bottom:16px}.tab{padding:8px 13px}.tag{background:#b8f36b18;color:#c4fa82}.marketfoot{font-size:10px}.spark{width:85px;height:27px}
-.sidepanel .panel{background:linear-gradient(145deg,var(--panel),var(--panel2))}.balance{font-size:30px;color:var(--lime)}
-.modal{border-radius:23px;padding:28px;background:linear-gradient(145deg,#10271c,#08170f);border-color:#315a40}.loginmodal{width:min(450px,100%);padding:34px}.loginbrand{display:flex;align-items:center;gap:12px;margin-bottom:35px}.loginTitle{font-size:31px;line-height:1.1;letter-spacing:-1.3px;margin:9px 0 12px}.loginmodal p{font-size:12px;line-height:1.7;margin-bottom:23px}.loginSubmit{width:100%;display:flex;justify-content:space-between;align-items:center;padding:13px 16px}.loginSubmit span{font-size:18px}.loginfoot{font-size:10px;color:#8ca99a;text-align:center;margin-top:20px;letter-spacing:.5px}.loginmodal .field input{padding:13px 14px;border-radius:11px}
-body.light .welcome{background:linear-gradient(112deg,#e0f6e6,#f4fbf5);border-color:#c6e8ce}body.light .welcome h1{color:#142b1d}body.light .modal{background:#fff}body.light .loginfoot{color:#667d6d}
-.table th{letter-spacing:.8px;font-size:9px}.table td{font-size:11px}.subnav button{padding:9px 13px}.subnav button.active{background:#0d8b581b;color:var(--lime)}
-@media(max-width:1050px){.layout{grid-template-columns:minmax(0,1fr)}.sidepanel{grid-template-columns:repeat(2,minmax(0,1fr))}.sidepanel .panel:last-child{grid-column:1/-1}}
-@media(max-width:700px){.app{grid-template-columns:1fr}.side{position:fixed;left:-270px;width:245px;transition:left .25s}.side.open{left:0}.mobilemenu{display:grid}.topbar{padding:0 15px;height:64px}.content{padding:17px 14px 40px}.welcome{padding:21px 19px}.welcome h1{font-size:25px}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stat{padding:14px}.statval{font-size:21px}.marketgrid{grid-template-columns:1fr}.sidepanel{grid-template-columns:1fr}.sidepanel .panel:last-child{grid-column:auto}.layout{gap:14px}.loginmodal{padding:26px}.loginbrand{margin-bottom:28px}}
-@media(min-width:701px) and (max-width:1100px){.marketgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+:root {
+  --cx-green: #075b3b;
+  --cx-green-dark: #06452f;
+  --cx-accent: #a8d65e;
+  --cx-nav-bg: #ffffff;
+  --cx-border: #e7ece8;
+  --cx-text: #26332c;
+}
 
+* {
+  box-sizing: border-box;
+}
 
-/* Weekly challenge, election countdown and navigation refinements */
-.challenge-hero{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;padding:22px;border-radius:18px;background:linear-gradient(120deg,#082f20,#0d6844 62%,#153c2b);color:#f1fff6;margin:0 0 18px;overflow:hidden;position:relative}.challenge-hero:after{content:"₦";position:absolute;right:20%;top:-50px;font-size:210px;font-weight:900;color:#ffffff0b;pointer-events:none}.challenge-hero h2{font-size:22px;margin:5px 0}.challenge-hero p{color:#c0e0ce;font-size:12px;max-width:560px}.challenge-prize{align-self:center;text-align:right;position:relative;z-index:1}.challenge-prize strong{display:block;font-size:30px;color:#c8ff82;letter-spacing:-1px}.challenge-prize small{color:#d3e9db}.challenge-stats{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.challenge-stat{padding:8px 11px;border-radius:10px;background:#ffffff12;border:1px solid #ffffff1b;font-size:10px;color:#e0f3e7}.challenge-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.challenge-market{padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--panel);min-width:0}.challenge-market h4{font-size:13px;line-height:1.45;margin:8px 0 12px}.challenge-market .outcomes{grid-template-columns:repeat(2,minmax(0,1fr))}.challenge-market .outcome.selected{border-color:var(--green);background:#0d8b5825;box-shadow:inset 0 0 0 1px var(--green)}.challenge-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);flex-wrap:wrap}.challenge-countdown{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.count-unit{min-width:65px;padding:9px 10px;text-align:center;border:1px solid #ffffff25;background:#ffffff10;border-radius:10px}.count-unit strong{display:block;font-size:20px;color:#d0ff92;font-variant-numeric:tabular-nums}.count-unit small{font-size:8px;letter-spacing:1px;color:#d1e8d9;text-transform:uppercase}.election-banner{padding:20px;border-radius:17px;background:linear-gradient(115deg,#0a3525,#126d48);color:#f1fff6;margin:0 0 16px}.election-banner h2{font-size:18px;margin:4px 0}.election-banner p{color:#c4e3d1;font-size:11px;margin:0}.election-banner .count-unit{min-width:58px}.challenge-admin-row{display:grid;grid-template-columns:minmax(180px,1fr) 80px 80px auto;gap:7px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.challenge-admin-row input{min-width:0;width:100%;background:var(--panel2);color:var(--text);border:1px solid var(--line);padding:8px;border-radius:7px}.challenge-admin-row button{white-space:nowrap}.nav button{position:relative}.profile-shortcut{display:flex;gap:8px;align-items:center}.challenge-empty{padding:25px;text-align:center;border:1px dashed var(--line);border-radius:13px;color:var(--muted)}
-@media(max-width:760px){.challenge-hero{grid-template-columns:1fr}.challenge-prize{text-align:left}.challenge-grid{grid-template-columns:1fr}.challenge-admin-row{grid-template-columns:minmax(0,1fr) 65px 65px}.challenge-admin-row button{grid-column:1/-1}.election-banner{padding:16px}}
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
+img, svg, canvas, video {
+  max-width: 100%;
+}
 
-/* CampusX brand polish: deep evergreen actions, trophy, horizontal countdown and wallet */
-:root{--brand-deep:#075536;--brand-deeper:#063d28;--brand-mid:#0b6844}
-.primary,.walletactions .primary{background:linear-gradient(135deg,#0b6844,#06472f)!important;color:#fff!important;border:1px solid #1a7953!important;box-shadow:0 8px 22px #06472f2b!important}
-.primary:hover{background:linear-gradient(135deg,#0d7950,#075536)!important;filter:none!important}
-.ghost{border-color:#c6d8cb}
-body:not(.light) .ghost{border-color:#28513d}
-.tab.active,.subnav button.active{background:#07553620;color:#188a5a;border-color:#0b6844}
-body:not(.light) .tab.active,body:not(.light) .subnav button.active{color:#8ce0b2}
-.notification-button{position:relative}
-.notification-button>svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.notif-badge{display:none;position:absolute;right:5px;top:4px;width:9px;height:9px;border-radius:50%;background:#f04452;border:2px solid var(--panel);box-shadow:0 0 0 3px #f0445230}
-.notif-badge.show{display:block;animation:notifPulse 1.8s infinite}
-@keyframes notifPulse{0%,100%{box-shadow:0 0 0 2px #f0445220}50%{box-shadow:0 0 0 6px #f0445230}}
-.challenge-hero{grid-template-columns:minmax(0,1fr) auto minmax(170px,.55fr);align-items:center}
-.trophy-art{width:112px;height:112px;display:grid;place-items:center;border-radius:28px;background:radial-gradient(circle,#d6ff9a33,transparent 70%);filter:drop-shadow(0 8px 18px #c8ff8240);animation:trophyFloat 3.2s ease-in-out infinite;position:relative;z-index:1}
-.trophy-art svg{width:100px;height:100px;fill:#c8ff82;stroke:#f0ffd5;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;animation:trophyGlow 2.5s ease-in-out infinite alternate}
-@keyframes trophyFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(2deg)}}
-@keyframes trophyGlow{from{filter:drop-shadow(0 0 2px #c8ff82)}to{filter:drop-shadow(0 0 13px #c8ff82)}}
-.countdown-row,.challenge-countdown{display:flex!important;flex-direction:row!important;align-items:stretch;justify-content:flex-start;gap:9px;flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding:12px 0 3px;scrollbar-width:thin}
-.countdown-row .count-unit,.challenge-countdown .count-unit{flex:1 0 76px;min-width:76px}
-.election-banner .countdown-row{width:100%}
-.wallet-hero{background:linear-gradient(120deg,#063d28,#075536 58%,#0c7049)!important;border:1px solid #247b52!important;box-shadow:0 18px 42px #063d2828!important}
-.wallet-hero .walletactions{display:flex;gap:10px;flex-wrap:wrap}
-.wallet-hero .walletactions button{min-width:130px;border-radius:12px;padding:11px 17px}
-.wallet-hero .walletactions .ghost{background:#ffffff12;color:#fff;border-color:#ffffff55}
-.wallet-stat-grid .stat{border-radius:16px;background:linear-gradient(145deg,var(--panel),var(--panel2))}
-#page-wallet .tablewrap{padding:18px;border-radius:18px}
-#page-wallet .sectionhead{align-items:center}
-#page-wallet .admin-status{background:#0b684416;color:#168653;border:1px solid #0b684433;padding:6px 9px;border-radius:99px;font-size:9px}
-#walletModal .modal{background:linear-gradient(150deg,#f8fcf9,#eaf4ed);color:#163b28;border:1px solid #c9dfd0}
-body:not(.light) #walletModal .modal{background:linear-gradient(150deg,#102b1e,#08180f);color:#edf7f0;border-color:#315a40}
-#walletModal .modalhead{padding-bottom:12px;border-bottom:1px solid var(--line)}
-#walletModal .balance{font-size:31px;color:#0b6844}
-body:not(.light) #walletModal .balance{color:#a8e7bd}
-#walletModal .tabs{background:#e5f0e8;padding:5px;border-radius:12px;margin:16px 0}
-body:not(.light) #walletModal .tabs{background:#0a2017}
-#walletModal .tab{flex:1;text-align:center}
-#walletModal .field input,#walletModal .field select{min-height:45px;border-radius:11px}
-#walletModal #verifyAccount{min-height:45px;justify-content:center;border-color:#0b684455;color:#0b6844}
-body:not(.light) #walletModal #verifyAccount{color:#a8e7bd}
-#walletModal #accountVerification{padding:12px;border-radius:11px;background:#0b68440d;border:1px dashed #0b684455;min-height:44px}
-#walletModal #walletSubmit{min-height:47px;border-radius:12px}
-@media(max-width:760px){.challenge-hero{grid-template-columns:1fr auto;gap:6px;padding:17px}.challenge-hero>div:first-child{grid-column:1/-1}.trophy-art{width:76px;height:76px;grid-column:1;grid-row:2}.trophy-art svg{width:72px;height:72px}.challenge-prize{grid-column:2;grid-row:2;text-align:right}.challenge-prize strong{font-size:26px}.countdown-row,.challenge-countdown{gap:6px}.countdown-row .count-unit,.challenge-countdown .count-unit{flex:1 0 68px;min-width:68px}.wallet-hero{padding:19px}}
+/* Desktop sidebar remains normal */
+#sidebar,
+.side {
+  min-width: 0;
+}
 
-.profile-actions .danger{display:inline-flex;align-items:center;gap:9px;background:#a83232;color:#fff;border:0;border-radius:12px;padding:11px 16px;font-weight:700;cursor:pointer}.profile-actions .danger:hover{background:#8e2525}.profile-actions .cx-svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}\n
+/* Prevent content from being squeezed */
+.main,
+.content,
+.workspace,
+.page {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.content {
+  overflow-x: hidden;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  max-width: 100%;
+}
+
+/* Tables can scroll instead of breaking the page */
+.table-wrap,
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
 
 /* =====================================================
-   CAMPUSX MOBILE APP LAYOUT — CLEAN BOTTOM ICON BAR
-   Keeps the original navigation buttons and their handlers.
-===================================================== */
-@media (max-width: 768px) {
-  html, body { width:100%; max-width:100%; overflow-x:hidden; }
-  body { -webkit-text-size-adjust:100%; }
-  .app { display:block !important; width:100%; min-height:100dvh; }
+   MOBILE LAYOUT
+   ===================================================== */
 
-  /* Fixed bottom navigation made from the existing nav controls */
-  #sidebar.side {
-    position:fixed !important; inset:auto 0 0 0 !important;
-    width:100% !important; height:calc(64px + env(safe-area-inset-bottom)) !important;
-    min-height:64px !important; max-height:82px !important;
-    padding:5px 8px calc(5px + env(safe-area-inset-bottom)) !important;
-    margin:0 !important; border:0 !important; border-top:1px solid var(--line) !important;
-    border-radius:17px 17px 0 0 !important; z-index:1000 !important;
-    display:flex !important; flex-direction:row !important; align-items:center !important;
-    gap:3px !important; overflow-x:auto !important; overflow-y:hidden !important;
-    background:color-mix(in srgb,var(--panel) 94%,transparent) !important;
-    -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px);
-    box-shadow:0 -8px 28px rgba(0,35,20,.10);
-    transform:none !important; left:0 !important;
-    scrollbar-width:none;
+@media (max-width: 760px) {
+
+  html, body {
+    overflow-x: hidden !important;
   }
-  #sidebar.side::-webkit-scrollbar { display:none; }
-  #sidebar .brand, #sidebar > .navlabel, #sidebar .userchip,
-  #sidebar #adminLabel, #sidebar .sidebottom > .navlabel { display:none !important; }
-  #sidebar #nav, #sidebar #adminNav, #sidebar .sidebottom,
-  #sidebar .sidebottom nav {
-    display:flex !important; flex:0 0 auto !important; flex-direction:row !important;
-    align-items:center !important; gap:4px !important; width:auto !important;
-    height:100% !important; margin:0 !important; padding:0 !important;
+
+  /* Hide desktop sidebar branding and footer */
+  #sidebar .brand,
+  #sidebar .logo,
+  #sidebar .sidebottom,
+  #sidebar .sidebar-footer,
+  #sidebar .sidebar-bottom,
+  .side .brand,
+  .side .logo {
+    display: none !important;
   }
-  #sidebar .sidebottom { margin:0 !important; }
-  #sidebar .nav button {
-    flex:0 0 48px !important; width:48px !important; min-width:48px !important;
-    height:48px !important; min-height:48px !important; padding:0 !important;
-    margin:0 !important; border:0 !important; border-radius:14px !important;
-    display:flex !important; align-items:center !important; justify-content:center !important;
-    background:transparent !important; color:var(--muted) !important;
-    box-shadow:none !important; font-size:0 !important; gap:0 !important;
-    -webkit-tap-highlight-color:transparent;
+
+  /* Turn sidebar into a bottom navigation dock */
+  #sidebar,
+  .side {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 68px !important;
+    min-height: 68px !important;
+    max-height: 68px !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-around !important;
+    gap: 0 !important;
+    padding: 5px 4px calc(5px + env(safe-area-inset-bottom)) !important;
+    margin: 0 !important;
+    background: var(--cx-nav-bg) !important;
+    border-top: 1px solid var(--cx-border) !important;
+    border-right: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: 0 -5px 22px rgba(0,0,0,.07) !important;
+    overflow: visible !important;
+    transform: none !important;
   }
-  #sidebar .nav button .ico { width:24px !important; height:24px !important; }
-  #sidebar .nav button .ico svg { width:24px !important; height:24px !important; }
-  #sidebar .nav button .navtext { display:none !important; }
+
+  /* Make all nav groups share the bottom dock */
+  #sidebar #nav,
+  #sidebar #adminNav,
+  #sidebar .nav,
+  .side #nav,
+  .side #adminNav,
+  .side .nav {
+    display: contents !important;
+  }
+
+  /* Navigation buttons */
+  #sidebar .nav button,
+  #sidebar .nav a,
+  .side .nav button,
+  .side .nav a {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    max-width: 82px !important;
+    height: 56px !important;
+    min-height: 56px !important;
+    padding: 8px 2px !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    border: 0 !important;
+    border-radius: 10px !important;
+    background: transparent !important;
+    color: #84918a !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+  }
+
+  /* Hide navigation text labels */
+  #sidebar .nav button span,
+  #sidebar .nav a span,
+  .side .nav button span,
+  .side .nav a span {
+    display: none !important;
+  }
+
+  /* Keep icons visible and consistent */
+  #sidebar .nav button svg,
+  #sidebar .nav a svg,
+  .side .nav button svg,
+  .side .nav a svg,
+  #sidebar .nav button i,
+  #sidebar .nav a i,
+  .side .nav button i,
+  .side .nav a i {
+    display: block !important;
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    font-size: 22px !important;
+    margin: 0 auto !important;
+    stroke-width: 1.8 !important;
+  }
+
+  /* Active navigation item */
   #sidebar .nav button.active,
-  #sidebar .nav button:focus-visible {
-    color:var(--green) !important; background:#0d8b5818 !important;
-    outline:none;
+  #sidebar .nav a.active,
+  .side .nav button.active,
+  .side .nav a.active {
+    color: var(--cx-green) !important;
+    background: rgba(7, 91, 59, .09) !important;
   }
-  /* Main content uses the entire screen; reserve room for bottom bar */
-  .main { width:100% !important; min-width:0 !important; margin:0 !important; }
+
+  #sidebar .nav button.active svg,
+  #sidebar .nav a.active svg,
+  .side .nav button.active svg,
+  .side .nav a.active svg {
+    stroke-width: 2.4 !important;
+  }
+
+  /* Hide desktop menu button */
+  #menuBtn,
+  .menu-toggle,
+  .hamburger,
+  #menuToggle {
+    display: none !important;
+  }
+
+  /* Main content takes full width */
+  .main {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100vh !important;
+  }
+
   .topbar {
-    height:62px !important; min-height:62px !important; padding:0 13px !important;
-    gap:8px !important; position:sticky !important; top:0 !important; z-index:20 !important;
+    width: 100% !important;
+    min-height: 58px !important;
+    padding: 10px 14px !important;
+    gap: 8px !important;
   }
-  #menuBtn { display:none !important; }
-  .crumb { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .topactions { gap:7px !important; flex:0 0 auto; }
-  .topactions .primary { padding:9px 11px !important; font-size:11px !important; }
-  .content { width:100% !important; max-width:none !important; padding:17px 13px calc(86px + env(safe-area-inset-bottom)) !important; margin:0 !important; }
-  .welcome { width:100%; align-items:flex-start !important; padding:19px 17px !important; border-radius:18px !important; margin-bottom:17px !important; }
-  .welcome h1 { font-size:clamp(23px,6vw,29px) !important; line-height:1.16 !important; }
-  .welcome p { font-size:13px !important; line-height:1.5; }
-  .date { display:none; }
-  .stats { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:9px !important; }
-  .stat { min-width:0; padding:12px !important; }
-  .statval { font-size:clamp(18px,5vw,23px) !important; overflow-wrap:anywhere; }
-  .layout { grid-template-columns:minmax(0,1fr) !important; gap:14px !important; }
-  .sidepanel { grid-template-columns:minmax(0,1fr) !important; }
-  .marketgrid { grid-template-columns:minmax(0,1fr) !important; gap:12px !important; }
-  .market { min-width:0 !important; width:100% !important; padding:15px !important; border-radius:17px !important; }
-  .market h3 { min-height:0 !important; font-size:15px !important; line-height:1.4 !important; }
-  .outcomes { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:8px !important; }
-  .outcome { min-width:0 !important; padding:10px !important; }
-  .marketfoot { gap:8px; flex-wrap:wrap; }
-  .tabs, .subnav { max-width:100%; overflow-x:auto !important; flex-wrap:nowrap !important; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
-  .tabs::-webkit-scrollbar, .subnav::-webkit-scrollbar { display:none; }
-  .tabs .tab, .subnav button { flex:0 0 auto; }
-  .sectionhead { gap:9px; align-items:flex-start !important; flex-wrap:wrap; }
-  .sectionhead .tools, .sectionhead .search { width:100%; max-width:100%; }
-  .search { width:100% !important; min-height:44px; font-size:16px !important; }
-  .panel { min-width:0; padding:14px !important; }
-  .formgrid { grid-template-columns:minmax(0,1fr) !important; }
-  .field.full { grid-column:auto !important; }
-  .field input, .field select, input, select, textarea { min-width:0; max-width:100%; font-size:16px !important; }
-  .tablewrap { width:100%; max-width:100%; overflow-x:auto !important; -webkit-overflow-scrolling:touch; }
-  .table { min-width:620px; }
-  .modalback { padding:8px !important; align-items:flex-end !important; }
-  .modal { width:100% !important; max-width:100% !important; max-height:90dvh !important; border-radius:19px 19px 12px 12px !important; padding:17px !important; }
-  .floating-slip { left:12px !important; right:12px !important; bottom:calc(76px + env(safe-area-inset-bottom)) !important; width:auto !important; }
-  .toast { left:12px !important; right:12px !important; bottom:calc(76px + env(safe-area-inset-bottom)) !important; text-align:center; }
-  button, a { touch-action:manipulation; }
+
+  .content {
+    width: 100% !important;
+    padding: 14px 12px 95px !important;
+    margin: 0 !important;
+  }
+
+  .page {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Responsive grids */
+  .grid,
+  .stats-grid,
+  .market-grid,
+  .dashboard-grid,
+  .cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  /* Smaller cards */
+  .card,
+  .stat-card,
+  .market-card,
+  .panel {
+    min-width: 0 !important;
+    padding: 13px !important;
+    border-radius: 13px !important;
+  }
+
+  /* Prevent oversized text */
+  h1 {
+    font-size: clamp(21px, 6vw, 28px) !important;
+  }
+
+  h2 {
+    font-size: 19px !important;
+  }
+
+  h3 {
+    font-size: 16px !important;
+  }
+
+  p, label, small {
+    overflow-wrap: anywhere;
+  }
+
+  /* Forms */
+  input, select, textarea {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: 14px !important;
+  }
+
+  /* Buttons */
+  button {
+    max-width: 100%;
+  }
+
+  /* Modal sizing */
+  .modal,
+  .modal-content,
+  .dialog {
+    width: calc(100% - 24px) !important;
+    max-width: 480px !important;
+    max-height: 85vh !important;
+    overflow-y: auto !important;
+    margin: auto !important;
+  }
+
+  /* Admin pages */
+  .admin-grid,
+  .admin-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  /* Wallet and market layouts */
+  .wallet-grid,
+  .market-layout,
+  .profile-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  /* Horizontal scrolling for wide content */
+  .table-wrap,
+  .table-responsive,
+  table {
+    max-width: 100% !important;
+  }
+
+  /* Keep notification and profile controls compact */
+  .topbar button,
+  .topbar .icon-btn {
+    flex-shrink: 0;
+  }
 }
-@media (max-width: 390px) {
-  .content { padding-left:10px !important; padding-right:10px !important; }
-  #sidebar .nav button { flex-basis:44px !important; width:44px !important; min-width:44px !important; }
-  #sidebar .nav button .ico, #sidebar .nav button .ico svg { width:22px !important; height:22px !important; }
-  .topactions .primary { font-size:10px !important; padding:8px 9px !important; }
+
+/* Very small phones */
+@media (max-width: 380px) {
+  #sidebar,
+  .side {
+    height: 64px !important;
+    min-height: 64px !important;
+  }
+
+  #sidebar .nav button svg,
+  #sidebar .nav a svg,
+  .side .nav button svg,
+  .side .nav a svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .content {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .grid,
+  .stats-grid,
+  .market-grid,
+  .dashboard-grid,
+  .cards-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
 }
-
-</style>
-<style id="campusx-glass-upgrade">
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
-:root{--cx-glass:rgba(255,255,255,.68);--cx-glass-strong:rgba(255,255,255,.84);--cx-stroke:rgba(255,255,255,.82);--cx-green:#08794d;--cx-deep:#07583b;--cx-shadow:0 18px 55px rgba(31,83,58,.10)}
-body,button,input,select{font-family:'Manrope','DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-body.light{--bg:#edf5f0;--panel:rgba(255,255,255,.64);--panel2:rgba(255,255,255,.48);--line:rgba(255,255,255,.84);--text:#14291f;--muted:#71857a;--shadow:0 18px 50px rgba(39,91,64,.09);background:radial-gradient(ellipse at 10% 0%,rgba(192,239,211,.9),transparent 34%),radial-gradient(ellipse at 95% 12%,rgba(207,226,255,.8),transparent 30%),linear-gradient(135deg,#f4f8f5,#eaf2ee 58%,#f1f5fa);background-attachment:fixed}
-body.light .side,body.light .topbar,body.light .stat,body.light .panel,body.light .market,body.light .walletcard,body.light .modal,body.light .iconbtn,body.light .ghost,body.light .search,body.light .tab,body.light .outcome,body.light .subnav button{background:var(--cx-glass);border-color:var(--cx-stroke);box-shadow:0 8px 28px rgba(40,83,60,.055);backdrop-filter:blur(24px) saturate(165%);-webkit-backdrop-filter:blur(24px) saturate(165%)}
-body.light .topbar{background:rgba(244,249,246,.62)}body.light .side{background:rgba(248,252,249,.68)}body.light .stat,body.light .market,body.light .panel{border-radius:20px}body.light .market:hover{box-shadow:0 22px 55px rgba(22,103,65,.13);transform:translateY(-5px) scale(1.008)}
-body.light .brandmark{background:linear-gradient(145deg,#07583b,#0c9560);box-shadow:0 8px 18px #07583b35}body.light .brandname span{color:#0a8958}body.light .eyebrow,body.light .tag{color:#08794d}body.light .tag{background:rgba(12,145,87,.10)}body.light .nav button.active,body.light .nav button:hover{background:rgba(14,146,87,.11);color:#08794d}body.light .primary{background:linear-gradient(135deg,#b9f477,#9ee65b);box-shadow:0 8px 18px rgba(89,160,46,.18)}body.light .outcome:hover{background:rgba(13,151,91,.09)}body.light .field input,body.light .field select{background:rgba(255,255,255,.66);border-color:rgba(255,255,255,.9)}body.light .modalback{background:rgba(18,40,29,.25);backdrop-filter:blur(12px)}body.light .modal{background:rgba(250,255,251,.82);border:1px solid white}
-.welcome h1,.sectionhead h2,.market h3,.panel h3{font-family:'Manrope',sans-serif;letter-spacing:-.7px}.welcome h1{font-size:clamp(27px,3vw,36px);font-weight:800}.statval,.balance{font-variant-numeric:tabular-nums;letter-spacing:-1.3px}.market,.stat,.panel,.walletcard,.modal,.topbar,.side{transition:background .35s,border-color .35s,box-shadow .35s,transform .35s}
-/* motion: staggered entrance from alternating directions */
-@keyframes cxRise{from{opacity:0;transform:translate3d(0,22px,0) scale(.985)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}@keyframes cxLeft{from{opacity:0;transform:translate3d(-32px,0,0)}to{opacity:1;transform:none}}@keyframes cxRight{from{opacity:0;transform:translate3d(32px,0,0)}to{opacity:1;transform:none}}@keyframes cxText{0%{opacity:0;transform:translateY(15px);filter:blur(5px)}100%{opacity:1;transform:none;filter:blur(0)}}@keyframes cxFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-.welcome{animation:cxLeft .65s cubic-bezier(.2,.8,.2,1) both}.welcome h1{animation:cxText .8s .12s both}.stats .stat{animation:cxRise .65s cubic-bezier(.2,.8,.2,1) both}.stats .stat:nth-child(2){animation-delay:.07s}.stats .stat:nth-child(3){animation-delay:.14s}.stats .stat:nth-child(4){animation-delay:.21s}.marketgrid .market{animation:cxRise .65s cubic-bezier(.2,.8,.2,1) both}.marketgrid .market:nth-child(2n){animation-name:cxRight}.sidepanel .panel{animation:cxRight .7s both}.primary,.iconbtn,.tab,.outcome,.nav button{transition:transform .22s,box-shadow .22s,background .22s}.primary:active,.iconbtn:active,.outcome:active{transform:scale(.97)}
-.icon-action{display:inline-grid;place-items:center;width:31px;height:31px;border-radius:9px;border:1px solid rgba(100,130,112,.2);background:rgba(255,255,255,.58);color:#64786d;vertical-align:middle;transition:.2s}.icon-action svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.icon-action:hover{transform:translateY(-2px);background:white;box-shadow:0 6px 15px #163e2818}.delete-action{color:#d34f5b}.void-action{color:#b17b24}
-.market-chart-card{margin:17px 0 15px;padding:15px 15px 11px;border:1px solid rgba(125,158,137,.18);border-radius:16px;background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(236,247,240,.52));box-shadow:inset 0 1px white,0 10px 26px rgba(42,92,60,.055)}.chart-topline{display:flex;justify-content:space-between;align-items:center}.chart-topline small{display:block;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:1.3px}.chart-current{font-size:25px;letter-spacing:-1px;color:#08794d}.chart-current em{font-style:normal;font-size:10px;letter-spacing:.5px;color:#7b9083}.chart-live{font-size:9px;font-weight:800;color:#138456;display:flex;align-items:center;gap:6px}.chart-live i{width:7px;height:7px;border-radius:50%;background:#16b978;box-shadow:0 0 0 4px #16b97820;animation:cxFloat 1.8s infinite}.chart-range{display:flex;gap:5px;margin:12px 0 3px}.chart-range button{border:0;background:transparent;color:#7a8d81;padding:5px 9px;border-radius:7px;font-size:9px;font-weight:800}.chart-range button.active{background:#08794d12;color:#08794d}.premium-chart{height:150px;margin:0}.premium-chart svg{overflow:visible}.chart-line-path{fill:none;stroke:#0b9a61;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 3px 4px #0b9a6130);stroke-dasharray:1200;stroke-dashoffset:1200;animation:cxDraw 1.7s .1s ease forwards}.chart-area-path{fill:url(#cxChartFill);opacity:0;animation:cxFade .8s .8s forwards}.chart-dot{fill:#fff;stroke:#0b9a61;stroke-width:3;filter:drop-shadow(0 2px 5px #0b9a6140);animation:cxFade .4s 1.2s both}.chart-axis{display:flex;justify-content:space-between;color:#91a196;font-size:9px}@keyframes cxDraw{to{stroke-dashoffset:0}}@keyframes cxFade{to{opacity:1}}
-@media(max-width:800px){body.light .side{background:rgba(247,252,248,.9)}.market-chart-card{padding:12px}.premium-chart{height:125px}.marketgrid{grid-template-columns:1fr}.welcome h1{font-size:27px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
-</style>
-<style id="campusx-odds-slip-wallet">
-/* Multi-market slip, odds, bank verification and live paid-position charts */
-.outcome:disabled{opacity:.45;cursor:not-allowed;filter:grayscale(.4)}.floating-slip{position:fixed;right:24px;bottom:24px;z-index:18;display:flex;align-items:center;gap:10px;padding:13px 17px;border:0;border-radius:999px;background:linear-gradient(120deg,#064a32,#0b9b62);color:#fff;font-weight:850;box-shadow:0 12px 35px #08794d55;opacity:0;pointer-events:none;transform:translateY(18px) scale(.92);transition:opacity .25s,transform .3s;animation:none}.floating-slip.show{opacity:1;pointer-events:auto;transform:translateY(0) scale(1);animation:cxFloat 2.2s ease-in-out infinite}.floating-slip svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.floating-slip b{display:grid;place-items:center;min-width:22px;height:22px;padding:0 5px;border-radius:20px;background:#c8f58d;color:#123421;font-size:11px}.slipitem button{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--line);border-radius:8px}.slipitem button svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.account-verification{display:flex;align-items:center;gap:9px;min-height:42px;padding:10px 12px;border:1px dashed var(--line);border-radius:10px;color:var(--muted);font-size:11px}.account-verification span:last-child{display:grid}.account-verification small{font-size:9px;color:var(--muted)}.verified-mark{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#0c9b6020;color:#07824f;font-weight:900}.position-chart{height:38px;width:min(240px,100%);margin-top:7px}.position-chart svg{width:100%;height:100%;overflow:visible}.position-chart path{fill:none;stroke:#0a9c62;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:500;stroke-dashoffset:500;animation:cxDraw 1.5s ease forwards}.position-chart circle{fill:#fff;stroke:#0a9c62;stroke-width:2}.position-live{display:block;color:#0b9860;font-size:8px;font-weight:800;letter-spacing:.5px;margin-top:4px}.ico svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-@media(max-width:800px){.side{width:78px;left:0;padding:17px 9px;align-items:center}.side .brand{padding:4px 0 24px}.side .brand>div:last-child,.side .navlabel,.side .navtext,.side .userchip>div:last-child{display:none}.side .nav{width:100%;gap:8px}.side .nav button{width:52px;height:48px;justify-content:center;padding:0;margin:auto;border-radius:14px;position:relative}.side .nav button .ico{width:22px;height:22px}.side .nav button .ico svg{width:22px;height:22px}.side .nav button[title]:hover:after,.side .nav button[title]:focus-visible:after{content:attr(title);position:absolute;left:62px;top:50%;transform:translateY(-50%);padding:7px 10px;border-radius:8px;background:#10291f;color:#fff;font-size:10px;white-space:nowrap;box-shadow:0 6px 20px #0003;z-index:40}.side .sidebottom{width:100%}.side .userchip{justify-content:center;padding:15px 0 0}.app{grid-template-columns:78px minmax(0,1fr)}.main{grid-column:2}.topbar{padding-left:14px}.content{padding-left:14px;padding-right:14px}.floating-slip{right:14px;bottom:16px}.marketgrid{grid-template-columns:1fr}}
-@media(max-width:480px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-tools-grid{grid-template-columns:1fr}.wallet-hero{grid-template-columns:1fr}.modal{padding:16px}.floating-slip{padding:12px 14px}}
 </style>
 
-<style id="campusx-final-polish">
-:root{--cx-accent:#08794d;--cx-accent2:#0fa66a;--cx-glass:rgba(255,255,255,.66);--cx-glass-hi:rgba(255,255,255,.84);--cx-border:rgba(255,255,255,.86)}
-html{scroll-behavior:smooth}body{font-feature-settings:"ss01" on,"cv11" on;font-kerning:normal;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-body.light{background:radial-gradient(ellipse at 8% 0%,rgba(187,235,205,.8),transparent 32%),radial-gradient(ellipse at 100% 18%,rgba(208,226,255,.75),transparent 30%),linear-gradient(145deg,#f7faf8 0%,#eaf3ed 55%,#f2f5fb 100%);background-attachment:fixed}
-body.light .app{background:transparent}body.light .side{background:rgba(250,253,251,.78);border-color:rgba(255,255,255,.9);box-shadow:12px 0 45px rgba(41,83,58,.045)}body.light .topbar{background:rgba(248,252,249,.72);border-color:rgba(255,255,255,.9)}
-body.light .stat,body.light .panel,body.light .market,body.light .walletcard,body.light .market-chart-card{background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(255,255,255,.54));border:1px solid rgba(255,255,255,.92);box-shadow:0 14px 38px rgba(37,83,56,.075),inset 0 1px rgba(255,255,255,.95);backdrop-filter:blur(26px) saturate(175%);-webkit-backdrop-filter:blur(26px) saturate(175%)}
-body.light .market{position:relative;overflow:hidden}body.light .market:before,body.light .stat:before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.98),transparent);pointer-events:none}
-body.light .outcome{background:rgba(255,255,255,.62);border-color:rgba(170,202,180,.38)}body.light .outcome:hover{background:rgba(226,246,233,.9);border-color:#8dc6a2}
-body.light .field input,body.light .field select,body.light .search{background:rgba(255,255,255,.72);border-color:rgba(169,198,179,.48);box-shadow:inset 0 1px 2px rgba(26,69,43,.035)}
-body.light .modal{background:rgba(250,254,251,.91);border-color:white;backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);box-shadow:0 35px 100px rgba(26,65,43,.2)}
-body.light .market-chart-card{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(231,245,236,.72))}
-.welcome{border:1px solid transparent;border-radius:22px;padding:22px 24px;background:linear-gradient(110deg,rgba(10,133,79,.07),rgba(255,255,255,.16));position:relative;overflow:hidden}
-.welcome:after{content:"";position:absolute;width:220px;height:220px;right:-70px;top:-145px;border-radius:50%;background:radial-gradient(circle,rgba(161,231,180,.28),transparent 68%);pointer-events:none}
-.stat,.panel,.market,.walletcard{min-width:0}.stat{overflow:hidden}.stathead{font-weight:700}.marketmeta{gap:8px}.market h3{overflow-wrap:anywhere}.marketfoot{gap:8px}.tablewrap{max-width:100%;overscroll-behavior-x:contain}.table{font-variant-numeric:tabular-nums}.table tbody tr:hover{background:rgba(10,130,76,.045)}
-/* Admin control room */
-.admin-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;padding:20px 22px;margin:0 0 16px;border-radius:20px;background:linear-gradient(115deg,#073d2a,#0b7950 62%,#159765);color:#f4fff7;box-shadow:0 18px 42px rgba(5,91,54,.2);position:relative;overflow:hidden}
-.admin-hero:after{content:"";position:absolute;width:270px;height:270px;right:10%;top:-190px;border:1px solid #ffffff28;border-radius:50%;box-shadow:0 0 0 25px #ffffff0b,0 0 0 55px #ffffff08}
-.admin-hero h2{font-size:clamp(20px,2.5vw,28px);letter-spacing:-1px;margin:3px 0}.admin-hero p{color:#d0ead9;margin:0;font-size:12px}.admin-hero .eyebrow{color:#c8f59d}.admin-hero-actions{display:flex;gap:8px;flex-wrap:wrap;z-index:1}.admin-hero .ghost{background:#ffffff18;border-color:#ffffff42;color:white}.admin-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:0 0 16px}.admin-kpi{padding:14px 16px;border:1px solid var(--line);border-radius:15px;background:var(--panel);box-shadow:var(--shadow)}.admin-kpi small{display:block;color:var(--muted);font-size:10px;font-weight:750}.admin-kpi strong{display:block;font-size:22px;letter-spacing:-.8px;margin-top:4px;font-variant-numeric:tabular-nums}
-.adminpane{border-radius:18px;min-width:0}.adminpane>h3{font-size:16px;margin:0 0 14px}.adminpane .table{min-width:720px}.adminpane .table th{white-space:nowrap}.adminpane .table td:last-child{white-space:nowrap}.admin-tools-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:14px}.admin-tool-card{padding:16px;border:1px solid var(--line);border-radius:15px;background:var(--panel2);min-width:0}.admin-tool-card h4{font-size:13px;margin:0 0 5px}.admin-tool-card p{font-size:10px;color:var(--muted);margin:0 0 12px}.admin-tool-card .field{margin-top:8px}.admin-tool-card .primary,.admin-tool-card .ghost{font-size:11px}.admin-announcement{display:flex;gap:8px}.admin-announcement input{min-width:0;flex:1}.admin-status{display:inline-flex;align-items:center;gap:7px;padding:5px 9px;border-radius:999px;background:rgba(12,151,89,.1);color:#08794d;font-size:9px;font-weight:850}.admin-status:before{content:"";width:6px;height:6px;border-radius:50%;background:#17ad70}
-.icon-action{width:34px;height:34px;border-radius:10px;cursor:pointer}.icon-action:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid rgba(16,157,98,.35);outline-offset:2px}.icon-action svg{width:16px;height:16px}
-/* Wallet: financial app visual hierarchy */
-.wallet-hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(230px,.85fr);gap:18px;padding:22px;border-radius:21px;background:linear-gradient(120deg,#063d2a,#08794d 65%,#159b63);color:#f4fff7;box-shadow:0 18px 42px rgba(6,95,57,.18);margin-bottom:15px;position:relative;overflow:hidden}
-.wallet-hero:after{content:"";position:absolute;width:260px;height:260px;right:10%;top:-180px;border:1px solid #ffffff2a;border-radius:50%;box-shadow:0 0 0 28px #ffffff0c,0 0 0 58px #ffffff08;pointer-events:none}.wallet-hero small{color:#cce9d8;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase}.wallet-hero strong{display:block;font-size:clamp(27px,4vw,39px);letter-spacing:-1.5px;margin:7px 0 13px;font-variant-numeric:tabular-nums}.wallet-hero .walletactions{max-width:310px;margin-top:0}.wallet-hero .primary{background:#c8f58a;color:#12341f}.wallet-hero .ghost{background:#ffffff17;color:white;border-color:#ffffff55}.wallet-mini{align-self:center;z-index:1;padding:15px;border-radius:15px;background:#ffffff15;border:1px solid #ffffff32;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}.wallet-mini .activityrow{color:#effff4;padding:7px 0}.wallet-mini .muted{color:#c9e5d4}.wallet-mini strong{font-size:12px;margin:0}.wallet-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:15px}.wallet-stat-grid .stat{padding:14px 16px}.wallet-stat-grid .statval{font-size:20px}.wallet-action-icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:rgba(13,142,83,.1);color:#08794d}.wallet-action-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-/* Native inline SVGs render consistently without remote icon fonts or CDNs */
-.cx-svg{width:18px;height:18px;display:inline-block;vertical-align:middle;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}.nav button .cx-svg{width:18px;height:18px}.marketfoot .cx-svg{width:13px;height:13px;color:var(--muted)}
-@media(max-width:1050px){.admin-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-hero{grid-template-columns:1fr}.admin-hero-actions{justify-content:flex-start}}
-@media(max-width:760px){.content{padding:16px 13px 38px}.welcome{padding:18px 17px;border-radius:17px}.welcome h1{font-size:clamp(23px,6vw,30px)}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stat{padding:13px}.layout{grid-template-columns:minmax(0,1fr)}.marketgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.market{padding:13px}.market h3{font-size:13px;min-height:54px}.outcome{padding:9px}.outcome strong{font-size:16px}.marketfoot{flex-wrap:wrap}.admin-hero{padding:17px}.admin-kpis{gap:8px}.admin-kpi{padding:12px}.admin-kpi strong{font-size:19px}.admin-tools-grid{grid-template-columns:1fr}.wallet-hero{grid-template-columns:1fr;padding:18px}.wallet-mini{width:100%}.wallet-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.subnav{overflow-x:auto;flex-wrap:nowrap;padding-bottom:5px}.subnav button{white-space:nowrap}.adminpane{padding:14px}}
-@media(max-width:520px){.topbar{padding:0 11px}.crumb{font-size:11px}.topactions{gap:6px}.topactions .primary{padding:9px 10px;font-size:11px}.iconbtn{width:34px;height:34px}.marketgrid{grid-template-columns:1fr}.market h3{min-height:0}.sidepanel{grid-template-columns:1fr}.sidepanel .panel:last-child{grid-column:auto}.stats{gap:8px}.statval{font-size:19px}.admin-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-hero-actions>*{flex:1}.wallet-stat-grid{grid-template-columns:1fr 1fr}.wallet-hero strong{font-size:29px}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.modalback{padding:10px;align-items:flex-end}.modal{max-height:92dvh;border-radius:22px 22px 12px 12px;padding:18px}.loginmodal{align-self:center;border-radius:22px}.table{min-width:560px}}
-@media(hover:none){.market:hover,.stat:hover{transform:none}.market:active{transform:scale(.99)}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){body.light .side,body.light .topbar,body.light .stat,body.light .panel,body.light .market,body.light .modal{background:rgba(255,255,255,.96)}}
-</style>
-
-</head>
-<body><div class="app"><aside class="side" id="sidebar"><div class="brand"><div class="brandmark">cx</div><div><div class="brandname">campus<span>X</span></div><small>PREDICTION MARKETS</small></div></div><div class="navlabel">WORKSPACE</div><nav class="nav" id="nav"><button class="active" data-page="overview" aria-label="Overview"><span class="ico"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></svg></span><span class="navtext">Overview</span></button><button data-page="markets" aria-label="Explore markets"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 19V5m0 14h16M7 15l4-4 3 2 5-7"/></svg></span><span class="navtext">Explore markets</span></button><button data-page="challenge" aria-label="Weekly challenge"><span class="ico"><svg viewBox="0 0 24 24"><path d="M8 4h8v3a4 4 0 0 1-8 0V4ZM8 6H4v2a4 4 0 0 0 4 4m8-6h4v2a4 4 0 0 1-4 4M12 11v6m-4 4h8m-7-4h6"/></svg></span><span class="navtext">Weekly challenge</span></button><button data-page="portfolio" aria-label="My positions"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 19V5m0 14h16M7 15l3-4 3 2 5-7"/><circle cx="18" cy="6" r="2"/></svg></span><span class="navtext">My positions</span></button><button data-page="wallet" aria-label="Wallet"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 9h18M16 14h2"/></svg></span><span class="navtext">Wallet</span></button><button data-page="activity" aria-label="Activity"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 18V6m0 12h16M7 14l4-4 3 3 5-7"/></svg></span><span class="navtext">Activity</span></button></nav><div class="navlabel adminonly" id="adminLabel">ADMINISTRATION</div><nav class="nav adminonly" id="adminNav"><button data-page="admin" aria-label="Admin tools"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/><path d="m19.4 15 .1.1 1.2 1-1.5 2.6-1.5-.6a8 8 0 0 1-1.7 1l-.3 1.6h-3l-.3-1.6a8 8 0 0 1-1.7-1l-1.5.6-1.5-2.6 1.2-1a8 8 0 0 1 0-2l-1.2-1 1.5-2.6 1.5.6a8 8 0 0 1 1.7-1L12.7 7h3l.3 1.6a8 8 0 0 1 1.7 1l1.5-.6 1.5 2.6-1.2 1a8 8 0 0 1-.1 2Z"/></svg></span><span class="navtext">Admin tools</span></button></nav><div class="sidebottom"><div class="navlabel">PREFERENCES</div><nav class="nav"><button id="themeSide"><span class="ico"><svg viewBox="0 0 24 24"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z"/></svg></span><span class="navtext">Appearance</span></button><button data-page="profile" title="My profile" aria-label="My profile"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><span class="navtext">My profile</span></button></nav><div class="userchip"><div class="avatar" id="avatar">U</div><div style="min-width:0"><strong id="sideName">Guest user</strong><small id="sideEmail">Sign in to continue</small></div></div></div></aside>
-<main class="main"><header class="topbar"><div style="display:flex;align-items:center;gap:12px"><button class="iconbtn mobilemenu" id="menuBtn">☰</button><div class="crumb">CampusX <span style="opacity:.5">/</span> <b id="crumb">Overview</b></div></div><div class="topactions"><button class="iconbtn" id="themeBtn" title="Toggle theme">◐</button><button class="iconbtn hide-sm notification-button" id="notifBtn" title="Notifications" aria-label="Notifications"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span class="notif-badge" id="notifBadge" aria-label="Unread notifications"></span></button><button class="primary" id="topDeposit">＋ Add funds</button></div></header>
-<div class="content"><section class="page active" id="page-overview"><div class="welcome"><div><div class="eyebrow">THE CAMPUS PULSE</div><h1>Good day, <span id="welcomeName">there</span>.</h1><p>Explore the markets. Make your call. Own your conviction.</p></div><div class="date" id="today"></div></div><div class="stats"><div class="stat"><div class="stathead">Available balance <span>◈</span></div><div class="statval" id="statBalance">₦25,000</div><div class="statfoot">Ready to use</div></div><div class="stat"><div class="stathead">Open positions <span>▤</span></div><div class="statval" id="statPositions">0</div><div class="statfoot">Your active predictions</div></div><div class="stat"><div class="stathead">Total invested <span>↗</span></div><div class="statval" id="statInvested">₦0</div><div class="statfoot">Across all positions</div></div><div class="stat"><div class="stathead">Markets available <span>▥</span></div><div class="statval" id="statMarkets">16</div><div class="statfoot">Across campus categories</div></div></div><div class="layout"><div><div class="sectionhead"><div><h2>Trending markets</h2><p>Markets attracting the most attention right now</p></div><button class="ghost" data-goto="markets">View all ↗</button></div><div class="tabs" id="overviewTabs"><button class="tab active" data-cat="All">All markets</button><button class="tab" data-cat="Elections">Elections</button><button class="tab" data-cat="Sports">Sports</button><button class="tab" data-cat="Campus life">Campus life</button><button class="tab" data-cat="Academics">Academics</button></div><div class="marketgrid" id="overviewMarkets"></div></div><aside class="sidepanel"><div class="panel"><h3>Wallet overview</h3><div class="muted" style="font-size:10px">Available balance</div><div class="balance" id="walletBalance">₦25,000</div><div class="walletactions"><button class="primary" id="walletDeposit">Deposit</button><button class="ghost" id="walletWithdraw">Withdraw</button></div></div><div class="panel"><h3>Recent activity</h3><div class="activity" id="recentActivity"><div class="empty">No activity yet</div></div></div><div class="panel"><h3>Market pulse</h3><div class="activityrow"><span class="muted">Markets open</span><strong id="openCount">16</strong></div><div class="activityrow"><span class="muted">Trading status</span><strong class="positive">● Active</strong></div><div class="activityrow"><span class="muted">Platform currency</span><strong>NGN · ₦</strong></div></div></aside></div></section>
-<section class="page" id="page-markets"><div class="welcome"><div><div class="eyebrow">DISCOVER</div><h1>Explore markets</h1><p>Find a question. Weigh the odds. Take a position.</p></div></div><div id="electionCountdown" style="display:none"></div><div class="sectionhead"><div class="tools"><input class="search" id="marketSearch" placeholder="Search markets..."></div><span class="muted" id="marketCount"></span></div><div class="tabs" id="marketTabs"><button class="tab active" data-cat="All">All</button><button class="tab" data-cat="Elections">Elections</button><button class="tab" data-cat="Sports">Sports</button><button class="tab" data-cat="Campus life">Campus life</button><button class="tab" data-cat="Academics">Academics</button><button class="tab" data-cat="Events">Events</button></div><div class="marketgrid" id="allMarkets"></div></section>
-<section class="page" id="page-challenge"><div class="welcome"><div><div class="eyebrow">CAMPUSX WEEKLY CHALLENGE</div><h1>10 picks. One million naira.</h1><p>Predict all ten outcomes correctly to claim the weekly prize.</p></div></div><div class="challenge-hero"><div><div class="eyebrow" style="color:#c8ff82">THE PERFECT TEN</div><h2>Can you get all 10 right?</h2><p>Admins select ten of the hardest prediction markets each week. Make one call on every market and submit your entry before the round closes.</p><div class="challenge-stats"><span class="challenge-stat">Entry stake: <b>₦10,000</b></span><span class="challenge-stat">10 predictions required</span><span class="challenge-stat">All 10 correct to win</span></div></div><div class="trophy-art" aria-hidden="true"><svg viewBox="0 0 120 120"><path d="M38 17h44v22c0 20-9 31-22 31S38 59 38 39V17Z"/><path d="M38 25H20v12c0 14 9 22 23 22M82 25h18v12c0 14-9 22-23 22M60 70v20M42 98h36M48 90h24"/><path d="m60 28 4 8 9 1-6.5 6 1.5 9-8-4.5-8 4.5 1.5-9-6.5-6 9-1 4-8Z"/></svg></div><div class="challenge-prize"><small>WEEKLY PRIZE</small><strong>₦1,000,000</strong><small>For a perfect prediction card</small></div></div><div class="panel"><div class="sectionhead"><div><h2>This week's challenge markets</h2><p id="challengeRoundLabel">Weekly round · Awaiting admin markets</p></div><span class="admin-status" id="challengeMarketCount">0 / 10 markets</span></div><div id="challengeMarkets" class="challenge-grid"><div class="challenge-empty">The weekly challenge has not been published yet. Check back when admins add the ten markets.</div></div><div class="challenge-footer"><div><div class="muted" style="font-size:10px">Fixed entry stake</div><strong style="font-size:19px">₦10,000</strong></div><button class="primary" id="joinChallenge" disabled>Submit all 10 predictions</button></div><div class="notice">You must select an outcome for all ten markets. The ₦10,000 entry stake is deducted from your local prototype wallet when you submit. A perfect card wins ₦1,000,000; settlement will be connected to the backend later.</div></div><div class="panel" style="margin-top:14px"><div class="sectionhead"><div><h2>My challenge entries</h2><p>Your submitted weekly prediction cards</p></div></div><div id="challengeEntries" class="activity"><div class="empty">No challenge entries yet.</div></div></div></section><section class="page" id="page-portfolio"><div class="welcome"><div><div class="eyebrow">YOUR PERFORMANCE</div><h1>My positions</h1><p>Track your active predictions and potential returns.</p></div></div><div class="panel tablewrap"><table class="table"><thead><tr><th>MARKET</th><th>OUTCOME</th><th>STAKE</th><th>ENTRY PRICE</th><th>POTENTIAL RETURN</th><th>STATUS</th></tr></thead><tbody id="positionsTable"></tbody></table></div></section>
-<section class="page" id="page-wallet"><div class="welcome"><div><div class="eyebrow">YOUR FUNDS</div><h1>Wallet & transactions</h1><p>A clear view of your available funds and account activity.</p></div></div><div class="wallet-hero"><div><small>Available balance</small><strong id="walletPageBalance">₦25,000</strong><div class="walletactions"><button class="primary" id="pageDeposit"><svg class="cx-svg" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> Add funds</button><button class="ghost" id="pageWithdraw"><svg class="cx-svg" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Withdraw</button></div></div><div class="wallet-mini"><div class="activityrow"><span class="muted">Account currency</span><strong>NGN · ₦</strong></div><div class="activityrow"><span class="muted">Deposit status</span><strong> <span class="admin-status">Available</span></strong></div><div class="activityrow"><span class="muted">Withdrawal status</span><strong> <span class="admin-status">Available</span></strong></div></div></div><div class="wallet-stat-grid"><div class="stat"><div class="stathead">Total deposits <span class="wallet-action-icon"><svg viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></span></div><div class="statval" id="depositTotal">₦0</div><div class="statfoot">Recorded deposits</div></div><div class="stat"><div class="stathead">Total withdrawals <span class="wallet-action-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14m-6-6 6 6 6-6"/></svg></span></div><div class="statval" id="withdrawTotal">₦0</div><div class="statfoot">Recorded withdrawals</div></div><div class="stat"><div class="stathead">Transactions <span class="wallet-action-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span></div><div class="statval" id="transactionCount">0</div><div class="statfoot">All wallet activity</div></div></div><div class="panel tablewrap"><div class="sectionhead"><div><h2>Transaction history</h2><p>Deposits, withdrawals and wallet activity</p></div><span class="admin-status">Account ledger</span></div><table class="table"><thead><tr><th>DATE</th><th>TYPE</th><th>REFERENCE</th><th>AMOUNT</th><th>STATUS</th></tr></thead><tbody id="transactionsTable"></tbody></table><div class="notice">Standalone mode: wallet requests are stored in this browser. Connect a verified payment gateway and secure backend before processing real funds.</div></div></section>
-<section class="page" id="page-activity"><div class="welcome"><div><div class="eyebrow">ACCOUNT LOG</div><h1>Activity</h1><p>Your recent actions and wallet events.</p></div></div><div class="panel tablewrap"><table class="table"><thead><tr><th>DATE</th><th>ACTIVITY</th><th>DETAIL</th><th>AMOUNT</th></tr></thead><tbody id="activityTable"></tbody></table></div></section>
-<section class="page" id="page-profile"><div class="welcome"><div><div class="eyebrow">ACCOUNT SETTINGS</div><h1>My profile</h1><p>Manage your personal details.</p></div></div><div class="panel" style="max-width:650px"><div style="display:flex;align-items:center;gap:13px;margin-bottom:20px"><div class="avatar" style="width:50px;height:50px;font-size:18px" id="profileAvatar">U</div><div><h3 id="profileDisplayName" style="margin:0">Guest user</h3><span class="muted" id="profileDisplayEmail"></span></div></div><form id="profileForm" class="formgrid"><div class="field"><label>FULL NAME</label><input id="profileName" required></div><div class="field"><label>EMAIL ADDRESS</label><input id="profileEmail" type="email" disabled></div><div class="field"><label>INSTITUTION</label><input id="profileInstitution" placeholder="Your institution"></div><div class="field" style="display:none"><label>ADMIN ID</label><input id="profileAdminId" value=""></div><div class="field full"><button class="primary">Save profile</button></div></form><div class="profile-actions" style="display:flex;justify-content:flex-end;margin-top:16px"><button type="button" class="danger" id="profileLogout"><svg class="cx-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg> Log out</button></div><div class="notice">Your profile is stored locally in this browser. Real authentication and protected account data require a secure backend.</div></div></section>
-<section class="page" id="page-admin"><div class="admin-hero"><div><div class="eyebrow">CAMPUSX CONTROL CENTRE</div><h2>Platform operations</h2><p>Manage markets, platform availability and trader communications.</p></div><div class="admin-hero-actions"><button class="ghost" id="adminExport"><svg class="cx-svg" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg> Export data</button><button class="ghost" id="adminRefresh"><svg class="cx-svg" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M5.6 9A7 7 0 0 1 18 6l2 6M4 12l2 6a7 7 0 0 0 12.4-3"/></svg> Refresh</button></div></div><div class="admin-kpis"><div class="admin-kpi"><small>Total markets</small><strong id="adminMarketTotal">—</strong></div><div class="admin-kpi"><small>Open markets</small><strong id="adminOpenTotal">—</strong></div><div class="admin-kpi"><small>Paused / voided</small><strong id="adminPausedTotal">—</strong></div><div class="admin-kpi"><small>Wallet requests</small><strong id="adminWalletTotal">—</strong></div></div><div class="subnav"><button class="active" data-admin-tab="manage">Markets</button><button data-admin-tab="create">Create market</button><button data-admin-tab="challenge">Weekly challenge</button><button data-admin-tab="settings">Platform settings</button><button data-admin-tab="users">Users</button><button data-admin-tab="logs">Audit log</button></div><div id="admin-manage" class="adminpane panel"><h3>Market management</h3><div class="tablewrap"><table class="table"><thead><tr><th>MARKET</th><th>YES ODDS</th><th>NO ODDS</th><th>STATUS</th><th>ACTIONS</th></tr></thead><tbody id="adminMarkets"></tbody></table></div></div><div id="admin-create" class="adminpane panel" style="display:none"><h3>Create a market</h3><form id="createMarket" class="formgrid"><div class="field full"><label>MARKET QUESTION</label><input id="newQuestion" required placeholder="Will ...?"></div><div class="field"><label>CATEGORY</label><select id="newCategory"><option>Elections</option><option>Sports</option><option>Campus life</option><option>Academics</option><option>Events</option></select></div><div class="field"><label>MARKET TYPE</label><select id="newType"><option value="binary">Yes / No</option><option value="multi">Multiple outcomes</option></select></div><div class="field"><label>YES DECIMAL ODDS</label><input id="newYes" type="number" min="1.01" max="100" step="0.01" value="1.72"></div><div class="field"><label>NO DECIMAL ODDS</label><input id="newNo" type="number" min="1.01" max="100" step="0.01" value="2.38"></div><div class="field full" id="multiField" style="display:none"><label>OUTCOMES (SEPARATE WITH COMMAS)</label><input id="newOutcomes" placeholder="Candidate A, Candidate B, Candidate C"></div><div class="field full"><button class="primary">Publish market</button></div></form></div><div id="admin-challenge" class="adminpane panel" style="display:none"><h3>Weekly challenge management</h3><p class="muted" style="font-size:11px">Publish up to 10 difficult markets for the ₦10,000-entry, ₦1,000,000-prize weekly challenge. Edit odds, void markets or resume them at any time.</p><form id="challengeMarketForm" class="formgrid" style="margin:14px 0"><div class="field full"><label>CHALLENGE MARKET QUESTION</label><input id="challengeQuestion" required maxlength="180" placeholder="Enter a difficult prediction market question"></div><div class="field"><label>YES ODDS</label><input id="challengeYes" type="number" min="1.01" max="100" step="0.01" value="2.10" required></div><div class="field"><label>NO ODDS</label><input id="challengeNo" type="number" min="1.01" max="100" step="0.01" value="1.80" required></div><div class="field full"><button class="primary" id="addChallengeMarket">Add to weekly challenge</button></div></form><div id="adminChallengeMarkets"><div class="empty">No challenge markets added yet.</div></div><div class="challenge-footer"><span class="muted" id="adminChallengeCount">0 of 10 markets added</span><button class="ghost" id="clearChallengeMarkets" type="button">Clear this week's markets</button></div></div><div id="admin-settings" class="adminpane panel" style="display:none"><h3>Platform settings</h3><div class="activityrow"><span>Trading enabled</span><input type="checkbox" id="tradingToggle" checked></div><div class="activityrow" style="margin-top:13px"><span>Deposits enabled</span><input type="checkbox" id="depositToggle" checked></div><div class="activityrow" style="margin-top:13px"><span>Withdrawals enabled</span><input type="checkbox" id="withdrawToggle" checked></div><div class="notice">These switches affect this browser prototype only. Enforce platform controls on the server in production.</div><div class="admin-tools-grid"><div class="admin-tool-card"><h4>Global announcement</h4><p>Publish a notice for traders across the platform.</p><form id="announcementForm"><div class="admin-announcement"><input id="announcementText" placeholder="Write a platform announcement…" maxlength="180" required><button class="primary" aria-label="Publish announcement" title="Publish announcement"><svg class="cx-svg" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z M22 2 11 13"/></svg></button></div></form><div id="announcementStatus" class="muted" style="font-size:10px;margin-top:8px">No new announcement published.</div></div><div class="admin-tool-card"><h4>Platform health</h4><p>Quick overview of current platform controls.</p><div class="activityrow"><span>Trading</span><strong id="healthTrading">—</strong></div><div class="activityrow"><span>Deposits</span><strong id="healthDeposit">—</strong></div><div class="activityrow"><span>Withdrawals</span><strong id="healthWithdraw">—</strong></div></div></div></div><div id="admin-users" class="adminpane panel" style="display:none"><h3>User directory</h3><div id="usersList" class="empty">User accounts will appear here after registration on a connected backend.</div></div><div id="admin-logs" class="adminpane panel" style="display:none"><h3>Audit log</h3><div id="auditList" class="activity"></div></div></section>
-</div></main></div>
-<div class="modalback" id="accountModal"><div class="modal loginmodal"><div class="loginbrand"><div class="brandmark">cx</div><div><div class="brandname">campus<span>X</span></div><small>PREDICTION MARKETS</small></div></div><div class="eyebrow">YOUR CAMPUS. YOUR CALL.</div><h2 class="loginTitle">Step into the market.</h2><p class="muted">Continue with your email address. CampusX will automatically recognise approved admin accounts.</p><form id="accountForm" class="formgrid"><div class="field full"><label>EMAIL ADDRESS</label><input id="accountEmail" type="email" autocomplete="email" required placeholder="you@example.com"></div><div class="field full"><button class="primary loginSubmit">Continue <span>→</span></button></div></form><div class="loginfoot">One email. Your CampusX workspace.</div></div></div>
-<div class="modalback" id="walletModal"><div class="modal"><div class="modalhead"><h2 id="walletModalTitle">Add funds</h2><button class="close" data-close="walletModal">×</button></div><div class="muted" style="font-size:11px">Available balance</div><div class="balance" id="modalBalance">₦25,000</div><div class="tabs"><button class="tab active" data-wallet-mode="deposit">Deposit</button><button class="tab" data-wallet-mode="withdraw">Withdraw</button></div><form id="walletForm" class="formgrid"><div class="field full"><label>AMOUNT (₦)</label><input id="walletAmount" type="number" min="100" step="100" required placeholder="Enter amount"></div><div class="field full" id="bankFields"><label>BANK NAME</label><select id="bankName" required><option value="">Select your bank</option><option>Access Bank</option><option>First Bank</option><option>GTBank</option><option>UBA</option><option>Zenith Bank</option><option>OPay</option><option>Moniepoint</option><option>Palmpay</option><option>FCMB</option><option>Fidelity Bank</option><option>Union Bank</option><option>Wema Bank</option><option>Stanbic IBTC</option><option>Ecobank</option><option>Other</option></select></div><div class="field full" id="accountFields"><label>ACCOUNT NUMBER</label><input id="bankAccount" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" required placeholder="Enter 10-digit account number"></div><div class="field full"><button class="ghost" id="verifyAccount" type="button"><svg class="cx-svg" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/><circle cx="12" cy="12" r="10"/></svg> Verify account details</button><div id="accountVerification" class="account-verification" aria-live="polite">Account name will appear here after verification.</div></div><div class="field full"><button class="primary" id="walletSubmit" disabled>Continue</button></div></form><div class="notice">This prototype records requests locally. Account-name verification is a frontend preview only. No real name enquiry, payment or bank transfer is processed until the backend is connected.</div></div></div>
-<div class="modalback" id="slipModal"><div class="modal"><div class="modalhead"><h2>Prediction slip</h2><button class="close" data-close="slipModal">×</button></div><div id="slipItems"></div><div class="field" style="margin-top:14px"><label>STAKE (₦)</label><input id="stakeInput" type="number" min="100" step="100" value="500"></div><div class="activityrow" style="margin-top:13px"><span class="muted">Combined odds</span><strong id="combinedOdds">1.00×</strong></div><div class="activityrow" style="margin-top:13px"><span class="muted">Combined potential return</span><strong id="potentialReturn">₦0</strong></div><div class="activityrow"><span class="muted">Potential profit</span><strong id="potentialProfit" class="positive">₦0</strong></div><div class="notice" id="slipNotice">Selections from different markets can be combined.</div><button class="primary" id="confirmSlip" style="width:100%;margin-top:8px">Confirm predictions</button></div></div>
-<div class="modalback" id="marketModal"><div class="modal"><div class="modalhead"><h2>Market details</h2><button class="close" data-close="marketModal">×</button></div><div id="marketDetails"></div></div></div>
-<div class="modalback" id="notifModal"><div class="modal"><div class="modalhead"><h2>Notifications</h2><button class="close" data-close="notifModal">×</button></div><div class="activity" id="notificationsList"><div class="empty">You're all caught up.</div></div><button class="ghost" id="markAll" style="margin-top:14px">Mark all as read</button></div></div>
-<button id="floatingSlip" class="floating-slip" type="button" aria-label="Open prediction slip" title="Open prediction slip"><svg viewBox="0 0 24 24"><path d="M6 3h12l2 18H4L6 3Z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg><span>Open slip</span><b id="slipCount">0</b></button><div class="toast" id="toast"></div>
 <script>
-(()=>{'use strict';
-const $=id=>document.getElementById(id), money=n=>'₦'+Number(n||0).toLocaleString('en-NG',{maximumFractionDigits:2}), now=()=>new Date().toISOString();
-const ADMIN={'progjossytech@gmail.com':'Jossy08','shinaayomiawwal@gmail.com':'Awwa_1','rachealkumapayi@gmail.com':'Honey13','mohd.yusuph08@gmail.com':'Yusuph24','amusafarid@gmail.com':'Farid10','digimide1@gmail.com':'Digimide00'};
-const seed=[
-['Will the campus football team win its next inter-college fixture?','Sports',56,44],['Will the next departmental football final have 3+ goals?','Sports',48,52],['Will the home team win the next campus basketball final?','Sports',61,39],['Will a major campus concert hold before the semester ends?','Events',74,26],['Will the next campus social event sell out?','Campus life',54,46],['Will the school announce a revised academic calendar this month?','Academics',39,61],['Will the library extend its weekend opening hours?','Campus life',47,53],['Will the next examination timetable be released on schedule?','Academics',66,34],['Will the campus host an entrepreneurship fair this semester?','Events',59,41],['Will hostel allocation be completed before resumption?','Campus life',43,57],['Will the next inter-faculty debate reach a final round?','Campus life',52,48],['Will the campus theatre group stage a production this term?','Events',63,37],['Will the school announce a new scholarship opportunity this semester?','Academics',44,56],['Will the next campus hackathon attract over 100 participants?','Events',57,43],['Will the home side score in the first half of the next campus derby?','Sports',49,51],['Will a campus club organise a public workshop this month?','Campus life',68,32],['Will the next departmental quiz competition have more than 5 teams?','Academics',58,42],['Will the campus sports week include a track event?','Sports',71,29],['Will the student innovation hub host a demo day this term?','Events',62,38],['Will the next campus music event feature a live band?','Campus life',53,47]
-];
-const key='campusx_v3';let state=load(),category='All',walletMode='deposit',slip=[],currentMarket=null;
-const challengeSeed=[
-['Will the next campus derby finish with exactly one goal? ',2.85,2.25],
-['Will the next inter-faculty final be decided by a one-goal margin?',2.40,1.95],
-['Will the next campus debate end with a unanimous winner?',3.10,1.62],
-['Will the next major campus event exceed its announced attendance target?',1.88,2.35],
-['Will the next examination timetable be released without a revision?',2.15,1.78],
-['Will a campus team score in the final ten minutes of its next fixture?',2.70,1.72],
-['Will the next departmental quiz have a tie at the end of regular rounds?',3.40,1.38],
-['Will the next campus innovation pitch produce a female-led winning team?',2.05,1.95],
-['Will the next campus sports final go to extra time?',3.25,1.42],
-['Will the next campus concert sell out before event day?',1.72,2.65]
-];
-if(state.challenge&&!state.challenge.initialized){state.challenge.markets=challengeSeed.map((x,i)=>({id:'cmseed'+(i+1),question:x[0].trim(),yes:x[1],no:x[2],status:'Open'}));state.challenge.initialized=true;localStorage.setItem(key,JSON.stringify(state));}
+/* =====================================================
+   CAMPUSX — MOBILE NAVIGATION & RESPONSIVENESS
+   Keeps existing page navigation event handlers.
+   ===================================================== */
 
-function load(){try{let s=JSON.parse(localStorage.getItem(key));if(s&&Array.isArray(s.markets)){s.challenge=s.challenge||{markets:[],entries:[],round:'2026-W48'};s.challenge.markets=Array.isArray(s.challenge.markets)?s.challenge.markets:[];s.challenge.entries=Array.isArray(s.challenge.entries)?s.challenge.entries:[];let publicCount=s.markets.filter(m=>m.category!=='Elections').length,knownQuestions=new Set(s.markets.map(m=>m.question));seed.forEach((x,i)=>{if(publicCount<20&&!knownQuestions.has(x[0])){let yes=Number((100/x[2]).toFixed(2)),no=Number((100/x[3]).toFixed(2));s.markets.push({id:'mseed'+(i+1),question:x[0],category:x[1],yes,no,status:'Open',type:'binary',volume:Math.round(12000+Math.random()*90000),created:now(),trend:Array(12).fill(yes),trendNo:Array(12).fill(no)});knownQuestions.add(x[0]);publicCount++}});s.markets.forEach(m=>{if(Number(m.yes)>10)m.yes=100/Number(m.yes);if(Number(m.no)>10)m.no=100/Number(m.no);m.yes=Number(m.yes)||1.8;m.no=Number(m.no)||1.8;m.trend=Array.isArray(m.trend)&&m.trend.length?m.trend.map(v=>Number(v)>10?100/Number(v):Number(v)):Array(12).fill(m.yes);m.trendNo=Array.isArray(m.trendNo)&&m.trendNo.length?m.trendNo.map(v=>Number(v)>10?100/Number(v):Number(v)):Array(12).fill(m.no)});return s}}catch(e){}return {profile:null,balance:25000,markets:seed.map((x,i)=>({id:'m'+(i+1),question:x[0],category:x[1],yes:Number((100/x[2]).toFixed(2)),no:Number((100/x[3]).toFixed(2)),status:'Open',type:'binary',volume:Math.round(12000+Math.random()*90000),created:now(),trend:Array.from({length:12},(_,j)=>Number((100/x[2]+(Math.random()-.5)*.08).toFixed(2))),trendNo:Array.from({length:12},(_,j)=>Number((100/x[3]+(Math.random()-.5)*.08).toFixed(2)))})),positions:[],transactions:[],logs:[],notifications:[{id:1,text:'Welcome to CampusX. Explore the available markets.',read:false,date:now()}],settings:{trading:true,deposit:true,withdraw:true},challenge:{markets:[],entries:[],round:'2026-W48'}}}
-function save(){localStorage.setItem(key,JSON.stringify(state));render()}
-function isAdmin(){return !!(state.profile&&Object.prototype.hasOwnProperty.call(ADMIN,String(state.profile.email||'').toLowerCase()))}
-function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2600)}
-function log(action,detail=''){state.logs.unshift({date:now(),action,detail});state.logs=state.logs.slice(0,100)}
-function fmtDate(d){return new Date(d).toLocaleString('en-NG',{dateStyle:'medium',timeStyle:'short'})}
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function spark(m){let vals=m.trend||[40,44,43,49,47,52,55,53],max=Math.max(...vals),min=Math.min(...vals);let pts=vals.map((v,i)=>(i/(vals.length-1)*100)+','+(22-(v-min)/(max-min||1)*19)).join(' ');return `<svg class="spark" viewBox="0 0 100 24"><polyline points="${pts}"/></svg>`}
-function marketCard(m){let yes=Number(m.yes).toFixed(2),no=Number(m.no).toFixed(2),closed=m.status!=='Open';return `<article class="market"><div class="marketmeta"><span class="tag">${esc(m.category)}</span><span class="status ${closed?'negative':''}">● ${esc(m.status)}</span></div><h3>${esc(m.question)}</h3><div class="outcomes"><button class="outcome" data-pick="${m.id}" data-outcome="Yes" ${closed?'disabled':''}><small>YES ODDS</small><strong>${yes}×</strong></button><button class="outcome" data-pick="${m.id}" data-outcome="No" ${closed?'disabled':''}><small>NO ODDS</small><strong>${no}×</strong></button></div><div class="marketfoot"><span>${money(m.volume)} volume</span>${spark(m)}<button class="ghost" style="padding:5px 8px;font-size:9px" data-details="${m.id}">Details</button></div></article>`}
-function renderMarkets(){let normal=state.markets.filter(m=>m.category!=='Elections');let list=normal.filter(m=>(category==='All'||m.category===category));let q=($('marketSearch')?.value||'').toLowerCase();list=list.filter(m=>m.question.toLowerCase().includes(q));$('overviewMarkets').innerHTML=normal.slice(0,4).map(marketCard).join('');$('allMarkets').innerHTML=category==='Elections'?'<div class="empty">Election markets are not listed yet. The election share-buying countdown is shown above.</div>':(list.length?list.map(marketCard).join(''):'<div class="empty">No markets match your search.</div>');$('electionCountdown').style.display=category==='Elections'?'block':'none';$('marketCount').textContent=(category==='Elections'?'Election markets coming later':list.length+' markets');$('statMarkets').textContent=normal.length;$('openCount').textContent=normal.filter(m=>m.status==='Open').length} 
-function positionSeries(x){let legs=x.selections||[],markets=legs.map(leg=>({leg,m:state.markets.find(a=>a.id===leg.id)})).filter(z=>z.m);if(!markets.length)return Array(12).fill(Number(x.price||1.8));let length=Math.min(18,...markets.map(z=>(z.m.trend||[]).length||12));return Array.from({length},(_,i)=>markets.reduce((product,z)=>{let series=z.leg.outcome==='Yes'?(z.m.trend||[]):(z.m.trendNo||[]);let value=Number(series[series.length-length+i]|| (z.leg.outcome==='Yes'?z.m.yes:z.m.no));return product*value},1))}
-function positionPath(x){let a=positionSeries(x),lo=Math.min(...a),hi=Math.max(...a),span=hi-lo||.1;return a.map((v,i)=>(i?'L':'M')+(5+i*210/Math.max(1,a.length-1)).toFixed(1)+' '+(41-(v-lo)/span*31).toFixed(1)).join(' ')}
-function positionLastY(x){let a=positionSeries(x),lo=Math.min(...a),hi=Math.max(...a);return (41-(a[a.length-1]-lo)/(hi-lo||.1)*31).toFixed(1)}
-function render(){let p=state.profile||{name:'Guest user',email:'Sign in to continue'};let unread=(state.notifications||[]).some(n=>!n.read);$('notifBadge')?.classList.toggle('show',unread);let first=p.name.split(' ')[0];$('welcomeName').textContent=first;$('sideName').textContent=p.name;$('sideEmail').textContent=p.email;$('avatar').textContent=(p.name[0]||'U').toUpperCase();$('profileAvatar').textContent=(p.name[0]||'U').toUpperCase();$('profileDisplayName').textContent=p.name;$('profileDisplayEmail').textContent=p.email;$('profileName').value=p.name;$('profileEmail').value=p.email;$('profileInstitution').value=p.institution||'';$('profileAdminId').value=p.adminId||'';$('statBalance').textContent=money(state.balance);$('walletBalance').textContent=money(state.balance);$('walletPageBalance').textContent=money(state.balance);$('modalBalance').textContent=money(state.balance);$('statPositions').textContent=state.positions.length;$('statInvested').textContent=money(state.positions.reduce((a,x)=>a+x.stake,0));$('depositTotal').textContent=money(state.transactions.filter(t=>t.type==='Deposit').reduce((a,t)=>a+t.amount,0));$('withdrawTotal').textContent=money(state.transactions.filter(t=>t.type==='Withdrawal').reduce((a,t)=>a+t.amount,0));$('transactionCount').textContent=state.transactions.length;
-renderMarkets();renderChallenge();$('positionsTable').innerHTML=state.positions.length?state.positions.map(x=>`<tr><td><b>${esc(x.question)}</b><div class="position-chart"><svg viewBox="0 0 220 48" preserveAspectRatio="none"><path d="${positionPath(x)}"/><circle cx="216" cy="${positionLastY(x)}" r="3"/></svg></div></td><td>${esc(x.outcome)}</td><td>${money(x.stake)}</td><td>${Number(x.price||x.combinedOdds||1).toFixed(2)}×</td><td>${money(x.potential)}</td><td><span class="positive">${esc(x.status)}</span><small class="position-live">LIVE PRICE TRACKING</small></td></tr>`).join(''):'<tr><td colspan="6" class="muted">No paid positions yet. Confirm a prediction to see its live price chart.</td></tr>';
-$('transactionsTable').innerHTML=state.transactions.length?state.transactions.map(t=>`<tr><td>${fmtDate(t.date)}</td><td>${esc(t.type)}</td><td>${esc(t.ref)}</td><td>${money(t.amount)}</td><td>${esc(t.status)}</td></tr>`).join(''):'<tr><td colspan="5" class="muted">No transactions recorded.</td></tr>';
-$('activityTable').innerHTML=state.logs.length?state.logs.map(l=>`<tr><td>${fmtDate(l.date)}</td><td>${esc(l.action)}</td><td>${esc(l.detail)}</td><td>—</td></tr>`).join(''):'<tr><td colspan="4" class="muted">No activity recorded.</td></tr>';
-$('recentActivity').innerHTML=state.logs.length?state.logs.slice(0,4).map(l=>`<div class="activityrow"><span><i class="dot"></i>${esc(l.action)}<small>${fmtDate(l.date)}</small></span></div>`).join(''):'<div class="empty">No activity yet</div>';
-$('adminLabel').style.display=isAdmin()?'block':'none';$('adminNav').style.display=isAdmin()?'grid':'none';if(isAdmin())renderAdmin();$('tradingToggle').checked=state.settings.trading;$('depositToggle').checked=state.settings.deposit;$('withdrawToggle').checked=state.settings.withdraw;
-}
+(function () {
+  "use strict";
 
-const ELECTION_START=Date.UTC(2026,10,25,0,0,0),ELECTION_END=ELECTION_START+102*86400000;
-function countdownMarkup(end){let ms=Math.max(0,end-Date.now()),days=Math.floor(ms/86400000),hours=Math.floor(ms%86400000/3600000),mins=Math.floor(ms%3600000/60000),secs=Math.floor(ms%60000/1000);return `<div class="countdown-row"><div class="count-unit"><strong>${String(days).padStart(3,'0')}</strong><small>Days</small></div><div class="count-unit"><strong>${String(hours).padStart(2,'0')}</strong><small>Hours</small></div><div class="count-unit"><strong>${String(mins).padStart(2,'0')}</strong><small>Minutes</small></div><div class="count-unit"><strong>${String(secs).padStart(2,'0')}</strong><small>Seconds</small></div></div>`}
-function renderElectionCountdown(){let el=$('electionCountdown');if(!el)return;el.innerHTML=`<div class="election-banner"><div class="eyebrow" style="color:#d0ff92">CAMPUSX ELECTION MARKETS</div><h2>Election share buying closes in</h2><p>Countdown began on 25 November 2026 and runs for 102 days. Election markets will be listed here later.</p><div id="electionTimer" class="challenge-countdown">${countdownMarkup(ELECTION_END)}</div></div>`}
-function renderChallenge(){let c=state.challenge||{markets:[],entries:[]},markets=c.markets||[];let root=$('challengeMarkets');if(!root)return;$('challengeMarketCount').textContent=markets.length+' / 10 markets';$('challengeRoundLabel').textContent='Weekly round · '+(markets.length===10?'Open for predictions':'Awaiting '+(10-markets.length)+' more markets');root.innerHTML=markets.length?markets.map((m,i)=>`<article class="challenge-market"><div class="marketmeta"><span class="tag">CHALLENGE ${String(i+1).padStart(2,'0')}</span><span class="status ${m.status==='Open'?'':'negative'}">● ${esc(m.status)}</span></div><h4>${esc(m.question)}</h4><div class="outcomes"><button class="outcome ${m.selection==='Yes'?'selected':''}" data-challenge-pick="${m.id}" data-outcome="Yes" ${m.status!=='Open'?'disabled':''}><small>YES · ODDS</small><strong>${Number(m.yes).toFixed(2)}×</strong></button><button class="outcome ${m.selection==='No'?'selected':''}" data-challenge-pick="${m.id}" data-outcome="No" ${m.status!=='Open'?'disabled':''}><small>NO · ODDS</small><strong>${Number(m.no).toFixed(2)}×</strong></button></div></article>`).join(''):'<div class="challenge-empty" style="grid-column:1/-1">Admins have not published this week’s ten challenge markets yet.</div>';
-let picks=markets.filter(m=>m.selection&&m.status==='Open').length;$('joinChallenge').disabled=markets.length!==10||picks!==10||markets.some(m=>m.status!=='Open');$('joinChallenge').textContent=picks+'/10 selected · Submit ₦10,000 entry';let entries=c.entries||[];$('challengeEntries').innerHTML=entries.length?entries.map(e=>`<div class="activityrow"><span><b>${esc(e.round||'Weekly challenge')}</b><small>${fmtDate(e.date)} · ${e.picks.length}/10 predictions submitted</small></span><strong>${esc(e.status||'Submitted')}</strong></div>`).join(''):'<div class="empty">No challenge entries yet.</div>';}
-function renderAdminChallenge(){let c=state.challenge||{markets:[],entries:[]},markets=c.markets||[];if(!$('adminChallengeMarkets'))return;$('adminChallengeCount').textContent=markets.length+' of 10 markets added';$('adminChallengeMarkets').innerHTML=markets.length?markets.map((m,i)=>`<div class="challenge-admin-row"><div><b>${i+1}. ${esc(m.question)}</b><small class="muted" style="display:block">${esc(m.status)}</small></div><input type="number" min="1.01" step="0.01" data-cprice="${m.id}" data-side="yes" value="${Number(m.yes).toFixed(2)}" aria-label="YES odds"><input type="number" min="1.01" step="0.01" data-cprice="${m.id}" data-side="no" value="${Number(m.no).toFixed(2)}" aria-label="NO odds"><div style="display:flex;gap:5px;flex-wrap:wrap"><button class="ghost" data-csave="${m.id}">Save odds</button><button class="ghost" data-ctoggle="${m.id}">${m.status==='Open'?'Void':'Resume'}</button><button class="ghost" data-cedit="${m.id}">Edit</button></div></div>`).join(''):'<div class="empty">No challenge markets added yet.</div>';}
+  function initCampusXMobile() {
+    const sidebar = document.getElementById("sidebar");
+    const side = sidebar || document.querySelector(".side");
 
-function navigate(page){if(page==='profile'&&!state.profile){openModal('accountModal');return}if(page==='admin'&&!isAdmin()){toast('Admin access is restricted.');return}document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$('page-'+page)?.classList.add('active');document.querySelectorAll('#nav button,#adminNav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));$('crumb').textContent=page[0].toUpperCase()+page.slice(1);$('sidebar').classList.remove('open');if(page==='markets')renderMarkets()}
-function openModal(id){$(id).classList.add('show')}function closeModal(id){$(id).classList.remove('show')}
-function addPick(id,outcome){let m=state.markets.find(x=>x.id===id);if(!m||m.status!=='Open'){toast('This market is not accepting predictions.');return}if(!state.settings.trading){toast('Trading is currently paused.');return}slip=slip.filter(x=>x.id!==id);slip.push({id,outcome,odds:Number(outcome==='Yes'?m.yes:m.no),question:m.question});renderSlip();toast('Added to your prediction slip.')}
-function renderSlip(){$('slipItems').innerHTML=slip.length?slip.map((x,i)=>`<div class="slipitem"><span><b>${esc(x.question)}</b><br><span class="muted">${esc(x.outcome)} · ${Number(x.odds).toFixed(2)}×</span></span><button data-remove="${i}" title="Remove selection" aria-label="Remove selection"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button></div>`).join(''):'<div class="empty">No selections yet.</div>';$('slipCount').textContent=slip.length;$('floatingSlip').classList.toggle('show',slip.length>0);calcSlip()}
-function calcSlip(){let stake=Number($('stakeInput').value)||0,odds=slip.reduce((a,x)=>a*Number(x.odds||1),1),ret=stake*odds;$('combinedOdds').textContent=odds.toFixed(2)+'×';$('potentialReturn').textContent=money(ret);$('potentialProfit').textContent=money(Math.max(0,ret-stake))}
-function wallet(mode){if(mode)walletMode=mode;document.querySelectorAll('[data-wallet-mode]').forEach(b=>b.classList.toggle('active',b.dataset.walletMode===walletMode));$('walletModalTitle').textContent=walletMode==='deposit'?'Add funds':'Request withdrawal';$('bankFields').style.display='grid';$('accountFields').style.display='grid';$('walletSubmit').textContent=walletMode==='deposit'?'Continue to deposit':'Submit withdrawal request';$('walletSubmit').disabled=true;$('accountVerification').textContent='Account name will appear here after verification.';$('modalBalance').textContent=money(state.balance);openModal('walletModal')}
-function renderAdmin(){$('adminMarkets').innerHTML=state.markets.map(m=>`<tr><td>${esc(m.question)}<br><small class="muted">${esc(m.category)}</small></td><td><input data-price="${m.id}" data-side="yes" type="number" min="1.01" max="100" step="0.01" value="${Number(m.yes).toFixed(2)}" style="width:68px;background:var(--panel2);color:var(--text);border:1px solid var(--line);padding:6px;border-radius:6px">×</td><td><input data-price="${m.id}" data-side="no" type="number" min="1.01" max="100" step="0.01" value="${Number(m.no).toFixed(2)}" style="width:68px;background:var(--panel2);color:var(--text);border:1px solid var(--line);padding:6px;border-radius:6px">×</td><td>${esc(m.status)}</td><td><button class="ghost" data-saveprice="${m.id}" title="Save decimal odds">Save odds</button> <button class="ghost" data-closemarket="${m.id}" title="Close or reopen market">${m.status==='Closed'?'Reopen':'Close market'}</button> <button class="ghost" data-togglemarket="${m.id}">${m.status==='Open'?'Pause':'Resume'}</button> <button class="icon-action void-action" title="Void / restore market" aria-label="Void market" data-void="${m.id}"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></svg></button> <button class="icon-action delete-action" title="Delete market" aria-label="Delete market" data-delete="${m.id}"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button></td></tr>`).join('');$('auditList').innerHTML=state.logs.length?state.logs.map(l=>`<div class="activityrow"><span>${esc(l.action)}<small>${esc(l.detail)} · ${fmtDate(l.date)}</small></span></div>`).join(''):'<div class="empty">No admin activity.</div>';if($('adminMarketTotal'))$('adminMarketTotal').textContent=state.markets.length;if($('adminOpenTotal'))$('adminOpenTotal').textContent=state.markets.filter(m=>m.status==='Open').length;if($('adminPausedTotal'))$('adminPausedTotal').textContent=state.markets.filter(m=>m.status!=='Open').length;if($('adminWalletTotal'))$('adminWalletTotal').textContent=state.transactions.filter(t=>t.status==='Pending').length;if($('healthTrading'))$('healthTrading').textContent=state.settings.trading?'Enabled':'Paused';if($('healthDeposit'))$('healthDeposit').textContent=state.settings.deposit?'Enabled':'Paused';if($('healthWithdraw'))$('healthWithdraw').textContent=state.settings.withdraw?'Enabled':'Paused';if($('announcementStatus'))$('announcementStatus').textContent=state.announcement||'No new announcement published.';renderAdminChallenge()}
-$('nav').addEventListener('click',e=>{let b=e.target.closest('[data-page]');if(b)navigate(b.dataset.page)});$('adminNav').addEventListener('click',e=>{let b=e.target.closest('[data-page]');if(b)navigate(b.dataset.page)});document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>navigate(b.dataset.goto));$('menuBtn').onclick=()=>$('sidebar').classList.toggle('open');document.querySelector('[data-page="profile"]').onclick=()=>navigate('profile');
-function drawMarketProgress(m,range='1D'){
- const values=(m.trend||[m.yes]).slice();
- const multiplier=range==='1D'?1:range==='1W'?1.15:range==='1M'?1.3:1.5;
- const lo=Math.min(...values),hi=Math.max(...values),mid=(lo+hi)/2;
- const series=values.map((v,i)=>Math.max(1.01,Math.min(100,mid+(v-mid)*multiplier+Math.sin(i*1.7)*.012)));
- const pts=series.map((v,i)=>[12+i*(616/Math.max(1,series.length-1)),174-((v-lo)/(hi-lo||.1)*145+12)]);
- const line=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
- const area=line+' L '+pts[pts.length-1][0]+' 184 L '+pts[0][0]+' 184 Z';
- const svg=$('marketDetails').querySelector('svg');if(!svg)return;
- svg.querySelector('.chart-line-path').setAttribute('d',line);svg.querySelector('.chart-area-path').setAttribute('d',area);
- const dot=svg.querySelector('.chart-dot'),last=pts[pts.length-1];dot.setAttribute('cx',last[0]);dot.setAttribute('cy',last[1]);
- const path=svg.querySelector('.chart-line-path');path.style.animation='none';void path.getBoundingClientRect();path.style.animation='';
-}
-document.addEventListener('click',e=>{let p=e.target.closest('[data-pick]');if(p)addPick(p.dataset.pick,p.dataset.outcome);let d=e.target.closest('[data-details]');if(d){let m=state.markets.find(x=>x.id===d.dataset.details);if(m){currentMarket=m;$('marketDetails').innerHTML=`<span class="tag">${esc(m.category)}</span><h2>${esc(m.question)}</h2><p class="muted">Market volume: ${money(m.volume)} · Status: ${esc(m.status)}</p><div class="market-chart-card"><div class="chart-topline"><div><small>PRICE HISTORY</small><strong class="chart-current">${Number(m.yes).toFixed(2)}× <em>YES ODDS</em></strong></div><span class="chart-live"><i></i> LIVE MARKET</span></div><div class="chart-range"><button class="active" data-range="1D">1D</button><button data-range="1W">1W</button><button data-range="1M">1M</button><button data-range="ALL">ALL</button></div><div class="chartbox premium-chart"><svg viewBox="0 0 640 190" preserveAspectRatio="none" role="img" aria-label="Selected market price progress"><defs><linearGradient id="cxChartFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#16a36a" stop-opacity=".28"/><stop offset="100%" stop-color="#16a36a" stop-opacity="0"/></linearGradient></defs><path class="chart-area-path" d=""/><path class="chart-line-path" d=""/><circle class="chart-dot" cx="0" cy="0" r="5"/></svg></div><div class="chart-axis"><span>Market opened</span><span>Latest</span></div></div><div class="outcomes"><button class="outcome" data-pick="${m.id}" data-outcome="Yes" ${m.status!=='Open'?'disabled':''}><small>YES ODDS</small><strong>${Number(m.yes).toFixed(2)}×</strong></button><button class="outcome" data-pick="${m.id}" data-outcome="No" ${m.status!=='Open'?'disabled':''}><small>NO ODDS</small><strong>${Number(m.no).toFixed(2)}×</strong></button></div>`;openModal('marketModal');drawMarketProgress(m)}}let range=e.target.closest('[data-range]');if(range&&currentMarket){range.parentElement.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b===range));drawMarketProgress(currentMarket,range.dataset.range)}let r=e.target.closest('[data-remove]');if(r){slip.splice(Number(r.dataset.remove),1);renderSlip()}let c=e.target.closest('[data-close]');if(c)closeModal(c.dataset.close);let wm=e.target.closest('[data-wallet-mode]');if(wm)wallet(wm.dataset.walletMode)});
-$('overviewTabs').onclick=$('marketTabs').onclick=e=>{let b=e.target.closest('[data-cat]');if(!b)return;category=b.dataset.cat;let root=b.closest('.tabs');root.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('[data-cat]').forEach(x=>{if(x.dataset.cat===category)x.classList.add('active');else x.classList.remove('active')});renderMarkets()};$('marketSearch').oninput=renderMarkets;
-$('floatingSlip').onclick=()=>{renderSlip();openModal('slipModal')};$('stakeInput').oninput=calcSlip;$('confirmSlip').onclick=()=>{let stake=Number($('stakeInput').value)||0;if(!slip.length)return toast('Add at least one selection.');if(slip.some(x=>{let m=state.markets.find(m=>m.id===x.id);return !m||m.status!=='Open'}))return toast('A selected market has closed. Remove it before confirming.');if(stake<100)return toast('Minimum stake is ₦100.');if(stake>state.balance)return toast('Insufficient wallet balance.');let combinedOdds=slip.reduce((a,x)=>a*Number(x.odds),1),potential=stake*combinedOdds;state.balance-=stake;state.positions.push({id:'p'+Date.now(),question:slip.map(x=>x.question).join(' + '),outcome:slip.map(x=>x.outcome).join(' + '),selections:slip.map(x=>({...x})),stake,price:combinedOdds,combinedOdds,potential,status:'Open',date:now()});log('Prediction placed',`${slip.length} selection(s), stake ${money(stake)}`);state.notifications.unshift({id:Date.now(),text:'Your prediction has been placed successfully.',read:false,date:now()});slip=[];renderSlip();save();closeModal('slipModal');toast('Prediction placed.');};
-$('topDeposit').onclick=$('walletDeposit').onclick=$('pageDeposit').onclick=()=>wallet('deposit');$('walletWithdraw').onclick=$('pageWithdraw').onclick=()=>wallet('withdraw');$('verifyAccount').onclick=()=>{let bank=$('bankName').value,account=$('bankAccount').value.trim();if(!bank)return toast('Select your bank first.');if(!/^\d{10}$/.test(account))return toast('Enter a valid 10-digit account number.');let mockName='Sample Account Name';$('accountVerification').innerHTML='<span class="verified-mark">✓</span><span><b>'+mockName+'</b><small>Frontend preview · real name enquiry will be connected to the backend</small></span>';$('walletSubmit').disabled=false;$('walletSubmit').dataset.verified='true';};$('bankName').onchange=$('bankAccount').oninput=()=>{$('walletSubmit').disabled=true;$('walletSubmit').dataset.verified='false';$('accountVerification').textContent='Please verify the updated bank details.'};$('walletForm').onsubmit=e=>{e.preventDefault();let amount=Number($('walletAmount').value),bank=$('bankName').value,account=$('bankAccount').value.trim();if(amount<100)return toast('Minimum amount is ₦100.');if($('walletSubmit').dataset.verified!=='true')return toast('Verify the bank account before continuing.');if(walletMode==='deposit'){if(!state.settings.deposit)return toast('Deposits are paused.');state.transactions.unshift({date:now(),type:'Deposit',ref:'DEP-'+Date.now(),amount,status:'Pending',bank,account,accountName:'CampusX Account Holder'});log('Deposit request created',money(amount)+' · '+bank);toast('Deposit request saved as pending.')}else{if(!state.settings.withdraw)return toast('Withdrawals are paused.');if(amount>state.balance)return toast('Insufficient balance.');state.balance-=amount;state.transactions.unshift({date:now(),type:'Withdrawal',ref:'WDR-'+Date.now(),amount,status:'Pending',bank,account,accountName:'CampusX Account Holder'});log('Withdrawal requested',money(amount)+' · '+bank);toast('Withdrawal request saved as pending.')}save();closeModal('walletModal');$('walletAmount').value='';$('walletSubmit').dataset.verified='false'};
-$('profileForm').onsubmit=e=>{e.preventDefault();state.profile={...state.profile,name:$('profileName').value.trim(),institution:$('profileInstitution').value.trim()};log('Profile updated');save();toast('Profile updated.')};$('profileLogout').onclick=()=>{if(!confirm('Are you sure you want to log out of CampusX?'))return;state.profile=null;save();closeModal('profileModal');openModal('accountModal');toast('You have been logged out.')};$('accountForm').onsubmit=e=>{e.preventDefault();const email=$('accountEmail').value.trim().toLowerCase();if(!email)return;const local=email.split('@')[0].replace(/[._-]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase());state.profile={name:local||'CampusX trader',email,institution:'',adminId:''};log(isAdmin()?'Admin signed in':'Trader signed in',email);save();closeModal('accountModal');toast(isAdmin()?'Admin access granted.':'Welcome to CampusX.');};
-function toggleTheme(){document.body.classList.toggle('light');localStorage.setItem('campusx_theme',document.body.classList.contains('light')?'light':'dark')}if(localStorage.getItem('campusx_theme')!=='dark')document.body.classList.add('light');$('themeBtn').onclick=$('themeSide').onclick=toggleTheme;
-$('notifBtn').onclick=()=>{renderNotifs();openModal('notifModal')};function renderNotifs(){$('notificationsList').innerHTML=state.notifications.length?state.notifications.map(n=>`<div class="activityrow" data-notif="${n.id}" style="cursor:pointer;opacity:${n.read?.55:1}"><span><i class="dot"></i>${esc(n.text)}<small>${fmtDate(n.date)}</small></span></div>`).join(''):'<div class="empty">No notifications.</div>'} $('notificationsList').onclick=e=>{let n=e.target.closest('[data-notif]');if(n){let x=state.notifications.find(a=>a.id==n.dataset.notif);if(x)x.read=true;save();renderNotifs()}};$('markAll').onclick=()=>{state.notifications.forEach(n=>n.read=true);save();renderNotifs();$('notifBadge').classList.remove('show')};
-document.querySelectorAll('[data-admin-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-admin-tab]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.adminpane').forEach(x=>x.style.display='none');$('admin-'+b.dataset.adminTab).style.display='block'});$('newType').onchange=()=>$('multiField').style.display=$('newType').value==='multi'?'grid':'none';$('createMarket').onsubmit=e=>{e.preventDefault();if(!isAdmin())return toast('Admin access required.');if(Number($('newYes').value)<=1||Number($('newNo').value)<=1)return toast('Both decimal odds must be greater than 1.00.');let m={id:'m'+Date.now(),question:$('newQuestion').value.trim(),category:$('newCategory').value,yes:Number($('newYes').value),no:Number($('newNo').value),status:'Open',type:$('newType').value,outcomes:$('newOutcomes').value.split(',').map(x=>x.trim()).filter(Boolean),volume:0,created:now(),trend:[Number($('newYes').value),Number($('newYes').value)*1.01,Number($('newYes').value)*.99,Number($('newYes').value)],trendNo:[Number($('newNo').value),Number($('newNo').value)*.99,Number($('newNo').value)*1.01,Number($('newNo').value)]};state.markets.unshift(m);log('Market created',m.question);save();e.target.reset();toast('Market published.')};
-$('adminMarkets').onclick=e=>{let b=e.target.closest('button');if(!b)return;let m=state.markets.find(x=>x.id===(b.dataset.saveprice||b.dataset.closemarket||b.dataset.togglemarket||b.dataset.void||b.dataset.delete));if(!m)return;if(b.dataset.saveprice){let y=Number(document.querySelector(`[data-price="${m.id}"][data-side="yes"]`).value),n=Number(document.querySelector(`[data-price="${m.id}"][data-side="no"]`).value);if(y<=1||n<=1||!Number.isFinite(y)||!Number.isFinite(n))return toast('Enter valid decimal odds greater than 1.00.');m.yes=y;m.no=n;m.trend=[...(m.trend||[]),y].slice(-18);m.trendNo=[...(m.trendNo||[]),n].slice(-18);log('Market odds updated',m.question)}if(b.dataset.closemarket){m.status=m.status==='Closed'?'Open':'Closed';log('Market closed / reopened',m.question+' — '+m.status)}if(b.dataset.togglemarket){m.status=m.status==='Open'?'Paused':'Open';log('Market status changed',m.question+' — '+m.status)}if(b.dataset.void){m.status=m.status==='Voided'?'Open':'Voided';log('Market void status changed',m.question+' — '+m.status)}if(b.dataset.delete){if(!confirm('Delete this market?'))return;state.markets=state.markets.filter(x=>x.id!==m.id);log('Market deleted',m.question)}save();renderAdmin();renderMarkets();toast('Market updated.')};
-['trading','deposit','withdraw'].forEach(k=>$(''+k+'Toggle').onchange=e=>{state.settings[k]=e.target.checked;log('Platform setting changed',k+': '+e.target.checked);save()});$('today').textContent=new Date().toLocaleDateString('en-NG',{weekday:'long',day:'numeric',month:'long',year:'numeric'});renderElectionCountdown();setInterval(()=>{let t=$('electionTimer');if(t)t.innerHTML=countdownMarkup(ELECTION_END)},1000);
-// Frontend-only market ticker: gently fluctuates decimal odds and animates paid-position charts.
-setInterval(()=>{let changed=false;state.markets.filter(m=>m.status==='Open').forEach(m=>{let drift=(Math.random()-.5)*.035;m.yes=Math.max(1.05,Math.min(25,Number((m.yes+drift).toFixed(2))));m.no=Math.max(1.05,Math.min(25,Number((m.no-drift*.7).toFixed(2))));m.trend=[...(m.trend||[]),m.yes].slice(-18);m.trendNo=[...(m.trendNo||[]),m.no].slice(-18);changed=true});if(changed){renderMarkets();if($('page-portfolio').classList.contains('active'))render() }},4500);
-// Election countdown uses a single fixed UTC start date shared by all devices.
+    if (!side) return;
 
-document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modalback.show').forEach(x=>x.classList.remove('show'))});document.querySelectorAll('.modalback').forEach(x=>x.addEventListener('click',e=>{if(e.target===x)closeModal(x.id)}));
-if(localStorage.getItem('campusx_theme')!=='dark')document.body.classList.add('light');if(!state.profile)openModal('accountModal');render();
+    const navItems = side.querySelectorAll(
+      ".nav button, .nav a, [data-page]"
+    );
 
-// Weekly challenge administration and entry submission.
-$('challengeMarketForm').onsubmit=e=>{e.preventDefault();if(!isAdmin())return toast('Admin access required.');let c=state.challenge||(state.challenge={markets:[],entries:[]});if(c.markets.length>=10)return toast('The weekly challenge already has 10 markets.');let y=Number($('challengeYes').value),n=Number($('challengeNo').value),q=$('challengeQuestion').value.trim();if(!q||y<=1||n<=1)return toast('Enter a question and valid decimal odds above 1.00.');c.markets.push({id:'cm'+Date.now(),question:q,yes:y,no:n,status:'Open'});log('Weekly challenge market added',q);save();e.target.reset();renderAdminChallenge();toast('Challenge market added.')};
-$('adminChallengeMarkets').onclick=e=>{let b=e.target.closest('button');if(!b)return;let c=state.challenge, m=c.markets.find(x=>x.id===(b.dataset.csave||b.dataset.ctoggle||b.dataset.cedit));if(!m)return;if(b.dataset.csave){let y=Number(document.querySelector(`[data-cprice="${m.id}"][data-side="yes"]`).value),n=Number(document.querySelector(`[data-cprice="${m.id}"][data-side="no"]`).value);if(y<=1||n<=1||!Number.isFinite(y)||!Number.isFinite(n))return toast('Enter odds greater than 1.00.');m.yes=y;m.no=n;log('Challenge odds edited',m.question)}if(b.dataset.ctoggle){m.status=m.status==='Open'?'Voided':'Open';m.selection=null;log('Challenge market status changed',m.question+' · '+m.status)}if(b.dataset.cedit){let q=prompt('Edit challenge market question:',m.question);if(q===null)return;if(!q.trim())return toast('Question cannot be empty.');m.question=q.trim();log('Challenge market edited',m.question)}save();renderAdminChallenge();renderChallenge();toast('Weekly challenge updated.')};
-$('clearChallengeMarkets').onclick=()=>{if(!isAdmin())return toast('Admin access required.');if(!confirm('Clear all ten markets for this weekly challenge?'))return;state.challenge.markets=[];state.challenge.entries=[];log('Weekly challenge reset');save();renderAdminChallenge();renderChallenge()};
-$('challengeMarkets').onclick=e=>{let b=e.target.closest('[data-challenge-pick]');if(!b)return;let m=state.challenge.markets.find(x=>x.id===b.dataset.challengePick);if(!m||m.status!=='Open')return;m.selection=b.dataset.outcome;renderChallenge()};
-$('joinChallenge').onclick=()=>{let c=state.challenge,markets=c.markets||[];if(markets.length!==10||markets.some(m=>m.status!=='Open'||!m.selection))return toast('Select an outcome for all 10 open challenge markets.');if(state.balance<10000)return toast('You need ₦10,000 in your wallet to enter.');state.balance-=10000;let entry={id:'ce'+Date.now(),round:c.round||'Weekly challenge',date:now(),stake:10000,picks:markets.map(m=>({id:m.id,question:m.question,outcome:m.selection,odds:m[m.selection==='Yes'?'yes':'no']})),status:'Submitted'};c.entries.unshift(entry);log('Weekly challenge entry submitted','₦10,000 · 10 predictions');state.notifications.unshift({id:Date.now(),text:'Your weekly challenge entry has been submitted.',read:false,date:now()});save();renderChallenge();toast('Weekly challenge entry submitted.')};
+    /* Add accessible labels without changing navigation */
+    navItems.forEach(function (item) {
+      const text = (
+        item.innerText ||
+        item.textContent ||
+        item.getAttribute("aria-label") ||
+        ""
+      ).trim();
 
-// Additional admin operations: announcement publishing, safe CSV export and refresh.
-if($('announcementForm'))$('announcementForm').onsubmit=e=>{e.preventDefault();if(!isAdmin())return toast('Admin access required.');const msg=$('announcementText').value.trim();if(!msg)return;state.announcement=msg;state.notifications.unshift({id:Date.now(),text:'Platform announcement: '+msg,read:false,date:now()});log('Announcement published',msg);save();$('announcementText').value='';toast('Announcement published to local notifications.')};
-if($('adminRefresh'))$('adminRefresh').onclick=()=>{if(!isAdmin())return toast('Admin access required.');renderAdmin();toast('Admin data refreshed.')};
-if($('adminExport'))$('adminExport').onclick=()=>{if(!isAdmin())return toast('Admin access required.');const rows=[['Market','Category','YES price','NO price','Status','Volume'],...state.markets.map(m=>[m.question,m.category,m.yes,m.no,m.status,m.volume])];const csv=rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='campusx-market-report.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);log('Market report exported',state.markets.length+' markets');save();toast('Market report exported.')};
-// Replace text-only remove controls with consistent inline SVG action icons.
-document.querySelectorAll('.slipitem button[data-remove]').forEach(b=>{b.innerHTML='<svg class="cx-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>';b.setAttribute('aria-label','Remove selection');b.title='Remove selection'});
-// Accessible focus and touch improvements for every action control.
-document.querySelectorAll('button').forEach(b=>{if(!b.getAttribute('aria-label')&&b.title)b.setAttribute('aria-label',b.title)});
+      if (text && !item.getAttribute("aria-label")) {
+        item.setAttribute("aria-label", text);
+      }
+
+      item.setAttribute("title", text || "Navigation");
+    });
+
+    /* Close an open mobile sidebar after selecting a page.
+       Does not replace or duplicate the existing page handlers. */
+    side.addEventListener("click", function (event) {
+      const item = event.target.closest(
+        ".nav button, .nav a, [data-page]"
+      );
+
+      if (!item) return;
+
+      if (window.innerWidth <= 760) {
+        side.classList.remove("open");
+      }
+    });
+
+    /* Close mobile sidebar when Escape is pressed */
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        side.classList.remove("open");
+      }
+    });
+
+    /* Ensure desktop/mobile layout updates correctly */
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 760) {
+        side.classList.remove("open");
+      }
+    });
+
+    /* Mark current page active when navigation changes */
+    function updateActiveNavigation() {
+      const activePage = document.querySelector(".page.active");
+
+      if (!activePage) return;
+
+      const pageId = activePage.id.replace("page-", "");
+
+      side.querySelectorAll("[data-page]").forEach(function (item) {
+        item.classList.toggle(
+          "active",
+          item.dataset.page === pageId
+        );
+      });
+    }
+
+    updateActiveNavigation();
+
+    /* Observe page changes without interfering with navigation */
+    const pageObserver = new MutationObserver(function () {
+      updateActiveNavigation();
+    });
+
+    document.querySelectorAll(".page").forEach(function (page) {
+      pageObserver.observe(page, {
+        attributes: true,
+        attributeFilter: ["class"]
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      initCampusXMobile,
+      { once: true }
+    );
+  } else {
+    initCampusXMobile();
+  }
 })();
-   
-</script></body></html>
+</script>
