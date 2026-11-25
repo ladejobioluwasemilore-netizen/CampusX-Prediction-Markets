@@ -7,8 +7,8 @@
   <title>CampusX — Prediction Markets</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.gooagleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="dash.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dash.css" />
 </head>
 <body>
   <div id="welcome-splash" class="welcome-splash hidden"><div class="welcome-splash-card"><div class="welcome-splash-logo">CX</div><span class="eyebrow">WELCOME TO CAMPUSX</span><h1>Welcome, <strong id="welcome-splash-name">Trader</strong></h1><p>Your campus prediction experience is ready.</p><div class="welcome-splash-loader"><span></span></div></div></div>
@@ -21,9 +21,9 @@
         <h1>See the odds.<br><em>Make your call.</em></h1>
         <p>A smarter way to follow predictions, explore markets and track your positions.</p>
         <div class="mini-stats">
-          <div><strong>120+</strong><span>Markets open</span></div>
+          <div><strong>120+</strong><span>Live markets</span></div>
           <div><strong>24/7</strong><span>Market activity</span></div>
-          <div><strong>₦</strong><span>Naira markets</span></div>
+          <div><strong>₦</strong><span>Naira-based demo</span></div>
         </div>
       </div>
       <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
@@ -41,9 +41,9 @@
           <div class="input-wrap"><i data-lucide="mail"></i><input id="login-email" name="email" type="email" placeholder="you@example.com" required></div>
           <button class="btn btn-primary btn-wide" type="submit">Continue to dashboard <i data-lucide="arrow-right"></i></button>
         </form>
-        <div class="login-note"><i data-lucide="shield-check"></i><span>Your account preview is stored in this browser. Payment services are not enabled.</span></div>
+        <div class="login-note"><i data-lucide="shield-check"></i><span>Frontend preview. Accounts and balances are stored locally in this browser only.</span></div>
       </div>
-      <div class="login-footer">© 2026 CampusX <span>CampusX account preview</span></div>
+      <div class="login-footer">© 2026 CampusX <span>Markets are for demonstration only</span></div>
     </div>
   </div>
 
@@ -73,7 +73,7 @@
         </nav>
       </div>
       <div class="sidebar-bottom">
-        <div class="help-card"><div class="help-icon"><i data-lucide="life-buoy"></i></div><strong>Need a hand?</strong><span>Explore CampusX or contact support.</span><button id="help-btn">Help centre <i data-lucide="arrow-up-right"></i></button></div>
+        <div class="help-card"><div class="help-icon"><i data-lucide="life-buoy"></i></div><strong>Need a hand?</strong><span>Explore the demo or contact support.</span><button id="help-btn">Help centre <i data-lucide="arrow-up-right"></i></button></div>
         <div class="profile-row"><div class="avatar" id="side-avatar">A</div><div class="profile-meta"><strong id="side-name">Alex Johnson</strong><span id="side-role">Trader account</span></div><button id="logout-btn" class="icon-btn" title="Sign out"><i data-lucide="log-out"></i></button></div>
       </div>
     </aside>
@@ -92,7 +92,7 @@
         <section id="view-overview" class="view active">
           <div class="welcome-row"><div><div class="eyebrow">TUESDAY, 25 NOVEMBER 2026</div><h1>Good to see you, <span id="welcome-name">Alex</span> <span class="wave">✦</span></h1><p class="muted">Here’s what’s happening across your markets today.</p></div><button class="btn btn-secondary" data-view="markets"><i data-lucide="compass"></i> Explore markets</button></div>
           <div class="stat-grid">
-            <div class="stat-card balance-card"><div class="stat-top"><span>Available balance</span><i data-lucide="wallet"></i></div><div class="stat-value" id="overview-balance">₦250,000.00</div><div class="stat-foot"><span class="positive"><i data-lucide="trending-up"></i> Account balance</span><button class="text-btn" data-view="wallet">Manage wallet <i data-lucide="arrow-up-right"></i></button></div></div>
+            <div class="stat-card balance-card"><div class="stat-top"><span>Available balance</span><i data-lucide="wallet"></i></div><div class="stat-value" id="overview-balance">₦250,000.00</div><div class="stat-foot"><span class="positive"><i data-lucide="trending-up"></i> Demo wallet</span><button class="text-btn" data-view="wallet">Manage wallet <i data-lucide="arrow-up-right"></i></button></div></div>
             <div class="stat-card"><div class="stat-top"><span>Open positions</span><i data-lucide="chart-no-axes-combined"></i></div><div class="stat-value" id="open-positions">0</div><div class="stat-foot"><span class="muted">Your active selections</span><button class="text-btn" data-view="positions">View positions <i data-lucide="arrow-up-right"></i></button></div></div>
             <div class="stat-card"><div class="stat-top"><span>Total staked</span><i data-lucide="layers-3"></i></div><div class="stat-value" id="total-staked">₦0.00</div><div class="stat-foot"><span class="muted">Across active positions</span><span class="soft-pill">This account</span></div></div>
             <div class="stat-card"><div class="stat-top"><span>Potential returns</span><i data-lucide="badge-naira"></i></div><div class="stat-value" id="potential-returns">₦0.00</div><div class="stat-foot"><span class="muted">If current picks win</span><span class="soft-pill green">Estimated</span></div></div>
@@ -102,7 +102,7 @@
             <div class="panel election-card"><div class="election-visual"><div class="election-orb"><i data-lucide="landmark"></i></div><span class="eyebrow">CAMPUS ELECTIONS</span><h3>The countdown is on.</h3><p>Follow the race across SUG, colleges and departments.</p><div class="countdown" id="countdown"><div><strong>102</strong><span>Days</span></div><b>:</b><div><strong>08</strong><span>Hours</span></div><b>:</b><div><strong>42</strong><span>Mins</span></div><b>:</b><div><strong>18</strong><span>Secs</span></div></div><button class="btn btn-white" data-view="elections">Explore elections <i data-lucide="arrow-right"></i></button></div></div>
           </div>
           <div class="panel categories-panel"><div class="panel-heading"><div><h3>Explore by category</h3><p class="muted">Find the markets you care about.</p></div></div><div class="category-grid" id="category-grid"></div></div>
-          <div class="panel"><div class="panel-heading"><div><h3>Weekly prediction challenge</h3><p class="muted">10 challenging predictions. Compete for the ₦1,000,000 top prize.</p></div><button class="text-btn" data-view="weekly">View challenge <i data-lucide="arrow-right"></i></button></div><div class="challenge-strip"><div class="challenge-icon"><i data-lucide="trophy"></i></div><div><strong>Can you call all 10?</strong><span>Entry starts at ₦10,000.</span></div><div class="challenge-prize"><span>TOP PRIZE</span><strong>₦1,000,000</strong></div><button class="btn btn-primary" data-view="weekly">Enter challenge</button></div></div>
+          <div class="panel"><div class="panel-heading"><div><h3>Weekly prediction challenge</h3><p class="muted">10 difficult predictions. One ₦1,000,000 prize pool concept.</p></div><button class="text-btn" data-view="weekly">View challenge <i data-lucide="arrow-right"></i></button></div><div class="challenge-strip"><div class="challenge-icon"><i data-lucide="trophy"></i></div><div><strong>Can you call all 10?</strong><span>Demo entry stake starts at ₦10,000.</span></div><div class="challenge-prize"><span>TOP PRIZE</span><strong>₦1,000,000</strong></div><button class="btn btn-primary" data-view="weekly">Enter challenge</button></div></div>
         </section>
 
         <section id="view-markets" class="view">
@@ -113,7 +113,7 @@
         </section>
 
         <section id="view-elections" class="view">
-          <div class="election-banner"><div><span class="eyebrow">FUNAAB CAMPUS ELECTIONS</span><h1>Every vote has a story.</h1><p>Explore predictions across student government, colleges and departments.</p></div><div class="election-count"><span>COUNTDOWN TO CLOSING</span><div id="election-countdown" class="countdown large"></div><small>Election date will be announced.</small></div></div>
+          <div class="election-banner"><div><span class="eyebrow">FUNAAB CAMPUS ELECTIONS</span><h1>Every vote has a story.</h1><p>Explore predictions across student government, colleges and departments.</p></div><div class="election-count"><span>COUNTDOWN TO CLOSING</span><div id="election-countdown" class="countdown large"></div><small>Demo countdown: official date not yet configured.</small></div></div>
           <div class="election-tabs" id="election-tabs"><button class="active" data-election="SUG">SUG</button><button data-election="COLLEGES">Colleges</button><button data-election="DEPARTMENT">Department</button></div>
           <div id="college-select-wrap" class="college-select hidden"><label for="college-select">Choose a college</label><select id="college-select"></select></div>
           <div class="panel-heading election-section-heading"><div><h3 id="election-section-title">SUG markets</h3><p class="muted">Campus election markets and candidate predictions.</p></div></div>
@@ -121,20 +121,20 @@
         </section>
 
         <section id="view-positions" class="view">
-          <div class="page-title-row"><div><span class="eyebrow">YOUR PORTFOLIO</span><h1>My positions</h1><p class="muted">Track your selections and indicative market movement.</p></div><div class="soft-pill green"><span class="pulse"></span> Market updates</div></div>
+          <div class="page-title-row"><div><span class="eyebrow">YOUR PORTFOLIO</span><h1>My positions</h1><p class="muted">Track your selections and indicative market movement.</p></div><div class="soft-pill green"><span class="pulse"></span> Live demo updates</div></div>
           <div class="stat-grid compact"><div class="stat-card"><div class="stat-top"><span>Active positions</span><i data-lucide="activity"></i></div><div class="stat-value" id="position-count">0</div></div><div class="stat-card"><div class="stat-top"><span>Total staked</span><i data-lucide="wallet"></i></div><div class="stat-value" id="position-staked">₦0</div></div><div class="stat-card"><div class="stat-top"><span>Potential payout</span><i data-lucide="trending-up"></i></div><div class="stat-value" id="position-payout">₦0</div></div></div>
           <div id="positions-list" class="positions-list"></div>
         </section>
 
         <section id="view-weekly" class="view">
-          <div class="weekly-hero"><div><span class="eyebrow">CX WEEKLY CHALLENGE</span><h1>10 picks. One big call.</h1><p>Take on this week's toughest prediction markets for a chance to claim the ₦1,000,000 top prize.</p><div class="weekly-meta"><span><i data-lucide="calendar-days"></i> Resets every Monday</span><span><i data-lucide="wallet"></i> Minimum entry ₦10,000</span></div></div><div class="weekly-trophy"><i data-lucide="trophy"></i><span>WEEKLY PRIZE</span><strong>₦1,000,000</strong></div></div>
-          <div class="panel"><div class="panel-heading"><div><h3>This week's 10 hardest predictions</h3><p class="muted">Select one outcome for each challenge market.</p><span id="weekly-closing-label" class="muted">Closing date to be announced</span></div><div id="weekly-admin-tools"></div><span class="soft-pill">10 markets</span></div><div id="weekly-markets" class="weekly-list"></div><div class="weekly-entry"><div><strong>Entry stake</strong><span>Minimum entry ₦10,000</span></div><input id="weekly-stake" type="number" min="10000" value="10000"><button class="btn btn-primary" id="weekly-enter">Submit challenge entry</button></div></div>
+          <div class="weekly-hero"><div><span class="eyebrow">CX WEEKLY CHALLENGE</span><h1>10 picks. One big call.</h1><p>Take on this week's toughest prediction markets for a chance at the demo ₦1,000,000 prize.</p><div class="weekly-meta"><span><i data-lucide="calendar-days"></i> Resets every Monday</span><span><i data-lucide="wallet"></i> Minimum entry ₦10,000</span></div></div><div class="weekly-trophy"><i data-lucide="trophy"></i><span>WEEKLY PRIZE</span><strong>₦1,000,000</strong></div></div>
+          <div class="panel"><div class="panel-heading"><div><h3>This week's 10 hardest predictions</h3><p class="muted">Select one outcome for each challenge market.</p><span id="weekly-closing-label" class="muted">Closing date to be announced</span></div><div id="weekly-admin-tools"></div><span class="soft-pill">10 markets</span></div><div id="weekly-markets" class="weekly-list"></div><div class="weekly-entry"><div><strong>Entry stake</strong><span>Minimum ₦10,000 · Demo only</span></div><input id="weekly-stake" type="number" min="10000" value="10000"><button class="btn btn-primary" id="weekly-enter">Submit challenge entry</button></div></div>
         </section>
 
         <section id="view-wallet" class="view">
-          <div class="page-title-row"><div><span class="eyebrow">YOUR MONEY, AT A GLANCE</span><h1>Wallet</h1><p class="muted">View your balance and wallet activity.</p></div><span class="soft-pill"><i data-lucide="lock"></i> Account preview</span></div>
-          <div class="wallet-hero"><div class="wallet-pattern"></div><div class="wallet-head"><span><i data-lucide="wallet"></i> CX WALLET</span><span class="wallet-chip">NGN</span></div><span class="wallet-label">AVAILABLE BALANCE</span><div class="wallet-balance" id="wallet-balance">₦250,000.00</div><div class="wallet-foot"><span id="wallet-user">Alex Johnson</span><span>•••• &nbsp; •••• &nbsp; 2026</span></div></div>
-          <div class="wallet-actions"><button class="wallet-action" id="open-deposit"><span class="action-icon deposit"><i data-lucide="arrow-down-left"></i></span><strong>Deposit</strong><small>Add funds</small></button><button class="wallet-action" id="open-withdraw"><span class="action-icon withdraw"><i data-lucide="arrow-up-right"></i></span><strong>Withdraw</strong><small>Request payout</small></button><button class="wallet-action" id="wallet-history-btn"><span class="action-icon history"><i data-lucide="receipt-text"></i></span><strong>Transactions</strong><small>View activity</small></button></div>
+          <div class="page-title-row"><div><span class="eyebrow">YOUR MONEY, AT A GLANCE</span><h1>Wallet</h1><p class="muted">Manage your demo funds and view wallet activity.</p></div><span class="soft-pill"><i data-lucide="lock"></i> Frontend demo</span></div>
+          <div class="wallet-hero"><div class="wallet-pattern"></div><div class="wallet-head"><span><i data-lucide="wallet"></i> CX WALLET</span><span class="wallet-chip">NGN · DEMO</span></div><span class="wallet-label">AVAILABLE BALANCE</span><div class="wallet-balance" id="wallet-balance">₦250,000.00</div><div class="wallet-foot"><span id="wallet-user">Alex Johnson</span><span>•••• &nbsp; •••• &nbsp; 2026</span></div></div>
+          <div class="wallet-actions"><button class="wallet-action" id="open-deposit"><span class="action-icon deposit"><i data-lucide="arrow-down-left"></i></span><strong>Deposit</strong><small>Add demo funds</small></button><button class="wallet-action" id="open-withdraw"><span class="action-icon withdraw"><i data-lucide="arrow-up-right"></i></span><strong>Withdraw</strong><small>Request payout</small></button><button class="wallet-action" id="wallet-history-btn"><span class="action-icon history"><i data-lucide="receipt-text"></i></span><strong>Transactions</strong><small>View activity</small></button></div>
           <div class="panel"><div class="panel-heading"><div><h3>Recent transactions</h3><p class="muted">Your local wallet activity.</p></div><span class="soft-pill">Latest first</span></div><div id="transactions-list" class="transactions-list"></div></div>
           <p class="disclaimer"><i data-lucide="info"></i> This is a frontend prototype. Deposit and withdrawal requests are recorded locally only. No bank lookup, payment, transfer or account-name verification occurs.</p>
         </section>
@@ -149,7 +149,7 @@
           <div class="settings-layout">
             <div class="panel profile-hero"><div class="profile-avatar-xl" id="settings-avatar">A</div><div><span class="eyebrow">ACCOUNT PROFILE</span><h2 id="settings-display-name">Your name</h2><p id="settings-display-email" class="muted">you@example.com</p><span id="settings-role-pill" class="soft-pill">Trader account</span></div></div>
             <form id="profile-form" class="panel settings-panel"><div class="panel-heading"><div><h3>Personal information</h3><p class="muted">Update how your name appears across the dashboard.</p></div><i data-lucide="user-round-cog"></i></div>
-              <div class="settings-fields"><div class="field"><label for="settings-name">Display name</label><input id="settings-name" name="name" minlength="2" maxlength="60" required></div><div class="field"><label for="settings-email">Email address</label><input id="settings-email" type="email" readonly disabled><div class="hint">Your sign-in email is read-only.</div></div></div>
+              <div class="settings-fields"><div class="field"><label for="settings-name">Display name</label><input id="settings-name" name="name" minlength="2" maxlength="60" required></div><div class="field"><label for="settings-email">Email address</label><input id="settings-email" type="email" readonly disabled><div class="hint">Email is fixed for this demo account.</div></div></div>
               <div class="modal-actions"><button class="btn btn-primary" type="submit"><i data-lucide="save"></i> Save profile</button></div>
             </form>
             <div class="panel settings-panel"><div class="panel-heading"><div><h3>Preferences</h3><p class="muted">Choose how the app behaves on this device.</p></div><i data-lucide="sliders-horizontal"></i></div>
@@ -169,12 +169,12 @@
         </section>
 
         <section id="view-admin-users" class="view">
-          <div class="page-title-row"><div><span class="eyebrow">ADMIN CONSOLE</span><h1>Account directory</h1><p class="muted">Review account details and activity.</p></div><span class="soft-pill">Browser-local directory</span></div>
+          <div class="page-title-row"><div><span class="eyebrow">ADMIN CONSOLE</span><h1>Account directory</h1><p class="muted">Review locally saved demo accounts and their activity.</p></div><span class="soft-pill">Browser-local directory</span></div>
           <div class="panel"><div class="admin-table-head"><div><h3>Registered accounts</h3><p class="muted">Only accounts created in this browser are visible.</p></div><div class="search-box small"><i data-lucide="search"></i><input id="user-search" placeholder="Search name or email..."></div></div><div class="table-scroll"><table><thead><tr><th>User</th><th>Email</th><th>Wallet</th><th>Positions</th><th>Status</th><th>Actions</th></tr></thead><tbody id="user-table"></tbody></table></div></div>
         </section>
 
         <section id="view-admin-requests" class="view">
-          <div class="page-title-row"><div><span class="eyebrow">ADMIN CONSOLE</span><h1>Wallet requests</h1><p class="muted">Review deposit and withdrawal requests.</p></div><span class="soft-pill">Local records only</span></div>
+          <div class="page-title-row"><div><span class="eyebrow">ADMIN CONSOLE</span><h1>Wallet requests</h1><p class="muted">Review demo deposit and withdrawal requests.</p></div><span class="soft-pill">Local records only</span></div>
           <div class="panel"><div class="panel-heading"><div><h3>Pending requests</h3><p class="muted">No real payment or bank verification is performed.</p></div></div><div id="admin-requests-list" class="transactions-list"></div></div>
         </section>
       </div>
@@ -194,7 +194,7 @@
   <aside id="slip-drawer" class="slip-drawer">
     <div class="drawer-head"><div><span class="eyebrow">YOUR SELECTIONS</span><h2>Market slip <span id="slip-count" class="count-bubble">0</span></h2></div><button class="icon-btn" id="close-slip"><i data-lucide="x"></i></button></div>
     <div id="slip-items" class="slip-items"><div class="empty-state"><i data-lucide="ticket"></i><strong>Your slip is empty</strong><span>Choose a market outcome to get started.</span></div></div>
-    <div class="slip-footer"><div class="stake-row"><label for="stake-input">Stake amount</label><div class="stake-input-wrap"><span>₦</span><input id="stake-input" type="number" min="100" value="1000"></div></div><div class="slip-summary"><div><span>Combined odds</span><strong id="combined-odds">1.00x</strong></div><div><span>Potential return</span><strong id="slip-return">₦1,000.00</strong></div></div><div class="slip-wallet"><span>Available balance</span><strong id="slip-balance">₦250,000.00</strong></div><button class="btn btn-primary btn-wide" id="confirm-slip">Confirm selection <i data-lucide="arrow-right"></i></button><small class="slip-legal">Payments and cash withdrawals are not enabled.</small></div>
+    <div class="slip-footer"><div class="stake-row"><label for="stake-input">Stake amount</label><div class="stake-input-wrap"><span>₦</span><input id="stake-input" type="number" min="100" value="1000"></div></div><div class="slip-summary"><div><span>Combined odds</span><strong id="combined-odds">1.00x</strong></div><div><span>Potential return</span><strong id="slip-return">₦1,000.00</strong></div></div><div class="slip-wallet"><span>Available balance</span><strong id="slip-balance">₦250,000.00</strong></div><button class="btn btn-primary btn-wide" id="confirm-slip">Confirm selection <i data-lucide="arrow-right"></i></button><small class="slip-legal">Demo only. No real-money wager or payment is made.</small></div>
   </aside>
 
   <div id="modal-backdrop" class="modal-backdrop">
