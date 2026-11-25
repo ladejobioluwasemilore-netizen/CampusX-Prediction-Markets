@@ -81,8 +81,7 @@ body:not(.light) #walletModal #verifyAccount{color:#a8e7bd}
 #walletModal #walletSubmit{min-height:47px;border-radius:12px}
 @media(max-width:760px){.challenge-hero{grid-template-columns:1fr auto;gap:6px;padding:17px}.challenge-hero>div:first-child{grid-column:1/-1}.trophy-art{width:76px;height:76px;grid-column:1;grid-row:2}.trophy-art svg{width:72px;height:72px}.challenge-prize{grid-column:2;grid-row:2;text-align:right}.challenge-prize strong{font-size:26px}.countdown-row,.challenge-countdown{gap:6px}.countdown-row .count-unit,.challenge-countdown .count-unit{flex:1 0 68px;min-width:68px}.wallet-hero{padding:19px}}
 
-.profile-actions .danger{display:inline-flex;align-items:center;gap:9px;background:#a83232;color:#fff;border:0;border-radius:12px;padding:11px 16px;font-weight:700;cursor:pointer}.profile-actions .danger:hover{background:#8e2525}.profile-actions .cx-svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-
+.profile-actions .danger{display:inline-flex;align-items:center;gap:9px;background:#a83232;color:#fff;border:0;border-radius:12px;padding:11px 16px;font-weight:700;cursor:pointer}.profile-actions .danger:hover{background:#8e2525}.profile-actions .cx-svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}\n
 
 /* =====================================================
    CAMPUSX MOBILE APP LAYOUT — CLEAN BOTTOM ICON BAR
@@ -245,220 +244,65 @@ body.light .market-chart-card{background:linear-gradient(145deg,rgba(255,255,255
 @supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){body.light .side,body.light .topbar,body.light .stat,body.light .panel,body.light .market,body.light .modal{background:rgba(255,255,255,.96)}}
 </style>
 
-<style id="campusx-responsive-final">
-
-/* =========================================================
-   CAMPUSX RESPONSIVE REBUILD — final cascade override
-   Keeps the existing HTML and JavaScript interactions intact.
-========================================================= */
-html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
-body { min-width:320px; overflow-x:hidden; }
-.app, .main, .content, .page, .layout, .marketgrid, .sidepanel { min-width:0; }
-img, svg, canvas, video { max-width:100%; }
-button, input, select, textarea { max-width:100%; }
-
-/* Tablet: compact vertical icon rail with a real content column */
-@media (min-width:761px) and (max-width:1024px) {
-  .app { grid-template-columns:76px minmax(0,1fr) !important; }
-  #sidebar.side { width:76px; min-width:76px; padding:18px 9px; }
-  #sidebar .brand { justify-content:center; padding:3px 0 22px; }
-  #sidebar .brand > div:last-child,
-  #sidebar .navlabel,
-  #sidebar .navtext,
-  #sidebar .userchip > div:last-child { display:none !important; }
-  #sidebar .nav { width:100%; gap:7px; }
-  #sidebar .nav button { width:52px; min-height:48px; justify-content:center; padding:0; margin:0 auto; }
-  #sidebar .sidebottom { width:100%; }
-  #sidebar .userchip { justify-content:center; padding:14px 0 0; }
-  .topbar { padding-left:18px; padding-right:18px; }
-  .content { padding-left:18px; padding-right:18px; }
-  .layout { grid-template-columns:minmax(0,1fr) 260px; gap:13px; }
-  .marketgrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+<style id="campusx-top-navigation-theme">
+/* CampusX top navigation menu + CX brand palette */
+:root{--bg:#f4f7f4;--panel:#ffffff;--panel2:#f0f5f1;--line:#dce7df;--text:#14251b;--muted:#687b6e;--green:#075536;--lime:#a9f13b;--shadow:0 16px 45px rgba(4,43,26,.10);color-scheme:light}
+body{background:radial-gradient(ellipse at 85% -20%,#e2f6d1 0,transparent 38%),var(--bg);color:var(--text)}
+body.light{--bg:#f4f7f4;--panel:#fff;--panel2:#f0f5f1;--line:#dce7df;--text:#14251b;--muted:#687b6e;--green:#075536;--lime:#a9f13b}
+.brandmark{background:#003b23!important;color:#a9f13b!important;border-radius:13px!important;letter-spacing:-2px}
+.brandname span,.eyebrow,.tag,.tab.active,.subnav button.active{color:#075536}
+.primary{background:#075536!important;color:#fff!important;border:1px solid #06452d!important}
+.nav button.active,.nav button:hover{background:#e9f6e1!important;color:#075536!important}
+.tab.active{background:#eaf5e5!important;border-color:#b7d5ad!important}
+.mobilemenu{display:grid!important;place-items:center;flex:0 0 40px;width:40px;height:40px;border:1px solid var(--line);background:var(--panel);color:var(--green);border-radius:12px}
+.mobilemenu svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+@media(max-width:800px){
+ .app{display:block!important;min-height:100vh;min-height:100dvh}
+ .side#sidebar{position:fixed!important;left:10px!important;right:10px!important;top:68px!important;bottom:auto!important;width:auto!important;height:auto!important;max-height:min(76dvh,650px)!important;overflow-y:auto!important;overflow-x:hidden!important;padding:14px!important;border:1px solid #d7e5d9!important;border-radius:18px!important;background:rgba(255,255,255,.97)!important;color:#14251b!important;box-shadow:0 22px 65px rgba(0,40,22,.22)!important;backdrop-filter:blur(22px) saturate(150%)!important;-webkit-backdrop-filter:blur(22px) saturate(150%)!important;z-index:100!important;display:flex!important;flex-direction:column!important;gap:5px!important;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px) scale(.985);transform-origin:top right;transition:opacity .18s ease,transform .18s ease,visibility .18s ease}
+ .side#sidebar.open{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1)}
+ .side#sidebar .brand{padding:4px 7px 12px;border-bottom:1px solid var(--line);margin-bottom:4px}
+ .side#sidebar .brandname{color:#103c27}
+ .side#sidebar .brand small,.side#sidebar .navlabel{color:#6a8171}
+ .side#sidebar .navlabel{padding:9px 10px 5px;font-size:9px}
+ .side#sidebar .nav{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px!important;width:100%!important}
+ .side#sidebar .nav button{width:100%!important;min-width:0!important;max-width:none!important;min-height:44px!important;height:auto!important;padding:10px!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;border-radius:11px!important;color:#52685a!important;font-size:12px!important;line-height:1.3!important;text-align:left!important;background:transparent!important}
+ .side#sidebar .nav button .ico{display:inline-grid!important;width:19px!important;height:19px!important;min-width:19px!important}
+ .side#sidebar .nav button .ico svg{width:19px!important;height:19px!important}
+ .side#sidebar .nav button .navtext{display:inline!important;white-space:normal!important;font-size:12px!important}
+ .side#sidebar .nav button.active{background:#eaf5e5!important;color:#075536!important;font-weight:800!important}
+ .side#sidebar .sidebottom{margin-top:8px!important;width:100%!important}
+ .side#sidebar .userchip{display:flex!important;border-top:1px solid var(--line)!important;padding:12px 7px 3px!important;color:#14251b!important}
+ .side#sidebar .userchip small{color:#718276!important}
+ .topbar{height:62px!important;padding:0 12px!important;gap:8px!important;z-index:110!important}
+ .topbar>div:first-child{min-width:0!important;gap:9px!important}
+ .crumb{font-size:11px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .topactions{gap:6px!important;flex:0 0 auto}
+ .iconbtn{width:36px!important;height:36px!important}
+ .topactions .primary{padding:9px 10px!important;font-size:10px!important;white-space:nowrap}
+ .content{padding:18px 13px 36px!important}
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+ .layout{grid-template-columns:minmax(0,1fr)!important}
+ .sidepanel{grid-template-columns:minmax(0,1fr)!important}
+ .marketgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+ .market{padding:13px!important}
+ .welcome{align-items:flex-start!important;flex-direction:column!important;gap:4px!important}
+ .welcome h1{font-size:24px!important}
+ .sectionhead{align-items:flex-start!important;gap:9px!important;flex-wrap:wrap}
+ .tools,.search{width:100%;max-width:100%}
+ .formgrid{grid-template-columns:minmax(0,1fr)!important}
+ .field.full{grid-column:auto!important}
+ .tablewrap{max-width:100%;overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+ .modalback{padding:9px!important;align-items:flex-end!important}
+ .modal{width:100%!important;max-width:100%!important;max-height:90dvh!important;border-radius:18px 18px 10px 10px!important}
 }
-
-/* Phones: full-width workspace and fixed bottom icon navigation */
-@media (max-width:760px) {
-  html, body { width:100%; max-width:100%; overflow-x:hidden !important; }
-  .app { display:block !important; width:100% !important; min-height:100vh; min-height:100dvh; }
-  .main { display:block; width:100% !important; max-width:100% !important; margin:0 !important; }
-
-  #sidebar.side {
-    position:fixed !important;
-    inset:auto 0 0 0 !important;
-    display:flex !important;
-    flex-direction:row !important;
-    align-items:center !important;
-    justify-content:space-between !important;
-    gap:3px !important;
-    width:100% !important;
-    height:calc(66px + env(safe-area-inset-bottom)) !important;
-    min-height:66px !important;
-    max-height:90px !important;
-    padding:5px 7px calc(5px + env(safe-area-inset-bottom)) !important;
-    margin:0 !important;
-    border:0 !important;
-    border-top:1px solid var(--line) !important;
-    border-right:0 !important;
-    border-radius:16px 16px 0 0 !important;
-    background:color-mix(in srgb,var(--panel) 94%,transparent) !important;
-    -webkit-backdrop-filter:blur(20px) saturate(150%);
-    backdrop-filter:blur(20px) saturate(150%);
-    box-shadow:0 -8px 28px rgba(0,25,15,.12) !important;
-    z-index:1000 !important;
-    overflow-x:auto !important;
-    overflow-y:hidden !important;
-    scrollbar-width:none;
-    transform:none !important;
-    left:0 !important;
-  }
-  #sidebar.side::-webkit-scrollbar { display:none; }
-  #sidebar .brand,
-  #sidebar > .navlabel,
-  #sidebar #adminLabel,
-  #sidebar .sidebottom > .navlabel,
-  #sidebar .userchip { display:none !important; }
-
-  /* Preserve separate nav groups and their original delegated handlers. */
-  #sidebar #nav,
-  #sidebar #adminNav,
-  #sidebar .sidebottom,
-  #sidebar .sidebottom nav {
-    display:flex !important;
-    flex-direction:row !important;
-    align-items:center !important;
-    justify-content:space-around !important;
-    flex:1 0 auto !important;
-    width:auto !important;
-    min-width:0 !important;
-    height:100% !important;
-    gap:2px !important;
-    margin:0 !important;
-    padding:0 !important;
-  }
-  /* Admin nav is hidden by the existing .adminonly rule until JS grants access. */
-  #sidebar #adminNav.adminonly:not([style*="grid"]):not([style*="flex"]) { display:none !important; }
-  #sidebar #adminNav[style*="grid"],
-  #sidebar #adminNav[style*="flex"] { display:flex !important; }
-  #sidebar .nav button {
-    display:flex !important;
-    flex:1 1 0 !important;
-    width:auto !important;
-    min-width:36px !important;
-    max-width:64px !important;
-    height:48px !important;
-    min-height:48px !important;
-    margin:0 !important;
-    padding:0 2px !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:0 !important;
-    border:0 !important;
-    border-radius:13px !important;
-    background:transparent !important;
-    color:var(--muted) !important;
-    box-shadow:none !important;
-    font-size:0 !important;
-    line-height:0 !important;
-    -webkit-tap-highlight-color:transparent;
-  }
-  #sidebar .nav button .ico,
-  #sidebar .nav button .ico svg {
-    display:grid !important;
-    width:22px !important;
-    height:22px !important;
-    min-width:22px !important;
-    min-height:22px !important;
-  }
-  #sidebar .nav button .navtext { display:none !important; }
-  #sidebar .nav button.active,
-  #sidebar .nav button:focus-visible {
-    color:var(--green) !important;
-    background:rgba(13,139,88,.13) !important;
-    outline:none !important;
-  }
-  #sidebar .nav button:active { transform:scale(.94); }
-
-  #menuBtn { display:none !important; }
-  .topbar {
-    position:sticky !important;
-    top:0 !important;
-    z-index:30 !important;
-    width:100% !important;
-    height:60px !important;
-    min-height:60px !important;
-    padding:0 12px !important;
-    gap:7px !important;
-  }
-  .topbar > div:first-child { min-width:0; flex:1 1 auto; }
-  .crumb { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11px; }
-  .topactions { min-width:0; flex:0 0 auto; gap:6px !important; }
-  .iconbtn { width:35px !important; height:35px !important; flex:0 0 35px; }
-  .topactions .primary { padding:9px 10px !important; font-size:11px !important; white-space:nowrap; }
-  .content {
-    width:100% !important;
-    max-width:none !important;
-    margin:0 !important;
-    padding:15px 12px calc(88px + env(safe-area-inset-bottom)) !important;
-  }
-  .page { width:100%; max-width:100%; }
-  .welcome { align-items:flex-start !important; gap:8px !important; margin-bottom:14px !important; }
-  .welcome h1 { font-size:clamp(22px,6vw,29px) !important; line-height:1.18; }
-  .welcome p { font-size:12px; }
-  .date { display:none; }
-  .stats { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:9px !important; }
-  .stat { min-width:0; padding:12px !important; }
-  .stathead { gap:5px; font-size:10px; }
-  .statval { font-size:clamp(17px,5vw,22px) !important; overflow-wrap:anywhere; }
-  .layout { grid-template-columns:minmax(0,1fr) !important; gap:13px !important; }
-  .sidepanel { grid-template-columns:minmax(0,1fr) !important; gap:10px !important; }
-  .marketgrid { grid-template-columns:minmax(0,1fr) !important; gap:10px !important; }
-  .market { width:100%; min-width:0; padding:14px !important; }
-  .market h3 { min-height:0 !important; font-size:14px !important; }
-  .outcomes { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:7px !important; }
-  .outcome { min-width:0; padding:9px !important; }
-  .sectionhead { align-items:flex-start !important; flex-wrap:wrap; gap:9px !important; }
-  .sectionhead .tools, .sectionhead .search { width:100%; max-width:100%; }
-  .search { width:100% !important; min-height:43px; font-size:16px !important; }
-  .tabs, .subnav { max-width:100%; overflow-x:auto !important; flex-wrap:nowrap !important; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
-  .tabs::-webkit-scrollbar, .subnav::-webkit-scrollbar { display:none; }
-  .tabs .tab, .subnav button { flex:0 0 auto; }
-  .panel { min-width:0; padding:14px !important; }
-  .formgrid { grid-template-columns:minmax(0,1fr) !important; }
-  .field.full { grid-column:auto !important; }
-  .field input, .field select, input, select, textarea { width:100%; min-width:0; max-width:100%; font-size:16px !important; }
-  .tablewrap { width:100%; max-width:100%; overflow-x:auto !important; -webkit-overflow-scrolling:touch; }
-  .table { min-width:560px; }
-  .modalback { padding:8px !important; align-items:flex-end !important; }
-  .modal { width:100% !important; max-width:100% !important; max-height:90dvh !important; overflow-y:auto; border-radius:19px 19px 12px 12px !important; padding:17px !important; }
-  .loginmodal { align-self:center; border-radius:20px !important; }
-  .floating-slip { left:12px !important; right:12px !important; bottom:calc(76px + env(safe-area-inset-bottom)) !important; width:auto !important; }
-  .toast { left:12px !important; right:12px !important; bottom:calc(76px + env(safe-area-inset-bottom)) !important; text-align:center; }
-  button, a { touch-action:manipulation; }
-}
-
-/* Compact phones */
-@media (max-width:390px) {
-  .content { padding-left:10px !important; padding-right:10px !important; }
-  #sidebar.side { padding-left:4px !important; padding-right:4px !important; }
-  #sidebar .nav button { min-width:33px !important; height:45px !important; min-height:45px !important; }
-  #sidebar .nav button .ico, #sidebar .nav button .ico svg { width:20px !important; height:20px !important; }
-  .topactions { gap:4px !important; }
-  .topactions .primary { padding:8px 8px !important; font-size:10px !important; }
-  .stats { gap:7px !important; }
-  .stat { padding:10px !important; }
-}
-
-/* Landscape phones: retain the dock without consuming too much height. */
-@media (max-width:760px) and (orientation:landscape) {
-  #sidebar.side { height:58px !important; min-height:58px !important; }
-  #sidebar .nav button { height:44px !important; min-height:44px !important; }
-  .content { padding-bottom:78px !important; }
-}
+@media(max-width:520px){.marketgrid{grid-template-columns:minmax(0,1fr)!important}.outcomes{grid-template-columns:repeat(2,minmax(0,1fr))!important}.content{padding-left:11px!important;padding-right:11px!important}.stat{padding:12px!important}.statval{font-size:19px!important}}
+@media(min-width:801px){.mobilemenu{display:none!important}.side#sidebar{position:sticky!important;left:auto!important;right:auto!important;top:0!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important}}
+@media(prefers-reduced-motion:reduce){.side#sidebar{transition:none!important}}
 
 </style>
 </head>
 <body><div class="app"><aside class="side" id="sidebar"><div class="brand"><div class="brandmark">cx</div><div><div class="brandname">campus<span>X</span></div><small>PREDICTION MARKETS</small></div></div><div class="navlabel">WORKSPACE</div><nav class="nav" id="nav"><button class="active" data-page="overview" aria-label="Overview"><span class="ico"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></svg></span><span class="navtext">Overview</span></button><button data-page="markets" aria-label="Explore markets"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 19V5m0 14h16M7 15l4-4 3 2 5-7"/></svg></span><span class="navtext">Explore markets</span></button><button data-page="challenge" aria-label="Weekly challenge"><span class="ico"><svg viewBox="0 0 24 24"><path d="M8 4h8v3a4 4 0 0 1-8 0V4ZM8 6H4v2a4 4 0 0 0 4 4m8-6h4v2a4 4 0 0 1-4 4M12 11v6m-4 4h8m-7-4h6"/></svg></span><span class="navtext">Weekly challenge</span></button><button data-page="portfolio" aria-label="My positions"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 19V5m0 14h16M7 15l3-4 3 2 5-7"/><circle cx="18" cy="6" r="2"/></svg></span><span class="navtext">My positions</span></button><button data-page="wallet" aria-label="Wallet"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 9h18M16 14h2"/></svg></span><span class="navtext">Wallet</span></button><button data-page="activity" aria-label="Activity"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 18V6m0 12h16M7 14l4-4 3 3 5-7"/></svg></span><span class="navtext">Activity</span></button></nav><div class="navlabel adminonly" id="adminLabel">ADMINISTRATION</div><nav class="nav adminonly" id="adminNav"><button data-page="admin" aria-label="Admin tools"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/><path d="m19.4 15 .1.1 1.2 1-1.5 2.6-1.5-.6a8 8 0 0 1-1.7 1l-.3 1.6h-3l-.3-1.6a8 8 0 0 1-1.7-1l-1.5.6-1.5-2.6 1.2-1a8 8 0 0 1 0-2l-1.2-1 1.5-2.6 1.5.6a8 8 0 0 1 1.7-1L12.7 7h3l.3 1.6a8 8 0 0 1 1.7 1l1.5-.6 1.5 2.6-1.2 1a8 8 0 0 1-.1 2Z"/></svg></span><span class="navtext">Admin tools</span></button></nav><div class="sidebottom"><div class="navlabel">PREFERENCES</div><nav class="nav"><button id="themeSide"><span class="ico"><svg viewBox="0 0 24 24"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z"/></svg></span><span class="navtext">Appearance</span></button><button data-page="profile" title="My profile" aria-label="My profile"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><span class="navtext">My profile</span></button></nav><div class="userchip"><div class="avatar" id="avatar">U</div><div style="min-width:0"><strong id="sideName">Guest user</strong><small id="sideEmail">Sign in to continue</small></div></div></div></aside>
-<main class="main"><header class="topbar"><div style="display:flex;align-items:center;gap:12px"><button class="iconbtn mobilemenu" id="menuBtn">☰</button><div class="crumb">CampusX <span style="opacity:.5">/</span> <b id="crumb">Overview</b></div></div><div class="topactions"><button class="iconbtn" id="themeBtn" title="Toggle theme">◐</button><button class="iconbtn hide-sm notification-button" id="notifBtn" title="Notifications" aria-label="Notifications"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span class="notif-badge" id="notifBadge" aria-label="Unread notifications"></span></button><button class="primary" id="topDeposit">＋ Add funds</button></div></header>
+<main class="main"><header class="topbar"><div style="display:flex;align-items:center;gap:12px"><button class="iconbtn mobilemenu" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="sidebar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><div class="crumb">CampusX <span style="opacity:.5">/</span> <b id="crumb">Overview</b></div></div><div class="topactions"><button class="iconbtn" id="themeBtn" title="Toggle theme">◐</button><button class="iconbtn hide-sm notification-button" id="notifBtn" title="Notifications" aria-label="Notifications"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span class="notif-badge" id="notifBadge" aria-label="Unread notifications"></span></button><button class="primary" id="topDeposit">＋ Add funds</button></div></header>
 <div class="content"><section class="page active" id="page-overview"><div class="welcome"><div><div class="eyebrow">THE CAMPUS PULSE</div><h1>Good day, <span id="welcomeName">there</span>.</h1><p>Explore the markets. Make your call. Own your conviction.</p></div><div class="date" id="today"></div></div><div class="stats"><div class="stat"><div class="stathead">Available balance <span>◈</span></div><div class="statval" id="statBalance">₦25,000</div><div class="statfoot">Ready to use</div></div><div class="stat"><div class="stathead">Open positions <span>▤</span></div><div class="statval" id="statPositions">0</div><div class="statfoot">Your active predictions</div></div><div class="stat"><div class="stathead">Total invested <span>↗</span></div><div class="statval" id="statInvested">₦0</div><div class="statfoot">Across all positions</div></div><div class="stat"><div class="stathead">Markets available <span>▥</span></div><div class="statval" id="statMarkets">16</div><div class="statfoot">Across campus categories</div></div></div><div class="layout"><div><div class="sectionhead"><div><h2>Trending markets</h2><p>Markets attracting the most attention right now</p></div><button class="ghost" data-goto="markets">View all ↗</button></div><div class="tabs" id="overviewTabs"><button class="tab active" data-cat="All">All markets</button><button class="tab" data-cat="Elections">Elections</button><button class="tab" data-cat="Sports">Sports</button><button class="tab" data-cat="Campus life">Campus life</button><button class="tab" data-cat="Academics">Academics</button></div><div class="marketgrid" id="overviewMarkets"></div></div><aside class="sidepanel"><div class="panel"><h3>Wallet overview</h3><div class="muted" style="font-size:10px">Available balance</div><div class="balance" id="walletBalance">₦25,000</div><div class="walletactions"><button class="primary" id="walletDeposit">Deposit</button><button class="ghost" id="walletWithdraw">Withdraw</button></div></div><div class="panel"><h3>Recent activity</h3><div class="activity" id="recentActivity"><div class="empty">No activity yet</div></div></div><div class="panel"><h3>Market pulse</h3><div class="activityrow"><span class="muted">Markets open</span><strong id="openCount">16</strong></div><div class="activityrow"><span class="muted">Trading status</span><strong class="positive">● Active</strong></div><div class="activityrow"><span class="muted">Platform currency</span><strong>NGN · ₦</strong></div></div></aside></div></section>
 <section class="page" id="page-markets"><div class="welcome"><div><div class="eyebrow">DISCOVER</div><h1>Explore markets</h1><p>Find a question. Weigh the odds. Take a position.</p></div></div><div id="electionCountdown" style="display:none"></div><div class="sectionhead"><div class="tools"><input class="search" id="marketSearch" placeholder="Search markets..."></div><span class="muted" id="marketCount"></span></div><div class="tabs" id="marketTabs"><button class="tab active" data-cat="All">All</button><button class="tab" data-cat="Elections">Elections</button><button class="tab" data-cat="Sports">Sports</button><button class="tab" data-cat="Campus life">Campus life</button><button class="tab" data-cat="Academics">Academics</button><button class="tab" data-cat="Events">Events</button></div><div class="marketgrid" id="allMarkets"></div></section>
 <section class="page" id="page-challenge"><div class="welcome"><div><div class="eyebrow">CAMPUSX WEEKLY CHALLENGE</div><h1>10 picks. One million naira.</h1><p>Predict all ten outcomes correctly to claim the weekly prize.</p></div></div><div class="challenge-hero"><div><div class="eyebrow" style="color:#c8ff82">THE PERFECT TEN</div><h2>Can you get all 10 right?</h2><p>Admins select ten of the hardest prediction markets each week. Make one call on every market and submit your entry before the round closes.</p><div class="challenge-stats"><span class="challenge-stat">Entry stake: <b>₦10,000</b></span><span class="challenge-stat">10 predictions required</span><span class="challenge-stat">All 10 correct to win</span></div></div><div class="trophy-art" aria-hidden="true"><svg viewBox="0 0 120 120"><path d="M38 17h44v22c0 20-9 31-22 31S38 59 38 39V17Z"/><path d="M38 25H20v12c0 14 9 22 23 22M82 25h18v12c0 14-9 22-23 22M60 70v20M42 98h36M48 90h24"/><path d="m60 28 4 8 9 1-6.5 6 1.5 9-8-4.5-8 4.5 1.5-9-6.5-6 9-1 4-8Z"/></svg></div><div class="challenge-prize"><small>WEEKLY PRIZE</small><strong>₦1,000,000</strong><small>For a perfect prediction card</small></div></div><div class="panel"><div class="sectionhead"><div><h2>This week's challenge markets</h2><p id="challengeRoundLabel">Weekly round · Awaiting admin markets</p></div><span class="admin-status" id="challengeMarketCount">0 / 10 markets</span></div><div id="challengeMarkets" class="challenge-grid"><div class="challenge-empty">The weekly challenge has not been published yet. Check back when admins add the ten markets.</div></div><div class="challenge-footer"><div><div class="muted" style="font-size:10px">Fixed entry stake</div><strong style="font-size:19px">₦10,000</strong></div><button class="primary" id="joinChallenge" disabled>Submit all 10 predictions</button></div><div class="notice">You must select an outcome for all ten markets. The ₦10,000 entry stake is deducted from your local prototype wallet when you submit. A perfect card wins ₦1,000,000; settlement will be connected to the backend later.</div></div><div class="panel" style="margin-top:14px"><div class="sectionhead"><div><h2>My challenge entries</h2><p>Your submitted weekly prediction cards</p></div></div><div id="challengeEntries" class="activity"><div class="empty">No challenge entries yet.</div></div></div></section><section class="page" id="page-portfolio"><div class="welcome"><div><div class="eyebrow">YOUR PERFORMANCE</div><h1>My positions</h1><p>Track your active predictions and potential returns.</p></div></div><div class="panel tablewrap"><table class="table"><thead><tr><th>MARKET</th><th>OUTCOME</th><th>STAKE</th><th>ENTRY PRICE</th><th>POTENTIAL RETURN</th><th>STATUS</th></tr></thead><tbody id="positionsTable"></tbody></table></div></section>
@@ -523,14 +367,14 @@ function renderChallenge(){let c=state.challenge||{markets:[],entries:[]},market
 let picks=markets.filter(m=>m.selection&&m.status==='Open').length;$('joinChallenge').disabled=markets.length!==10||picks!==10||markets.some(m=>m.status!=='Open');$('joinChallenge').textContent=picks+'/10 selected · Submit ₦10,000 entry';let entries=c.entries||[];$('challengeEntries').innerHTML=entries.length?entries.map(e=>`<div class="activityrow"><span><b>${esc(e.round||'Weekly challenge')}</b><small>${fmtDate(e.date)} · ${e.picks.length}/10 predictions submitted</small></span><strong>${esc(e.status||'Submitted')}</strong></div>`).join(''):'<div class="empty">No challenge entries yet.</div>';}
 function renderAdminChallenge(){let c=state.challenge||{markets:[],entries:[]},markets=c.markets||[];if(!$('adminChallengeMarkets'))return;$('adminChallengeCount').textContent=markets.length+' of 10 markets added';$('adminChallengeMarkets').innerHTML=markets.length?markets.map((m,i)=>`<div class="challenge-admin-row"><div><b>${i+1}. ${esc(m.question)}</b><small class="muted" style="display:block">${esc(m.status)}</small></div><input type="number" min="1.01" step="0.01" data-cprice="${m.id}" data-side="yes" value="${Number(m.yes).toFixed(2)}" aria-label="YES odds"><input type="number" min="1.01" step="0.01" data-cprice="${m.id}" data-side="no" value="${Number(m.no).toFixed(2)}" aria-label="NO odds"><div style="display:flex;gap:5px;flex-wrap:wrap"><button class="ghost" data-csave="${m.id}">Save odds</button><button class="ghost" data-ctoggle="${m.id}">${m.status==='Open'?'Void':'Resume'}</button><button class="ghost" data-cedit="${m.id}">Edit</button></div></div>`).join(''):'<div class="empty">No challenge markets added yet.</div>';}
 
-function navigate(page){if(page==='profile'&&!state.profile){openModal('accountModal');return}if(page==='admin'&&!isAdmin()){toast('Admin access is restricted.');return}document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$('page-'+page)?.classList.add('active');document.querySelectorAll('#nav button,#adminNav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));$('crumb').textContent=page[0].toUpperCase()+page.slice(1);$('sidebar').classList.remove('open');if(page==='markets')renderMarkets()}
+function navigate(page){if(page==='profile'&&!state.profile){openModal('accountModal');return}if(page==='admin'&&!isAdmin()){toast('Admin access is restricted.');return}document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$('page-'+page)?.classList.add('active');document.querySelectorAll('#nav button,#adminNav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));$('crumb').textContent=page[0].toUpperCase()+page.slice(1);$('sidebar').classList.remove('open');$('menuBtn').setAttribute('aria-expanded','false');if(page==='markets')renderMarkets()}
 function openModal(id){$(id).classList.add('show')}function closeModal(id){$(id).classList.remove('show')}
 function addPick(id,outcome){let m=state.markets.find(x=>x.id===id);if(!m||m.status!=='Open'){toast('This market is not accepting predictions.');return}if(!state.settings.trading){toast('Trading is currently paused.');return}slip=slip.filter(x=>x.id!==id);slip.push({id,outcome,odds:Number(outcome==='Yes'?m.yes:m.no),question:m.question});renderSlip();toast('Added to your prediction slip.')}
 function renderSlip(){$('slipItems').innerHTML=slip.length?slip.map((x,i)=>`<div class="slipitem"><span><b>${esc(x.question)}</b><br><span class="muted">${esc(x.outcome)} · ${Number(x.odds).toFixed(2)}×</span></span><button data-remove="${i}" title="Remove selection" aria-label="Remove selection"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button></div>`).join(''):'<div class="empty">No selections yet.</div>';$('slipCount').textContent=slip.length;$('floatingSlip').classList.toggle('show',slip.length>0);calcSlip()}
 function calcSlip(){let stake=Number($('stakeInput').value)||0,odds=slip.reduce((a,x)=>a*Number(x.odds||1),1),ret=stake*odds;$('combinedOdds').textContent=odds.toFixed(2)+'×';$('potentialReturn').textContent=money(ret);$('potentialProfit').textContent=money(Math.max(0,ret-stake))}
 function wallet(mode){if(mode)walletMode=mode;document.querySelectorAll('[data-wallet-mode]').forEach(b=>b.classList.toggle('active',b.dataset.walletMode===walletMode));$('walletModalTitle').textContent=walletMode==='deposit'?'Add funds':'Request withdrawal';$('bankFields').style.display='grid';$('accountFields').style.display='grid';$('walletSubmit').textContent=walletMode==='deposit'?'Continue to deposit':'Submit withdrawal request';$('walletSubmit').disabled=true;$('accountVerification').textContent='Account name will appear here after verification.';$('modalBalance').textContent=money(state.balance);openModal('walletModal')}
 function renderAdmin(){$('adminMarkets').innerHTML=state.markets.map(m=>`<tr><td>${esc(m.question)}<br><small class="muted">${esc(m.category)}</small></td><td><input data-price="${m.id}" data-side="yes" type="number" min="1.01" max="100" step="0.01" value="${Number(m.yes).toFixed(2)}" style="width:68px;background:var(--panel2);color:var(--text);border:1px solid var(--line);padding:6px;border-radius:6px">×</td><td><input data-price="${m.id}" data-side="no" type="number" min="1.01" max="100" step="0.01" value="${Number(m.no).toFixed(2)}" style="width:68px;background:var(--panel2);color:var(--text);border:1px solid var(--line);padding:6px;border-radius:6px">×</td><td>${esc(m.status)}</td><td><button class="ghost" data-saveprice="${m.id}" title="Save decimal odds">Save odds</button> <button class="ghost" data-closemarket="${m.id}" title="Close or reopen market">${m.status==='Closed'?'Reopen':'Close market'}</button> <button class="ghost" data-togglemarket="${m.id}">${m.status==='Open'?'Pause':'Resume'}</button> <button class="icon-action void-action" title="Void / restore market" aria-label="Void market" data-void="${m.id}"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></svg></button> <button class="icon-action delete-action" title="Delete market" aria-label="Delete market" data-delete="${m.id}"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button></td></tr>`).join('');$('auditList').innerHTML=state.logs.length?state.logs.map(l=>`<div class="activityrow"><span>${esc(l.action)}<small>${esc(l.detail)} · ${fmtDate(l.date)}</small></span></div>`).join(''):'<div class="empty">No admin activity.</div>';if($('adminMarketTotal'))$('adminMarketTotal').textContent=state.markets.length;if($('adminOpenTotal'))$('adminOpenTotal').textContent=state.markets.filter(m=>m.status==='Open').length;if($('adminPausedTotal'))$('adminPausedTotal').textContent=state.markets.filter(m=>m.status!=='Open').length;if($('adminWalletTotal'))$('adminWalletTotal').textContent=state.transactions.filter(t=>t.status==='Pending').length;if($('healthTrading'))$('healthTrading').textContent=state.settings.trading?'Enabled':'Paused';if($('healthDeposit'))$('healthDeposit').textContent=state.settings.deposit?'Enabled':'Paused';if($('healthWithdraw'))$('healthWithdraw').textContent=state.settings.withdraw?'Enabled':'Paused';if($('announcementStatus'))$('announcementStatus').textContent=state.announcement||'No new announcement published.';renderAdminChallenge()}
-$('nav').addEventListener('click',e=>{let b=e.target.closest('[data-page]');if(b)navigate(b.dataset.page)});$('adminNav').addEventListener('click',e=>{let b=e.target.closest('[data-page]');if(b)navigate(b.dataset.page)});document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>navigate(b.dataset.goto));$('menuBtn').onclick=()=>$('sidebar').classList.toggle('open');document.querySelector('[data-page="profile"]').onclick=()=>navigate('profile');
+$('nav').addEventListener('click',e=>{let b=e.target.closest('[data-page]');if(b)navigate(b.dataset.page)});$('adminNav').addEventListener('click',e=>{let b=e.target.closest('[data-page]');if(b)navigate(b.dataset.page)});document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>navigate(b.dataset.goto));$('menuBtn').onclick=()=>{let open=$('sidebar').classList.toggle('open');$('menuBtn').setAttribute('aria-expanded',String(open));$('menuBtn').setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu')};document.addEventListener('click',e=>{if(window.innerWidth<=800&&$('sidebar').classList.contains('open')&&!$('sidebar').contains(e.target)&&!$('menuBtn').contains(e.target)){ $('sidebar').classList.remove('open');$('menuBtn').setAttribute('aria-expanded','false');$('menuBtn').setAttribute('aria-label','Open navigation menu')}});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('sidebar').classList.contains('open')){$('sidebar').classList.remove('open');$('menuBtn').setAttribute('aria-expanded','false');$('menuBtn').focus()}});document.querySelector('[data-page="profile"]').onclick=()=>navigate('profile');
 function drawMarketProgress(m,range='1D'){
  const values=(m.trend||[m.yes]).slice();
  const multiplier=range==='1D'?1:range==='1W'?1.15:range==='1M'?1.3:1.5;
@@ -571,7 +415,7 @@ $('joinChallenge').onclick=()=>{let c=state.challenge,markets=c.markets||[];if(m
 // Additional admin operations: announcement publishing, safe CSV export and refresh.
 if($('announcementForm'))$('announcementForm').onsubmit=e=>{e.preventDefault();if(!isAdmin())return toast('Admin access required.');const msg=$('announcementText').value.trim();if(!msg)return;state.announcement=msg;state.notifications.unshift({id:Date.now(),text:'Platform announcement: '+msg,read:false,date:now()});log('Announcement published',msg);save();$('announcementText').value='';toast('Announcement published to local notifications.')};
 if($('adminRefresh'))$('adminRefresh').onclick=()=>{if(!isAdmin())return toast('Admin access required.');renderAdmin();toast('Admin data refreshed.')};
-if($('adminExport'))$('adminExport').onclick=()=>{if(!isAdmin())return toast('Admin access required.');const rows=[['Market','Category','YES price','NO price','Status','Volume'],...state.markets.map(m=>[m.question,m.category,m.yes,m.no,m.status,m.volume])];const csv=rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='campusx-market-report.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);log('Market report exported',state.markets.length+' markets');save();toast('Market report exported.')};
+if($('adminExport'))$('adminExport').onclick=()=>{if(!isAdmin())return toast('Admin access required.');const rows=[['Market','Category','YES price','NO price','Status','Volume'],...state.markets.map(m=>[m.question,m.category,m.yes,m.no,m.status,m.volume])];const csv=rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='campusx-market-report.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);log('Market report exported',state.markets.length+' markets');save();toast('Market report exported.')};
 // Replace text-only remove controls with consistent inline SVG action icons.
 document.querySelectorAll('.slipitem button[data-remove]').forEach(b=>{b.innerHTML='<svg class="cx-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>';b.setAttribute('aria-label','Remove selection');b.title='Remove selection'});
 // Accessible focus and touch improvements for every action control.
