@@ -879,4 +879,60 @@ document.querySelectorAll('.slipitem button[data-remove]').forEach(b=>{b.innerHT
 // Accessible focus and touch improvements for every action control.
 document.querySelectorAll('button').forEach(b=>{if(!b.getAttribute('aria-label')&&b.title)b.setAttribute('aria-label',b.title)});
 })();
+   
+/* =========================================
+   CAMPUSX MOBILE NAVIGATION PATCH
+========================================= */
+document.addEventListener("DOMContentLoaded", function () {
+
+  const sidebar = document.querySelector(".side");
+  if (!sidebar) return;
+
+  const navItems = sidebar.querySelectorAll(
+    ".nav button, .nav a"
+  );
+
+  navItems.forEach(function (item, index) {
+
+    // Give every icon button an accessible name
+    const label =
+      item.getAttribute("aria-label") ||
+      item.getAttribute("title") ||
+      item.innerText.trim() ||
+      "Navigation " + (index + 1);
+
+    item.setAttribute("aria-label", label);
+    item.setAttribute("title", "");
+
+    // Close an expanded mobile sidebar after selection.
+    // Existing navigation click handlers are preserved.
+    item.addEventListener("click", function () {
+      if (window.innerWidth <= 768) {
+        sidebar.classList.remove("open");
+        document.body.classList.remove("sidebar-open");
+      }
+    });
+  });
+
+  // Prevent the desktop menu toggle from trapping mobile users.
+  document.querySelectorAll(
+    ".menu-toggle, .hamburger, #menuToggle"
+  ).forEach(function (toggle) {
+    toggle.addEventListener("click", function () {
+      if (window.innerWidth <= 768) {
+        sidebar.classList.toggle("open");
+      }
+    });
+  });
+
+  // Keep layout correct when rotating the phone.
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 768) {
+      sidebar.classList.remove("open");
+      document.body.classList.remove("sidebar-open");
+    }
+  });
+
+});
+
 </script></body></html>
