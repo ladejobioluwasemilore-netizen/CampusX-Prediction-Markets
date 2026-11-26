@@ -91,11 +91,20 @@ const api = sb ? {
     if (error) fail(error);
   },
   async currentUser() {
-    const { data: { user: authUser } } = await sb.auth.getUser();
+    // Wait for Supabase to finish processing an email-confirmation callback
+    // (the access token / PKCE code in the landing-page URL) before checking
+    // the session. Without this wait, the landing page can incorrectly look
+    // signed out and ask the user to enter their email and password again.
+    try { await sb.auth.initialize(); } catch (e) {
+      // Older compatible Supabase builds may not expose initialize().
+    }
+    const { data: { user: authUser }, error } = await sb.auth.getUser();
+    if (error) fail(error);
     if (!authUser) { cache(null); return null; }
     const user = await loadProfile(authUser.id);
     if (user.status === 'SUSPENDED') { await sb.auth.signOut(); cache(null); return null; }
     cache(user);
+    window.dispatchEvent(new CustomEvent('campusx:auth-user', { detail: user }));
     return user;
   },
   async updateProfile(fields) {
@@ -137,17 +146,23 @@ else window.CampusXBackendReady = Promise.resolve(api);
 if (sb) {
   const page = location.pathname.split('/').pop() || 'index.html';
   const hadCache = !!(sessionStorage.getItem(SESSION_KEY) || localStorage.getItem(REMEMBER_KEY));
+  const hashParams = new URLSearchParams(location.hash.replace(/^#/, ''));
+  const queryParams = new URLSearchParams(location.search);
+  const confirmationReturn = ['signup', 'email'].includes(hashParams.get('type')) ||
+    ['signup', 'email'].includes(queryParams.get('type')) ||
+    hashParams.has('token_hash') || queryParams.has('token_hash') ||
+    queryParams.has('code');
   api.currentUser().then(user => {
     if (page.startsWith('dashboard')) {
       if (!user) { location.replace('index.html'); return; }
       window.CampusXRefreshUser?.(user);
     } else if (page.startsWith('admin')) {
       window.CampusXAdminStart?.(user);
-    } else if (user && !hadCache) {
-      // Arrived from the email confirmation link: go straight to the dashboard.
-      location.href = 'dashboard.html';
+    } else if (user && confirmationReturn) {
+      // A verified email-confirmation callback goes straight into CampusX.
+      location.replace('dashboard.html');
     } else if (!user && hadCache) {
       window.CampusXSignedOut?.();
     }
-  }).catch(err => console.error('CampusX session check failed:', err));
+  }).catch(err => { console.error('CampusX session check failed:', err); if (page.startsWith('dashboard')) window.CampusXAuthFailure?.(err); else window.CampusXSignedOut?.(); });
 }
