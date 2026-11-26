@@ -1,6 +1,6 @@
 // CampusX accounts backend: Supabase email/password auth + profiles.
 // Loaded as a module on every page after campusx-config.js.
-import { createClient } from './vendor/supabase-js.js';
+const { createClient } = window.supabase;
 
 const SESSION_KEY = 'campusXSession';
 const REMEMBER_KEY = 'campusXRememberedSession';
