@@ -1002,39 +1002,191 @@ syncCampusXAccess();
   },true);
 })();
 </script>
-\n<script id="cx-dashboard-auth-bridge">
-document.addEventListener('DOMContentLoaded',function(){
-(async function(){
-  const gate=document.getElementById('cxAuthGate');
-  const showError=(message)=>{if(gate){gate.innerHTML='<div class="cx-auth-card"><strong>We could not verify your CampusX session.</strong><small>'+String(message||'Please sign in again from the landing page.').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))+'</small><button type="button" id="cxAuthReturn">Return to sign in</button></div>';document.getElementById('cxAuthReturn')?.addEventListener('click',()=>location.replace('index.html'));}};
-  try{
-    const api=await window.CampusXBackendReady;
-    if(!api||!api.client)throw new Error('CampusX account service is unavailable.');
-    const user=await api.currentUser();
-    const {data:{user:authUser},error}=await api.client.auth.getUser();
-    if(error)throw error;
-    if(!user||!authUser){location.replace('index.html');return;}
-    if(!authUser.email_confirmed_at){await api.signOut();location.replace('index.html');return;}
-    const registeredName=String(user.name||user.full_name||authUser.user_metadata?.full_name||'').trim();
-    if(!registeredName)throw new Error('Your registered name could not be loaded. Please contact support.');
-    if(typeof window.CampusXApplyAuthenticatedUser!=='function'||!window.CampusXApplyAuthenticatedUser({...user,name:registeredName,email:user.email||authUser.email||''}))throw new Error('Your CampusX profile could not be loaded.');
-    const accountModal=document.getElementById('accountModal');if(accountModal){accountModal.classList.remove('show');accountModal.setAttribute('aria-hidden','true');}
-    const oldAccountForm=document.getElementById('accountForm');if(oldAccountForm)oldAccountForm.onsubmit=e=>{e.preventDefault();location.replace('index.html');};
-    const profileForm=document.getElementById('profileForm');if(profileForm)profileForm.onsubmit=async e=>{
-      e.preventDefault();const submit=profileForm.querySelector('button[type="submit"],button:not([type])');if(submit){submit.disabled=true;submit.dataset.oldText=submit.textContent;submit.textContent='Saving…';}
-      try{const updated=await api.updateProfile({full_name:document.getElementById('profileName')?.value||registeredName,campus:document.getElementById('profileInstitution')?.value||''});
-        window.CampusXApplyAuthenticatedUser({...updated,name:updated.name||updated.full_name||registeredName,email:updated.email||user.email||authUser.email||''});
-        if(typeof toast==='function')toast('Profile updated successfully.');
-      }catch(err){if(typeof toast==='function')toast(err?.message||'Could not update your profile.');}
-      finally{if(submit){submit.disabled=false;submit.textContent=submit.dataset.oldText||'Save changes';}}
+<script id="cx-dashboard-auth-bridge">
+
+<script id="cx-dashboard-auth-bridge">
+(async function () {
+  const gate = document.getElementById('cxAuthGate');
+
+  function returnToLogin(message) {
+    console.error('CampusX authentication:', message);
+
+    if (gate) {
+      gate.innerHTML = `
+        <div class="cx-auth-card">
+          <strong>Unable to open your CampusX account.</strong>
+          <small>${String(message || 'Please sign in again.')
+            .replace(/[&<>"']/g, c => ({
+              '&':'&amp;', '<':'&lt;', '>':'&gt;',
+              '"':'&quot;', "'":'&#39;'
+            }[c]))}</small>
+          <button type="button"
+            onclick="location.replace('index.html')">
+            Return to sign in
+          </button>
+        </div>`;
+    }
+  }
+
+  try {
+    const api = await window.CampusXBackendReady;
+
+    if (!api || !api.client) {
+      throw new Error('CampusX authentication service is unavailable.');
+    }
+
+    // Verify the actual Supabase session.
+    const { data, error } = await api.client.auth.getUser();
+
+    if (error) throw error;
+
+    const authUser = data?.user;
+
+    if (!authUser) {
+      location.replace('index.html');
+      return;
+    }
+
+    // Only verified email accounts can enter.
+    if (!authUser.email_confirmed_at) {
+      await api.signOut();
+      location.replace('index.html');
+      return;
+    }
+
+    // Retrieve the existing CampusX profile.
+    let profile = null;
+
+    try {
+      profile = await api.currentUser();
+    } catch (profileError) {
+      console.warn(
+        'CampusX profile lookup failed; using verified account details:',
+        profileError
+      );
+    }
+
+    // Recover the registered name from available account information.
+    const registeredName =
+      profile?.name ||
+      profile?.full_name ||
+      authUser.user_metadata?.full_name ||
+      authUser.user_metadata?.name ||
+      authUser.email?.split('@')[0] ||
+      'CampusX User';
+
+    const campusUser = {
+      ...(profile || {}),
+      id: authUser.id,
+      name: registeredName,
+      email: authUser.email || profile?.email || '',
+      institution: profile?.campus || profile?.institution || '',
+      role: profile?.role || 'TRADER',
+      verified: true
     };
-    const logout=async()=>{if(!confirm('Are you sure you want to log out of CampusX?'))return;try{await api.signOut();}catch(err){console.error('CampusX sign-out failed:',err);}try{localStorage.removeItem('campusx_v3');localStorage.removeItem('campusXRememberedSession');sessionStorage.removeItem('campusXSession');}catch{}location.replace('index.html');};
-    const profileLogout=document.getElementById('profileLogout');if(profileLogout)profileLogout.onclick=e=>{e.preventDefault();logout();};
-    document.getElementById('cxAuthGate')?.remove();
+
+    // Apply the authenticated user to the existing dashboard.
+    let applied = false;
+
+    if (typeof window.CampusXApplyAuthenticatedUser === 'function') {
+      applied = window.CampusXApplyAuthenticatedUser(campusUser);
+    }
+
+    // Fallback to the dashboard's existing state if necessary.
+    if (!applied) {
+      if (typeof state !== 'undefined') {
+        state.profile = {
+          ...(state.profile || {}),
+          ...campusUser
+        };
+
+        save();
+        if (typeof render === 'function') render();
+        applied = true;
+      }
+    }
+
+    if (!applied) {
+      throw new Error('The dashboard could not initialise your account.');
+    }
+
+    // Remove the old email-entry modal.
+    const accountModal = document.getElementById('accountModal');
+
+    if (accountModal) {
+      accountModal.classList.remove('show');
+      accountModal.setAttribute('aria-hidden', 'true');
+    }
+
+    // Keep the displayed name current.
+    document.querySelectorAll(
+      '#welcomeName, #profileName, #sidebarUserName'
+    ).forEach(element => {
+      if (element.tagName === 'INPUT') {
+        element.value = registeredName;
+      } else {
+        element.textContent = registeredName;
+      }
+    });
+
+    // Connect profile updates to the existing backend.
+    const profileForm = document.getElementById('profileForm');
+
+    if (profileForm) {
+      profileForm.onsubmit = async function (event) {
+        event.preventDefault();
+
+        try {
+          const updated = await api.updateProfile({
+            full_name:
+              document.getElementById('profileName')?.value ||
+              registeredName,
+            campus:
+              document.getElementById('profileInstitution')?.value || ''
+          });
+
+          const updatedName =
+            updated.name || updated.full_name || registeredName;
+
+          window.CampusXApplyAuthenticatedUser({
+            ...updated,
+            name: updatedName
+          });
+
+          if (typeof toast === 'function') {
+            toast('Profile updated successfully.');
+          }
+        } catch (err) {
+          if (typeof toast === 'function') {
+            toast(err.message || 'Could not update your profile.');
+          }
+        }
+      };
+    }
+
+    // Real Supabase logout.
+    const logoutButton = document.getElementById('profileLogout');
+
+    if (logoutButton) {
+      logoutButton.onclick = async function (event) {
+        event.preventDefault();
+
+        if (!confirm('Are you sure you want to log out?')) return;
+
+        await api.signOut();
+        location.replace('index.html');
+      };
+    }
+
+    gate?.remove();
     document.documentElement.classList.remove('cx-auth-pending');
-  }catch(err){console.error('CampusX dashboard authentication failed:',err);showError(err?.message||'Please sign in from the landing page.');}
+
+  } catch (err) {
+    returnToLogin(err.message);
+  }
 })();
-},{once:true});
+</script>
+
 </script>\n</body></html>
 <style>
 .admin-market-search{display:flex;align-items:center;gap:10px;width:100%;max-width:620px;margin:14px 0 6px;padding:0 12px;min-height:44px;border:1px solid var(--line);border-radius:11px;background:var(--panel2);color:var(--muted)}.admin-market-search svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}.admin-market-search input{width:100%;min-width:0;border:0!important;outline:0!important;background:transparent;color:var(--text);font:inherit;font-size:12px;padding:10px 0}.admin-market-search input::placeholder{color:var(--muted)}.admin-market-search button{border:0;background:transparent;color:var(--muted);font-size:21px;line-height:1;padding:3px 5px}.admin-market-search button:hover{color:var(--text)}.admin-market-search:focus-within{border-color:var(--green);box-shadow:0 0 0 3px #0d8b5818}.admin-market-search-meta{font-size:10px;color:var(--muted);min-height:15px;margin:0 0 8px}@media(max-width:600px){.admin-market-search{max-width:none}.admin-market-search input{font-size:11px}.admin-market-search-meta{font-size:9px}}
