@@ -1342,6 +1342,88 @@ syncCampusXAccess();
   .position-card,.panel,.market,.walletcard{box-shadow:0 3px 12px rgba(0,0,0,.045)}
 }
 @media(max-width:360px){#page-portfolio .position-metrics{grid-template-columns:minmax(0,1fr)}#page-portfolio .position-metric.position-potential-return{grid-column:1!important}}
+
+/* CampusX mobile experience phase — frontend-only, additive overrides */
+:root{--cx-safe-bottom:env(safe-area-inset-bottom,0px);--cx-safe-top:env(safe-area-inset-top,0px)}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth;overscroll-behavior-y:contain}
+body{-webkit-tap-highlight-color:transparent}
+button,a,[role="button"],input,select,textarea{touch-action:manipulation}
+button,a,[role="button"]{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid #36a66e!important;outline-offset:3px}
+img,svg,canvas,video{max-width:100%}
+.tablewrap,.table-wrap,.table-responsive{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media(max-width:800px){
+  html,body{max-width:100%;overflow-x:hidden}
+  .app{min-height:100dvh}
+  .topbar{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));padding-top:var(--cx-safe-top)}
+  .content{width:100%;min-width:0;padding:16px 13px calc(34px + var(--cx-safe-bottom))}
+  .sectionhead{gap:10px;align-items:flex-start;flex-wrap:wrap}
+  .sectionhead>*{min-width:0}
+  .stats,.wallet-stat-grid,.sidepanel{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .stat,.wallet-stat-grid .stat,.market,.position-card,.panel,.wallet-hero{min-width:0}
+  .marketgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .market{padding:13px;border-radius:14px;transition:none}
+  .market h3{font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+  .market:hover,.position-delete-icon:hover{transform:none}
+  .outcome{min-width:0;padding:10px 8px}
+  .outcome strong{font-size:clamp(13px,4vw,16px)}
+  .subnav{max-width:100%;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;padding:2px 1px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .subnav::-webkit-scrollbar{display:none}
+  .subnav button{flex:0 0 auto;min-height:40px}
+  .wallet-hero{padding:17px!important;border-radius:16px!important}
+  .wallet-hero .walletactions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .wallet-hero .walletactions button{width:100%;min-width:0;min-height:44px;padding:10px}
+  .wallet-stat-grid .stat{padding:13px}
+  .positions-cards{gap:11px}
+  .position-card{padding:14px;border-radius:15px}
+  .position-card-head{gap:8px}
+  .position-card-head h3{font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+  .position-metrics{gap:8px}
+  .position-metric{min-width:0;overflow-wrap:anywhere}
+  .position-chart-wrap,.chartbox,.market-chart-card{max-width:100%;min-width:0;overflow:hidden}
+  .position-chart-wrap svg,.chartbox svg,.market-chart-card svg{display:block;width:100%;max-width:100%}
+  .floating-slip{max-height:min(76dvh,650px);overflow-y:auto;overscroll-behavior:contain;padding-bottom:calc(14px + var(--cx-safe-bottom))}
+  .modalback{padding:8px 8px calc(8px + var(--cx-safe-bottom))}
+  .modal{max-height:calc(92dvh - var(--cx-safe-top));overflow-y:auto;overscroll-behavior:contain}
+  .toast{bottom:calc(14px + var(--cx-safe-bottom));left:12px;right:12px;max-width:none}
+  #page-wallet .tablewrap,#page-wallet .table-wrap{padding:12px}
+  #page-wallet table{min-width:560px}
+  input,select,textarea{font-size:16px!important}
+  button,.nav button,.outcome,.tab,.subnav button,.position-delete-icon{min-height:42px}
+  .nav button{padding-top:11px;padding-bottom:11px}
+  .side{padding-bottom:calc(16px + var(--cx-safe-bottom))}
+}
+@media(max-width:520px){
+  .content{padding-left:11px;padding-right:11px}
+  .marketgrid{grid-template-columns:minmax(0,1fr)}
+  .stats,.wallet-stat-grid,.sidepanel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sectionhead{align-items:stretch}
+  .sectionhead .actions,.sectionhead .topactions{width:100%;max-width:100%;flex-wrap:wrap}
+  .sectionhead .actions button,.sectionhead .topactions button{flex:1 1 auto}
+  .wallet-hero .walletactions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .position-card-head{align-items:flex-start}
+  .position-card-actions{gap:5px}
+  .position-status{font-size:9px;white-space:normal;text-align:center}
+  .position-delete-icon{width:42px;height:42px;min-width:42px}
+  .floating-slip{left:8px!important;right:8px!important;width:auto!important;bottom:calc(10px + var(--cx-safe-bottom))!important}
+  .modal{width:100%!important;max-width:100%!important}
+}
+@media(max-width:360px){
+  .content{padding-left:9px;padding-right:9px}
+  .stats,.wallet-stat-grid,.sidepanel{grid-template-columns:minmax(0,1fr)}
+  .marketgrid{grid-template-columns:minmax(0,1fr)}
+  .position-metrics{grid-template-columns:minmax(0,1fr)!important}
+  #page-portfolio .position-metric.position-potential-return{grid-column:1!important}
+}
+@media(hover:none) and (pointer:coarse){
+  .market:hover,.card:hover,.panel:hover{transform:none!important}
+  button:active,.outcome:active,.tab:active{filter:brightness(.97)}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
 </style>
 <script id="cx-frontend-features-script">
 (()=>{
@@ -1421,5 +1503,20 @@ window.addEventListener('pageshow',()=>{let next=getData();data=next;renderAll()
  window.addEventListener('storage',e=>{if(e.key==='campusx_v3')window.renderPositionCards?.();});
 })();
 </script>
+
+<script>
+/* CampusX mobile loading polish: defer non-critical images without touching app data. */
+(function(){
+  function prepareImages(){
+    document.querySelectorAll('img:not([loading])').forEach(function(img){
+      if(!img.closest('.brand,.logo,.topbar')) img.loading='lazy';
+      img.decoding='async';
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',prepareImages,{once:true});
+  else prepareImages();
+})();
+</script>
+
 </body></html>
 
