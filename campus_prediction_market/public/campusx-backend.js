@@ -1,5 +1,6 @@
 // CampusX accounts backend: Supabase email/password auth + profiles.
 // Loaded as a module on every page after campusx-config.js.
+import './campusx-markets.js';
 const { createClient } = window.supabase;
 
 const SESSION_KEY = 'campusXSession';
@@ -59,6 +60,7 @@ async function loadProfile(uid) {
   return toUser(p, (r || []).map(x => x.role));
 }
 
+const pushed = new Map(); // market id -> last JSON known to be in the backend (null = deleted)
 const api = sb ? {
   async signUp({ name, email, password, remember }) {
     localStorage.setItem(REMEMBER_FLAG, remember ? '1' : '0');
@@ -91,20 +93,11 @@ const api = sb ? {
     if (error) fail(error);
   },
   async currentUser() {
-    // Wait for Supabase to finish processing an email-confirmation callback
-    // (the access token / PKCE code in the landing-page URL) before checking
-    // the session. Without this wait, the landing page can incorrectly look
-    // signed out and ask the user to enter their email and password again.
-    try { await sb.auth.initialize(); } catch (e) {
-      // Older compatible Supabase builds may not expose initialize().
-    }
-    const { data: { user: authUser }, error } = await sb.auth.getUser();
-    if (error) fail(error);
+    const { data: { user: authUser } } = await sb.auth.getUser();
     if (!authUser) { cache(null); return null; }
     const user = await loadProfile(authUser.id);
     if (user.status === 'SUSPENDED') { await sb.auth.signOut(); cache(null); return null; }
     cache(user);
-    window.dispatchEvent(new CustomEvent('campusx:auth-user', { detail: user }));
     return user;
   },
   async updateProfile(fields) {
@@ -113,7 +106,7 @@ const api = sb ? {
     const patch = {};
     for (const k of ['full_name', 'phone', 'campus', 'department', 'level']) if (k in fields) patch[k] = String(fields[k] ?? '').trim().slice(0, 200) || null;
     if ('full_name' in patch && !patch.full_name) throw new Error('Enter your full name.');
-    const { error } = await sb.from('profiles').update(patch).eq('id', authUser.id);
+    const { error } = await sb.from('profiles').update(patch).eq('id', authUser.id).select('id').single();
     if (error) fail(error);
     const user = await loadProfile(authUser.id);
     cache(user);
@@ -135,6 +128,35 @@ const api = sb ? {
     const { error } = await sb.rpc('admin_delete_user', { target: id });
     if (error) fail(error);
   },
+  // ---- Shared markets: one list in the backend that every account reads. ----
+  async listMarkets() {
+    const rows = [];
+    for (let offset = 0; ; offset += 1000) {
+      const { data, error } = await sb.from('markets').select('id, data, deleted, updated_at').order('id').range(offset, offset + 999);
+      if (error) fail(error);
+      rows.push(...(data || []));
+      if (!data || data.length < 1000) return rows;
+    }
+  },
+  async saveMarket(market) {
+    const data = window.CampusXMarkets.toDecimal(market);
+    const { error } = await sb.from('markets').upsert({ id: data.id, data, deleted: false, updated_at: new Date().toISOString() });
+    if (error) fail(error);
+  },
+  // Compare this editor's before/after state, never delete records absent from a stale browser.
+  async pushMarkets(list, previous = []) {
+    const rows = window.CampusXMarkets.changes(list, previous);
+    if (!rows.length) return 0;
+    const { error } = await sb.from('markets').upsert(rows.map(r => ({ ...r, updated_at: new Date().toISOString() })));
+    if (error) fail(error);
+    rows.forEach(r => pushed.set(r.id, r.deleted ? null : JSON.stringify(r.data)));
+    return rows.length;
+  },
+  onMarketsChange(cb, ready) {
+    return sb.channel('campusx-markets').on('postgres_changes', { event: '*', schema: 'public', table: 'markets' }, payload => cb(payload.new)).subscribe(status => {
+      if (status === 'SUBSCRIBED') ready?.();
+    });
+  },
   client: sb,
 } : new Proxy({}, { get: (_t, prop) => (prop === 'then' ? undefined : unavailable) });
 
@@ -146,23 +168,43 @@ else window.CampusXBackendReady = Promise.resolve(api);
 if (sb) {
   const page = location.pathname.split('/').pop() || 'index.html';
   const hadCache = !!(sessionStorage.getItem(SESSION_KEY) || localStorage.getItem(REMEMBER_KEY));
-  const hashParams = new URLSearchParams(location.hash.replace(/^#/, ''));
-  const queryParams = new URLSearchParams(location.search);
-  const confirmationReturn = ['signup', 'email'].includes(hashParams.get('type')) ||
-    ['signup', 'email'].includes(queryParams.get('type')) ||
-    hashParams.has('token_hash') || queryParams.has('token_hash') ||
-    queryParams.has('code');
   api.currentUser().then(user => {
     if (page.startsWith('dashboard')) {
       if (!user) { location.replace('index.html'); return; }
       window.CampusXRefreshUser?.(user);
+      syncMarkets(user);
     } else if (page.startsWith('admin')) {
       window.CampusXAdminStart?.(user);
-    } else if (user && confirmationReturn) {
-      // A verified email-confirmation callback goes straight into CampusX.
-      location.replace('dashboard.html');
+      syncMarkets(user);
+    } else if (user && !hadCache) {
+      // Arrived from the email confirmation link: go straight to the dashboard.
+      location.href = 'dashboard.html';
     } else if (!user && hadCache) {
       window.CampusXSignedOut?.();
     }
-  }).catch(err => { console.error('CampusX session check failed:', err); if (page.startsWith('dashboard')) window.CampusXAuthFailure?.(err); else window.CampusXSignedOut?.(); });
+  }).catch(err => {
+    console.error('CampusX session check failed:', err);
+    window.CampusXBackendError?.(err);
+    if (page.startsWith('dashboard')) location.replace('index.html');
+  });
+}
+
+// Pull the shared markets into this page and keep listening for admin changes.
+async function syncMarkets(user) {
+  const apply = window.CampusXApplyRemoteMarkets;
+  if (!sb || !apply || !user) return;
+  let pulling = false;
+  const pull = async () => {
+    if (pulling) return;
+    pulling = true;
+    try { apply(await api.listMarkets(), user, true); }
+    catch (err) { console.error('CampusX markets sync failed:', err); window.CampusXBackendError?.(err); }
+    finally { pulling = false; }
+  };
+  const channel = api.onMarketsChange(() => pull(), pull);
+  await pull();
+  const timer = setInterval(pull, 15000);
+  const visible = () => { if (document.visibilityState === 'visible') pull(); };
+  document.addEventListener('visibilitychange', visible);
+  window.addEventListener('pagehide', () => { clearInterval(timer); sb.removeChannel(channel); document.removeEventListener('visibilitychange', visible); }, { once: true });
 }
